@@ -1,0 +1,6 @@
+Sinter packs
+Copyright 2026 The Sinter Authors
+
+Each grammar in this repository keeps the license of its upstream
+project. The folder licenses/ of each pack holds those license texts
+and names the source of each grammar.
