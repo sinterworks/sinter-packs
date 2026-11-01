@@ -1,0 +1,141 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright 2026 The Sinter Authors
+
+name: licensing
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  dco:
+    name: DCO sign-off
+    runs-on: ubuntu-26.04
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - name: Check every commit for a Signed-off-by line
+        env:
+          EVENT: ${{ github.event_name }}
+          BASE: ${{ github.event.pull_request.base.sha }}
+          HEAD: ${{ github.event.pull_request.head.sha }}
+          BEFORE: ${{ github.event.before }}
+          AFTER: ${{ github.sha }}
+        run: |
+          set -eu
+          if [ "$EVENT" = "pull_request" ]; then
+            range="$BASE..$HEAD"
+          elif [ "$BEFORE" = "0000000000000000000000000000000000000000" ]; then
+            range="$AFTER"
+          else
+            range="$BEFORE..$AFTER"
+          fi
+          commits="$RUNNER_TEMP/commits"
+          git rev-list --no-merges "$range" >"$commits"
+          echo "The range $range holds $(awk 'END { print NR }' "$commits") commits that are not merges."
+          message="$RUNNER_TEMP/message"
+          bad=0
+          while IFS= read -r commit; do
+            git show -s --format=%B "$commit" >"$message"
+            if ! grep -q '^Signed-off-by: ' "$message"; then
+              echo "Commit $commit has no Signed-off-by line."
+              bad=1
+            fi
+          done <"$commits"
+          exit "$bad"
+
+  reuse:
+    name: REUSE lint
+    runs-on: ubuntu-26.04
+    steps:
+      - uses: actions/checkout@v7
+      - name: Run reuse lint
+        run: pipx run reuse lint
+
+  third-party-manifest:
+    name: Third-party manifest
+    runs-on: ubuntu-26.04
+    steps:
+      - uses: actions/checkout@v7
+      - name: Check that THIRD_PARTY.md exists and is well-formed
+        run: |
+          set -eu
+          test -f THIRD_PARTY.md
+          awk -F'|' '
+            /^\|/ {
+              if ($0 == "|---|---|---|") next
+              if ($0 == "| component | license | link |") { header = 1; next }
+              if (NF != 5) { print "This row does not have three cells: " $0; bad = 1; next }
+              for (i = 2; i <= 4; i++) {
+                cell = $i; gsub(/^ +| +$/, "", cell)
+                if (cell == "") { print "This row has an empty cell: " $0; bad = 1 }
+              }
+            }
+            END {
+              if (!header) { print "No table has the columns component, license, and link."; bad = 1 }
+              exit bad
+            }
+          ' THIRD_PARTY.md
+
+  forbidden-licenses:
+    name: No forbidden licenses
+    runs-on: ubuntu-26.04
+    steps:
+      - uses: actions/checkout@v7
+      - name: Check the third-party components for forbidden licenses
+        run: |
+          set -eu
+          awk -F'|' '
+            /^\|/ && $0 != "|---|---|---|" && $0 != "| component | license | link |" {
+              c = $2; l = $3
+              gsub(/^ +| +$/, "", c); gsub(/^ +| +$/, "", l)
+              if (l ~ /GPL|SSPL/ || l ~ /[Uu]nknown/ || l == "") {
+                print "Forbidden or unknown license for " c ": " l; bad = 1
+              }
+            }
+            END { exit bad }
+          ' THIRD_PARTY.md
+      - uses: actions-rust-lang/setup-rust-toolchain@v2
+        if: hashFiles('adapters/**/Cargo.toml') != ''
+        with:
+          cache: false
+          toolchain: 1.99.1
+      - name: Check the Rust dependencies of the adapters for forbidden licenses
+        if: hashFiles('adapters/**/Cargo.toml') != ''
+        run: |
+          set -eu
+          licenses="$RUNNER_TEMP/licenses"
+          : >"$licenses"
+          find adapters -name Cargo.toml -type f >"$RUNNER_TEMP/manifests"
+          while IFS= read -r manifest; do
+            echo "Reading the dependencies of $manifest."
+            cargo metadata --format-version 1 --locked \
+              --manifest-path "$manifest" >"$RUNNER_TEMP/metadata.json"
+            jq -r '.packages[] | "\(.name)\t\(.license // "unknown")"' \
+              "$RUNNER_TEMP/metadata.json" >>"$licenses"
+          done <"$RUNNER_TEMP/manifests"
+          awk -F'\t' '
+            {
+              name = $1; expression = $2
+              if (expression == "") expression = "unknown"
+              parts = split(expression, choices, / OR /)
+              ok = 0
+              for (i = 1; i <= parts; i++) {
+                if (choices[i] !~ /GPL|SSPL/ && choices[i] !~ /unknown/) ok = 1
+              }
+              if (!ok) {
+                print "Forbidden or unknown license for " name ": " expression
+                bad = 1
+              }
+            }
+            END { exit bad }
+          ' "$licenses"
