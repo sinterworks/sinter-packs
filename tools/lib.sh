@@ -253,3 +253,11 @@ spdx_problem() {
     }
   '
 }
+
+pack_hash_at() {
+  rm -rf "$temp_dir/base"
+  mkdir "$temp_dir/base"
+  git -C "$1" archive --format=tar "$2" "$3" >"$temp_dir/base.tar" || return 3
+  tar -x -f "$temp_dir/base.tar" -C "$temp_dir/base" || return 3
+  pack_hash "$temp_dir/base/$3"
+}

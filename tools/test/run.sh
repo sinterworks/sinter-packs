@@ -129,6 +129,28 @@ test_case() {
   fi
 }
 
+commit_all() {
+  git -C "$1" add -A
+  git -C "$1" -c user.name=test -c user.email=test@example.com -c commit.gpgsign=false \
+    commit -q -m "$2"
+}
+
+index_line() {
+  printf '{"hash":"%s","name":"%s","url":"https://github.com/sinterworks/sinter-packs/releases/download/%s-v%s/%s-%s.tar.gz","v":1,"version":"%s"}\n' \
+    "$3" "$1" "$1" "$2" "$1" "$2" "$2"
+}
+
+set_version() {
+  sed "s/^version = \".*\"\$/version = \"$2\"/" "$1/pack.toml" >"$1/pack.toml.new"
+  mv "$1/pack.toml.new" "$1/pack.toml"
+}
+
+make_repository() {
+  mkdir -p repo/packs
+  make_pack repo/packs/demo demo demo
+  index_line demo 0.1.0 "$(pack_hash repo/packs/demo)" >repo/index.jsonl
+}
+
 replace_line() {
   awk -v from="$2" -v to="$3" '{ if (index($0, from) == 1) print to; else print }' "$1" >"$1.new"
   mv "$1.new" "$1"
@@ -1076,6 +1098,346 @@ t_upstream_find_a_missing_license_on_github() {
   rm stub/api/repos_tree-sitter_tree-sitter-demo_license_ref_v1.2.3
   run 1 "$tools_dir/check-upstream.sh" "my pack"
   has "my pack: GitHub gives no license file of tree-sitter/tree-sitter-demo at v1.2.3"
+}
+
+t_index_passes() {
+  make_repository
+  run 0 "$tools_dir/check-index.sh" repo
+  has "The packs and the index pass, with 1 pack folders and 1 lines in the index."
+}
+
+t_index_passes_with_no_index() {
+  make_repository
+  rm repo/index.jsonl
+  run 0 "$tools_dir/check-index.sh" repo
+}
+
+index_refusal() {
+  make_repository
+  printf '%s\n' "$1" >repo/index.jsonl
+  run 1 "$tools_dir/check-index.sh" repo
+  has "$2"
+}
+
+good_line() {
+  index_line demo 0.1.0 "$(pack_hash repo/packs/demo)"
+}
+
+t_index_finds_a_line_that_is_not_json() {
+  index_refusal '{"hash":' "index.jsonl: line 1: the line is not a JSON object"
+}
+
+t_index_finds_an_array() {
+  index_refusal '[1]' "index.jsonl: line 1: the line is not a JSON object"
+}
+
+t_index_finds_a_space() {
+  make_repository
+  good_line | sed 's/,"name"/, "name"/' >repo/index.jsonl
+  run 1 "$tools_dir/check-index.sh" repo
+  has "index.jsonl: line 1: the line is not in the canonical form"
+}
+
+t_index_finds_keys_out_of_order() {
+  make_repository
+  good_line | jq -c '{name, hash, url, v, version}' >repo/index.jsonl
+  run 1 "$tools_dir/check-index.sh" repo
+  has "index.jsonl: line 1: the line is not in the canonical form"
+}
+
+t_index_finds_a_key_written_twice() {
+  make_repository
+  good_line | sed 's/^{/{"hash":"x",/' >repo/index.jsonl
+  run 1 "$tools_dir/check-index.sh" repo
+  has "index.jsonl: line 1: the line is not in the canonical form"
+}
+
+t_index_finds_a_field_too_many() {
+  make_repository
+  good_line | jq -c -S '. + {extra: 1}' >repo/index.jsonl
+  run 1 "$tools_dir/check-index.sh" repo
+  has "index.jsonl: line 1: the line does not have exactly the fields hash, name, url, v, and version"
+}
+
+t_index_finds_a_missing_field() {
+  make_repository
+  good_line | jq -c -S 'del(.url)' >repo/index.jsonl
+  run 1 "$tools_dir/check-index.sh" repo
+  has "the line does not have exactly the fields"
+}
+
+t_index_finds_a_v_that_is_not_one() {
+  make_repository
+  good_line | sed 's/"v":1/"v":2/' >repo/index.jsonl
+  run 1 "$tools_dir/check-index.sh" repo
+  has "index.jsonl: line 1: the field v is not 1"
+}
+
+t_index_finds_a_v_written_as_a_fraction() {
+  make_repository
+  good_line | sed 's/"v":1/"v":1.0/' >repo/index.jsonl
+  run 1 "$tools_dir/check-index.sh" repo
+  has "index.jsonl: line 1: the "
+}
+
+t_index_finds_a_v_written_as_a_string() {
+  make_repository
+  good_line | sed 's/"v":1/"v":"1"/' >repo/index.jsonl
+  run 1 "$tools_dir/check-index.sh" repo
+  has "index.jsonl: line 1: the field v is not 1"
+}
+
+t_index_finds_a_version_with_a_leading_zero() {
+  make_repository
+  index_line demo 01.0.0 "$(pack_hash repo/packs/demo)" >repo/index.jsonl
+  run 1 "$tools_dir/check-index.sh" repo
+  has "index.jsonl: line 1: the field version is not a release number"
+}
+
+t_index_finds_a_version_of_two_numbers() {
+  make_repository
+  index_line demo 0.1 "$(pack_hash repo/packs/demo)" >repo/index.jsonl
+  run 1 "$tools_dir/check-index.sh" repo
+  has "the field version is not a release number"
+}
+
+t_index_finds_a_name_that_is_not_a_name_of_a_pack() {
+  make_repository
+  index_line Demo 0.1.0 "$(pack_hash repo/packs/demo)" >repo/index.jsonl
+  run 1 "$tools_dir/check-index.sh" repo
+  has "index.jsonl: line 1: the field name is not a name of a pack"
+}
+
+t_index_finds_a_hash_in_upper_case() {
+  make_repository
+  index_line demo 0.1.0 "$(pack_hash repo/packs/demo | tr 'a-f' 'A-F')" >repo/index.jsonl
+  run 1 "$tools_dir/check-index.sh" repo
+  has "index.jsonl: line 1: the field hash is not 64 lowercase hex digits"
+}
+
+t_index_finds_a_url_of_another_repository() {
+  make_repository
+  good_line | sed 's|sinterworks/sinter-packs|lathrys-at/sinter-packs|' >repo/index.jsonl
+  run 1 "$tools_dir/check-index.sh" repo
+  has "index.jsonl: line 1: the field url is not the address of the archive of the release"
+}
+
+t_index_finds_a_url_of_another_release() {
+  make_repository
+  good_line | sed 's|demo-v0.1.0/|demo-v0.1.1/|' >repo/index.jsonl
+  run 1 "$tools_dir/check-index.sh" repo
+  has "the field url is not the address of the archive of the release"
+}
+
+t_index_finds_a_carriage_return() {
+  make_repository
+  good_line | sed "s/\$/$(printf '\r')/" >repo/index.jsonl
+  run 1 "$tools_dir/check-index.sh" repo
+  has "index.jsonl: line 1: the line is not in the canonical form"
+}
+
+t_index_finds_a_blank_line() {
+  make_repository
+  printf '\n' >>repo/index.jsonl
+  run 1 "$tools_dir/check-index.sh" repo
+  has "index.jsonl: line 2: the line is not a JSON object"
+}
+
+t_index_finds_no_line_feed_at_the_end() {
+  make_repository
+  printf '%s' "$(good_line)" >repo/index.jsonl
+  run 1 "$tools_dir/check-index.sh" repo
+  has "index.jsonl does not end with a line feed"
+}
+
+second_pack() {
+  make_pack repo/packs/alpha alpha alpha
+}
+
+t_index_passes_two_packs_in_byte_order() {
+  make_repository
+  second_pack
+  {
+    index_line alpha 0.1.0 "$(pack_hash repo/packs/alpha)"
+    good_line
+  } >repo/index.jsonl
+  run 0 "$tools_dir/check-index.sh" repo
+}
+
+t_index_finds_packs_out_of_byte_order() {
+  make_repository
+  second_pack
+  {
+    good_line
+    index_line alpha 0.1.0 "$(pack_hash repo/packs/alpha)"
+  } >repo/index.jsonl
+  run 1 "$tools_dir/check-index.sh" repo
+  has "index.jsonl: line 2: the pack alpha comes after the pack demo, and the lines must be in the byte order of the names"
+}
+
+t_index_passes_releases_in_the_order_of_their_numbers() {
+  make_repository
+  set_version repo/packs/demo 0.10.0
+  {
+    index_line demo 0.9.0 "$(printf '%064d' 0)"
+    index_line demo 0.10.0 "$(pack_hash repo/packs/demo)"
+  } >repo/index.jsonl
+  run 0 "$tools_dir/check-index.sh" repo
+}
+
+t_index_finds_releases_out_of_the_order_of_their_numbers() {
+  make_repository
+  set_version repo/packs/demo 0.9.0
+  {
+    index_line demo 0.10.0 "$(printf '%064d' 0)"
+    index_line demo 0.9.0 "$(pack_hash repo/packs/demo)"
+  } >repo/index.jsonl
+  run 1 "$tools_dir/check-index.sh" repo
+  has "index.jsonl: line 2: the release 0.9.0 of demo comes after the release 0.10.0"
+}
+
+t_index_finds_a_release_written_twice() {
+  make_repository
+  {
+    good_line
+    good_line
+  } >repo/index.jsonl
+  run 1 "$tools_dir/check-index.sh" repo
+  has "index.jsonl: line 2: the release 0.1.0 of demo comes after the release 0.1.0"
+}
+
+t_index_finds_a_pack_with_no_folder() {
+  make_repository
+  {
+    good_line
+    index_line zeta 0.1.0 "$(printf '%064d' 0)"
+  } >repo/index.jsonl
+  run 1 "$tools_dir/check-index.sh" repo
+  has "index.jsonl: line 2: the pack zeta has no folder packs/zeta with a descriptor that passes"
+}
+
+t_index_finds_a_newest_release_of_another_version() {
+  make_repository
+  set_version repo/packs/demo 0.2.0
+  index_line demo 0.1.0 "$(pack_hash repo/packs/demo)" >repo/index.jsonl
+  run 1 "$tools_dir/check-index.sh" repo
+  has "index.jsonl: line 1: the newest release of demo is 0.1.0, and the descriptor gives the version 0.2.0"
+}
+
+t_index_finds_a_hash_of_other_files() {
+  make_repository
+  printf 'x' >>repo/packs/demo/queries/demo/tags.scm
+  run 1 "$tools_dir/check-index.sh" repo
+  has "index.jsonl: line 1: the release 0.1.0 of demo has the hash "
+  has ", and the pack hash of packs/demo is $(pack_hash repo/packs/demo)"
+}
+
+t_index_finds_a_descriptor_of_another_name() {
+  make_repository
+  replace_line repo/packs/demo/pack.toml 'name = "demo"' 'name = "other"'
+  run 1 "$tools_dir/check-index.sh" repo
+  has "packs/demo: the descriptor gives the name \"other\", and the folder has the name demo"
+}
+
+t_index_finds_a_folder_that_is_not_a_name_of_a_pack() {
+  make_repository
+  mkdir "repo/packs/My Pack"
+  run 1 "$tools_dir/check-index.sh" repo
+  has "packs/My Pack: the name of the folder is not a name of a pack"
+}
+
+t_index_finds_a_file_under_packs() {
+  make_repository
+  printf 'x' >repo/packs/README
+  run 1 "$tools_dir/check-index.sh" repo
+  has "packs/README is not a folder"
+}
+
+t_index_finds_a_version_that_is_not_a_release_number() {
+  make_repository
+  set_version repo/packs/demo 1.0
+  run 1 "$tools_dir/check-index.sh" repo
+  has "packs/demo: the descriptor gives the version \"1.0\", which is not a release number"
+}
+
+base_repository() {
+  make_repository
+  mkdir -p "repo/packs/demo/a folder"
+  printf 'x' >"repo/packs/demo/a folder/a file"
+  printf 'y' >"repo/packs/demo/a folder.txt"
+  printf 'z' >'repo/packs/demo/a "quoted" name'
+  index_line demo 0.1.0 "$(pack_hash repo/packs/demo)" >repo/index.jsonl
+  git init -q repo
+  commit_all repo base
+}
+
+t_index_passes_an_unchanged_pack_against_the_base() {
+  base_repository
+  run 0 "$tools_dir/check-index.sh" -b HEAD repo
+}
+
+t_index_finds_a_changed_pack_with_no_new_release() {
+  base_repository
+  printf 'x' >>repo/packs/demo/queries/demo/tags.scm
+  index_line demo 0.1.0 "$(pack_hash repo/packs/demo)" >repo/index.jsonl
+  run 1 "$tools_dir/check-index.sh" -b HEAD repo
+  has "packs/demo: the files of the pack changed since HEAD, and the index has no new release of it"
+}
+
+t_index_passes_a_changed_pack_with_a_new_release() {
+  base_repository
+  printf 'x' >>repo/packs/demo/queries/demo/tags.scm
+  set_version repo/packs/demo 0.1.1
+  index_line demo 0.1.1 "$(pack_hash repo/packs/demo)" >>repo/index.jsonl
+  run 0 "$tools_dir/check-index.sh" -b HEAD repo
+}
+
+t_index_finds_a_line_of_the_base_that_is_gone() {
+  base_repository
+  printf 'x' >>repo/packs/demo/queries/demo/tags.scm
+  set_version repo/packs/demo 0.1.1
+  index_line demo 0.1.1 "$(pack_hash repo/packs/demo)" >repo/index.jsonl
+  run 1 "$tools_dir/check-index.sh" -b HEAD repo
+  has "index.jsonl: line 1 of the index of HEAD is no longer in the index"
+}
+
+t_index_passes_a_new_pack_with_no_release() {
+  base_repository
+  second_pack
+  run 0 "$tools_dir/check-index.sh" -b HEAD repo
+}
+
+t_index_passes_a_pack_with_no_release_at_the_base() {
+  make_repository
+  rm repo/index.jsonl
+  git init -q repo
+  commit_all repo base
+  printf 'x' >>repo/packs/demo/queries/demo/tags.scm
+  run 0 "$tools_dir/check-index.sh" -b HEAD repo
+}
+
+t_index_finds_a_link_in_the_pack_at_the_base() {
+  base_repository
+  ln -s pack.toml repo/packs/demo/link
+  commit_all repo link
+  base=$(git -C repo rev-parse HEAD)
+  rm repo/packs/demo/link
+  commit_all repo "no link"
+  run 1 "$tools_dir/check-index.sh" -b "$base" repo
+  has "packs/demo has no pack hash at $base: the pack holds an entry that is not a file or a folder: link"
+}
+
+t_index_reads_the_repository_that_it_names() {
+  base_repository
+  mkdir other
+  git init -q other
+  run 0 env GIT_DIR="$case_dir/other/.git" "$tools_dir/check-index.sh" -b HEAD repo
+}
+
+t_index_needs_a_revision() {
+  base_repository
+  run 3 "$tools_dir/check-index.sh" -b no-such-revision repo
+  has "no-such-revision is not a revision of the repository"
 }
 
 online_pack() {
