@@ -962,6 +962,147 @@ t_licenses_find_two_tags_of_one_repository() {
   has "my pack: licenses/NOTICE gives two tags of the repository tree-sitter/tree-sitter-demo"
 }
 
+stub_github() {
+  pack=$1
+  mkdir -p stub/api
+  cat >stub/gh <<'STUB'
+#!/bin/sh
+printf '%s\n' "$*" >>"$STUB_DIR/log"
+case $1 in
+  api)
+    file=$STUB_DIR/api/$(printf '%s' "$2" | tr '/?=' '___')
+    if [ ! -f "$file" ]; then
+      echo "HTTP 404: Not Found ($2)" >&2
+      exit 1
+    fi
+    cat "$file"
+    ;;
+  attestation)
+    if [ ! -f "$STUB_DIR/attested" ]; then
+      echo "Error: verifying with issuer \"sigstore.dev\"" >&2
+      exit 1
+    fi
+    echo "Verification succeeded!"
+    ;;
+esac
+STUB
+  chmod +x stub/gh
+  printf '{"sha":"0123456789abcdef0123456789abcdef01234567"}\n' \
+    >stub/api/repos_tree-sitter_tree-sitter-demo_commits_v1.2.3
+  printf '{"assets":[{"name":"other.wasm","digest":null},{"name":"tree-sitter-demo.wasm","digest":"sha256:%s"}]}\n' \
+    "$(sha256_of "$pack/grammars/demo.wasm")" >stub/api/repos_tree-sitter_tree-sitter-demo_releases_tags_v1.2.3
+  jq -R -s '@base64 | [scan(".{1,60}")] | join("\n") | {content: (. + "\n"), encoding: "base64"}' \
+    <"$pack/licenses/tree-sitter-demo.LICENSE" >stub/api/repos_tree-sitter_tree-sitter-demo_license_ref_v1.2.3
+  : >stub/attested
+  STUB_DIR=$case_dir/stub
+  GH=$case_dir/stub/gh
+  export STUB_DIR GH
+}
+
+upstream_case() {
+  make_pack "my pack" demo demo
+  stub_github "my pack"
+}
+
+t_upstream_pass() {
+  upstream_case
+  run 0 "$tools_dir/check-upstream.sh" "my pack"
+  has "my pack: the upstream releases pass."
+  grep -Fxq "attestation verify my pack/grammars/demo.wasm --repo tree-sitter/tree-sitter-demo --signer-workflow tree-sitter/workflows/.github/workflows/release.yml --source-ref refs/tags/v1.2.3 --source-digest 0123456789abcdef0123456789abcdef01234567 --deny-self-hosted-runners" stub/log
+}
+
+t_upstream_find_a_tag_of_another_commit() {
+  upstream_case
+  printf '{"sha":"%s"}\n' "$(printf '%040d' 1)" >stub/api/repos_tree-sitter_tree-sitter-demo_commits_v1.2.3
+  run 1 "$tools_dir/check-upstream.sh" "my pack"
+  has "my pack: the grammar demo: the tag v1.2.3 of tree-sitter/tree-sitter-demo names the commit $(printf '%040d' 1), and licenses/NOTICE gives 0123456789abcdef0123456789abcdef01234567"
+}
+
+t_upstream_find_a_missing_tag() {
+  upstream_case
+  rm stub/api/repos_tree-sitter_tree-sitter-demo_commits_v1.2.3
+  run 1 "$tools_dir/check-upstream.sh" "my pack"
+  has "my pack: the grammar demo: GitHub gives no commit for the tag v1.2.3 of tree-sitter/tree-sitter-demo: HTTP 404"
+}
+
+t_upstream_find_a_wrong_digest() {
+  upstream_case
+  printf '{"assets":[{"name":"tree-sitter-demo.wasm","digest":"sha256:%064d"}]}\n' 0 \
+    >stub/api/repos_tree-sitter_tree-sitter-demo_releases_tags_v1.2.3
+  run 1 "$tools_dir/check-upstream.sh" "my pack"
+  has "my pack: the grammar demo has the SHA-256 "
+  has ", and GitHub gives the digest $(printf '%064d' 0) for the asset tree-sitter-demo.wasm"
+}
+
+t_upstream_pass_an_asset_with_no_digest_and_say_so() {
+  upstream_case
+  printf '{"assets":[{"name":"tree-sitter-demo.wasm","digest":null}]}\n' \
+    >stub/api/repos_tree-sitter_tree-sitter-demo_releases_tags_v1.2.3
+  run 0 "$tools_dir/check-upstream.sh" "my pack"
+  has "my pack: the grammar demo: GitHub gives no digest for the asset tree-sitter-demo.wasm, so the sha256 of the descriptor is the only record of the file."
+}
+
+t_upstream_find_a_missing_asset() {
+  upstream_case
+  printf '{"assets":[]}\n' >stub/api/repos_tree-sitter_tree-sitter-demo_releases_tags_v1.2.3
+  run 1 "$tools_dir/check-upstream.sh" "my pack"
+  has "has 0 assets with the name tree-sitter-demo.wasm, and it must have one"
+}
+
+t_upstream_find_two_assets_of_one_name() {
+  upstream_case
+  printf '{"assets":[{"name":"tree-sitter-demo.wasm","digest":null},{"name":"tree-sitter-demo.wasm","digest":null}]}\n' \
+    >stub/api/repos_tree-sitter_tree-sitter-demo_releases_tags_v1.2.3
+  run 1 "$tools_dir/check-upstream.sh" "my pack"
+  has "has 2 assets with the name tree-sitter-demo.wasm, and it must have one"
+}
+
+t_upstream_find_a_file_that_the_attestation_does_not_cover() {
+  upstream_case
+  rm stub/attested
+  run 1 "$tools_dir/check-upstream.sh" "my pack"
+  has "my pack: the grammar demo: gh attestation verify does not accept the file: Error: verifying"
+}
+
+t_upstream_find_a_changed_license_file() {
+  upstream_case
+  printf 'x' >>"my pack/licenses/tree-sitter-demo.LICENSE"
+  run 1 "$tools_dir/check-upstream.sh" "my pack"
+  has "my pack: licenses/tree-sitter-demo.LICENSE is not the license file of tree-sitter/tree-sitter-demo at v1.2.3"
+}
+
+t_upstream_find_a_missing_license_on_github() {
+  upstream_case
+  rm stub/api/repos_tree-sitter_tree-sitter-demo_license_ref_v1.2.3
+  run 1 "$tools_dir/check-upstream.sh" "my pack"
+  has "my pack: GitHub gives no license file of tree-sitter/tree-sitter-demo at v1.2.3"
+}
+
+online_pack() {
+  requires grammars
+  mkdir -p "rust pack/grammars" "rust pack/licenses"
+  cp "$rust_wasm" "rust pack/grammars/rust.wasm"
+  curl -fsSL --proto '=https' -o "rust pack/licenses/tree-sitter-rust.LICENSE" \
+    https://raw.githubusercontent.com/tree-sitter/tree-sitter-rust/v0.24.2/LICENSE
+  {
+    printf 'rust pack of Sinter\nCopyright 2026 The Sinter Authors\n'
+    notice_block rust tree-sitter/tree-sitter-rust v0.24.2 "$1" tree-sitter-rust.wasm "$(sha256_of "$rust_wasm")"
+  } >"rust pack/licenses/NOTICE"
+}
+
+t_online_upstream_passes_tree_sitter_rust() {
+  online_pack 77a3747266f4d621d0757825e6b11edcbf991ca5
+  run 0 "$tools_dir/check-upstream.sh" "rust pack"
+  has "rust pack: the upstream releases pass."
+}
+
+t_online_upstream_finds_a_wrong_commit() {
+  online_pack 0123456789abcdef0123456789abcdef01234567
+  run 1 "$tools_dir/check-upstream.sh" "rust pack"
+  has "names the commit 77a3747266f4d621d0757825e6b11edcbf991ca5"
+  has "gh attestation verify does not accept the file"
+}
+
 t_tools_print_their_usage() {
   for script in "$tools_dir"/*.sh; do
     name=${script##*/}
