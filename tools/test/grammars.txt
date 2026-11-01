@@ -1,0 +1,2 @@
+tree-sitter-rust.wasm 24c89bd9252255e4aebbcbd7d2d308bd92c86dd95a130fdc80efa49577b8d738 https://github.com/tree-sitter/tree-sitter-rust/releases/download/v0.24.2/tree-sitter-rust.wasm
+tree-sitter-typescript.wasm 778025db5a8be0e70f8ccc3671e486dfeddd048c25d9e8a70c26de2e1bf6f97d https://github.com/tree-sitter/tree-sitter-typescript/releases/download/v0.23.2/tree-sitter-typescript.wasm

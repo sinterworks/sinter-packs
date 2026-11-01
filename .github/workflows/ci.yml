@@ -1,0 +1,254 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright 2026 The Sinter Authors
+
+name: ci
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  pin:
+    name: Read the pin of Sinter
+    runs-on: ubuntu-26.04
+    outputs:
+      commit: ${{ steps.pin.outputs.commit }}
+    steps:
+      - uses: actions/checkout@v7
+      - name: Read tools/sinter.pin
+        id: pin
+        run: |
+          set -eu
+          commit=$(cat tools/sinter.pin)
+          if ! printf '%s\n' "$commit" | grep -Eqx '[0-9a-f]{40}'; then
+            echo "tools/sinter.pin must hold one commit of Sinter, as 40 lowercase hex digits."
+            exit 1
+          fi
+          echo "The pin of Sinter is $commit."
+          echo "commit=$commit" >>"$GITHUB_OUTPUT"
+
+  sinter:
+    name: Build the pinned Sinter
+    needs: pin
+    runs-on: ubuntu-26.04
+    env:
+      COMMIT: ${{ needs.pin.outputs.commit }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          repository: lathrys-at/sinter
+          ref: ${{ needs.pin.outputs.commit }}
+      - name: Name the runner image
+        id: image
+        run: |
+          test -n "$ImageOS"
+          echo "os=$ImageOS" >>"$GITHUB_OUTPUT"
+      - name: Read the versions of OCaml and Rust that Sinter pins
+        id: versions
+        run: |
+          set -eu
+          ocaml=$(sed -n 's/^  "ocaml" {= "\([0-9.]*\)"}$/\1/p' sinter.opam.locked)
+          rust=$(sed -n 's/^channel = "\([0-9.]*\)"$/\1/p' bridge/rust-toolchain.toml)
+          if [ "$(printf '%s\n' "$ocaml" | wc -l)" -ne 1 ] || [ -z "$ocaml" ]; then
+            echo "sinter.opam.locked of the pinned Sinter does not give one version of ocaml."
+            exit 1
+          fi
+          if [ "$(printf '%s\n' "$rust" | wc -l)" -ne 1 ] || [ -z "$rust" ]; then
+            echo "bridge/rust-toolchain.toml of the pinned Sinter does not give one channel."
+            exit 1
+          fi
+          echo "The pinned Sinter builds with OCaml $ocaml and Rust $rust."
+          echo "ocaml=$ocaml" >>"$GITHUB_OUTPUT"
+          echo "rust=$rust" >>"$GITHUB_OUTPUT"
+      - name: Restore the build of the pinned Sinter
+        id: build
+        uses: actions/cache@v6
+        with:
+          path: sinter-build
+          key: sinter-build-v1-${{ steps.image.outputs.os }}-${{ runner.arch }}-${{ needs.pin.outputs.commit }}
+      - name: Restore the opam switch
+        if: steps.build.outputs.cache-hit != 'true'
+        id: opam
+        uses: actions/cache@v6
+        with:
+          path: _opam
+          key: opam-sinter-v1-${{ steps.image.outputs.os }}-${{ runner.arch }}-${{ steps.versions.outputs.ocaml }}-${{ hashFiles('sinter.opam.locked') }}
+          restore-keys: |
+            opam-sinter-v1-${{ steps.image.outputs.os }}-${{ runner.arch }}-${{ steps.versions.outputs.ocaml }}-
+      - uses: actions-rust-lang/setup-rust-toolchain@v2
+        if: steps.build.outputs.cache-hit != 'true'
+        with:
+          cache: false
+          toolchain: ${{ steps.versions.outputs.rust }}
+      - name: Cache the cargo state
+        if: steps.build.outputs.cache-hit != 'true'
+        uses: actions/cache@v6
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            ~/.cache/sinter-bridge-build
+          key: cargo-sinter-${{ steps.image.outputs.os }}-${{ runner.arch }}-${{ hashFiles('bridge/Cargo.lock') }}
+          restore-keys: cargo-sinter-${{ steps.image.outputs.os }}-${{ runner.arch }}-
+      - name: Turn off git background maintenance
+        if: steps.build.outputs.cache-hit != 'true' && steps.opam.outputs.cache-hit != 'true'
+        run: git config --global maintenance.auto false
+      - uses: ocaml/setup-ocaml@v3
+        if: steps.build.outputs.cache-hit != 'true' && steps.opam.outputs.cache-hit != 'true'
+        with:
+          ocaml-compiler: ${{ steps.versions.outputs.ocaml }}
+          cache: false
+      - name: Install the dependencies
+        if: steps.build.outputs.cache-hit != 'true' && steps.opam.outputs.cache-hit != 'true'
+        run: opam install . --deps-only --locked
+      - name: Put the switch on the path
+        if: steps.build.outputs.cache-hit != 'true'
+        run: |
+          prefix="$GITHUB_WORKSPACE/_opam"
+          echo "$prefix/bin" >>"$GITHUB_PATH"
+          echo "OPAM_SWITCH_PREFIX=$prefix" >>"$GITHUB_ENV"
+          echo "CAML_LD_LIBRARY_PATH=$prefix/lib/stublibs:$prefix/lib/ocaml/stublibs" >>"$GITHUB_ENV"
+      - name: Build Sinter
+        if: steps.build.outputs.cache-hit != 'true'
+        run: |
+          set -eu
+          dune build bin/main.exe
+          crate=$(cargo metadata --format-version 1 --locked --manifest-path bridge/Cargo.toml |
+            jq -r '[.packages[] | select(.name == "tree-sitter")] | if length == 1 then .[0].manifest_path else empty end')
+          if [ -z "$crate" ]; then
+            echo "bridge/Cargo.lock of Sinter does not name exactly one crate tree-sitter."
+            exit 1
+          fi
+          mkdir -p sinter-build/bin
+          cp _build/default/bin/main.exe sinter-build/bin/sinter
+          cp -R "$(dirname "$crate")" sinter-build/tree-sitter
+          printf '%s\n' "$COMMIT" >sinter-build/commit
+      - name: Report the build
+        run: |
+          set -eu
+          echo "Sinter $(sinter-build/bin/sinter --version), from the commit $(cat sinter-build/commit)."
+          echo "The crate tree-sitter of its bridge: $(sed -n 's/^version = "\(.*\)"$/\1/p' sinter-build/tree-sitter/Cargo.toml | head -n 1)."
+      - uses: actions/upload-artifact@v7
+        with:
+          name: sinter-build
+          path: sinter-build
+          if-no-files-found: error
+
+  check:
+    name: Check the repository and the packs
+    needs: sinter
+    runs-on: ubuntu-26.04
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - uses: actions/download-artifact@v7
+        with:
+          name: sinter-build
+          path: ${{ runner.temp }}/sinter-build
+      - name: Put the pinned Sinter on the path
+        run: |
+          set -eu
+          build="$RUNNER_TEMP/sinter-build"
+          chmod +x "$build/bin/sinter"
+          echo "$build/bin" >>"$GITHUB_PATH"
+          echo "TREE_SITTER_CRATE=$build/tree-sitter" >>"$GITHUB_ENV"
+      - name: Check this repository with Sinter
+        run: |
+          set -eu
+          if [ "$GITHUB_EVENT_NAME" = "pull_request" ]; then
+            gate=review
+          else
+            gate=merged
+          fi
+          echo "The gate is $gate."
+          sinter check --gate "$gate"
+      - name: List the packs
+        if: ${{ !cancelled() }}
+        id: packs
+        run: |
+          set -eu
+          count=0
+          for folder in packs/*/; do
+            [ -d "$folder" ] && count=$((count + 1))
+          done
+          echo "The repository has $count packs."
+          echo "count=$count" >>"$GITHUB_OUTPUT"
+      - name: Check the grammars
+        if: ${{ !cancelled() && steps.packs.outputs.count != '0' }}
+        run: tools/check-grammars.sh -t "$TREE_SITTER_CRATE" packs/*/
+      - name: Check the queries
+        if: ${{ !cancelled() && steps.packs.outputs.count != '0' }}
+        run: tools/check-queries.sh -s sinter packs/*/
+      - name: Check the licenses
+        if: ${{ !cancelled() && steps.packs.outputs.count != '0' }}
+        run: tools/check-licenses.sh packs/*/
+      - name: Check the upstream releases
+        if: ${{ !cancelled() && steps.packs.outputs.count != '0' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: tools/check-upstream.sh packs/*/
+      - name: Check the index and the versions
+        if: ${{ !cancelled() && steps.packs.outcome == 'success' }}
+        env:
+          BEFORE: ${{ github.event.before }}
+        run: |
+          set -eu
+          if [ "$GITHUB_EVENT_NAME" = "pull_request" ]; then
+            base=$(git merge-base "origin/$GITHUB_BASE_REF" HEAD)
+          elif [ -n "$BEFORE" ] && [ "$BEFORE" != "0000000000000000000000000000000000000000" ]; then
+            base=$BEFORE
+          else
+            base=
+          fi
+          if [ -n "$base" ]; then
+            echo "The base is $base."
+            tools/check-index.sh -b "$base"
+          else
+            echo "No base: the check compares nothing with an earlier tree."
+            tools/check-index.sh
+          fi
+
+  tools:
+    name: Check and test the tools
+    needs: sinter
+    runs-on: ubuntu-26.04
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/download-artifact@v7
+        with:
+          name: sinter-build
+          path: ${{ runner.temp }}/sinter-build
+      - name: Run shellcheck on every script
+        run: |
+          set -eu
+          shellcheck --version
+          find tools -name '*.sh' -type f -print0 | xargs -0 shellcheck -s sh -x -P SCRIPTDIR
+      - name: Download the grammars of the tests
+        run: |
+          set -eu
+          dir="$RUNNER_TEMP/grammars"
+          mkdir -p "$dir"
+          while read -r file hash url; do
+            curl -fsSL --proto '=https' --retry 3 -o "$dir/$file" "$url"
+            echo "$hash  $dir/$file" | sha256sum -c -
+          done <tools/test/grammars.txt
+      - name: Run the tests of the tools
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -eu
+          build="$RUNNER_TEMP/sinter-build"
+          chmod +x "$build/bin/sinter"
+          sh tools/test/run.sh -u \
+            -s "$build/bin/sinter" \
+            -t "$build/tree-sitter" \
+            -g "$RUNNER_TEMP/grammars"
