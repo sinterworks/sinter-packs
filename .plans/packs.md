@@ -13,7 +13,7 @@ Add the files of the repository root, the manifest that lets Sinter
 check this repository, and the four license checks of Sinter's CI.
 
 ## Check packs
-@scope tools/**, .github/workflows/ci.yml
+@scope tools/**, .github/workflows/ci.yml, CONTRIBUTING.md
 Check each pack on each pull request with a Sinter built from a
 pinned commit: the upstream digest and provenance of each grammar,
 its imports, features, and ABI against the pinned tree-sitter, each

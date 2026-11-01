@@ -1,0 +1,21 @@
+sinter-spec = "1.0"
+
+[scan]
+packs.markdown.files = ["**/*.md", "!fixtures/**"]
+namespaces.gh = "[1-9][0-9]*"
+
+[paths]
+exempt = [
+  "DCO",
+  "LICENSE",
+  "LICENSES/",
+  "NOTICE",
+  "REUSE.toml",
+  "THIRD_PARTY.md",
+  "adapters/**/Cargo.lock",
+  "tools/sinter.pin",
+]
+decision = ["docs/decisions/"]
+
+[check]
+warn-only = false
