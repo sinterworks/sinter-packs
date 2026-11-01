@@ -1,9 +1,9 @@
 # The first packs
 @plan packs@939532
 @scope README.md, CONTRIBUTING.md, NOTICE, REUSE.toml, LICENSES/**, THIRD_PARTY.md, sinter.toml, docs/**, packs/**, adapters/**, fixtures/**, tools/**, index.jsonl, .github/workflows/**
-Release the packs ocaml, rust, and typescript at 0.1.0, with their
-queries, their conformance fixtures, and their test runners, and the
-CI that checks and releases each pack.
+Release the packs javascript, ocaml, rust, and typescript at 0.1.0,
+with their queries, their conformance fixtures, and their test
+runners, and the CI that checks and releases each pack.
 
 ## Set up the repository
 @scope CONTRIBUTING.md, NOTICE, REUSE.toml, LICENSES/**, THIRD_PARTY.md, sinter.toml, docs/**, .github/workflows/licensing.yml
@@ -20,11 +20,11 @@ its imports, features, and ABI against the pinned tree-sitter, each
 query, the license list, the folder `licenses/`, and the rules of
 `index.jsonl`.
 
-## Add the three packs
+## Add the four packs
 @scope packs/**, REUSE.toml, THIRD_PARTY.md
-Add the packs ocaml, rust, and typescript: the upstream grammars by
-SHA-256, their license texts and notice, the descriptors, and the
-query files for comments, definitions, and tests.
+Add the packs javascript, ocaml, rust, and typescript: the upstream
+grammars by SHA-256, their license texts and notice, the descriptors,
+and the query files for comments, definitions, and tests.
 
 ## Release packs
 @scope tools/**, .github/workflows/release.yml
@@ -37,11 +37,11 @@ build the archive, check its pack hash, attest it, and publish it as
 Add the conformance fixtures of each pack, with the project, the
 manifest, and the expected scan, and check each release against the
 fixtures of the release before it. This step needs the Sinter step
-"Read TypeScript, Rust, and OCaml".
+"Read JavaScript, OCaml, Rust, and TypeScript".
 
 ## Release the first packs
 @scope index.jsonl, packs/*/pack.toml
-Release ocaml, rust, and typescript at 0.1.0.
+Release javascript, ocaml, rust, and typescript at 0.1.0.
 
 ## Add the test runners
 @scope packs/**, adapters/**, fixtures/**, tools/**, THIRD_PARTY.md, .github/workflows/**

@@ -14,6 +14,7 @@ gives the format of a pack.
 
 | pack | files | grammars | test runners |
 |---|---|---|---|
+| `javascript` | `*.js`, `*.mjs`, `*.cjs`, `*.jsx` | tree-sitter-javascript: `javascript` | vitest |
 | `ocaml` | `*.ml`, `*.mli` | tree-sitter-ocaml: `ocaml`, `ocaml_interface` | alcotest, with a JUnit report |
 | `rust` | `*.rs` | tree-sitter-rust: `rust` | cargo-nextest |
 | `typescript` | `*.ts`, `*.mts`, `*.cts`, `*.tsx` | tree-sitter-typescript: `typescript`, `tsx` | vitest |
