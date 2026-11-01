@@ -685,6 +685,51 @@ t_grammars_pass_the_upstream_grammars() {
   has "typescript: the grammar typescript passes: ABI version 14,"
 }
 
+query_case() {
+  requires sinter grammars
+  make_pack "my pack" rust rust
+  cp "$rust_wasm" "my pack/grammars/rust.wasm"
+}
+
+t_queries_pass_a_query_that_compiles() {
+  query_case
+  printf '(line_comment) @comment\n(block_comment) @comment\n' >"my pack/queries/rust/tags.scm"
+  run 0 "$tools_dir/check-queries.sh" -s "$sinter" "my pack"
+  has "my pack: queries/rust/tags.scm compiles."
+}
+
+t_queries_find_a_query_that_does_not_compile() {
+  query_case
+  printf '(line_comment) @comment\n' >"my pack/queries/rust/tags.scm"
+  printf '(no_such_node) @definition\n' >"my pack/queries/rust/definitions.scm"
+  run 1 "$tools_dir/check-queries.sh" -s "$sinter" "my pack"
+  has "my pack: queries/rust/tags.scm compiles."
+  has "my pack: queries/rust/definitions.scm does not compile: "
+  has "no_such_node"
+}
+
+t_queries_find_a_directive() {
+  query_case
+  printf '((line_comment) @comment (#set! kind "x"))\n' >"my pack/queries/rust/tags.scm"
+  run 1 "$tools_dir/check-queries.sh" -s "$sinter" "my pack"
+  has "my pack: queries/rust/tags.scm does not compile: "
+}
+
+t_queries_find_a_folder_of_no_grammar() {
+  query_case
+  printf '(line_comment) @comment\n' >"my pack/queries/rust/tags.scm"
+  mkdir "my pack/queries/other"
+  run 1 "$tools_dir/check-queries.sh" -s "$sinter" "my pack"
+  has "my pack: queries/other belongs to no grammar of the descriptor"
+}
+
+t_queries_find_a_missing_grammar() {
+  query_case
+  rm "my pack/grammars/rust.wasm"
+  run 1 "$tools_dir/check-queries.sh" -s "$sinter" "my pack"
+  has "my pack: the grammar rust has no file grammars/rust.wasm"
+}
+
 t_tools_print_their_usage() {
   for script in "$tools_dir"/*.sh; do
     name=${script##*/}
