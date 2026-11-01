@@ -120,3 +120,9 @@ descriptor_grammar_value() {
     }
   ' "$1"
 }
+
+wasm_info() {
+  WASM_FILE=$1 WASM_MODE=file WASM_GRAMMAR=$2 \
+    WASM_SIZE=$(wc -c <"$1" | tr -d ' ') \
+    awk -f "$tools_dir/wasm.awk" </dev/null
+}
