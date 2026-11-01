@@ -65,15 +65,45 @@ license tags for this file.
 
 ## Checks
 
+The file `tools/sinter.pin` holds the commit of Sinter that CI builds.
+Build Sinter at that commit from
+[its repository](https://github.com/lathrys-at/sinter), as its
+CONTRIBUTING.md says. The checks below name two of its parts:
+
+- `SINTER`: the built `sinter`, `_build/default/bin/main.exe`.
+- `CRATE`: the folder of the source of the crate `tree-sitter` that
+  the bridge of Sinter uses. In the checkout of Sinter, this command
+  prints the path of the file `Cargo.toml` of that crate, and `CRATE`
+  is the folder of that file:
+
+  ```
+  cargo metadata --format-version 1 --locked --manifest-path bridge/Cargo.toml |
+    jq -r '.packages[] | select(.name == "tree-sitter") | .manifest_path'
+  ```
+
 Before you commit, check that these pass at the repository root:
 
 - `reuse lint`. Install the tool once, for example with
   `pipx install reuse`.
-- `sinter check --gate review`. Build Sinter from
-  [its repository](https://github.com/lathrys-at/sinter), as its
-  CONTRIBUTING.md says.
+- `SINTER check --gate review`.
+- `shellcheck -s sh -x -P SCRIPTDIR` on each file `*.sh` under
+  `tools/`.
+- The tests of the tools:
+  `sh tools/test/run.sh -s SINTER -t CRATE -g GRAMMARS`. `GRAMMARS` is
+  a folder that holds the files of `tools/test/grammars.txt`. Each
+  line of that file gives a file, its SHA-256, and its address.
+  Download each file and check its SHA-256. With `-u`, the tests also
+  call GitHub with `gh`.
+- The checks of the packs, on each folder under `packs/`:
+  1. `tools/check-grammars.sh -t CRATE packs/*/`
+  2. `tools/check-queries.sh -s SINTER packs/*/`
+  3. `tools/check-licenses.sh packs/*/`
+  4. `tools/check-upstream.sh packs/*/`, which calls GitHub with `gh`
+  5. `tools/check-index.sh -b origin/main`
 
-CI runs both, and the license checks of the workflow `licensing`.
+Each tool prints its checks and its exit codes with `-h`. CI runs all of
+them in the workflow `ci`, and the license checks in the workflow
+`licensing`.
 
 ## Commits
 
@@ -151,7 +181,9 @@ its upstream project (record `upstream-grammars`).
    value is an SPDX expression of licenses on this list: `0BSD`,
    `Apache-2.0`, `BSD-2-Clause`, `BSD-3-Clause`, `ISC`, `MIT`,
    `MPL-2.0`, `Unlicense`. Any other license needs a decision of the
-   maintainer.
+   maintainer. Write the descriptor in the plain form of TOML that the
+   tools read: no dotted key, no inline table, no multi-line string,
+   and each value on the line of its key.
 6. Fill the folder `packs/<name>/licenses/`:
    - `Apache-2.0.txt`: the text of `LICENSES/Apache-2.0.txt`, for the
      files that this repository writes.
@@ -199,7 +231,8 @@ The first release of a pack is `0.1.0`. Each change of the files of a
 pack that has a release needs a new release: raise `version` in
 `pack.toml` by the rules of release numbers of the pack
 specification, and add the line of the new release to `index.jsonl`
-in the same pull request. The line holds the pack hash of the folder.
+in the same pull request. The line holds the pack hash of the folder,
+which `tools/pack-hash.sh packs/<name>` prints.
 After the merge, CI publishes the archive of the release.
 
 ### A grammar built from source
