@@ -730,6 +730,238 @@ t_queries_find_a_missing_grammar() {
   has "my pack: the grammar rust has no file grammars/rust.wasm"
 }
 
+license_case() {
+  make_pack "my pack" demo demo
+}
+
+license_value() {
+  license_case
+  replace_line "my pack/pack.toml" 'license = "MIT"' "license = \"$1\""
+}
+
+t_licenses_pass() {
+  license_case
+  run 0 "$tools_dir/check-licenses.sh" "my pack"
+  has "my pack: the licenses pass."
+}
+
+t_licenses_pass_an_expression_with_and_or_and_brackets() {
+  license_value "(MIT OR ISC) AND 0BSD"
+  run 0 "$tools_dir/check-licenses.sh" "my pack"
+}
+
+t_licenses_find_a_top_level_license_that_is_not_apache() {
+  license_case
+  replace_line "my pack/pack.toml" 'license = "Apache-2.0"' 'license = "MIT"'
+  run 1 "$tools_dir/check-licenses.sh" "my pack"
+  has "my pack: the top-level license of the descriptor is \"MIT\", and it must be Apache-2.0"
+}
+
+t_licenses_find_a_license_off_the_list() {
+  license_value "GPL-3.0-only"
+  run 1 "$tools_dir/check-licenses.sh" "my pack"
+  has "my pack: the value \"GPL-3.0-only\" of grammar[0].license names the license GPL-3.0-only, which is not on the list of licenses that a pack can use"
+}
+
+t_licenses_find_a_license_off_the_list_on_a_side_of_or() {
+  license_value "MIT OR GPL-2.0-only"
+  run 1 "$tools_dir/check-licenses.sh" "my pack"
+  has "names the license GPL-2.0-only"
+}
+
+t_licenses_find_an_exception() {
+  license_value "Apache-2.0 WITH LLVM-exception"
+  run 1 "$tools_dir/check-licenses.sh" "my pack"
+  has "names a license exception"
+}
+
+t_licenses_find_an_expression_that_is_not_spdx() {
+  license_value "MIT AND"
+  run 1 "$tools_dir/check-licenses.sh" "my pack"
+  has "my pack: the value \"MIT AND\" of grammar[0].license is not an SPDX expression"
+}
+
+t_licenses_find_a_bracket_that_does_not_close() {
+  license_value "(MIT OR ISC"
+  run 1 "$tools_dir/check-licenses.sh" "my pack"
+  has "is not an SPDX expression"
+}
+
+t_licenses_find_a_license_in_lower_case() {
+  license_value "mit"
+  run 1 "$tools_dir/check-licenses.sh" "my pack"
+  has "names the license mit"
+}
+
+t_licenses_find_an_operator_in_lower_case() {
+  license_value "MIT and ISC"
+  run 1 "$tools_dir/check-licenses.sh" "my pack"
+  has "my pack: the value \"MIT and ISC\" of grammar[0].license writes the operator and in lower case, and the tools read only AND"
+}
+
+t_licenses_find_a_grammar_with_no_license() {
+  license_case
+  grep -v '^license = "MIT"$' "my pack/pack.toml" >toml
+  mv toml "my pack/pack.toml"
+  run 1 "$tools_dir/check-licenses.sh" "my pack"
+  has "my pack: the grammar demo has no license in the descriptor"
+}
+
+t_licenses_find_a_changed_apache_text() {
+  license_case
+  printf 'x' >>"my pack/licenses/Apache-2.0.txt"
+  run 1 "$tools_dir/check-licenses.sh" "my pack"
+  has "my pack: licenses/Apache-2.0.txt is not the text of the Apache-2.0 license of this repository"
+}
+
+t_licenses_find_a_missing_apache_text() {
+  license_case
+  rm "my pack/licenses/Apache-2.0.txt"
+  run 1 "$tools_dir/check-licenses.sh" "my pack"
+  has "my pack: licenses/Apache-2.0.txt is missing"
+}
+
+t_licenses_find_a_file_too_many() {
+  license_case
+  printf 'x' >"my pack/licenses/other file"
+  mkdir "my pack/licenses/folder"
+  run 1 "$tools_dir/check-licenses.sh" "my pack"
+  has "my pack: licenses/other file is not a file that the folder holds"
+  has "my pack: licenses/folder is not a file that the folder holds"
+}
+
+t_licenses_find_a_missing_upstream_license() {
+  license_case
+  rm "my pack/licenses/tree-sitter-demo.LICENSE"
+  run 1 "$tools_dir/check-licenses.sh" "my pack"
+  has "my pack: licenses/tree-sitter-demo.LICENSE is missing"
+}
+
+t_licenses_find_an_empty_upstream_license() {
+  license_case
+  : >"my pack/licenses/tree-sitter-demo.LICENSE"
+  run 1 "$tools_dir/check-licenses.sh" "my pack"
+  has "my pack: licenses/tree-sitter-demo.LICENSE is empty"
+}
+
+t_licenses_find_a_missing_notice() {
+  license_case
+  rm "my pack/licenses/NOTICE"
+  run 1 "$tools_dir/check-licenses.sh" "my pack"
+  has "my pack: licenses/NOTICE is missing"
+}
+
+t_licenses_find_a_wrong_first_line_of_the_notice() {
+  license_case
+  replace_line "my pack/licenses/NOTICE" "demo pack" "demo pack of sinter"
+  run 1 "$tools_dir/check-licenses.sh" "my pack"
+  has "my pack: licenses/NOTICE is not in its form: line 1: the first line is not \"<name> pack of Sinter\""
+}
+
+t_licenses_find_a_notice_of_another_pack() {
+  license_case
+  replace_line "my pack/licenses/NOTICE" "demo pack" "other pack of Sinter"
+  run 1 "$tools_dir/check-licenses.sh" "my pack"
+  has "my pack: licenses/NOTICE names the pack other, and the descriptor names it demo"
+}
+
+t_licenses_find_a_wrong_copyright_line() {
+  license_case
+  replace_line "my pack/licenses/NOTICE" "Copyright" "Copyright 2026 Somebody"
+  run 1 "$tools_dir/check-licenses.sh" "my pack"
+  has "line 2: the second line is not"
+}
+
+t_licenses_find_a_block_with_a_missing_line() {
+  license_case
+  grep -v '^asset: ' "my pack/licenses/NOTICE" >notice
+  mv notice "my pack/licenses/NOTICE"
+  run 1 "$tools_dir/check-licenses.sh" "my pack"
+  has "line 8: the line does not start with asset:"
+}
+
+t_licenses_find_a_block_that_is_cut_short() {
+  license_case
+  grep -v '^sha256: ' "my pack/licenses/NOTICE" >notice
+  mv notice "my pack/licenses/NOTICE"
+  run 1 "$tools_dir/check-licenses.sh" "my pack"
+  has "the last block does not have its six lines"
+}
+
+t_licenses_find_a_block_of_a_grammar_built_from_source() {
+  license_case
+  printf 'tree-sitter-cli: 0.26.13 %s\n' "$(printf '%064d' 0)" >>"my pack/licenses/NOTICE"
+  run 1 "$tools_dir/check-licenses.sh" "my pack"
+  has "licenses/NOTICE is not in its form"
+}
+
+t_licenses_find_a_commit_that_is_not_hex() {
+  license_case
+  replace_line "my pack/licenses/NOTICE" "commit: " "commit: v1.2.3"
+  run 1 "$tools_dir/check-licenses.sh" "my pack"
+  has "line 7: the value of commit is not in its form"
+}
+
+t_licenses_find_a_tag_with_a_parent_folder() {
+  license_case
+  replace_line "my pack/licenses/NOTICE" "tag: " "tag: ../v1"
+  run 1 "$tools_dir/check-licenses.sh" "my pack"
+  has "line 6: the value of tag is not in its form"
+}
+
+t_licenses_find_a_wrong_sha256_in_the_notice() {
+  license_case
+  replace_line "my pack/licenses/NOTICE" "sha256: " "sha256: $(printf '%064d' 0)"
+  run 1 "$tools_dir/check-licenses.sh" "my pack"
+  has "my pack: licenses/NOTICE gives the grammar demo the sha256 $(printf '%064d' 0), and the descriptor gives "
+}
+
+t_licenses_find_a_notice_with_no_line_feed_at_its_end() {
+  license_case
+  printf '%s' "$(cat "my pack/licenses/NOTICE")" >notice
+  mv notice "my pack/licenses/NOTICE"
+  run 1 "$tools_dir/check-licenses.sh" "my pack"
+  has "my pack: licenses/NOTICE does not end with a line feed"
+}
+
+two_grammars() {
+  license_case
+  cp "my pack/grammars/demo.wasm" "my pack/grammars/second.wasm"
+  printf '\n[[grammar]]\nname = "second"\nsha256 = "%s"\nlicense = "MIT"\nnames = ["*.y"]\n' \
+    "$(sha256_of "my pack/grammars/second.wasm")" >>"my pack/pack.toml"
+}
+
+t_licenses_pass_two_grammars_of_one_repository() {
+  two_grammars
+  notice_block second tree-sitter/tree-sitter-demo v1.2.3 \
+    0123456789abcdef0123456789abcdef01234567 tree-sitter-second.wasm \
+    "$(sha256_of "my pack/grammars/second.wasm")" >>"my pack/licenses/NOTICE"
+  run 0 "$tools_dir/check-licenses.sh" "my pack"
+}
+
+t_licenses_find_blocks_in_another_order() {
+  two_grammars
+  {
+    printf 'demo pack of Sinter\nCopyright 2026 The Sinter Authors\n'
+    notice_block second tree-sitter/tree-sitter-demo v1.2.3 \
+      0123456789abcdef0123456789abcdef01234567 tree-sitter-second.wasm \
+      "$(sha256_of "my pack/grammars/second.wasm")"
+    sed -n '3,$p' "my pack/licenses/NOTICE"
+  } >notice
+  mv notice "my pack/licenses/NOTICE"
+  run 1 "$tools_dir/check-licenses.sh" "my pack"
+  has "my pack: the blocks of licenses/NOTICE do not name the grammars of the descriptor in their order"
+}
+
+t_licenses_find_two_tags_of_one_repository() {
+  two_grammars
+  notice_block second tree-sitter/tree-sitter-demo v9.9.9 \
+    0123456789abcdef0123456789abcdef01234567 tree-sitter-second.wasm \
+    "$(sha256_of "my pack/grammars/second.wasm")" >>"my pack/licenses/NOTICE"
+  run 1 "$tools_dir/check-licenses.sh" "my pack"
+  has "my pack: licenses/NOTICE gives two tags of the repository tree-sitter/tree-sitter-demo"
+}
+
 t_tools_print_their_usage() {
   for script in "$tools_dir"/*.sh; do
     name=${script##*/}
