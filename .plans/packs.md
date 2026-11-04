@@ -21,7 +21,7 @@ query, the license list, the folder `licenses/`, and the rules of
 `index.jsonl`.
 
 ## Add the four packs
-@scope packs/**, REUSE.toml, LICENSES/**, THIRD_PARTY.md, tests/**, tools/**, .github/workflows/ci.yml, docs/decisions/**
+@scope packs/**, REUSE.toml, LICENSES/**, THIRD_PARTY.md, CONTRIBUTING.md, tests/**, tools/**, .github/workflows/ci.yml, docs/decisions/**
 @decision query-tests
 Add the packs javascript, ocaml, rust, and typescript: the upstream
 grammars by SHA-256, their license texts and notice, the descriptors,
