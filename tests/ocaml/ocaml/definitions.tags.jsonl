@@ -1,0 +1,2 @@
+{"cap":"untagged","col":1,"eb":25,"ecol":26,"eline":1,"line":1,"node":"comment","pat":0,"path":"tests/ocaml/ocaml/definitions.ml","sb":0,"text":"(** Returns its input. *)"}
+{"cap":"comment","col":1,"eb":25,"ecol":26,"eline":1,"line":1,"node":"comment","pat":1,"path":"tests/ocaml/ocaml/definitions.ml","sb":0,"text":"(** Returns its input. *)"}

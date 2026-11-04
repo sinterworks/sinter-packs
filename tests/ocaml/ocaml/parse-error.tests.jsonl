@@ -1,0 +1,3 @@
+{"cap":"test","col":13,"eb":112,"ecol":61,"eline":3,"line":3,"node":"application_expression","pat":3,"path":"tests/ocaml/ocaml/parse-error.ml","sb":64,"text":"Alcotest.test_case \"after\" `Quick (fun () -> ())"}
+{"cap":"_fn","col":13,"eb":82,"ecol":31,"eline":3,"line":3,"node":"value_path","pat":3,"path":"tests/ocaml/ocaml/parse-error.ml","sb":64,"text":"Alcotest.test_case"}
+{"cap":"name","col":33,"eb":89,"ecol":38,"eline":3,"line":3,"node":"string_content","pat":3,"path":"tests/ocaml/ocaml/parse-error.ml","sb":84,"text":"after"}

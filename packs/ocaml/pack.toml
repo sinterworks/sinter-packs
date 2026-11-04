@@ -1,0 +1,23 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright 2026 The Sinter Authors
+
+sinter-spec = "1.0"
+name = "ocaml"
+version = "0.1.0"
+license = "Apache-2.0"
+name-separator = "."
+
+[comments]
+block = [["(*", "*)"], ["(**", "*)"]]
+
+[[grammar]]
+name = "ocaml"
+sha256 = "bfa3eef92b9d3cc1117aa486d46ecb06c98a3a28c1747660aaa5851df5e4530c"
+license = "MIT"
+names = ["*.ml"]
+
+[[grammar]]
+name = "ocaml_interface"
+sha256 = "3ce03850c36618e3530292372aae9156a45b5a923210a87c285539d7f13b0354"
+license = "MIT"
+names = ["*.mli"]

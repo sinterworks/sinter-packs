@@ -1,0 +1,1 @@
+{"cap":"comment","col":1,"eb":95,"ecol":54,"eline":3,"line":2,"node":"comment","pat":1,"path":"tests/ocaml/ocaml/unclosed-comment.ml","sb":10,"text":"(* A comment that does not end.\nlet b = Alcotest.test_case \"b\" `Quick (fun () -> ())\n"}

@@ -25,3 +25,9 @@ path = ["packs/rust/grammars/rust.wasm", "packs/rust/licenses/tree-sitter-rust.L
 precedence = "override"
 SPDX-FileCopyrightText = "Copyright (c) 2017 Maxim Sokolov"
 SPDX-License-Identifier = "MIT"
+
+[[annotations]]
+path = ["packs/ocaml/grammars/ocaml.wasm", "packs/ocaml/grammars/ocaml_interface.wasm", "packs/ocaml/licenses/tree-sitter-ocaml.LICENSE"]
+precedence = "override"
+SPDX-FileCopyrightText = "Copyright (c) 2020 Max Brunsfeld and Pieter Goetschalckx"
+SPDX-License-Identifier = "MIT"

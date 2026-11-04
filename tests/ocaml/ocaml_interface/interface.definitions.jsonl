@@ -1,0 +1,27 @@
+{"cap":"definition","col":1,"eb":65,"ecol":23,"eline":2,"line":2,"node":"value_specification","pat":0,"path":"tests/ocaml/ocaml_interface/interface.mli","sb":43,"text":"val plain : int -> int"}
+{"cap":"name","col":5,"eb":52,"ecol":10,"eline":2,"line":2,"node":"value_name","pat":0,"path":"tests/ocaml/ocaml_interface/interface.mli","sb":47,"text":"plain"}
+{"cap":"definition","col":1,"eb":131,"ecol":31,"eline":5,"line":5,"node":"value_specification","pat":0,"path":"tests/ocaml/ocaml_interface/interface.mli","sb":101,"text":"val ( +! ) : int -> int -> int"}
+{"cap":"name","col":5,"eb":111,"ecol":11,"eline":5,"line":5,"node":"parenthesized_operator","pat":0,"path":"tests/ocaml/ocaml_interface/interface.mli","sb":105,"text":"( +! )"}
+{"cap":"definition","col":6,"eb":145,"ecol":13,"eline":7,"line":7,"node":"type_binding","pat":1,"path":"tests/ocaml/ocaml_interface/interface.mli","sb":138,"text":"t = int"}
+{"cap":"name","col":6,"eb":139,"ecol":7,"eline":7,"line":7,"node":"type_constructor","pat":1,"path":"tests/ocaml/ocaml_interface/interface.mli","sb":138,"text":"t"}
+{"cap":"body","col":10,"eb":145,"ecol":13,"eline":7,"line":7,"node":"type_constructor_path","pat":1,"path":"tests/ocaml/ocaml_interface/interface.mli","sb":142,"text":"int"}
+{"cap":"definition","col":5,"eb":165,"ecol":19,"eline":9,"line":9,"node":"type_binding","pat":1,"path":"tests/ocaml/ocaml_interface/interface.mli","sb":151,"text":"u = A | B of t"}
+{"cap":"name","col":5,"eb":152,"ecol":6,"eline":9,"line":9,"node":"type_constructor","pat":1,"path":"tests/ocaml/ocaml_interface/interface.mli","sb":151,"text":"u"}
+{"cap":"body","col":9,"eb":165,"ecol":19,"eline":9,"line":9,"node":"variant_declaration","pat":1,"path":"tests/ocaml/ocaml_interface/interface.mli","sb":155,"text":"A | B of t"}
+{"cap":"definition","col":6,"eb":180,"ecol":14,"eline":11,"line":11,"node":"type_binding","pat":1,"path":"tests/ocaml/ocaml_interface/interface.mli","sb":172,"text":"abstract"}
+{"cap":"name","col":6,"eb":180,"ecol":14,"eline":11,"line":11,"node":"type_constructor","pat":1,"path":"tests/ocaml/ocaml_interface/interface.mli","sb":172,"text":"abstract"}
+{"cap":"definition","col":8,"eb":222,"ecol":4,"eline":15,"line":13,"node":"module_binding","pat":2,"path":"tests/ocaml/ocaml_interface/interface.mli","sb":189,"text":"M : sig\n  val in_module : int\nend"}
+{"cap":"name","col":8,"eb":190,"ecol":9,"eline":13,"line":13,"node":"module_name","pat":2,"path":"tests/ocaml/ocaml_interface/interface.mli","sb":189,"text":"M"}
+{"cap":"definition","col":3,"eb":218,"ecol":22,"eline":14,"line":14,"node":"value_specification","pat":0,"path":"tests/ocaml/ocaml_interface/interface.mli","sb":199,"text":"val in_module : int"}
+{"cap":"name","col":7,"eb":212,"ecol":16,"eline":14,"line":14,"node":"value_name","pat":0,"path":"tests/ocaml/ocaml_interface/interface.mli","sb":203,"text":"in_module"}
+{"cap":"definition","col":1,"eb":261,"ecol":4,"eline":19,"line":17,"node":"module_type_definition","pat":3,"path":"tests/ocaml/ocaml_interface/interface.mli","sb":224,"text":"module type S = sig\n  val x : int\nend"}
+{"cap":"name","col":13,"eb":237,"ecol":14,"eline":17,"line":17,"node":"module_type_name","pat":3,"path":"tests/ocaml/ocaml_interface/interface.mli","sb":236,"text":"S"}
+{"cap":"body","col":17,"eb":261,"ecol":4,"eline":19,"line":17,"node":"signature","pat":3,"path":"tests/ocaml/ocaml_interface/interface.mli","sb":240,"text":"sig\n  val x : int\nend"}
+{"cap":"definition","col":3,"eb":257,"ecol":14,"eline":18,"line":18,"node":"value_specification","pat":0,"path":"tests/ocaml/ocaml_interface/interface.mli","sb":246,"text":"val x : int"}
+{"cap":"name","col":7,"eb":251,"ecol":8,"eline":18,"line":18,"node":"value_name","pat":0,"path":"tests/ocaml/ocaml_interface/interface.mli","sb":250,"text":"x"}
+{"cap":"definition","col":7,"eb":308,"ecol":4,"eline":23,"line":21,"node":"class_binding","pat":4,"path":"tests/ocaml/ocaml_interface/interface.mli","sb":269,"text":"counter : object\n  method get : int\nend"}
+{"cap":"name","col":7,"eb":276,"ecol":14,"eline":21,"line":21,"node":"class_name","pat":4,"path":"tests/ocaml/ocaml_interface/interface.mli","sb":269,"text":"counter"}
+{"cap":"definition","col":1,"eb":367,"ecol":58,"eline":25,"line":25,"node":"external","pat":5,"path":"tests/ocaml/ocaml_interface/interface.mli","sb":310,"text":"external length : string -> int = \"caml_ml_string_length\""}
+{"cap":"name","col":10,"eb":325,"ecol":16,"eline":25,"line":25,"node":"value_name","pat":5,"path":"tests/ocaml/ocaml_interface/interface.mli","sb":319,"text":"length"}
+{"cap":"definition","col":1,"eb":395,"ecol":27,"eline":27,"line":27,"node":"exception_definition","pat":6,"path":"tests/ocaml/ocaml_interface/interface.mli","sb":369,"text":"exception Failed of string"}
+{"cap":"name","col":11,"eb":385,"ecol":17,"eline":27,"line":27,"node":"constructor_name","pat":6,"path":"tests/ocaml/ocaml_interface/interface.mli","sb":379,"text":"Failed"}

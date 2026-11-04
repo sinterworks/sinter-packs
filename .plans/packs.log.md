@@ -133,3 +133,34 @@
 - In the rust grammar, a doc line comment `///` or `//!` holds its
   line ending, and in a file with CRLF line ends, a plain line comment
   holds the CR.
+- The OCaml `tags.scm` is the example of the specification: a comment
+  that starts with `(**` and a character that is not `*` is
+  `@untagged`, so `(***)` stays a tagged comment.
+- In `.ml`, each `let_binding` of a `let` in a file or in a `struct` is
+  a definition. A binding whose pattern is not a name, such as
+  `let () =`, has a pattern of its own with no `@name`, after the
+  pattern with the name. A `let ... in` gives no definition.
+- An `Alcotest.test_case` has a pattern with the label `slow` before
+  the pattern with no label. One pattern with an optional tag gave no
+  match for `` `Quick ``: a match whose predicate fails is dropped, and
+  tree-sitter gives no match without the optional node.
+- In ``test_case "x" `Quick @@ fun () -> ...``, the test is the
+  application ``test_case "x" `Quick``, and the function is outside
+  it.
+- When the string of an OCaml name holds a backslash, the name is one
+  `@placeholder` (ruling of the lead). The grammar gives the text
+  around an escape sequence no node of its own. The cost: such a name
+  matches any name that the runner reports.
+- An OCaml test name that is a value path, a field, or an expression
+  in brackets is one `@placeholder`, and so is the punned label
+  `~name` of `QCheck.Test.make` (ruling of the lead, as for JavaScript).
+  A group name that is not a literal is one `@placeholder` too: in a
+  tuple, it can also be an application or an infix expression with no
+  brackets. A quoted string `{|...|}` is a literal: its content is
+  `@name`.
+- A group needs a list literal: `("unit", unit_tests)` is no group, as
+  its tests are not inside it.
+- The grammar ocaml_interface has no `tests.scm` (ruling of the lead):
+  an interface declares no tests.
+- In the grammar ocaml v0.26.0, a comment that does not end runs to
+  the end of the file, with no `ERROR` node.
