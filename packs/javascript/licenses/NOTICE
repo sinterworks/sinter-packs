@@ -1,0 +1,9 @@
+javascript pack of Sinter
+Copyright 2026 The Sinter Authors
+
+grammar: javascript
+repository: tree-sitter/tree-sitter-javascript
+tag: v0.25.0
+commit: 44c892e0be055ac465d5eeddae6d3e194424e7de
+asset: tree-sitter-javascript.wasm
+sha256: 5fb488d0cabb4775a594bab85682de5ad6ce83c0d6ac997a9f82dd084d571240

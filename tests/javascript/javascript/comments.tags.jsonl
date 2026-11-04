@@ -1,0 +1,8 @@
+{"cap":"comment","col":1,"eb":18,"ecol":19,"eline":1,"line":1,"node":"comment","pat":0,"path":"tests/javascript/javascript/comments.js","sb":0,"text":"// A line comment."}
+{"cap":"comment","col":1,"eb":41,"ecol":23,"eline":2,"line":2,"node":"comment","pat":0,"path":"tests/javascript/javascript/comments.js","sb":19,"text":"/* A block comment. */"}
+{"cap":"comment","col":1,"eb":129,"ecol":4,"eline":7,"line":3,"node":"comment","pat":0,"path":"tests/javascript/javascript/comments.js","sb":42,"text":"/**\n * A doc comment.\n * @param {number} x the input\n * @satisfies some-requirement\n */"}
+{"cap":"comment","col":13,"eb":182,"ecol":37,"eline":9,"line":9,"node":"comment","pat":0,"path":"tests/javascript/javascript/comments.js","sb":158,"text":"// A comment after code."}
+{"cap":"comment","col":1,"eb":196,"ecol":12,"eline":11,"line":11,"node":"comment","pat":0,"path":"tests/javascript/javascript/comments.js","sb":185,"text":"/* first */"}
+{"cap":"comment","col":13,"eb":209,"ecol":25,"eline":11,"line":11,"node":"comment","pat":0,"path":"tests/javascript/javascript/comments.js","sb":197,"text":"/* second */"}
+{"cap":"comment","col":1,"eb":264,"ecol":27,"eline":13,"line":13,"node":"html_comment","pat":1,"path":"tests/javascript/javascript/comments.js","sb":238,"text":"<!-- An HTML-like comment."}
+{"cap":"comment","col":1,"eb":312,"ecol":33,"eline":15,"line":15,"node":"html_comment","pat":1,"path":"tests/javascript/javascript/comments.js","sb":280,"text":"--> A closing HTML-like comment."}

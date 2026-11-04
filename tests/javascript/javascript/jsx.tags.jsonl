@@ -1,0 +1,2 @@
+{"cap":"comment","col":6,"eb":48,"ecol":26,"eline":3,"line":3,"node":"comment","pat":0,"path":"tests/javascript/javascript/jsx.jsx","sb":28,"text":"/* A JSX comment. */"}
+{"cap":"comment","col":18,"eb":83,"ecol":34,"eline":4,"line":4,"node":"comment","pat":0,"path":"tests/javascript/javascript/jsx.jsx","sb":67,"text":"/* after code */"}

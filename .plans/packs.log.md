@@ -57,3 +57,44 @@
   is all that the check needs.
 - The tests that call GitHub with gh, and the download of the
   grammars of the tests, run only in CI.
+
+## Add the four packs
+
+- The query tests have no license header in their cases and expected
+  files (ruling of the lead): a header is a comment, and every expected
+  file of `tags.scm` would capture it. The annotation `**` of
+  `REUSE.toml` gives them Apache-2.0.
+- The JSDoc block tags, with their synonyms, come from the list "Block
+  Tags" of https://jsdoc.app/ (read 2026-11-04): 85 words.
+- `foreign-tags` leaves out each word that is also a word of Sinter's
+  vocabulary (ruling of the lead): `deprecated`, a block tag of JSDoc
+  and a status tag of Sinter. The javascript pack lists 84 words.
+- The javascript grammar has a second comment node, `html_comment`,
+  for `<!--` and `-->`. `tags.scm` captures it as `@comment`.
+  `[comments]` has no sigil for it, so it carries no tags.
+- A tag before `export function f` attaches to `f` with no pattern for
+  `export_statement`: `f` starts on the line of `export`, so no line
+  stands between the run and `f`. A decorator before `export class`
+  is a child of `export_statement`; it is `@decoration`, and the class
+  starts on the next line. Without `export`, a decorator is a child of
+  the class, and the class starts at the decorator.
+- `definitions.scm` captures `variable_declarator`, not the
+  declaration, so that `const a = () => {}, b = function () {}` gives
+  two definitions.
+- The labels of `tests.scm` use `#eq?` on captures in the branches of
+  an alternation. A predicate on a capture that a match does not hold
+  passes, so each branch keeps only the property that its label names.
+  `it.concurrent` and `it.skip.each` give no test.
+- A default export with no name, `export default function () {}`,
+  `function* () {}`, `() => {}`, or `class {}`, is a definition with
+  no `@name` (ruling of the lead). The grammar gives it as the `value`
+  of `export_statement`.
+- A class field whose value is a function, a generator, or an arrow
+  function is a definition, as a variable with such a value is
+  (ruling of the lead).
+- A test or a group whose title is an identifier, a member, a
+  subscript, a call, a binary or ternary expression, or a parenthesized
+  expression has that title as one `@placeholder` (ruling of the
+  lead). The cost: such a name matches any name that the runner
+  reports, and one such test in a loop stands for many tests at run
+  time.
