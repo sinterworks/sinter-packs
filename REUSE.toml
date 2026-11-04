@@ -13,3 +13,9 @@ path = ["packs/javascript/grammars/javascript.wasm", "packs/javascript/licenses/
 precedence = "override"
 SPDX-FileCopyrightText = "Copyright (c) 2014 Max Brunsfeld"
 SPDX-License-Identifier = "MIT"
+
+[[annotations]]
+path = ["packs/typescript/grammars/typescript.wasm", "packs/typescript/grammars/tsx.wasm", "packs/typescript/licenses/tree-sitter-typescript.LICENSE"]
+precedence = "override"
+SPDX-FileCopyrightText = "Copyright (c) 2017 Max Brunsfeld"
+SPDX-License-Identifier = "MIT"

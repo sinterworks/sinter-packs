@@ -1,0 +1,16 @@
+typescript pack of Sinter
+Copyright 2026 The Sinter Authors
+
+grammar: typescript
+repository: tree-sitter/tree-sitter-typescript
+tag: v0.23.2
+commit: f975a621f4e7f532fe322e13c4f79495e0a7b2e7
+asset: tree-sitter-typescript.wasm
+sha256: 778025db5a8be0e70f8ccc3671e486dfeddd048c25d9e8a70c26de2e1bf6f97d
+
+grammar: tsx
+repository: tree-sitter/tree-sitter-typescript
+tag: v0.23.2
+commit: f975a621f4e7f532fe322e13c4f79495e0a7b2e7
+asset: tree-sitter-tsx.wasm
+sha256: 79e5da75ea62855a0cd67177685f0164eac87d5f630b3cbe1e0a099751ad30f8

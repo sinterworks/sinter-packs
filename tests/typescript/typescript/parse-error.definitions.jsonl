@@ -1,0 +1,6 @@
+{"cap":"definition","col":1,"eb":72,"ecol":2,"eline":4,"line":2,"node":"function_declaration","pat":0,"path":"tests/typescript/typescript/parse-error.ts","sb":31,"text":"function broken(a: number {\n  return a;\n}"}
+{"cap":"name","col":10,"eb":46,"ecol":16,"eline":2,"line":2,"node":"identifier","pat":0,"path":"tests/typescript/typescript/parse-error.ts","sb":40,"text":"broken"}
+{"cap":"body","col":27,"eb":72,"ecol":2,"eline":4,"line":2,"node":"statement_block","pat":0,"path":"tests/typescript/typescript/parse-error.ts","sb":57,"text":"{\n  return a;\n}"}
+{"cap":"definition","col":1,"eb":90,"ecol":18,"eline":5,"line":5,"node":"interface_declaration","pat":8,"path":"tests/typescript/typescript/parse-error.ts","sb":73,"text":"interface Fine {}"}
+{"cap":"name","col":11,"eb":87,"ecol":15,"eline":5,"line":5,"node":"type_identifier","pat":8,"path":"tests/typescript/typescript/parse-error.ts","sb":83,"text":"Fine"}
+{"cap":"body","col":16,"eb":90,"ecol":18,"eline":5,"line":5,"node":"interface_body","pat":8,"path":"tests/typescript/typescript/parse-error.ts","sb":88,"text":"{}"}

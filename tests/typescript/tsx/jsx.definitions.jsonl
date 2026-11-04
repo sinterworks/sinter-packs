@@ -1,0 +1,11 @@
+{"cap":"definition","col":8,"eb":220,"ecol":2,"eline":10,"line":3,"node":"function_declaration","pat":0,"path":"tests/typescript/tsx/jsx.tsx","sb":48,"text":"function View(props: { value: number }): JSX.Element {\n  return (\n    <div>\n      {/* A JSX comment. */}\n      <span>{props.value /* after code */}</span>\n    </div>\n  );\n}"}
+{"cap":"name","col":17,"eb":61,"ecol":21,"eline":3,"line":3,"node":"identifier","pat":0,"path":"tests/typescript/tsx/jsx.tsx","sb":57,"text":"View"}
+{"cap":"body","col":61,"eb":220,"ecol":2,"eline":10,"line":3,"node":"statement_block","pat":0,"path":"tests/typescript/tsx/jsx.tsx","sb":101,"text":"{\n  return (\n    <div>\n      {/* A JSX comment. */}\n      <span>{props.value /* after code */}</span>\n    </div>\n  );\n}"}
+{"cap":"definition","col":7,"eb":268,"ecol":47,"eline":12,"line":12,"node":"variable_declarator","pat":13,"path":"tests/typescript/tsx/jsx.tsx","sb":228,"text":"Arrow = <T,>(x: T) => <b>{String(x)}</b>"}
+{"cap":"name","col":7,"eb":233,"ecol":12,"eline":12,"line":12,"node":"identifier","pat":13,"path":"tests/typescript/tsx/jsx.tsx","sb":228,"text":"Arrow"}
+{"cap":"body","col":29,"eb":268,"ecol":47,"eline":12,"line":12,"node":"jsx_element","pat":13,"path":"tests/typescript/tsx/jsx.tsx","sb":250,"text":"<b>{String(x)}</b>"}
+{"cap":"definition","col":1,"eb":315,"ecol":2,"eline":16,"line":14,"node":"interface_declaration","pat":8,"path":"tests/typescript/tsx/jsx.tsx","sb":271,"text":"interface Props {\n  render(): JSX.Element;\n}"}
+{"cap":"name","col":11,"eb":286,"ecol":16,"eline":14,"line":14,"node":"type_identifier","pat":8,"path":"tests/typescript/tsx/jsx.tsx","sb":281,"text":"Props"}
+{"cap":"body","col":17,"eb":315,"ecol":2,"eline":16,"line":14,"node":"interface_body","pat":8,"path":"tests/typescript/tsx/jsx.tsx","sb":287,"text":"{\n  render(): JSX.Element;\n}"}
+{"cap":"definition","col":3,"eb":312,"ecol":24,"eline":15,"line":15,"node":"method_signature","pat":6,"path":"tests/typescript/tsx/jsx.tsx","sb":291,"text":"render(): JSX.Element"}
+{"cap":"name","col":3,"eb":297,"ecol":9,"eline":15,"line":15,"node":"property_identifier","pat":6,"path":"tests/typescript/tsx/jsx.tsx","sb":291,"text":"render"}

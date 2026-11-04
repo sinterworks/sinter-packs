@@ -98,3 +98,18 @@
   lead). The cost: such a name matches any name that the runner
   reports, and one such test in a loop stands for many tests at run
   time.
+- The TSDoc block tags come from the tag reference of
+  https://tsdoc.org/ (read 2026-11-04). Its list has 25 tags; the
+  file `StandardTags.ts` of microsoft/tsdoc gives the kind of each.
+  The 11 block tags are `decorator`, `defaultValue`, `deprecated`,
+  `example`, `param`, `privateRemarks`, `remarks`, `returns`, `see`,
+  `throws`, and `typeParam`. The four `jsx` tags of that file are not
+  in the reference. The typescript pack lists 89 words: the 84 of
+  JSDoc and 5 of TSDoc that JSDoc does not have.
+- The grammars typescript and tsx have the same text in each query
+  file. `tsx` parses JSX, and `typescript` parses the type assertion
+  `<T>x`; the node types that the queries name are in both.
+- The name of `declare module "x"` is the `string_fragment`, so that
+  the name path holds no quotes.
+- In TypeScript, a title that is an `as`, `!`, or `satisfies`
+  expression is one `@placeholder` too.

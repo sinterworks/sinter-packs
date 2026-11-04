@@ -1,0 +1,2 @@
+{"cap":"comment","col":1,"eb":13,"ecol":14,"eline":1,"line":1,"node":"comment","pat":0,"path":"tests/typescript/typescript/crlf.ts","sb":0,"text":"// A comment."}
+{"cap":"comment","col":1,"eb":42,"ecol":4,"eline":4,"line":2,"node":"comment","pat":0,"path":"tests/typescript/typescript/crlf.ts","sb":15,"text":"/**\r\n * A doc comment.\r\n */"}

@@ -1,0 +1,26 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright 2026 The Sinter Authors
+
+sinter-spec = "1.0"
+name = "typescript"
+version = "0.1.0"
+license = "Apache-2.0"
+name-separator = "."
+foreign-tags = ["abstract", "access", "alias", "arg", "argument", "async", "augments", "author", "borrows", "class", "classdesc", "const", "constant", "constructor", "constructs", "copyright", "decorator", "default", "defaultValue", "defaultvalue", "desc", "description", "emits", "enum", "event", "example", "exception", "exports", "extends", "external", "file", "fileoverview", "fires", "func", "function", "generator", "global", "hideconstructor", "host", "ignore", "implements", "inheritdoc", "inner", "instance", "interface", "kind", "lends", "license", "listens", "member", "memberof", "method", "mixes", "mixin", "module", "name", "namespace", "override", "overview", "package", "param", "private", "privateRemarks", "prop", "property", "protected", "public", "readonly", "remarks", "requires", "return", "returns", "see", "since", "static", "summary", "this", "throws", "todo", "tutorial", "type", "typeParam", "typedef", "var", "variation", "version", "virtual", "yield", "yields"]
+
+[comments]
+line = ["//"]
+block = [["/*", "*/"], ["/**", "*/"]]
+inner = ["*"]
+
+[[grammar]]
+name = "typescript"
+sha256 = "778025db5a8be0e70f8ccc3671e486dfeddd048c25d9e8a70c26de2e1bf6f97d"
+license = "MIT"
+names = ["*.ts", "*.mts", "*.cts"]
+
+[[grammar]]
+name = "tsx"
+sha256 = "79e5da75ea62855a0cd67177685f0164eac87d5f630b3cbe1e0a099751ad30f8"
+license = "MIT"
+names = ["*.tsx"]

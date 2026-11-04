@@ -1,0 +1,8 @@
+{"cap":"comment","col":1,"eb":18,"ecol":19,"eline":1,"line":1,"node":"comment","pat":0,"path":"tests/typescript/typescript/comments.ts","sb":0,"text":"// A line comment."}
+{"cap":"comment","col":1,"eb":41,"ecol":23,"eline":2,"line":2,"node":"comment","pat":0,"path":"tests/typescript/typescript/comments.ts","sb":19,"text":"/* A block comment. */"}
+{"cap":"comment","col":1,"eb":122,"ecol":4,"eline":7,"line":3,"node":"comment","pat":0,"path":"tests/typescript/typescript/comments.ts","sb":42,"text":"/**\n * A doc comment.\n * @param x - the input\n * @satisfies some-requirement\n */"}
+{"cap":"comment","col":13,"eb":191,"ecol":37,"eline":9,"line":9,"node":"comment","pat":0,"path":"tests/typescript/typescript/comments.ts","sb":167,"text":"// A comment after code."}
+{"cap":"comment","col":1,"eb":205,"ecol":12,"eline":11,"line":11,"node":"comment","pat":0,"path":"tests/typescript/typescript/comments.ts","sb":194,"text":"/* first */"}
+{"cap":"comment","col":13,"eb":218,"ecol":25,"eline":11,"line":11,"node":"comment","pat":0,"path":"tests/typescript/typescript/comments.ts","sb":206,"text":"/* second */"}
+{"cap":"comment","col":1,"eb":281,"ecol":27,"eline":13,"line":13,"node":"html_comment","pat":1,"path":"tests/typescript/typescript/comments.ts","sb":255,"text":"<!-- An HTML-like comment."}
+{"cap":"comment","col":1,"eb":329,"ecol":33,"eline":15,"line":15,"node":"html_comment","pat":1,"path":"tests/typescript/typescript/comments.ts","sb":297,"text":"--> A closing HTML-like comment."}

@@ -1,0 +1,3 @@
+{"cap":"test","col":1,"eb":112,"ecol":26,"eline":8,"line":8,"node":"call_expression","pat":0,"path":"tests/typescript/typescript/crlf.ts","sb":87,"text":"it(\"crlf test\", () => {})"}
+{"cap":"_fn","col":1,"eb":89,"ecol":3,"eline":8,"line":8,"node":"identifier","pat":0,"path":"tests/typescript/typescript/crlf.ts","sb":87,"text":"it"}
+{"cap":"name","col":5,"eb":100,"ecol":14,"eline":8,"line":8,"node":"string_fragment","pat":0,"path":"tests/typescript/typescript/crlf.ts","sb":91,"text":"crlf test"}

@@ -1,0 +1,104 @@
+{"cap":"group","col":1,"eb":326,"ecol":3,"eline":12,"line":1,"node":"call_expression","pat":3,"path":"tests/typescript/typescript/tests.ts","sb":0,"text":"describe(\"math\", (): void => {\n  it(\"adds\", () => {});\n  test(\"subtracts\", () => {});\n  it.skip(\"skips\", () => {});\n  it.only(\"runs alone\", () => {});\n  it.todo(\"waits\");\n  test.each([[1, 2]])(\"doubles %i to %i\", (a: number, b: number) => {});\n  it.each`\n    a    | b\n    ${1} | ${2}\n  `(\"adds $a to $b\", ({ a, b }) => {});\n})"}
+{"cap":"_fn","col":1,"eb":8,"ecol":9,"eline":1,"line":1,"node":"identifier","pat":3,"path":"tests/typescript/typescript/tests.ts","sb":0,"text":"describe"}
+{"cap":"name","col":11,"eb":14,"ecol":15,"eline":1,"line":1,"node":"string_fragment","pat":3,"path":"tests/typescript/typescript/tests.ts","sb":10,"text":"math"}
+{"cap":"test","col":3,"eb":53,"ecol":23,"eline":2,"line":2,"node":"call_expression","pat":0,"path":"tests/typescript/typescript/tests.ts","sb":33,"text":"it(\"adds\", () => {})"}
+{"cap":"_fn","col":3,"eb":35,"ecol":5,"eline":2,"line":2,"node":"identifier","pat":0,"path":"tests/typescript/typescript/tests.ts","sb":33,"text":"it"}
+{"cap":"name","col":7,"eb":41,"ecol":11,"eline":2,"line":2,"node":"string_fragment","pat":0,"path":"tests/typescript/typescript/tests.ts","sb":37,"text":"adds"}
+{"cap":"test","col":3,"eb":84,"ecol":30,"eline":3,"line":3,"node":"call_expression","pat":0,"path":"tests/typescript/typescript/tests.ts","sb":57,"text":"test(\"subtracts\", () => {})"}
+{"cap":"_fn","col":3,"eb":61,"ecol":7,"eline":3,"line":3,"node":"identifier","pat":0,"path":"tests/typescript/typescript/tests.ts","sb":57,"text":"test"}
+{"cap":"name","col":9,"eb":72,"ecol":18,"eline":3,"line":3,"node":"string_fragment","pat":0,"path":"tests/typescript/typescript/tests.ts","sb":63,"text":"subtracts"}
+{"cap":"test","col":3,"eb":114,"ecol":29,"eline":4,"line":4,"node":"call_expression","pat":0,"path":"tests/typescript/typescript/tests.ts","sb":88,"text":"it.skip(\"skips\", () => {})"}
+{"cap":"_fn","col":3,"eb":90,"ecol":5,"eline":4,"line":4,"node":"identifier","pat":0,"path":"tests/typescript/typescript/tests.ts","sb":88,"text":"it"}
+{"cap":"label.skip","col":6,"eb":95,"ecol":10,"eline":4,"line":4,"node":"property_identifier","pat":0,"path":"tests/typescript/typescript/tests.ts","sb":91,"text":"skip"}
+{"cap":"name","col":12,"eb":102,"ecol":17,"eline":4,"line":4,"node":"string_fragment","pat":0,"path":"tests/typescript/typescript/tests.ts","sb":97,"text":"skips"}
+{"cap":"test","col":3,"eb":149,"ecol":34,"eline":5,"line":5,"node":"call_expression","pat":0,"path":"tests/typescript/typescript/tests.ts","sb":118,"text":"it.only(\"runs alone\", () => {})"}
+{"cap":"_fn","col":3,"eb":120,"ecol":5,"eline":5,"line":5,"node":"identifier","pat":0,"path":"tests/typescript/typescript/tests.ts","sb":118,"text":"it"}
+{"cap":"label.only","col":6,"eb":125,"ecol":10,"eline":5,"line":5,"node":"property_identifier","pat":0,"path":"tests/typescript/typescript/tests.ts","sb":121,"text":"only"}
+{"cap":"name","col":12,"eb":137,"ecol":22,"eline":5,"line":5,"node":"string_fragment","pat":0,"path":"tests/typescript/typescript/tests.ts","sb":127,"text":"runs alone"}
+{"cap":"test","col":3,"eb":169,"ecol":19,"eline":6,"line":6,"node":"call_expression","pat":0,"path":"tests/typescript/typescript/tests.ts","sb":153,"text":"it.todo(\"waits\")"}
+{"cap":"_fn","col":3,"eb":155,"ecol":5,"eline":6,"line":6,"node":"identifier","pat":0,"path":"tests/typescript/typescript/tests.ts","sb":153,"text":"it"}
+{"cap":"label.todo","col":6,"eb":160,"ecol":10,"eline":6,"line":6,"node":"property_identifier","pat":0,"path":"tests/typescript/typescript/tests.ts","sb":156,"text":"todo"}
+{"cap":"name","col":12,"eb":167,"ecol":17,"eline":6,"line":6,"node":"string_fragment","pat":0,"path":"tests/typescript/typescript/tests.ts","sb":162,"text":"waits"}
+{"cap":"test","col":3,"eb":242,"ecol":72,"eline":7,"line":7,"node":"call_expression","pat":0,"path":"tests/typescript/typescript/tests.ts","sb":173,"text":"test.each([[1, 2]])(\"doubles %i to %i\", (a: number, b: number) => {})"}
+{"cap":"_fn","col":3,"eb":177,"ecol":7,"eline":7,"line":7,"node":"identifier","pat":0,"path":"tests/typescript/typescript/tests.ts","sb":173,"text":"test"}
+{"cap":"label.each","col":8,"eb":182,"ecol":12,"eline":7,"line":7,"node":"property_identifier","pat":0,"path":"tests/typescript/typescript/tests.ts","sb":178,"text":"each"}
+{"cap":"name","col":24,"eb":210,"ecol":40,"eline":7,"line":7,"node":"string_fragment","pat":0,"path":"tests/typescript/typescript/tests.ts","sb":194,"text":"doubles %i to %i"}
+{"cap":"test","col":3,"eb":322,"ecol":39,"eline":11,"line":8,"node":"call_expression","pat":0,"path":"tests/typescript/typescript/tests.ts","sb":246,"text":"it.each`\n    a    | b\n    ${1} | ${2}\n  `(\"adds $a to $b\", ({ a, b }) => {})"}
+{"cap":"_fn","col":3,"eb":248,"ecol":5,"eline":8,"line":8,"node":"identifier","pat":0,"path":"tests/typescript/typescript/tests.ts","sb":246,"text":"it"}
+{"cap":"label.each","col":6,"eb":253,"ecol":10,"eline":8,"line":8,"node":"property_identifier","pat":0,"path":"tests/typescript/typescript/tests.ts","sb":249,"text":"each"}
+{"cap":"name","col":6,"eb":302,"ecol":19,"eline":11,"line":11,"node":"string_fragment","pat":0,"path":"tests/typescript/typescript/tests.ts","sb":289,"text":"adds $a to $b"}
+{"cap":"group","col":1,"eb":369,"ecol":41,"eline":14,"line":14,"node":"call_expression","pat":3,"path":"tests/typescript/typescript/tests.ts","sb":329,"text":"describe.skip(\"skipped group\", () => {})"}
+{"cap":"_fn","col":1,"eb":337,"ecol":9,"eline":14,"line":14,"node":"identifier","pat":3,"path":"tests/typescript/typescript/tests.ts","sb":329,"text":"describe"}
+{"cap":"label.skip","col":10,"eb":342,"ecol":14,"eline":14,"line":14,"node":"property_identifier","pat":3,"path":"tests/typescript/typescript/tests.ts","sb":338,"text":"skip"}
+{"cap":"name","col":16,"eb":357,"ecol":29,"eline":14,"line":14,"node":"string_fragment","pat":3,"path":"tests/typescript/typescript/tests.ts","sb":344,"text":"skipped group"}
+{"cap":"group","col":1,"eb":408,"ecol":38,"eline":15,"line":15,"node":"call_expression","pat":4,"path":"tests/typescript/typescript/tests.ts","sb":371,"text":"describe.only(`only group`, () => {})"}
+{"cap":"_fn","col":1,"eb":379,"ecol":9,"eline":15,"line":15,"node":"identifier","pat":4,"path":"tests/typescript/typescript/tests.ts","sb":371,"text":"describe"}
+{"cap":"label.only","col":10,"eb":384,"ecol":14,"eline":15,"line":15,"node":"property_identifier","pat":4,"path":"tests/typescript/typescript/tests.ts","sb":380,"text":"only"}
+{"cap":"name","col":16,"eb":396,"ecol":26,"eline":15,"line":15,"node":"string_fragment","pat":4,"path":"tests/typescript/typescript/tests.ts","sb":386,"text":"only group"}
+{"cap":"group","col":1,"eb":438,"ecol":29,"eline":16,"line":16,"node":"call_expression","pat":3,"path":"tests/typescript/typescript/tests.ts","sb":410,"text":"describe.todo(\"later group\")"}
+{"cap":"_fn","col":1,"eb":418,"ecol":9,"eline":16,"line":16,"node":"identifier","pat":3,"path":"tests/typescript/typescript/tests.ts","sb":410,"text":"describe"}
+{"cap":"label.todo","col":10,"eb":423,"ecol":14,"eline":16,"line":16,"node":"property_identifier","pat":3,"path":"tests/typescript/typescript/tests.ts","sb":419,"text":"todo"}
+{"cap":"name","col":16,"eb":436,"ecol":27,"eline":16,"line":16,"node":"string_fragment","pat":3,"path":"tests/typescript/typescript/tests.ts","sb":425,"text":"later group"}
+{"cap":"group","col":1,"eb":484,"ecol":45,"eline":17,"line":17,"node":"call_expression","pat":3,"path":"tests/typescript/typescript/tests.ts","sb":440,"text":"describe.each([1, 2])(\"group %i\", (n) => {})"}
+{"cap":"_fn","col":1,"eb":448,"ecol":9,"eline":17,"line":17,"node":"identifier","pat":3,"path":"tests/typescript/typescript/tests.ts","sb":440,"text":"describe"}
+{"cap":"label.each","col":10,"eb":453,"ecol":14,"eline":17,"line":17,"node":"property_identifier","pat":3,"path":"tests/typescript/typescript/tests.ts","sb":449,"text":"each"}
+{"cap":"name","col":24,"eb":471,"ecol":32,"eline":17,"line":17,"node":"string_fragment","pat":3,"path":"tests/typescript/typescript/tests.ts","sb":463,"text":"group %i"}
+{"cap":"test","col":1,"eb":528,"ecol":42,"eline":19,"line":19,"node":"call_expression","pat":0,"path":"tests/typescript/typescript/tests.ts","sb":487,"text":"it(\"line\\nbreak and \\\"quote\\\"\", () => {})"}
+{"cap":"_fn","col":1,"eb":489,"ecol":3,"eline":19,"line":19,"node":"identifier","pat":0,"path":"tests/typescript/typescript/tests.ts","sb":487,"text":"it"}
+{"cap":"name","col":5,"eb":495,"ecol":9,"eline":19,"line":19,"node":"string_fragment","pat":0,"path":"tests/typescript/typescript/tests.ts","sb":491,"text":"line"}
+{"cap":"placeholder","col":9,"eb":497,"ecol":11,"eline":19,"line":19,"node":"escape_sequence","pat":0,"path":"tests/typescript/typescript/tests.ts","sb":495,"text":"\\n"}
+{"cap":"name","col":11,"eb":507,"ecol":21,"eline":19,"line":19,"node":"string_fragment","pat":0,"path":"tests/typescript/typescript/tests.ts","sb":497,"text":"break and "}
+{"cap":"placeholder","col":21,"eb":509,"ecol":23,"eline":19,"line":19,"node":"escape_sequence","pat":0,"path":"tests/typescript/typescript/tests.ts","sb":507,"text":"\\\""}
+{"cap":"name","col":23,"eb":514,"ecol":28,"eline":19,"line":19,"node":"string_fragment","pat":0,"path":"tests/typescript/typescript/tests.ts","sb":509,"text":"quote"}
+{"cap":"placeholder","col":28,"eb":516,"ecol":30,"eline":19,"line":19,"node":"escape_sequence","pat":0,"path":"tests/typescript/typescript/tests.ts","sb":514,"text":"\\\""}
+{"cap":"test","col":1,"eb":570,"ecol":41,"eline":20,"line":20,"node":"call_expression","pat":1,"path":"tests/typescript/typescript/tests.ts","sb":530,"text":"test(`count ${n} of ${total}`, () => {})"}
+{"cap":"_fn","col":1,"eb":534,"ecol":5,"eline":20,"line":20,"node":"identifier","pat":1,"path":"tests/typescript/typescript/tests.ts","sb":530,"text":"test"}
+{"cap":"name","col":7,"eb":542,"ecol":13,"eline":20,"line":20,"node":"string_fragment","pat":1,"path":"tests/typescript/typescript/tests.ts","sb":536,"text":"count "}
+{"cap":"placeholder","col":13,"eb":546,"ecol":17,"eline":20,"line":20,"node":"template_substitution","pat":1,"path":"tests/typescript/typescript/tests.ts","sb":542,"text":"${n}"}
+{"cap":"name","col":17,"eb":550,"ecol":21,"eline":20,"line":20,"node":"string_fragment","pat":1,"path":"tests/typescript/typescript/tests.ts","sb":546,"text":" of "}
+{"cap":"placeholder","col":21,"eb":558,"ecol":29,"eline":20,"line":20,"node":"template_substitution","pat":1,"path":"tests/typescript/typescript/tests.ts","sb":550,"text":"${total}"}
+{"cap":"test","col":1,"eb":597,"ecol":26,"eline":21,"line":21,"node":"call_expression","pat":1,"path":"tests/typescript/typescript/tests.ts","sb":572,"text":"it(`tab\\there`, () => {})"}
+{"cap":"_fn","col":1,"eb":574,"ecol":3,"eline":21,"line":21,"node":"identifier","pat":1,"path":"tests/typescript/typescript/tests.ts","sb":572,"text":"it"}
+{"cap":"name","col":5,"eb":579,"ecol":8,"eline":21,"line":21,"node":"string_fragment","pat":1,"path":"tests/typescript/typescript/tests.ts","sb":576,"text":"tab"}
+{"cap":"placeholder","col":8,"eb":581,"ecol":10,"eline":21,"line":21,"node":"escape_sequence","pat":1,"path":"tests/typescript/typescript/tests.ts","sb":579,"text":"\\t"}
+{"cap":"name","col":10,"eb":585,"ecol":14,"eline":21,"line":21,"node":"string_fragment","pat":1,"path":"tests/typescript/typescript/tests.ts","sb":581,"text":"here"}
+{"cap":"test","col":1,"eb":615,"ecol":17,"eline":22,"line":22,"node":"call_expression","pat":0,"path":"tests/typescript/typescript/tests.ts","sb":599,"text":"it(\"\", () => {})"}
+{"cap":"_fn","col":1,"eb":601,"ecol":3,"eline":22,"line":22,"node":"identifier","pat":0,"path":"tests/typescript/typescript/tests.ts","sb":599,"text":"it"}
+{"cap":"test","col":1,"eb":764,"ecol":19,"eline":27,"line":27,"node":"call_expression","pat":2,"path":"tests/typescript/typescript/tests.ts","sb":746,"text":"it(name, () => {})"}
+{"cap":"_fn","col":1,"eb":748,"ecol":3,"eline":27,"line":27,"node":"identifier","pat":2,"path":"tests/typescript/typescript/tests.ts","sb":746,"text":"it"}
+{"cap":"placeholder","col":4,"eb":753,"ecol":8,"eline":27,"line":27,"node":"identifier","pat":2,"path":"tests/typescript/typescript/tests.ts","sb":749,"text":"name"}
+{"cap":"group","col":1,"eb":1157,"ecol":3,"eline":41,"line":30,"node":"call_expression","pat":5,"path":"tests/typescript/typescript/tests.ts","sb":787,"text":"describe(suiteName, () => {\n  it.each(rows)(title, () => {});\n  test(prefix + \" suffix\", () => {});\n  it.skip(names[0], () => {});\n  it(makeTitle(), () => {});\n  it(table.title, () => {});\n  it(fast ? \"fast\" : \"slow\", () => {});\n  it((\"parenthesized\"), () => {});\n  it(title as string, () => {});\n  it(maybeTitle!, () => {});\n  it(checked satisfies string, () => {});\n})"}
+{"cap":"_fn","col":1,"eb":795,"ecol":9,"eline":30,"line":30,"node":"identifier","pat":5,"path":"tests/typescript/typescript/tests.ts","sb":787,"text":"describe"}
+{"cap":"placeholder","col":10,"eb":805,"ecol":19,"eline":30,"line":30,"node":"identifier","pat":5,"path":"tests/typescript/typescript/tests.ts","sb":796,"text":"suiteName"}
+{"cap":"test","col":3,"eb":847,"ecol":33,"eline":31,"line":31,"node":"call_expression","pat":2,"path":"tests/typescript/typescript/tests.ts","sb":817,"text":"it.each(rows)(title, () => {})"}
+{"cap":"_fn","col":3,"eb":819,"ecol":5,"eline":31,"line":31,"node":"identifier","pat":2,"path":"tests/typescript/typescript/tests.ts","sb":817,"text":"it"}
+{"cap":"label.each","col":6,"eb":824,"ecol":10,"eline":31,"line":31,"node":"property_identifier","pat":2,"path":"tests/typescript/typescript/tests.ts","sb":820,"text":"each"}
+{"cap":"placeholder","col":17,"eb":836,"ecol":22,"eline":31,"line":31,"node":"identifier","pat":2,"path":"tests/typescript/typescript/tests.ts","sb":831,"text":"title"}
+{"cap":"test","col":3,"eb":885,"ecol":37,"eline":32,"line":32,"node":"call_expression","pat":2,"path":"tests/typescript/typescript/tests.ts","sb":851,"text":"test(prefix + \" suffix\", () => {})"}
+{"cap":"_fn","col":3,"eb":855,"ecol":7,"eline":32,"line":32,"node":"identifier","pat":2,"path":"tests/typescript/typescript/tests.ts","sb":851,"text":"test"}
+{"cap":"placeholder","col":8,"eb":874,"ecol":26,"eline":32,"line":32,"node":"binary_expression","pat":2,"path":"tests/typescript/typescript/tests.ts","sb":856,"text":"prefix + \" suffix\""}
+{"cap":"test","col":3,"eb":916,"ecol":30,"eline":33,"line":33,"node":"call_expression","pat":2,"path":"tests/typescript/typescript/tests.ts","sb":889,"text":"it.skip(names[0], () => {})"}
+{"cap":"_fn","col":3,"eb":891,"ecol":5,"eline":33,"line":33,"node":"identifier","pat":2,"path":"tests/typescript/typescript/tests.ts","sb":889,"text":"it"}
+{"cap":"label.skip","col":6,"eb":896,"ecol":10,"eline":33,"line":33,"node":"property_identifier","pat":2,"path":"tests/typescript/typescript/tests.ts","sb":892,"text":"skip"}
+{"cap":"placeholder","col":11,"eb":905,"ecol":19,"eline":33,"line":33,"node":"subscript_expression","pat":2,"path":"tests/typescript/typescript/tests.ts","sb":897,"text":"names[0]"}
+{"cap":"test","col":3,"eb":945,"ecol":28,"eline":34,"line":34,"node":"call_expression","pat":2,"path":"tests/typescript/typescript/tests.ts","sb":920,"text":"it(makeTitle(), () => {})"}
+{"cap":"_fn","col":3,"eb":922,"ecol":5,"eline":34,"line":34,"node":"identifier","pat":2,"path":"tests/typescript/typescript/tests.ts","sb":920,"text":"it"}
+{"cap":"placeholder","col":6,"eb":934,"ecol":17,"eline":34,"line":34,"node":"call_expression","pat":2,"path":"tests/typescript/typescript/tests.ts","sb":923,"text":"makeTitle()"}
+{"cap":"test","col":3,"eb":974,"ecol":28,"eline":35,"line":35,"node":"call_expression","pat":2,"path":"tests/typescript/typescript/tests.ts","sb":949,"text":"it(table.title, () => {})"}
+{"cap":"_fn","col":3,"eb":951,"ecol":5,"eline":35,"line":35,"node":"identifier","pat":2,"path":"tests/typescript/typescript/tests.ts","sb":949,"text":"it"}
+{"cap":"placeholder","col":6,"eb":963,"ecol":17,"eline":35,"line":35,"node":"member_expression","pat":2,"path":"tests/typescript/typescript/tests.ts","sb":952,"text":"table.title"}
+{"cap":"test","col":3,"eb":1014,"ecol":39,"eline":36,"line":36,"node":"call_expression","pat":2,"path":"tests/typescript/typescript/tests.ts","sb":978,"text":"it(fast ? \"fast\" : \"slow\", () => {})"}
+{"cap":"_fn","col":3,"eb":980,"ecol":5,"eline":36,"line":36,"node":"identifier","pat":2,"path":"tests/typescript/typescript/tests.ts","sb":978,"text":"it"}
+{"cap":"placeholder","col":6,"eb":1003,"ecol":28,"eline":36,"line":36,"node":"ternary_expression","pat":2,"path":"tests/typescript/typescript/tests.ts","sb":981,"text":"fast ? \"fast\" : \"slow\""}
+{"cap":"test","col":3,"eb":1049,"ecol":34,"eline":37,"line":37,"node":"call_expression","pat":2,"path":"tests/typescript/typescript/tests.ts","sb":1018,"text":"it((\"parenthesized\"), () => {})"}
+{"cap":"_fn","col":3,"eb":1020,"ecol":5,"eline":37,"line":37,"node":"identifier","pat":2,"path":"tests/typescript/typescript/tests.ts","sb":1018,"text":"it"}
+{"cap":"placeholder","col":6,"eb":1038,"ecol":23,"eline":37,"line":37,"node":"parenthesized_expression","pat":2,"path":"tests/typescript/typescript/tests.ts","sb":1021,"text":"(\"parenthesized\")"}
+{"cap":"test","col":3,"eb":1082,"ecol":32,"eline":38,"line":38,"node":"call_expression","pat":2,"path":"tests/typescript/typescript/tests.ts","sb":1053,"text":"it(title as string, () => {})"}
+{"cap":"_fn","col":3,"eb":1055,"ecol":5,"eline":38,"line":38,"node":"identifier","pat":2,"path":"tests/typescript/typescript/tests.ts","sb":1053,"text":"it"}
+{"cap":"placeholder","col":6,"eb":1071,"ecol":21,"eline":38,"line":38,"node":"as_expression","pat":2,"path":"tests/typescript/typescript/tests.ts","sb":1056,"text":"title as string"}
+{"cap":"test","col":3,"eb":1111,"ecol":28,"eline":39,"line":39,"node":"call_expression","pat":2,"path":"tests/typescript/typescript/tests.ts","sb":1086,"text":"it(maybeTitle!, () => {})"}
+{"cap":"_fn","col":3,"eb":1088,"ecol":5,"eline":39,"line":39,"node":"identifier","pat":2,"path":"tests/typescript/typescript/tests.ts","sb":1086,"text":"it"}
+{"cap":"placeholder","col":6,"eb":1100,"ecol":17,"eline":39,"line":39,"node":"non_null_expression","pat":2,"path":"tests/typescript/typescript/tests.ts","sb":1089,"text":"maybeTitle!"}
+{"cap":"test","col":3,"eb":1153,"ecol":41,"eline":40,"line":40,"node":"call_expression","pat":2,"path":"tests/typescript/typescript/tests.ts","sb":1115,"text":"it(checked satisfies string, () => {})"}
+{"cap":"_fn","col":3,"eb":1117,"ecol":5,"eline":40,"line":40,"node":"identifier","pat":2,"path":"tests/typescript/typescript/tests.ts","sb":1115,"text":"it"}
+{"cap":"placeholder","col":6,"eb":1142,"ecol":30,"eline":40,"line":40,"node":"satisfies_expression","pat":2,"path":"tests/typescript/typescript/tests.ts","sb":1118,"text":"checked satisfies string"}

@@ -1,0 +1,9 @@
+{"cap":"group","col":1,"eb":385,"ecol":3,"eline":20,"line":18,"node":"call_expression","pat":3,"path":"tests/typescript/tsx/jsx.tsx","sb":317,"text":"describe(\"view\", () => {\n  it.skip(`renders ${\"a\"}\\n`, () => {});\n})"}
+{"cap":"_fn","col":1,"eb":325,"ecol":9,"eline":18,"line":18,"node":"identifier","pat":3,"path":"tests/typescript/tsx/jsx.tsx","sb":317,"text":"describe"}
+{"cap":"name","col":11,"eb":331,"ecol":15,"eline":18,"line":18,"node":"string_fragment","pat":3,"path":"tests/typescript/tsx/jsx.tsx","sb":327,"text":"view"}
+{"cap":"test","col":3,"eb":381,"ecol":40,"eline":19,"line":19,"node":"call_expression","pat":1,"path":"tests/typescript/tsx/jsx.tsx","sb":344,"text":"it.skip(`renders ${\"a\"}\\n`, () => {})"}
+{"cap":"_fn","col":3,"eb":346,"ecol":5,"eline":19,"line":19,"node":"identifier","pat":1,"path":"tests/typescript/tsx/jsx.tsx","sb":344,"text":"it"}
+{"cap":"label.skip","col":6,"eb":351,"ecol":10,"eline":19,"line":19,"node":"property_identifier","pat":1,"path":"tests/typescript/tsx/jsx.tsx","sb":347,"text":"skip"}
+{"cap":"name","col":12,"eb":361,"ecol":20,"eline":19,"line":19,"node":"string_fragment","pat":1,"path":"tests/typescript/tsx/jsx.tsx","sb":353,"text":"renders "}
+{"cap":"placeholder","col":20,"eb":367,"ecol":26,"eline":19,"line":19,"node":"template_substitution","pat":1,"path":"tests/typescript/tsx/jsx.tsx","sb":361,"text":"${\"a\"}"}
+{"cap":"placeholder","col":26,"eb":369,"ecol":28,"eline":19,"line":19,"node":"escape_sequence","pat":1,"path":"tests/typescript/tsx/jsx.tsx","sb":367,"text":"\\n"}
