@@ -58,8 +58,9 @@ line `Copyright <year> The Sinter Authors`:
 These files carry no header, and `REUSE.toml` gives each its license:
 the files at the repository root; files whose format has no comment,
 such as JSON; files that a tool generates, such as `Cargo.lock`; the
-plan files under `.plans/`; and the grammars and the license files of
-the upstream projects. Keep the two ignore markers around the list
+plan files under `.plans/`; the grammars and the license files of the
+upstream projects; and the cases of the query tests and their expected
+captures under `tests/`. Keep the two ignore markers around the list
 above. The markers stop the `reuse` tool from reading the examples as
 license tags for this file.
 
@@ -100,6 +101,8 @@ Before you commit, check that these pass at the repository root:
   3. `tools/check-licenses.sh packs/*/`
   4. `tools/check-upstream.sh packs/*/`, which calls GitHub with `gh`
   5. `tools/check-index.sh -b origin/main`
+  6. `tools/check-query-tests.sh -s SINTER`, which runs the query
+     tests
 
 Each tool prints its checks and its exit codes with `-h`. CI runs all of
 them in the workflow `ci`, and the license checks in the workflow
@@ -195,6 +198,17 @@ its upstream project (record `upstream-grammars`).
    license in `REUSE.toml`, with the copyright line of the upstream
    license file, and add a row for each grammar to `THIRD_PARTY.md`.
 8. Write the query files under `packs/<name>/queries/<grammar>/`.
+9. Write the query tests (record `query-tests`) of each grammar in the
+   folder `tests/<name>/<grammar>/`. A case is a small file of the
+   language, `<case>.<ext>`. For each query file `<query>.scm` of the
+   grammar, the file `<case>.<query>.jsonl` holds the captures that
+   `sinter parse --query` prints for the case. Give each grammar cases
+   for every form that its queries find, and for forms that they must
+   not find. Then run `tools/check-query-tests.sh -u -s SINTER`. With
+   `-u`, the tool writes the files `<case>.<query>.jsonl`. Read each
+   file that it writes, line by line, and check each capture against
+   the case. Do not commit a file that no person has read. Without
+   `-u`, the tool compares the output with each file, as CI does.
 
 The file `licenses/NOTICE` starts with two lines: `<name> pack of
 Sinter` and `Copyright <year> The Sinter Authors`. Then it holds one
