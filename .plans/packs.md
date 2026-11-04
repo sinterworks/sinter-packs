@@ -1,6 +1,6 @@
 # The first packs
 @plan packs@939532
-@scope README.md, CONTRIBUTING.md, NOTICE, REUSE.toml, LICENSES/**, THIRD_PARTY.md, sinter.toml, docs/**, packs/**, adapters/**, fixtures/**, tools/**, index.jsonl, .github/workflows/**
+@scope README.md, CONTRIBUTING.md, NOTICE, REUSE.toml, LICENSES/**, THIRD_PARTY.md, sinter.toml, docs/**, packs/**, adapters/**, fixtures/**, tools/**, tests/**, index.jsonl, .github/workflows/**
 Release the packs javascript, ocaml, rust, and typescript at 0.1.0,
 with their queries, their conformance fixtures, and their test
 runners, and the CI that checks and releases each pack.
@@ -21,10 +21,13 @@ query, the license list, the folder `licenses/`, and the rules of
 `index.jsonl`.
 
 ## Add the four packs
-@scope packs/**, REUSE.toml, THIRD_PARTY.md
+@scope packs/**, REUSE.toml, LICENSES/**, THIRD_PARTY.md, CONTRIBUTING.md, tests/**, tools/**, .github/workflows/ci.yml, docs/decisions/**
+@decision query-tests
 Add the packs javascript, ocaml, rust, and typescript: the upstream
 grammars by SHA-256, their license texts and notice, the descriptors,
-and the query files for comments, definitions, and tests.
+and the query files for comments, definitions, and tests. Test the
+queries of each grammar on small files against the captures that
+`sinter parse --query` prints, in CI.
 
 ## Release packs
 @scope tools/**, .github/workflows/release.yml
