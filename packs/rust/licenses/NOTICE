@@ -1,0 +1,9 @@
+rust pack of Sinter
+Copyright 2026 The Sinter Authors
+
+grammar: rust
+repository: tree-sitter/tree-sitter-rust
+tag: v0.24.2
+commit: 77a3747266f4d621d0757825e6b11edcbf991ca5
+asset: tree-sitter-rust.wasm
+sha256: 24c89bd9252255e4aebbcbd7d2d308bd92c86dd95a130fdc80efa49577b8d738

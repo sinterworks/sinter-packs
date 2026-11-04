@@ -113,3 +113,23 @@
   the name path holds no quotes.
 - In TypeScript, a title that is an `as`, `!`, or `satisfies`
   expression is one `@placeholder` too.
+- In Rust, an attribute is a sibling before its item, not a child. The
+  patterns of `tests.scm` read the attributes before a function as a
+  sibling sequence: a test attribute, then any attributes and comments,
+  then the function. `#[ignore]` before or after the test attribute
+  has a pattern of its own, before the pattern with no label, so that
+  the match with the label is the first one.
+- `definitions.scm` captures every `attribute_item` as `@decoration`,
+  as the example of the specification does, also an attribute of a
+  parameter such as `#[case]`.
+- An `impl` has the name of its type: `impl Shape for Unit` and
+  `impl<T> Named<T>` have the names `Unit` and `Named`. An `impl` for
+  another type, such as a reference, is a definition with no name.
+- Only a module with `#[cfg(test)]` is a group (ruling of the lead). A
+  module inside such a module, a test module without `#[cfg(test)]`,
+  and a module with `#[cfg(all(test, unix))]` are no groups, so the
+  name path of their tests lacks that module. The step "Add the scan
+  fixtures" can widen the rule.
+- In the rust grammar, a doc line comment `///` or `//!` holds its
+  line ending, and in a file with CRLF line ends, a plain line comment
+  holds the CR.

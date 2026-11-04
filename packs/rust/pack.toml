@@ -1,0 +1,19 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright 2026 The Sinter Authors
+
+sinter-spec = "1.0"
+name = "rust"
+version = "0.1.0"
+license = "Apache-2.0"
+name-separator = "::"
+
+[comments]
+line = ["//", "///", "//!"]
+block = [["/*", "*/"], ["/**", "*/"], ["/*!", "*/"]]
+inner = ["*"]
+
+[[grammar]]
+name = "rust"
+sha256 = "24c89bd9252255e4aebbcbd7d2d308bd92c86dd95a130fdc80efa49577b8d738"
+license = "MIT"
+names = ["*.rs"]

@@ -1,0 +1,2 @@
+{"cap":"comment","col":1,"eb":14,"ecol":15,"eline":1,"line":1,"node":"line_comment","pat":0,"path":"tests/rust/rust/crlf.rs","sb":0,"text":"// A comment.\r"}
+{"cap":"comment","col":1,"eb":35,"ecol":21,"eline":2,"line":2,"node":"line_comment","pat":0,"path":"tests/rust/rust/crlf.rs","sb":15,"text":"/// A doc comment.\r\n"}

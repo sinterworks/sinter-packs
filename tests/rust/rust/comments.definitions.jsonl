@@ -1,0 +1,3 @@
+{"cap":"definition","col":1,"eb":349,"ecol":2,"eline":16,"line":14,"node":"function_item","pat":0,"path":"tests/rust/rust/comments.rs","sb":275,"text":"fn f() -> &'static str {\n    \"// not a comment\" // A comment after code.\n}"}
+{"cap":"name","col":4,"eb":279,"ecol":5,"eline":14,"line":14,"node":"identifier","pat":0,"path":"tests/rust/rust/comments.rs","sb":278,"text":"f"}
+{"cap":"body","col":24,"eb":349,"ecol":2,"eline":16,"line":14,"node":"block","pat":0,"path":"tests/rust/rust/comments.rs","sb":298,"text":"{\n    \"// not a comment\" // A comment after code.\n}"}

@@ -1,0 +1,76 @@
+{"cap":"decoration","col":1,"eb":32,"ecol":10,"eline":2,"line":2,"node":"attribute_item","pat":13,"path":"tests/rust/rust/definitions.rs","sb":23,"text":"#[inline]"}
+{"cap":"definition","col":1,"eb":86,"ecol":2,"eline":6,"line":3,"node":"function_item","pat":0,"path":"tests/rust/rust/definitions.rs","sb":33,"text":"pub fn plain(a: u8) -> u8 {\n    fn inner() {}\n    a\n}"}
+{"cap":"name","col":8,"eb":45,"ecol":13,"eline":3,"line":3,"node":"identifier","pat":0,"path":"tests/rust/rust/definitions.rs","sb":40,"text":"plain"}
+{"cap":"body","col":27,"eb":86,"ecol":2,"eline":6,"line":3,"node":"block","pat":0,"path":"tests/rust/rust/definitions.rs","sb":59,"text":"{\n    fn inner() {}\n    a\n}"}
+{"cap":"definition","col":5,"eb":78,"ecol":18,"eline":4,"line":4,"node":"function_item","pat":0,"path":"tests/rust/rust/definitions.rs","sb":65,"text":"fn inner() {}"}
+{"cap":"name","col":8,"eb":73,"ecol":13,"eline":4,"line":4,"node":"identifier","pat":0,"path":"tests/rust/rust/definitions.rs","sb":68,"text":"inner"}
+{"cap":"body","col":16,"eb":78,"ecol":18,"eline":4,"line":4,"node":"block","pat":0,"path":"tests/rust/rust/definitions.rs","sb":76,"text":"{}"}
+{"cap":"definition","col":1,"eb":104,"ecol":17,"eline":8,"line":8,"node":"struct_item","pat":2,"path":"tests/rust/rust/definitions.rs","sb":88,"text":"pub struct Unit;"}
+{"cap":"name","col":12,"eb":103,"ecol":16,"eline":8,"line":8,"node":"type_identifier","pat":2,"path":"tests/rust/rust/definitions.rs","sb":99,"text":"Unit"}
+{"cap":"definition","col":1,"eb":126,"ecol":22,"eline":9,"line":9,"node":"struct_item","pat":2,"path":"tests/rust/rust/definitions.rs","sb":105,"text":"pub struct Tuple(u8);"}
+{"cap":"name","col":12,"eb":121,"ecol":17,"eline":9,"line":9,"node":"type_identifier","pat":2,"path":"tests/rust/rust/definitions.rs","sb":116,"text":"Tuple"}
+{"cap":"body","col":17,"eb":125,"ecol":21,"eline":9,"line":9,"node":"ordered_field_declaration_list","pat":2,"path":"tests/rust/rust/definitions.rs","sb":121,"text":"(u8)"}
+{"cap":"definition","col":1,"eb":164,"ecol":2,"eline":12,"line":10,"node":"struct_item","pat":2,"path":"tests/rust/rust/definitions.rs","sb":127,"text":"pub struct Named<T> {\n    field: T,\n}"}
+{"cap":"name","col":12,"eb":143,"ecol":17,"eline":10,"line":10,"node":"type_identifier","pat":2,"path":"tests/rust/rust/definitions.rs","sb":138,"text":"Named"}
+{"cap":"body","col":21,"eb":164,"ecol":2,"eline":12,"line":10,"node":"field_declaration_list","pat":2,"path":"tests/rust/rust/definitions.rs","sb":147,"text":"{\n    field: T,\n}"}
+{"cap":"definition","col":1,"eb":199,"ecol":2,"eline":17,"line":14,"node":"enum_item","pat":3,"path":"tests/rust/rust/definitions.rs","sb":166,"text":"enum Choice {\n    A,\n    B(u8),\n}"}
+{"cap":"name","col":6,"eb":177,"ecol":12,"eline":14,"line":14,"node":"type_identifier","pat":3,"path":"tests/rust/rust/definitions.rs","sb":171,"text":"Choice"}
+{"cap":"body","col":13,"eb":199,"ecol":2,"eline":17,"line":14,"node":"enum_variant_list","pat":3,"path":"tests/rust/rust/definitions.rs","sb":178,"text":"{\n    A,\n    B(u8),\n}"}
+{"cap":"definition","col":1,"eb":239,"ecol":2,"eline":22,"line":19,"node":"union_item","pat":4,"path":"tests/rust/rust/definitions.rs","sb":201,"text":"union Bits {\n    a: u32,\n    b: f32,\n}"}
+{"cap":"name","col":7,"eb":211,"ecol":11,"eline":19,"line":19,"node":"type_identifier","pat":4,"path":"tests/rust/rust/definitions.rs","sb":207,"text":"Bits"}
+{"cap":"body","col":12,"eb":239,"ecol":2,"eline":22,"line":19,"node":"field_declaration_list","pat":4,"path":"tests/rust/rust/definitions.rs","sb":212,"text":"{\n    a: u32,\n    b: f32,\n}"}
+{"cap":"definition","col":1,"eb":334,"ecol":2,"eline":29,"line":24,"node":"trait_item","pat":5,"path":"tests/rust/rust/definitions.rs","sb":241,"text":"trait Shape {\n    fn area(&self) -> f64;\n    fn name(&self) -> &str {\n        \"shape\"\n    }\n}"}
+{"cap":"name","col":7,"eb":252,"ecol":12,"eline":24,"line":24,"node":"type_identifier","pat":5,"path":"tests/rust/rust/definitions.rs","sb":247,"text":"Shape"}
+{"cap":"body","col":13,"eb":334,"ecol":2,"eline":29,"line":24,"node":"declaration_list","pat":5,"path":"tests/rust/rust/definitions.rs","sb":253,"text":"{\n    fn area(&self) -> f64;\n    fn name(&self) -> &str {\n        \"shape\"\n    }\n}"}
+{"cap":"definition","col":5,"eb":281,"ecol":27,"eline":25,"line":25,"node":"function_signature_item","pat":1,"path":"tests/rust/rust/definitions.rs","sb":259,"text":"fn area(&self) -> f64;"}
+{"cap":"name","col":8,"eb":266,"ecol":12,"eline":25,"line":25,"node":"identifier","pat":1,"path":"tests/rust/rust/definitions.rs","sb":262,"text":"area"}
+{"cap":"definition","col":5,"eb":332,"ecol":6,"eline":28,"line":26,"node":"function_item","pat":0,"path":"tests/rust/rust/definitions.rs","sb":286,"text":"fn name(&self) -> &str {\n        \"shape\"\n    }"}
+{"cap":"name","col":8,"eb":293,"ecol":12,"eline":26,"line":26,"node":"identifier","pat":0,"path":"tests/rust/rust/definitions.rs","sb":289,"text":"name"}
+{"cap":"body","col":28,"eb":332,"ecol":6,"eline":28,"line":26,"node":"block","pat":0,"path":"tests/rust/rust/definitions.rs","sb":309,"text":"{\n        \"shape\"\n    }"}
+{"cap":"definition","col":1,"eb":405,"ecol":2,"eline":35,"line":31,"node":"impl_item","pat":6,"path":"tests/rust/rust/definitions.rs","sb":336,"text":"impl Shape for Unit {\n    fn area(&self) -> f64 {\n        0.0\n    }\n}"}
+{"cap":"name","col":16,"eb":355,"ecol":20,"eline":31,"line":31,"node":"type_identifier","pat":6,"path":"tests/rust/rust/definitions.rs","sb":351,"text":"Unit"}
+{"cap":"body","col":21,"eb":405,"ecol":2,"eline":35,"line":31,"node":"declaration_list","pat":6,"path":"tests/rust/rust/definitions.rs","sb":356,"text":"{\n    fn area(&self) -> f64 {\n        0.0\n    }\n}"}
+{"cap":"definition","col":1,"eb":405,"ecol":2,"eline":35,"line":31,"node":"impl_item","pat":7,"path":"tests/rust/rust/definitions.rs","sb":336,"text":"impl Shape for Unit {\n    fn area(&self) -> f64 {\n        0.0\n    }\n}"}
+{"cap":"body","col":21,"eb":405,"ecol":2,"eline":35,"line":31,"node":"declaration_list","pat":7,"path":"tests/rust/rust/definitions.rs","sb":356,"text":"{\n    fn area(&self) -> f64 {\n        0.0\n    }\n}"}
+{"cap":"definition","col":5,"eb":403,"ecol":6,"eline":34,"line":32,"node":"function_item","pat":0,"path":"tests/rust/rust/definitions.rs","sb":362,"text":"fn area(&self) -> f64 {\n        0.0\n    }"}
+{"cap":"name","col":8,"eb":369,"ecol":12,"eline":32,"line":32,"node":"identifier","pat":0,"path":"tests/rust/rust/definitions.rs","sb":365,"text":"area"}
+{"cap":"body","col":27,"eb":403,"ecol":6,"eline":34,"line":32,"node":"block","pat":0,"path":"tests/rust/rust/definitions.rs","sb":384,"text":"{\n        0.0\n    }"}
+{"cap":"definition","col":1,"eb":487,"ecol":2,"eline":41,"line":37,"node":"impl_item","pat":6,"path":"tests/rust/rust/definitions.rs","sb":407,"text":"impl<T> Named<T> {\n    fn new(field: T) -> Self {\n        Self { field }\n    }\n}"}
+{"cap":"name","col":9,"eb":420,"ecol":14,"eline":37,"line":37,"node":"type_identifier","pat":6,"path":"tests/rust/rust/definitions.rs","sb":415,"text":"Named"}
+{"cap":"body","col":18,"eb":487,"ecol":2,"eline":41,"line":37,"node":"declaration_list","pat":6,"path":"tests/rust/rust/definitions.rs","sb":424,"text":"{\n    fn new(field: T) -> Self {\n        Self { field }\n    }\n}"}
+{"cap":"definition","col":1,"eb":487,"ecol":2,"eline":41,"line":37,"node":"impl_item","pat":7,"path":"tests/rust/rust/definitions.rs","sb":407,"text":"impl<T> Named<T> {\n    fn new(field: T) -> Self {\n        Self { field }\n    }\n}"}
+{"cap":"body","col":18,"eb":487,"ecol":2,"eline":41,"line":37,"node":"declaration_list","pat":7,"path":"tests/rust/rust/definitions.rs","sb":424,"text":"{\n    fn new(field: T) -> Self {\n        Self { field }\n    }\n}"}
+{"cap":"definition","col":5,"eb":485,"ecol":6,"eline":40,"line":38,"node":"function_item","pat":0,"path":"tests/rust/rust/definitions.rs","sb":430,"text":"fn new(field: T) -> Self {\n        Self { field }\n    }"}
+{"cap":"name","col":8,"eb":436,"ecol":11,"eline":38,"line":38,"node":"identifier","pat":0,"path":"tests/rust/rust/definitions.rs","sb":433,"text":"new"}
+{"cap":"body","col":30,"eb":485,"ecol":6,"eline":40,"line":38,"node":"block","pat":0,"path":"tests/rust/rust/definitions.rs","sb":455,"text":"{\n        Self { field }\n    }"}
+{"cap":"definition","col":1,"eb":624,"ecol":2,"eline":47,"line":43,"node":"impl_item","pat":6,"path":"tests/rust/rust/definitions.rs","sb":489,"text":"impl std::fmt::Debug for crate::Tuple {\n    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {\n        Ok(())\n    }\n}"}
+{"cap":"name","col":33,"eb":526,"ecol":38,"eline":43,"line":43,"node":"type_identifier","pat":6,"path":"tests/rust/rust/definitions.rs","sb":521,"text":"Tuple"}
+{"cap":"body","col":39,"eb":624,"ecol":2,"eline":47,"line":43,"node":"declaration_list","pat":6,"path":"tests/rust/rust/definitions.rs","sb":527,"text":"{\n    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {\n        Ok(())\n    }\n}"}
+{"cap":"definition","col":1,"eb":624,"ecol":2,"eline":47,"line":43,"node":"impl_item","pat":7,"path":"tests/rust/rust/definitions.rs","sb":489,"text":"impl std::fmt::Debug for crate::Tuple {\n    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {\n        Ok(())\n    }\n}"}
+{"cap":"body","col":39,"eb":624,"ecol":2,"eline":47,"line":43,"node":"declaration_list","pat":7,"path":"tests/rust/rust/definitions.rs","sb":527,"text":"{\n    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {\n        Ok(())\n    }\n}"}
+{"cap":"definition","col":5,"eb":622,"ecol":6,"eline":46,"line":44,"node":"function_item","pat":0,"path":"tests/rust/rust/definitions.rs","sb":533,"text":"fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {\n        Ok(())\n    }"}
+{"cap":"name","col":8,"eb":539,"ecol":11,"eline":44,"line":44,"node":"identifier","pat":0,"path":"tests/rust/rust/definitions.rs","sb":536,"text":"fmt"}
+{"cap":"body","col":72,"eb":622,"ecol":6,"eline":46,"line":44,"node":"block","pat":0,"path":"tests/rust/rust/definitions.rs","sb":600,"text":"{\n        Ok(())\n    }"}
+{"cap":"definition","col":1,"eb":696,"ecol":2,"eline":53,"line":49,"node":"impl_item","pat":7,"path":"tests/rust/rust/definitions.rs","sb":626,"text":"impl Shape for &Unit {\n    fn area(&self) -> f64 {\n        1.0\n    }\n}"}
+{"cap":"body","col":22,"eb":696,"ecol":2,"eline":53,"line":49,"node":"declaration_list","pat":7,"path":"tests/rust/rust/definitions.rs","sb":647,"text":"{\n    fn area(&self) -> f64 {\n        1.0\n    }\n}"}
+{"cap":"definition","col":5,"eb":694,"ecol":6,"eline":52,"line":50,"node":"function_item","pat":0,"path":"tests/rust/rust/definitions.rs","sb":653,"text":"fn area(&self) -> f64 {\n        1.0\n    }"}
+{"cap":"name","col":8,"eb":660,"ecol":12,"eline":50,"line":50,"node":"identifier","pat":0,"path":"tests/rust/rust/definitions.rs","sb":656,"text":"area"}
+{"cap":"body","col":27,"eb":694,"ecol":6,"eline":52,"line":50,"node":"block","pat":0,"path":"tests/rust/rust/definitions.rs","sb":675,"text":"{\n        1.0\n    }"}
+{"cap":"definition","col":1,"eb":732,"ecol":2,"eline":57,"line":55,"node":"mod_item","pat":8,"path":"tests/rust/rust/definitions.rs","sb":698,"text":"mod outer {\n    pub mod inner {}\n}"}
+{"cap":"name","col":5,"eb":707,"ecol":10,"eline":55,"line":55,"node":"identifier","pat":8,"path":"tests/rust/rust/definitions.rs","sb":702,"text":"outer"}
+{"cap":"body","col":11,"eb":732,"ecol":2,"eline":57,"line":55,"node":"declaration_list","pat":8,"path":"tests/rust/rust/definitions.rs","sb":708,"text":"{\n    pub mod inner {}\n}"}
+{"cap":"definition","col":5,"eb":730,"ecol":21,"eline":56,"line":56,"node":"mod_item","pat":8,"path":"tests/rust/rust/definitions.rs","sb":714,"text":"pub mod inner {}"}
+{"cap":"name","col":13,"eb":727,"ecol":18,"eline":56,"line":56,"node":"identifier","pat":8,"path":"tests/rust/rust/definitions.rs","sb":722,"text":"inner"}
+{"cap":"body","col":19,"eb":730,"ecol":21,"eline":56,"line":56,"node":"declaration_list","pat":8,"path":"tests/rust/rust/definitions.rs","sb":728,"text":"{}"}
+{"cap":"definition","col":1,"eb":747,"ecol":14,"eline":59,"line":59,"node":"mod_item","pat":8,"path":"tests/rust/rust/definitions.rs","sb":734,"text":"mod declared;"}
+{"cap":"name","col":5,"eb":746,"ecol":13,"eline":59,"line":59,"node":"identifier","pat":8,"path":"tests/rust/rust/definitions.rs","sb":738,"text":"declared"}
+{"cap":"definition","col":1,"eb":769,"ecol":21,"eline":61,"line":61,"node":"const_item","pat":9,"path":"tests/rust/rust/definitions.rs","sb":749,"text":"const LIMIT: u8 = 1;"}
+{"cap":"name","col":7,"eb":760,"ecol":12,"eline":61,"line":61,"node":"identifier","pat":9,"path":"tests/rust/rust/definitions.rs","sb":755,"text":"LIMIT"}
+{"cap":"definition","col":1,"eb":797,"ecol":28,"eline":62,"line":62,"node":"static_item","pat":10,"path":"tests/rust/rust/definitions.rs","sb":770,"text":"static NAME: &str = \"rust\";"}
+{"cap":"name","col":8,"eb":781,"ecol":12,"eline":62,"line":62,"node":"identifier","pat":10,"path":"tests/rust/rust/definitions.rs","sb":777,"text":"NAME"}
+{"cap":"definition","col":1,"eb":814,"ecol":17,"eline":63,"line":63,"node":"type_item","pat":11,"path":"tests/rust/rust/definitions.rs","sb":798,"text":"type Alias = u8;"}
+{"cap":"name","col":6,"eb":808,"ecol":11,"eline":63,"line":63,"node":"type_identifier","pat":11,"path":"tests/rust/rust/definitions.rs","sb":803,"text":"Alias"}
+{"cap":"definition","col":1,"eb":880,"ecol":2,"eline":69,"line":65,"node":"macro_definition","pat":12,"path":"tests/rust/rust/definitions.rs","sb":816,"text":"macro_rules! twice {\n    ($e:expr) => {\n        $e + $e\n    };\n}"}
+{"cap":"name","col":14,"eb":834,"ecol":19,"eline":65,"line":65,"node":"identifier","pat":12,"path":"tests/rust/rust/definitions.rs","sb":829,"text":"twice"}
+{"cap":"definition","col":5,"eb":926,"ecol":32,"eline":72,"line":72,"node":"function_signature_item","pat":1,"path":"tests/rust/rust/definitions.rs","sb":899,"text":"fn external(x: i32) -> i32;"}
+{"cap":"name","col":8,"eb":910,"ecol":16,"eline":72,"line":72,"node":"identifier","pat":1,"path":"tests/rust/rust/definitions.rs","sb":902,"text":"external"}
