@@ -44,7 +44,7 @@ jobs:
     steps:
       - uses: actions/checkout@v7
         with:
-          repository: lathrys-at/sinter
+          repository: sinterworks/sinter
           ref: ${{ needs.pin.outputs.commit }}
       - name: Name the runner image
         id: image
