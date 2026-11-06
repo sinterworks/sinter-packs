@@ -1,0 +1,3 @@
+{"cap":"_test","col":3,"eb":41,"ecol":7,"eline":3,"line":3,"node":"identifier","pat":2,"path":"tests/rust/rust/crlf.rs","sb":37,"text":"test"}
+{"cap":"test","col":1,"eb":74,"ecol":2,"eline":6,"line":4,"node":"function_item","pat":2,"path":"tests/rust/rust/crlf.rs","sb":44,"text":"fn crlf() {\r\n    let _ = 1;\r\n}"}
+{"cap":"name","col":4,"eb":51,"ecol":8,"eline":4,"line":4,"node":"identifier","pat":2,"path":"tests/rust/rust/crlf.rs","sb":47,"text":"crlf"}

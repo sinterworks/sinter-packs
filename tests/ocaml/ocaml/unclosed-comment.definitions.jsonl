@@ -1,0 +1,5 @@
+{"cap":"definition","col":5,"eb":9,"ecol":10,"eline":1,"line":1,"node":"let_binding","pat":0,"path":"tests/ocaml/ocaml/unclosed-comment.ml","sb":4,"text":"a = 1"}
+{"cap":"name","col":5,"eb":5,"ecol":6,"eline":1,"line":1,"node":"value_name","pat":0,"path":"tests/ocaml/ocaml/unclosed-comment.ml","sb":4,"text":"a"}
+{"cap":"body","col":9,"eb":9,"ecol":10,"eline":1,"line":1,"node":"number","pat":0,"path":"tests/ocaml/ocaml/unclosed-comment.ml","sb":8,"text":"1"}
+{"cap":"definition","col":5,"eb":9,"ecol":10,"eline":1,"line":1,"node":"let_binding","pat":2,"path":"tests/ocaml/ocaml/unclosed-comment.ml","sb":4,"text":"a = 1"}
+{"cap":"body","col":9,"eb":9,"ecol":10,"eline":1,"line":1,"node":"number","pat":2,"path":"tests/ocaml/ocaml/unclosed-comment.ml","sb":8,"text":"1"}

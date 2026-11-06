@@ -1,0 +1,7 @@
+{"cap":"comment","col":1,"eb":22,"ecol":23,"eline":1,"line":1,"node":"comment","pat":1,"path":"tests/ocaml/ocaml/comments.ml","sb":0,"text":"(* A plain comment. *)"}
+{"cap":"untagged","col":1,"eb":89,"ecol":27,"eline":3,"line":2,"node":"comment","pat":0,"path":"tests/ocaml/ocaml/comments.ml","sb":23,"text":"(** A doc comment that carries no tags.\n    @satisfies not-read *)"}
+{"cap":"comment","col":1,"eb":89,"ecol":27,"eline":3,"line":2,"node":"comment","pat":1,"path":"tests/ocaml/ocaml/comments.ml","sb":23,"text":"(** A doc comment that carries no tags.\n    @satisfies not-read *)"}
+{"cap":"comment","col":1,"eb":159,"ecol":39,"eline":5,"line":4,"node":"comment","pat":1,"path":"tests/ocaml/ocaml/comments.ml","sb":90,"text":"(* @satisfies some-requirement\n   A tagged comment over two lines. *)"}
+{"cap":"comment","col":1,"eb":190,"ecol":31,"eline":6,"line":6,"node":"comment","pat":1,"path":"tests/ocaml/ocaml/comments.ml","sb":160,"text":"(* outer (* nested *) outer *)"}
+{"cap":"comment","col":1,"eb":196,"ecol":6,"eline":7,"line":7,"node":"comment","pat":1,"path":"tests/ocaml/ocaml/comments.ml","sb":191,"text":"(***)"}
+{"cap":"comment","col":31,"eb":254,"ecol":58,"eline":8,"line":8,"node":"comment","pat":1,"path":"tests/ocaml/ocaml/comments.ml","sb":227,"text":"(* A comment after code. *)"}

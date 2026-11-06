@@ -1,0 +1,1 @@
+{"cap":"comment","col":1,"eb":33,"ecol":34,"eline":1,"line":1,"node":"comment","pat":1,"path":"tests/ocaml/ocaml_interface/parse-error.mli","sb":0,"text":"(* A comment before the error. *)"}

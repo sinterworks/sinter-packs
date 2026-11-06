@@ -1,0 +1,63 @@
+{"cap":"definition","col":5,"eb":41,"ecol":16,"eline":2,"line":2,"node":"let_binding","pat":0,"path":"tests/ocaml/ocaml/definitions.ml","sb":30,"text":"plain x = x"}
+{"cap":"name","col":5,"eb":35,"ecol":10,"eline":2,"line":2,"node":"value_name","pat":0,"path":"tests/ocaml/ocaml/definitions.ml","sb":30,"text":"plain"}
+{"cap":"body","col":15,"eb":41,"ecol":16,"eline":2,"line":2,"node":"value_path","pat":0,"path":"tests/ocaml/ocaml/definitions.ml","sb":40,"text":"x"}
+{"cap":"definition","col":5,"eb":41,"ecol":16,"eline":2,"line":2,"node":"let_binding","pat":2,"path":"tests/ocaml/ocaml/definitions.ml","sb":30,"text":"plain x = x"}
+{"cap":"body","col":15,"eb":41,"ecol":16,"eline":2,"line":2,"node":"value_path","pat":2,"path":"tests/ocaml/ocaml/definitions.ml","sb":40,"text":"x"}
+{"cap":"definition","col":9,"eb":80,"ecol":38,"eline":4,"line":4,"node":"let_binding","pat":0,"path":"tests/ocaml/ocaml/definitions.ml","sb":51,"text":"even n = n = 0 || odd (n - 1)"}
+{"cap":"name","col":9,"eb":55,"ecol":13,"eline":4,"line":4,"node":"value_name","pat":0,"path":"tests/ocaml/ocaml/definitions.ml","sb":51,"text":"even"}
+{"cap":"body","col":18,"eb":80,"ecol":38,"eline":4,"line":4,"node":"infix_expression","pat":0,"path":"tests/ocaml/ocaml/definitions.ml","sb":60,"text":"n = 0 || odd (n - 1)"}
+{"cap":"definition","col":9,"eb":80,"ecol":38,"eline":4,"line":4,"node":"let_binding","pat":2,"path":"tests/ocaml/ocaml/definitions.ml","sb":51,"text":"even n = n = 0 || odd (n - 1)"}
+{"cap":"body","col":18,"eb":80,"ecol":38,"eline":4,"line":4,"node":"infix_expression","pat":2,"path":"tests/ocaml/ocaml/definitions.ml","sb":60,"text":"n = 0 || odd (n - 1)"}
+{"cap":"definition","col":5,"eb":115,"ecol":35,"eline":5,"line":5,"node":"let_binding","pat":0,"path":"tests/ocaml/ocaml/definitions.ml","sb":85,"text":"odd n = n <> 0 && even (n - 1)"}
+{"cap":"name","col":5,"eb":88,"ecol":8,"eline":5,"line":5,"node":"value_name","pat":0,"path":"tests/ocaml/ocaml/definitions.ml","sb":85,"text":"odd"}
+{"cap":"body","col":13,"eb":115,"ecol":35,"eline":5,"line":5,"node":"infix_expression","pat":0,"path":"tests/ocaml/ocaml/definitions.ml","sb":93,"text":"n <> 0 && even (n - 1)"}
+{"cap":"definition","col":5,"eb":115,"ecol":35,"eline":5,"line":5,"node":"let_binding","pat":2,"path":"tests/ocaml/ocaml/definitions.ml","sb":85,"text":"odd n = n <> 0 && even (n - 1)"}
+{"cap":"body","col":13,"eb":115,"ecol":35,"eline":5,"line":5,"node":"infix_expression","pat":2,"path":"tests/ocaml/ocaml/definitions.ml","sb":93,"text":"n <> 0 && even (n - 1)"}
+{"cap":"definition","col":5,"eb":139,"ecol":23,"eline":7,"line":7,"node":"let_binding","pat":0,"path":"tests/ocaml/ocaml/definitions.ml","sb":121,"text":"( +! ) a b = a + b"}
+{"cap":"name","col":5,"eb":127,"ecol":11,"eline":7,"line":7,"node":"parenthesized_operator","pat":0,"path":"tests/ocaml/ocaml/definitions.ml","sb":121,"text":"( +! )"}
+{"cap":"body","col":18,"eb":139,"ecol":23,"eline":7,"line":7,"node":"infix_expression","pat":0,"path":"tests/ocaml/ocaml/definitions.ml","sb":134,"text":"a + b"}
+{"cap":"definition","col":5,"eb":139,"ecol":23,"eline":7,"line":7,"node":"let_binding","pat":2,"path":"tests/ocaml/ocaml/definitions.ml","sb":121,"text":"( +! ) a b = a + b"}
+{"cap":"body","col":18,"eb":139,"ecol":23,"eline":7,"line":7,"node":"infix_expression","pat":2,"path":"tests/ocaml/ocaml/definitions.ml","sb":134,"text":"a + b"}
+{"cap":"definition","col":5,"eb":169,"ecol":29,"eline":9,"line":9,"node":"let_binding","pat":2,"path":"tests/ocaml/ocaml/definitions.ml","sb":145,"text":"() = print_endline \"run\""}
+{"cap":"body","col":10,"eb":169,"ecol":29,"eline":9,"line":9,"node":"application_expression","pat":2,"path":"tests/ocaml/ocaml/definitions.ml","sb":150,"text":"print_endline \"run\""}
+{"cap":"definition","col":5,"eb":199,"ecol":29,"eline":11,"line":11,"node":"let_binding","pat":2,"path":"tests/ocaml/ocaml/definitions.ml","sb":175,"text":"(first, second) = (1, 2)"}
+{"cap":"body","col":23,"eb":199,"ecol":29,"eline":11,"line":11,"node":"parenthesized_expression","pat":2,"path":"tests/ocaml/ocaml/definitions.ml","sb":193,"text":"(1, 2)"}
+{"cap":"definition","col":5,"eb":239,"ecol":8,"eline":15,"line":13,"node":"let_binding","pat":0,"path":"tests/ocaml/ocaml/definitions.ml","sb":205,"text":"local =\n  let inner = 1 in\n  inner"}
+{"cap":"name","col":5,"eb":210,"ecol":10,"eline":13,"line":13,"node":"value_name","pat":0,"path":"tests/ocaml/ocaml/definitions.ml","sb":205,"text":"local"}
+{"cap":"body","col":3,"eb":239,"ecol":8,"eline":15,"line":14,"node":"let_expression","pat":0,"path":"tests/ocaml/ocaml/definitions.ml","sb":215,"text":"let inner = 1 in\n  inner"}
+{"cap":"definition","col":5,"eb":239,"ecol":8,"eline":15,"line":13,"node":"let_binding","pat":2,"path":"tests/ocaml/ocaml/definitions.ml","sb":205,"text":"local =\n  let inner = 1 in\n  inner"}
+{"cap":"body","col":3,"eb":239,"ecol":8,"eline":15,"line":14,"node":"let_expression","pat":2,"path":"tests/ocaml/ocaml/definitions.ml","sb":215,"text":"let inner = 1 in\n  inner"}
+{"cap":"definition","col":6,"eb":253,"ecol":13,"eline":17,"line":17,"node":"type_binding","pat":4,"path":"tests/ocaml/ocaml/definitions.ml","sb":246,"text":"t = int"}
+{"cap":"name","col":6,"eb":247,"ecol":7,"eline":17,"line":17,"node":"type_constructor","pat":4,"path":"tests/ocaml/ocaml/definitions.ml","sb":246,"text":"t"}
+{"cap":"body","col":10,"eb":253,"ecol":13,"eline":17,"line":17,"node":"type_constructor_path","pat":4,"path":"tests/ocaml/ocaml/definitions.ml","sb":250,"text":"int"}
+{"cap":"definition","col":5,"eb":273,"ecol":19,"eline":19,"line":19,"node":"type_binding","pat":4,"path":"tests/ocaml/ocaml/definitions.ml","sb":259,"text":"u = A | B of t"}
+{"cap":"name","col":5,"eb":260,"ecol":6,"eline":19,"line":19,"node":"type_constructor","pat":4,"path":"tests/ocaml/ocaml/definitions.ml","sb":259,"text":"u"}
+{"cap":"body","col":9,"eb":273,"ecol":19,"eline":19,"line":19,"node":"variant_declaration","pat":4,"path":"tests/ocaml/ocaml/definitions.ml","sb":263,"text":"A | B of t"}
+{"cap":"definition","col":6,"eb":303,"ecol":29,"eline":21,"line":21,"node":"type_binding","pat":4,"path":"tests/ocaml/ocaml/definitions.ml","sb":280,"text":"'a box = { value : 'a }"}
+{"cap":"name","col":9,"eb":286,"ecol":12,"eline":21,"line":21,"node":"type_constructor","pat":4,"path":"tests/ocaml/ocaml/definitions.ml","sb":283,"text":"box"}
+{"cap":"body","col":15,"eb":303,"ecol":29,"eline":21,"line":21,"node":"record_declaration","pat":4,"path":"tests/ocaml/ocaml/definitions.ml","sb":289,"text":"{ value : 'a }"}
+{"cap":"definition","col":6,"eb":318,"ecol":14,"eline":23,"line":23,"node":"type_binding","pat":4,"path":"tests/ocaml/ocaml/definitions.ml","sb":310,"text":"abstract"}
+{"cap":"name","col":6,"eb":318,"ecol":14,"eline":23,"line":23,"node":"type_constructor","pat":4,"path":"tests/ocaml/ocaml/definitions.ml","sb":310,"text":"abstract"}
+{"cap":"definition","col":8,"eb":361,"ecol":4,"eline":27,"line":25,"node":"module_binding","pat":5,"path":"tests/ocaml/ocaml/definitions.ml","sb":327,"text":"M = struct\n  let in_module = 1\nend"}
+{"cap":"name","col":8,"eb":328,"ecol":9,"eline":25,"line":25,"node":"module_name","pat":5,"path":"tests/ocaml/ocaml/definitions.ml","sb":327,"text":"M"}
+{"cap":"body","col":12,"eb":361,"ecol":4,"eline":27,"line":25,"node":"structure","pat":5,"path":"tests/ocaml/ocaml/definitions.ml","sb":331,"text":"struct\n  let in_module = 1\nend"}
+{"cap":"definition","col":7,"eb":357,"ecol":20,"eline":26,"line":26,"node":"let_binding","pat":1,"path":"tests/ocaml/ocaml/definitions.ml","sb":344,"text":"in_module = 1"}
+{"cap":"name","col":7,"eb":353,"ecol":16,"eline":26,"line":26,"node":"value_name","pat":1,"path":"tests/ocaml/ocaml/definitions.ml","sb":344,"text":"in_module"}
+{"cap":"body","col":19,"eb":357,"ecol":20,"eline":26,"line":26,"node":"number","pat":1,"path":"tests/ocaml/ocaml/definitions.ml","sb":356,"text":"1"}
+{"cap":"definition","col":7,"eb":357,"ecol":20,"eline":26,"line":26,"node":"let_binding","pat":3,"path":"tests/ocaml/ocaml/definitions.ml","sb":344,"text":"in_module = 1"}
+{"cap":"body","col":19,"eb":357,"ecol":20,"eline":26,"line":26,"node":"number","pat":3,"path":"tests/ocaml/ocaml/definitions.ml","sb":356,"text":"1"}
+{"cap":"definition","col":8,"eb":398,"ecol":36,"eline":29,"line":29,"node":"module_binding","pat":5,"path":"tests/ocaml/ocaml/definitions.ml","sb":370,"text":"F (X : sig end) = struct end"}
+{"cap":"name","col":8,"eb":371,"ecol":9,"eline":29,"line":29,"node":"module_name","pat":5,"path":"tests/ocaml/ocaml/definitions.ml","sb":370,"text":"F"}
+{"cap":"body","col":26,"eb":398,"ecol":36,"eline":29,"line":29,"node":"structure","pat":5,"path":"tests/ocaml/ocaml/definitions.ml","sb":388,"text":"struct end"}
+{"cap":"definition","col":1,"eb":437,"ecol":4,"eline":33,"line":31,"node":"module_type_definition","pat":6,"path":"tests/ocaml/ocaml/definitions.ml","sb":400,"text":"module type S = sig\n  val x : int\nend"}
+{"cap":"name","col":13,"eb":413,"ecol":14,"eline":31,"line":31,"node":"module_type_name","pat":6,"path":"tests/ocaml/ocaml/definitions.ml","sb":412,"text":"S"}
+{"cap":"body","col":17,"eb":437,"ecol":4,"eline":33,"line":31,"node":"signature","pat":6,"path":"tests/ocaml/ocaml/definitions.ml","sb":416,"text":"sig\n  val x : int\nend"}
+{"cap":"definition","col":7,"eb":482,"ecol":4,"eline":37,"line":35,"node":"class_binding","pat":7,"path":"tests/ocaml/ocaml/definitions.ml","sb":445,"text":"counter = object\n  method get = 0\nend"}
+{"cap":"name","col":7,"eb":452,"ecol":14,"eline":35,"line":35,"node":"class_name","pat":7,"path":"tests/ocaml/ocaml/definitions.ml","sb":445,"text":"counter"}
+{"cap":"body","col":17,"eb":482,"ecol":4,"eline":37,"line":35,"node":"object_expression","pat":7,"path":"tests/ocaml/ocaml/definitions.ml","sb":455,"text":"object\n  method get = 0\nend"}
+{"cap":"definition","col":1,"eb":541,"ecol":58,"eline":39,"line":39,"node":"external","pat":8,"path":"tests/ocaml/ocaml/definitions.ml","sb":484,"text":"external length : string -> int = \"caml_ml_string_length\""}
+{"cap":"name","col":10,"eb":499,"ecol":16,"eline":39,"line":39,"node":"value_name","pat":8,"path":"tests/ocaml/ocaml/definitions.ml","sb":493,"text":"length"}
+{"cap":"definition","col":1,"eb":569,"ecol":27,"eline":41,"line":41,"node":"exception_definition","pat":9,"path":"tests/ocaml/ocaml/definitions.ml","sb":543,"text":"exception Failed of string"}
+{"cap":"name","col":11,"eb":559,"ecol":17,"eline":41,"line":41,"node":"constructor_name","pat":9,"path":"tests/ocaml/ocaml/definitions.ml","sb":553,"text":"Failed"}
+{"cap":"definition","col":1,"eb":585,"ecol":15,"eline":43,"line":43,"node":"exception_definition","pat":9,"path":"tests/ocaml/ocaml/definitions.ml","sb":571,"text":"exception Stop"}
+{"cap":"name","col":11,"eb":585,"ecol":15,"eline":43,"line":43,"node":"constructor_name","pat":9,"path":"tests/ocaml/ocaml/definitions.ml","sb":581,"text":"Stop"}

@@ -1,0 +1,7 @@
+{"cap":"definition","col":1,"eb":51,"ecol":2,"eline":4,"line":2,"node":"function_item","pat":0,"path":"tests/rust/rust/parse-error.rs","sb":31,"text":"fn broken( {\n    1\n}"}
+{"cap":"name","col":4,"eb":40,"ecol":10,"eline":2,"line":2,"node":"identifier","pat":0,"path":"tests/rust/rust/parse-error.rs","sb":34,"text":"broken"}
+{"cap":"body","col":12,"eb":51,"ecol":2,"eline":4,"line":2,"node":"block","pat":0,"path":"tests/rust/rust/parse-error.rs","sb":42,"text":"{\n    1\n}"}
+{"cap":"decoration","col":1,"eb":60,"ecol":8,"eline":6,"line":6,"node":"attribute_item","pat":13,"path":"tests/rust/rust/parse-error.rs","sb":53,"text":"#[test]"}
+{"cap":"definition","col":1,"eb":84,"ecol":24,"eline":7,"line":7,"node":"function_item","pat":0,"path":"tests/rust/rust/parse-error.rs","sb":61,"text":"fn after_the_error() {}"}
+{"cap":"name","col":4,"eb":79,"ecol":19,"eline":7,"line":7,"node":"identifier","pat":0,"path":"tests/rust/rust/parse-error.rs","sb":64,"text":"after_the_error"}
+{"cap":"body","col":22,"eb":84,"ecol":24,"eline":7,"line":7,"node":"block","pat":0,"path":"tests/rust/rust/parse-error.rs","sb":82,"text":"{}"}

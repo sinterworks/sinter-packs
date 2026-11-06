@@ -1,0 +1,5 @@
+{"cap":"definition","col":5,"eb":226,"ecol":30,"eline":8,"line":8,"node":"let_binding","pat":0,"path":"tests/ocaml/ocaml/comments.ml","sb":201,"text":"s = \"(* not a comment *)\""}
+{"cap":"name","col":5,"eb":202,"ecol":6,"eline":8,"line":8,"node":"value_name","pat":0,"path":"tests/ocaml/ocaml/comments.ml","sb":201,"text":"s"}
+{"cap":"body","col":9,"eb":226,"ecol":30,"eline":8,"line":8,"node":"string","pat":0,"path":"tests/ocaml/ocaml/comments.ml","sb":205,"text":"\"(* not a comment *)\""}
+{"cap":"definition","col":5,"eb":226,"ecol":30,"eline":8,"line":8,"node":"let_binding","pat":2,"path":"tests/ocaml/ocaml/comments.ml","sb":201,"text":"s = \"(* not a comment *)\""}
+{"cap":"body","col":9,"eb":226,"ecol":30,"eline":8,"line":8,"node":"string","pat":2,"path":"tests/ocaml/ocaml/comments.ml","sb":205,"text":"\"(* not a comment *)\""}

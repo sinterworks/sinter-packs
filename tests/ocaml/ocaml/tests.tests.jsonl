@@ -1,0 +1,142 @@
+{"cap":"test","col":5,"eb":87,"ecol":52,"eline":5,"line":5,"node":"application_expression","pat":3,"path":"tests/ocaml/ocaml/tests.ml","sb":40,"text":"Alcotest.test_case \"adds\" `Quick (fun () -> ())"}
+{"cap":"_fn","col":5,"eb":58,"ecol":23,"eline":5,"line":5,"node":"value_path","pat":3,"path":"tests/ocaml/ocaml/tests.ml","sb":40,"text":"Alcotest.test_case"}
+{"cap":"name","col":25,"eb":64,"ecol":29,"eline":5,"line":5,"node":"string_content","pat":3,"path":"tests/ocaml/ocaml/tests.ml","sb":60,"text":"adds"}
+{"cap":"test","col":5,"eb":135,"ecol":47,"eline":6,"line":6,"node":"application_expression","pat":0,"path":"tests/ocaml/ocaml/tests.ml","sb":93,"text":"test_case \"subtracts\" `Slow (fun () -> ())"}
+{"cap":"_fn","col":5,"eb":102,"ecol":14,"eline":6,"line":6,"node":"value_path","pat":0,"path":"tests/ocaml/ocaml/tests.ml","sb":93,"text":"test_case"}
+{"cap":"name","col":16,"eb":113,"ecol":25,"eline":6,"line":6,"node":"string_content","pat":0,"path":"tests/ocaml/ocaml/tests.ml","sb":104,"text":"subtracts"}
+{"cap":"label.slow","col":27,"eb":120,"ecol":32,"eline":6,"line":6,"node":"tag","pat":0,"path":"tests/ocaml/ocaml/tests.ml","sb":115,"text":"`Slow"}
+{"cap":"test","col":5,"eb":135,"ecol":47,"eline":6,"line":6,"node":"application_expression","pat":3,"path":"tests/ocaml/ocaml/tests.ml","sb":93,"text":"test_case \"subtracts\" `Slow (fun () -> ())"}
+{"cap":"_fn","col":5,"eb":102,"ecol":14,"eline":6,"line":6,"node":"value_path","pat":3,"path":"tests/ocaml/ocaml/tests.ml","sb":93,"text":"test_case"}
+{"cap":"name","col":16,"eb":113,"ecol":25,"eline":6,"line":6,"node":"string_content","pat":3,"path":"tests/ocaml/ocaml/tests.ml","sb":104,"text":"subtracts"}
+{"cap":"test","col":5,"eb":201,"ecol":65,"eline":7,"line":7,"node":"application_expression","pat":3,"path":"tests/ocaml/ocaml/tests.ml","sb":141,"text":"Alcotest.test_case \"quote \\\"in\\\" name\" `Quick (fun () -> ())"}
+{"cap":"_fn","col":5,"eb":159,"ecol":23,"eline":7,"line":7,"node":"value_path","pat":3,"path":"tests/ocaml/ocaml/tests.ml","sb":141,"text":"Alcotest.test_case"}
+{"cap":"placeholder","col":25,"eb":178,"ecol":42,"eline":7,"line":7,"node":"string_content","pat":3,"path":"tests/ocaml/ocaml/tests.ml","sb":161,"text":"quote \\\"in\\\" name"}
+{"cap":"test","col":5,"eb":241,"ecol":39,"eline":8,"line":8,"node":"application_expression","pat":3,"path":"tests/ocaml/ocaml/tests.ml","sb":207,"text":"test_case \"\" `Quick (fun () -> ())"}
+{"cap":"_fn","col":5,"eb":216,"ecol":14,"eline":8,"line":8,"node":"value_path","pat":3,"path":"tests/ocaml/ocaml/tests.ml","sb":207,"text":"test_case"}
+{"cap":"test","col":5,"eb":280,"ecol":38,"eline":9,"line":9,"node":"application_expression","pat":3,"path":"tests/ocaml/ocaml/tests.ml","sb":247,"text":"Alcotest.test_case \"infix\" `Quick"}
+{"cap":"_fn","col":5,"eb":265,"ecol":23,"eline":9,"line":9,"node":"value_path","pat":3,"path":"tests/ocaml/ocaml/tests.ml","sb":247,"text":"Alcotest.test_case"}
+{"cap":"name","col":25,"eb":272,"ecol":30,"eline":9,"line":9,"node":"string_content","pat":3,"path":"tests/ocaml/ocaml/tests.ml","sb":267,"text":"infix"}
+{"cap":"test","col":3,"eb":430,"ecol":33,"eline":14,"line":13,"node":"application_expression","pat":6,"path":"tests/ocaml/ocaml/tests.ml","sb":320,"text":"QCheck.Test.make ~count:10 ~name:\"reverses twice\" QCheck.(list int) (fun l ->\n      List.rev (List.rev l) = l)"}
+{"cap":"_fn","col":3,"eb":336,"ecol":19,"eline":13,"line":13,"node":"value_path","pat":6,"path":"tests/ocaml/ocaml/tests.ml","sb":320,"text":"QCheck.Test.make"}
+{"cap":"_label","col":31,"eb":352,"ecol":35,"eline":13,"line":13,"node":"label_name","pat":6,"path":"tests/ocaml/ocaml/tests.ml","sb":348,"text":"name"}
+{"cap":"name","col":37,"eb":368,"ecol":51,"eline":13,"line":13,"node":"string_content","pat":6,"path":"tests/ocaml/ocaml/tests.ml","sb":354,"text":"reverses twice"}
+{"cap":"test","col":13,"eb":505,"ecol":74,"eline":16,"line":16,"node":"application_expression","pat":6,"path":"tests/ocaml/ocaml/tests.ml","sb":444,"text":"QCheck.Test.make ~name:\"tab\\there\" QCheck.int (fun _ -> true)"}
+{"cap":"_fn","col":13,"eb":460,"ecol":29,"eline":16,"line":16,"node":"value_path","pat":6,"path":"tests/ocaml/ocaml/tests.ml","sb":444,"text":"QCheck.Test.make"}
+{"cap":"_label","col":31,"eb":466,"ecol":35,"eline":16,"line":16,"node":"label_name","pat":6,"path":"tests/ocaml/ocaml/tests.ml","sb":462,"text":"name"}
+{"cap":"placeholder","col":37,"eb":477,"ecol":46,"eline":16,"line":16,"node":"string_content","pat":6,"path":"tests/ocaml/ocaml/tests.ml","sb":468,"text":"tab\\there"}
+{"cap":"test","col":15,"eb":724,"ecol":84,"eline":24,"line":24,"node":"application_expression","pat":5,"path":"tests/ocaml/ocaml/tests.ml","sb":655,"text":"Alcotest.test_case (Printf.sprintf \"case %d\" i) `Quick (fun () -> ())"}
+{"cap":"_fn","col":15,"eb":673,"ecol":33,"eline":24,"line":24,"node":"value_path","pat":5,"path":"tests/ocaml/ocaml/tests.ml","sb":655,"text":"Alcotest.test_case"}
+{"cap":"placeholder","col":34,"eb":702,"ecol":62,"eline":24,"line":24,"node":"parenthesized_expression","pat":5,"path":"tests/ocaml/ocaml/tests.ml","sb":674,"text":"(Printf.sprintf \"case %d\" i)"}
+{"cap":"test","col":18,"eb":801,"ecol":62,"eline":27,"line":27,"node":"application_expression","pat":2,"path":"tests/ocaml/ocaml/tests.ml","sb":757,"text":"Alcotest.test_case name `Slow (fun () -> ())"}
+{"cap":"_fn","col":18,"eb":775,"ecol":36,"eline":27,"line":27,"node":"value_path","pat":2,"path":"tests/ocaml/ocaml/tests.ml","sb":757,"text":"Alcotest.test_case"}
+{"cap":"placeholder","col":37,"eb":780,"ecol":41,"eline":27,"line":27,"node":"value_path","pat":2,"path":"tests/ocaml/ocaml/tests.ml","sb":776,"text":"name"}
+{"cap":"label.slow","col":42,"eb":786,"ecol":47,"eline":27,"line":27,"node":"tag","pat":2,"path":"tests/ocaml/ocaml/tests.ml","sb":781,"text":"`Slow"}
+{"cap":"test","col":18,"eb":801,"ecol":62,"eline":27,"line":27,"node":"application_expression","pat":5,"path":"tests/ocaml/ocaml/tests.ml","sb":757,"text":"Alcotest.test_case name `Slow (fun () -> ())"}
+{"cap":"_fn","col":18,"eb":775,"ecol":36,"eline":27,"line":27,"node":"value_path","pat":5,"path":"tests/ocaml/ocaml/tests.ml","sb":757,"text":"Alcotest.test_case"}
+{"cap":"placeholder","col":37,"eb":780,"ecol":41,"eline":27,"line":27,"node":"value_path","pat":5,"path":"tests/ocaml/ocaml/tests.ml","sb":776,"text":"name"}
+{"cap":"test","col":14,"eb":874,"ecol":72,"eline":29,"line":29,"node":"application_expression","pat":4,"path":"tests/ocaml/ocaml/tests.ml","sb":816,"text":"Alcotest.test_case {|quoted \"text\"|} `Quick (fun () -> ())"}
+{"cap":"_fn","col":14,"eb":834,"ecol":32,"eline":29,"line":29,"node":"value_path","pat":4,"path":"tests/ocaml/ocaml/tests.ml","sb":816,"text":"Alcotest.test_case"}
+{"cap":"name","col":35,"eb":850,"ecol":48,"eline":29,"line":29,"node":"quoted_string_content","pat":4,"path":"tests/ocaml/ocaml/tests.ml","sb":837,"text":"quoted \"text\""}
+{"cap":"test","col":19,"eb":943,"ecol":68,"eline":31,"line":31,"node":"application_expression","pat":9,"path":"tests/ocaml/ocaml/tests.ml","sb":894,"text":"QCheck.Test.make ~name QCheck.int (fun _ -> true)"}
+{"cap":"_fn","col":19,"eb":910,"ecol":35,"eline":31,"line":31,"node":"value_path","pat":9,"path":"tests/ocaml/ocaml/tests.ml","sb":894,"text":"QCheck.Test.make"}
+{"cap":"placeholder","col":37,"eb":916,"ecol":41,"eline":31,"line":31,"node":"label_name","pat":9,"path":"tests/ocaml/ocaml/tests.ml","sb":912,"text":"name"}
+{"cap":"test","col":16,"eb":1024,"ecol":80,"eline":33,"line":33,"node":"application_expression","pat":8,"path":"tests/ocaml/ocaml/tests.ml","sb":960,"text":"QCheck.Test.make ~name:(prefix ^ \"x\") QCheck.int (fun _ -> true)"}
+{"cap":"_fn","col":16,"eb":976,"ecol":32,"eline":33,"line":33,"node":"value_path","pat":8,"path":"tests/ocaml/ocaml/tests.ml","sb":960,"text":"QCheck.Test.make"}
+{"cap":"_label","col":34,"eb":982,"ecol":38,"eline":33,"line":33,"node":"label_name","pat":8,"path":"tests/ocaml/ocaml/tests.ml","sb":978,"text":"name"}
+{"cap":"placeholder","col":39,"eb":997,"ecol":53,"eline":33,"line":33,"node":"parenthesized_expression","pat":8,"path":"tests/ocaml/ocaml/tests.ml","sb":983,"text":"(prefix ^ \"x\")"}
+{"cap":"test","col":23,"eb":1108,"ecol":83,"eline":35,"line":35,"node":"application_expression","pat":7,"path":"tests/ocaml/ocaml/tests.ml","sb":1048,"text":"QCheck.Test.make ~name:{|quoted|} QCheck.int (fun _ -> true)"}
+{"cap":"_fn","col":23,"eb":1064,"ecol":39,"eline":35,"line":35,"node":"value_path","pat":7,"path":"tests/ocaml/ocaml/tests.ml","sb":1048,"text":"QCheck.Test.make"}
+{"cap":"_label","col":41,"eb":1070,"ecol":45,"eline":35,"line":35,"node":"label_name","pat":7,"path":"tests/ocaml/ocaml/tests.ml","sb":1066,"text":"name"}
+{"cap":"name","col":48,"eb":1079,"ecol":54,"eline":35,"line":35,"node":"quoted_string_content","pat":7,"path":"tests/ocaml/ocaml/tests.ml","sb":1073,"text":"quoted"}
+{"cap":"test","col":19,"eb":1183,"ecol":74,"eline":37,"line":37,"node":"application_expression","pat":1,"path":"tests/ocaml/ocaml/tests.ml","sb":1128,"text":"Alcotest.test_case {|quoted slow|} `Slow (fun () -> ())"}
+{"cap":"_fn","col":19,"eb":1146,"ecol":37,"eline":37,"line":37,"node":"value_path","pat":1,"path":"tests/ocaml/ocaml/tests.ml","sb":1128,"text":"Alcotest.test_case"}
+{"cap":"name","col":40,"eb":1160,"ecol":51,"eline":37,"line":37,"node":"quoted_string_content","pat":1,"path":"tests/ocaml/ocaml/tests.ml","sb":1149,"text":"quoted slow"}
+{"cap":"label.slow","col":54,"eb":1168,"ecol":59,"eline":37,"line":37,"node":"tag","pat":1,"path":"tests/ocaml/ocaml/tests.ml","sb":1163,"text":"`Slow"}
+{"cap":"test","col":19,"eb":1183,"ecol":74,"eline":37,"line":37,"node":"application_expression","pat":4,"path":"tests/ocaml/ocaml/tests.ml","sb":1128,"text":"Alcotest.test_case {|quoted slow|} `Slow (fun () -> ())"}
+{"cap":"_fn","col":19,"eb":1146,"ecol":37,"eline":37,"line":37,"node":"value_path","pat":4,"path":"tests/ocaml/ocaml/tests.ml","sb":1128,"text":"Alcotest.test_case"}
+{"cap":"name","col":40,"eb":1160,"ecol":51,"eline":37,"line":37,"node":"quoted_string_content","pat":4,"path":"tests/ocaml/ocaml/tests.ml","sb":1149,"text":"quoted slow"}
+{"cap":"test","col":20,"eb":1251,"ecol":67,"eline":39,"line":39,"node":"application_expression","pat":5,"path":"tests/ocaml/ocaml/tests.ml","sb":1204,"text":"Alcotest.test_case t.name `Quick (fun () -> ())"}
+{"cap":"_fn","col":20,"eb":1222,"ecol":38,"eline":39,"line":39,"node":"value_path","pat":5,"path":"tests/ocaml/ocaml/tests.ml","sb":1204,"text":"Alcotest.test_case"}
+{"cap":"placeholder","col":39,"eb":1229,"ecol":45,"eline":39,"line":39,"node":"field_get_expression","pat":5,"path":"tests/ocaml/ocaml/tests.ml","sb":1223,"text":"t.name"}
+{"cap":"test","col":25,"eb":1314,"ecol":62,"eline":41,"line":41,"node":"application_expression","pat":2,"path":"tests/ocaml/ocaml/tests.ml","sb":1277,"text":"test_case t.name `Slow (fun () -> ())"}
+{"cap":"_fn","col":25,"eb":1286,"ecol":34,"eline":41,"line":41,"node":"value_path","pat":2,"path":"tests/ocaml/ocaml/tests.ml","sb":1277,"text":"test_case"}
+{"cap":"placeholder","col":35,"eb":1293,"ecol":41,"eline":41,"line":41,"node":"field_get_expression","pat":2,"path":"tests/ocaml/ocaml/tests.ml","sb":1287,"text":"t.name"}
+{"cap":"label.slow","col":42,"eb":1299,"ecol":47,"eline":41,"line":41,"node":"tag","pat":2,"path":"tests/ocaml/ocaml/tests.ml","sb":1294,"text":"`Slow"}
+{"cap":"test","col":25,"eb":1314,"ecol":62,"eline":41,"line":41,"node":"application_expression","pat":5,"path":"tests/ocaml/ocaml/tests.ml","sb":1277,"text":"test_case t.name `Slow (fun () -> ())"}
+{"cap":"_fn","col":25,"eb":1286,"ecol":34,"eline":41,"line":41,"node":"value_path","pat":5,"path":"tests/ocaml/ocaml/tests.ml","sb":1277,"text":"test_case"}
+{"cap":"placeholder","col":35,"eb":1293,"ecol":41,"eline":41,"line":41,"node":"field_get_expression","pat":5,"path":"tests/ocaml/ocaml/tests.ml","sb":1287,"text":"t.name"}
+{"cap":"test","col":27,"eb":1398,"ecol":83,"eline":43,"line":43,"node":"application_expression","pat":8,"path":"tests/ocaml/ocaml/tests.ml","sb":1342,"text":"QCheck.Test.make ~name:t.name QCheck.int (fun _ -> true)"}
+{"cap":"_fn","col":27,"eb":1358,"ecol":43,"eline":43,"line":43,"node":"value_path","pat":8,"path":"tests/ocaml/ocaml/tests.ml","sb":1342,"text":"QCheck.Test.make"}
+{"cap":"_label","col":45,"eb":1364,"ecol":49,"eline":43,"line":43,"node":"label_name","pat":8,"path":"tests/ocaml/ocaml/tests.ml","sb":1360,"text":"name"}
+{"cap":"placeholder","col":50,"eb":1371,"ecol":56,"eline":43,"line":43,"node":"field_get_expression","pat":8,"path":"tests/ocaml/ocaml/tests.ml","sb":1365,"text":"t.name"}
+{"cap":"test","col":27,"eb":1477,"ecol":78,"eline":45,"line":45,"node":"application_expression","pat":8,"path":"tests/ocaml/ocaml/tests.ml","sb":1426,"text":"QCheck.Test.make ~name:n QCheck.int (fun _ -> true)"}
+{"cap":"_fn","col":27,"eb":1442,"ecol":43,"eline":45,"line":45,"node":"value_path","pat":8,"path":"tests/ocaml/ocaml/tests.ml","sb":1426,"text":"QCheck.Test.make"}
+{"cap":"_label","col":45,"eb":1448,"ecol":49,"eline":45,"line":45,"node":"label_name","pat":8,"path":"tests/ocaml/ocaml/tests.ml","sb":1444,"text":"name"}
+{"cap":"placeholder","col":50,"eb":1450,"ecol":51,"eline":45,"line":45,"node":"value_path","pat":8,"path":"tests/ocaml/ocaml/tests.ml","sb":1449,"text":"n"}
+{"cap":"_fn","col":3,"eb":1502,"ecol":15,"eline":48,"line":48,"node":"value_path","pat":11,"path":"tests/ocaml/ocaml/tests.ml","sb":1490,"text":"Alcotest.run"}
+{"cap":"group","col":8,"eb":1619,"ecol":75,"eline":51,"line":51,"node":"tuple_expression","pat":11,"path":"tests/ocaml/ocaml/tests.ml","sb":1552,"text":"\"inline\", [ Alcotest.test_case \"inline test\" `Slow (fun () -> ()) ]"}
+{"cap":"name","col":9,"eb":1559,"ecol":15,"eline":51,"line":51,"node":"string_content","pat":11,"path":"tests/ocaml/ocaml/tests.ml","sb":1553,"text":"inline"}
+{"cap":"test","col":20,"eb":1617,"ecol":73,"eline":51,"line":51,"node":"application_expression","pat":0,"path":"tests/ocaml/ocaml/tests.ml","sb":1564,"text":"Alcotest.test_case \"inline test\" `Slow (fun () -> ())"}
+{"cap":"_fn","col":20,"eb":1582,"ecol":38,"eline":51,"line":51,"node":"value_path","pat":0,"path":"tests/ocaml/ocaml/tests.ml","sb":1564,"text":"Alcotest.test_case"}
+{"cap":"name","col":40,"eb":1595,"ecol":51,"eline":51,"line":51,"node":"string_content","pat":0,"path":"tests/ocaml/ocaml/tests.ml","sb":1584,"text":"inline test"}
+{"cap":"label.slow","col":53,"eb":1602,"ecol":58,"eline":51,"line":51,"node":"tag","pat":0,"path":"tests/ocaml/ocaml/tests.ml","sb":1597,"text":"`Slow"}
+{"cap":"test","col":20,"eb":1617,"ecol":73,"eline":51,"line":51,"node":"application_expression","pat":3,"path":"tests/ocaml/ocaml/tests.ml","sb":1564,"text":"Alcotest.test_case \"inline test\" `Slow (fun () -> ())"}
+{"cap":"_fn","col":20,"eb":1582,"ecol":38,"eline":51,"line":51,"node":"value_path","pat":3,"path":"tests/ocaml/ocaml/tests.ml","sb":1564,"text":"Alcotest.test_case"}
+{"cap":"name","col":40,"eb":1595,"ecol":51,"eline":51,"line":51,"node":"string_content","pat":3,"path":"tests/ocaml/ocaml/tests.ml","sb":1584,"text":"inline test"}
+{"cap":"_fn","col":3,"eb":1502,"ecol":15,"eline":48,"line":48,"node":"value_path","pat":10,"path":"tests/ocaml/ocaml/tests.ml","sb":1490,"text":"Alcotest.run"}
+{"cap":"group","col":7,"eb":1683,"ecol":62,"eline":52,"line":52,"node":"tuple_expression","pat":10,"path":"tests/ocaml/ocaml/tests.ml","sb":1628,"text":"\"bare pair\", [ test_case \"bare\" `Quick (fun () -> ()) ]"}
+{"cap":"name","col":8,"eb":1638,"ecol":17,"eline":52,"line":52,"node":"string_content","pat":10,"path":"tests/ocaml/ocaml/tests.ml","sb":1629,"text":"bare pair"}
+{"cap":"test","col":22,"eb":1681,"ecol":60,"eline":52,"line":52,"node":"application_expression","pat":3,"path":"tests/ocaml/ocaml/tests.ml","sb":1643,"text":"test_case \"bare\" `Quick (fun () -> ())"}
+{"cap":"_fn","col":22,"eb":1652,"ecol":31,"eline":52,"line":52,"node":"value_path","pat":3,"path":"tests/ocaml/ocaml/tests.ml","sb":1643,"text":"test_case"}
+{"cap":"name","col":33,"eb":1658,"ecol":37,"eline":52,"line":52,"node":"string_content","pat":3,"path":"tests/ocaml/ocaml/tests.ml","sb":1654,"text":"bare"}
+{"cap":"_fn","col":3,"eb":1502,"ecol":15,"eline":48,"line":48,"node":"value_path","pat":11,"path":"tests/ocaml/ocaml/tests.ml","sb":1490,"text":"Alcotest.run"}
+{"cap":"group","col":8,"eb":1742,"ecol":58,"eline":53,"line":53,"node":"tuple_expression","pat":11,"path":"tests/ocaml/ocaml/tests.ml","sb":1692,"text":"\"qcheck\", [ QCheck_alcotest.to_alcotest property ]"}
+{"cap":"name","col":9,"eb":1699,"ecol":15,"eline":53,"line":53,"node":"string_content","pat":11,"path":"tests/ocaml/ocaml/tests.ml","sb":1693,"text":"qcheck"}
+{"cap":"_fn","col":3,"eb":1502,"ecol":15,"eline":48,"line":48,"node":"value_path","pat":11,"path":"tests/ocaml/ocaml/tests.ml","sb":1490,"text":"Alcotest.run"}
+{"cap":"group","col":8,"eb":1816,"ecol":72,"eline":54,"line":54,"node":"tuple_expression","pat":11,"path":"tests/ocaml/ocaml/tests.ml","sb":1752,"text":"\"tab\\tgroup\", [ test_case \"in tab group\" `Quick (fun () -> ()) ]"}
+{"cap":"placeholder","col":9,"eb":1763,"ecol":19,"eline":54,"line":54,"node":"string_content","pat":11,"path":"tests/ocaml/ocaml/tests.ml","sb":1753,"text":"tab\\tgroup"}
+{"cap":"test","col":24,"eb":1814,"ecol":70,"eline":54,"line":54,"node":"application_expression","pat":3,"path":"tests/ocaml/ocaml/tests.ml","sb":1768,"text":"test_case \"in tab group\" `Quick (fun () -> ())"}
+{"cap":"_fn","col":24,"eb":1777,"ecol":33,"eline":54,"line":54,"node":"value_path","pat":3,"path":"tests/ocaml/ocaml/tests.ml","sb":1768,"text":"test_case"}
+{"cap":"name","col":35,"eb":1791,"ecol":47,"eline":54,"line":54,"node":"string_content","pat":3,"path":"tests/ocaml/ocaml/tests.ml","sb":1779,"text":"in tab group"}
+{"cap":"_fn","col":3,"eb":1502,"ecol":15,"eline":48,"line":48,"node":"value_path","pat":13,"path":"tests/ocaml/ocaml/tests.ml","sb":1490,"text":"Alcotest.run"}
+{"cap":"group","col":8,"eb":1897,"ecol":79,"eline":55,"line":55,"node":"tuple_expression","pat":13,"path":"tests/ocaml/ocaml/tests.ml","sb":1826,"text":"{|quoted group|}, [ test_case \"in quoted group\" `Quick (fun () -> ()) ]"}
+{"cap":"name","col":10,"eb":1840,"ecol":22,"eline":55,"line":55,"node":"quoted_string_content","pat":13,"path":"tests/ocaml/ocaml/tests.ml","sb":1828,"text":"quoted group"}
+{"cap":"test","col":28,"eb":1895,"ecol":77,"eline":55,"line":55,"node":"application_expression","pat":3,"path":"tests/ocaml/ocaml/tests.ml","sb":1846,"text":"test_case \"in quoted group\" `Quick (fun () -> ())"}
+{"cap":"_fn","col":28,"eb":1855,"ecol":37,"eline":55,"line":55,"node":"value_path","pat":3,"path":"tests/ocaml/ocaml/tests.ml","sb":1846,"text":"test_case"}
+{"cap":"name","col":39,"eb":1872,"ecol":54,"eline":55,"line":55,"node":"string_content","pat":3,"path":"tests/ocaml/ocaml/tests.ml","sb":1857,"text":"in quoted group"}
+{"cap":"_fn","col":3,"eb":1502,"ecol":15,"eline":48,"line":48,"node":"value_path","pat":12,"path":"tests/ocaml/ocaml/tests.ml","sb":1490,"text":"Alcotest.run"}
+{"cap":"group","col":7,"eb":1987,"ecol":88,"eline":56,"line":56,"node":"tuple_expression","pat":12,"path":"tests/ocaml/ocaml/tests.ml","sb":1906,"text":"{|bare quoted group|}, [ test_case \"in bare quoted group\" `Quick (fun () -> ()) ]"}
+{"cap":"name","col":9,"eb":1925,"ecol":26,"eline":56,"line":56,"node":"quoted_string_content","pat":12,"path":"tests/ocaml/ocaml/tests.ml","sb":1908,"text":"bare quoted group"}
+{"cap":"test","col":32,"eb":1985,"ecol":86,"eline":56,"line":56,"node":"application_expression","pat":3,"path":"tests/ocaml/ocaml/tests.ml","sb":1931,"text":"test_case \"in bare quoted group\" `Quick (fun () -> ())"}
+{"cap":"_fn","col":32,"eb":1940,"ecol":41,"eline":56,"line":56,"node":"value_path","pat":3,"path":"tests/ocaml/ocaml/tests.ml","sb":1931,"text":"test_case"}
+{"cap":"name","col":43,"eb":1962,"ecol":63,"eline":56,"line":56,"node":"string_content","pat":3,"path":"tests/ocaml/ocaml/tests.ml","sb":1942,"text":"in bare quoted group"}
+{"cap":"_fn","col":3,"eb":1502,"ecol":15,"eline":48,"line":48,"node":"value_path","pat":15,"path":"tests/ocaml/ocaml/tests.ml","sb":1490,"text":"Alcotest.run"}
+{"cap":"group","col":8,"eb":2060,"ecol":72,"eline":57,"line":57,"node":"tuple_expression","pat":15,"path":"tests/ocaml/ocaml/tests.ml","sb":1996,"text":"group_name, [ test_case \"in named group\" `Quick (fun () -> ()) ]"}
+{"cap":"placeholder","col":8,"eb":2006,"ecol":18,"eline":57,"line":57,"node":"value_path","pat":15,"path":"tests/ocaml/ocaml/tests.ml","sb":1996,"text":"group_name"}
+{"cap":"test","col":22,"eb":2058,"ecol":70,"eline":57,"line":57,"node":"application_expression","pat":3,"path":"tests/ocaml/ocaml/tests.ml","sb":2010,"text":"test_case \"in named group\" `Quick (fun () -> ())"}
+{"cap":"_fn","col":22,"eb":2019,"ecol":31,"eline":57,"line":57,"node":"value_path","pat":3,"path":"tests/ocaml/ocaml/tests.ml","sb":2010,"text":"test_case"}
+{"cap":"name","col":33,"eb":2035,"ecol":47,"eline":57,"line":57,"node":"string_content","pat":3,"path":"tests/ocaml/ocaml/tests.ml","sb":2021,"text":"in named group"}
+{"cap":"_fn","col":3,"eb":1502,"ecol":15,"eline":48,"line":48,"node":"value_path","pat":14,"path":"tests/ocaml/ocaml/tests.ml","sb":1490,"text":"Alcotest.run"}
+{"cap":"group","col":7,"eb":2135,"ecol":73,"eline":58,"line":58,"node":"tuple_expression","pat":14,"path":"tests/ocaml/ocaml/tests.ml","sb":2069,"text":"config.title, [ test_case \"in field group\" `Quick (fun () -> ()) ]"}
+{"cap":"placeholder","col":7,"eb":2081,"ecol":19,"eline":58,"line":58,"node":"field_get_expression","pat":14,"path":"tests/ocaml/ocaml/tests.ml","sb":2069,"text":"config.title"}
+{"cap":"test","col":23,"eb":2133,"ecol":71,"eline":58,"line":58,"node":"application_expression","pat":3,"path":"tests/ocaml/ocaml/tests.ml","sb":2085,"text":"test_case \"in field group\" `Quick (fun () -> ())"}
+{"cap":"_fn","col":23,"eb":2094,"ecol":32,"eline":58,"line":58,"node":"value_path","pat":3,"path":"tests/ocaml/ocaml/tests.ml","sb":2085,"text":"test_case"}
+{"cap":"name","col":34,"eb":2110,"ecol":48,"eline":58,"line":58,"node":"string_content","pat":3,"path":"tests/ocaml/ocaml/tests.ml","sb":2096,"text":"in field group"}
+{"cap":"_fn","col":3,"eb":1502,"ecol":15,"eline":48,"line":48,"node":"value_path","pat":15,"path":"tests/ocaml/ocaml/tests.ml","sb":1490,"text":"Alcotest.run"}
+{"cap":"group","col":8,"eb":2228,"ecol":92,"eline":59,"line":59,"node":"tuple_expression","pat":15,"path":"tests/ocaml/ocaml/tests.ml","sb":2144,"text":"Printf.sprintf \"group %d\" 1, [ test_case \"in computed group\" `Quick (fun () -> ()) ]"}
+{"cap":"placeholder","col":8,"eb":2171,"ecol":35,"eline":59,"line":59,"node":"application_expression","pat":15,"path":"tests/ocaml/ocaml/tests.ml","sb":2144,"text":"Printf.sprintf \"group %d\" 1"}
+{"cap":"test","col":39,"eb":2226,"ecol":90,"eline":59,"line":59,"node":"application_expression","pat":3,"path":"tests/ocaml/ocaml/tests.ml","sb":2175,"text":"test_case \"in computed group\" `Quick (fun () -> ())"}
+{"cap":"_fn","col":39,"eb":2184,"ecol":48,"eline":59,"line":59,"node":"value_path","pat":3,"path":"tests/ocaml/ocaml/tests.ml","sb":2175,"text":"test_case"}
+{"cap":"name","col":50,"eb":2203,"ecol":67,"eline":59,"line":59,"node":"string_content","pat":3,"path":"tests/ocaml/ocaml/tests.ml","sb":2186,"text":"in computed group"}
+{"cap":"_fn","col":3,"eb":1502,"ecol":15,"eline":48,"line":48,"node":"value_path","pat":15,"path":"tests/ocaml/ocaml/tests.ml","sb":1490,"text":"Alcotest.run"}
+{"cap":"group","col":8,"eb":2310,"ecol":80,"eline":60,"line":60,"node":"tuple_expression","pat":15,"path":"tests/ocaml/ocaml/tests.ml","sb":2238,"text":"prefix ^ \" group\", [ test_case \"in joined group\" `Quick (fun () -> ()) ]"}
+{"cap":"placeholder","col":8,"eb":2255,"ecol":25,"eline":60,"line":60,"node":"infix_expression","pat":15,"path":"tests/ocaml/ocaml/tests.ml","sb":2238,"text":"prefix ^ \" group\""}
+{"cap":"test","col":29,"eb":2308,"ecol":78,"eline":60,"line":60,"node":"application_expression","pat":3,"path":"tests/ocaml/ocaml/tests.ml","sb":2259,"text":"test_case \"in joined group\" `Quick (fun () -> ())"}
+{"cap":"_fn","col":29,"eb":2268,"ecol":38,"eline":60,"line":60,"node":"value_path","pat":3,"path":"tests/ocaml/ocaml/tests.ml","sb":2259,"text":"test_case"}
+{"cap":"name","col":40,"eb":2285,"ecol":55,"eline":60,"line":60,"node":"string_content","pat":3,"path":"tests/ocaml/ocaml/tests.ml","sb":2270,"text":"in joined group"}
+{"cap":"_fn","col":3,"eb":1502,"ecol":15,"eline":48,"line":48,"node":"value_path","pat":15,"path":"tests/ocaml/ocaml/tests.ml","sb":1490,"text":"Alcotest.run"}
+{"cap":"group","col":8,"eb":2401,"ecol":89,"eline":61,"line":61,"node":"tuple_expression","pat":15,"path":"tests/ocaml/ocaml/tests.ml","sb":2320,"text":"(prefix ^ \" bracketed\"), [ test_case \"in bracketed group\" `Quick (fun () -> ()) ]"}
+{"cap":"placeholder","col":8,"eb":2343,"ecol":31,"eline":61,"line":61,"node":"parenthesized_expression","pat":15,"path":"tests/ocaml/ocaml/tests.ml","sb":2320,"text":"(prefix ^ \" bracketed\")"}
+{"cap":"test","col":35,"eb":2399,"ecol":87,"eline":61,"line":61,"node":"application_expression","pat":3,"path":"tests/ocaml/ocaml/tests.ml","sb":2347,"text":"test_case \"in bracketed group\" `Quick (fun () -> ())"}
+{"cap":"_fn","col":35,"eb":2356,"ecol":44,"eline":61,"line":61,"node":"value_path","pat":3,"path":"tests/ocaml/ocaml/tests.ml","sb":2347,"text":"test_case"}
+{"cap":"name","col":46,"eb":2376,"ecol":64,"eline":61,"line":61,"node":"string_content","pat":3,"path":"tests/ocaml/ocaml/tests.ml","sb":2358,"text":"in bracketed group"}

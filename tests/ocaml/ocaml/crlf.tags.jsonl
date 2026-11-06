@@ -1,0 +1,3 @@
+{"cap":"comment","col":1,"eb":16,"ecol":17,"eline":1,"line":1,"node":"comment","pat":1,"path":"tests/ocaml/ocaml/crlf.ml","sb":0,"text":"(* A comment. *)"}
+{"cap":"untagged","col":1,"eb":39,"ecol":22,"eline":2,"line":2,"node":"comment","pat":0,"path":"tests/ocaml/ocaml/crlf.ml","sb":18,"text":"(** A doc comment. *)"}
+{"cap":"comment","col":1,"eb":39,"ecol":22,"eline":2,"line":2,"node":"comment","pat":1,"path":"tests/ocaml/ocaml/crlf.ml","sb":18,"text":"(** A doc comment. *)"}

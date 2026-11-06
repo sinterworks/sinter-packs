@@ -1,0 +1,3 @@
+{"cap":"definition","col":1,"eb":184,"ecol":2,"eline":10,"line":8,"node":"function_declaration","pat":0,"path":"tests/javascript/javascript/comments.js","sb":130,"text":"function f(x) {\n  return x; // A comment after code.\n}"}
+{"cap":"name","col":10,"eb":140,"ecol":11,"eline":8,"line":8,"node":"identifier","pat":0,"path":"tests/javascript/javascript/comments.js","sb":139,"text":"f"}
+{"cap":"body","col":15,"eb":184,"ecol":2,"eline":10,"line":8,"node":"statement_block","pat":0,"path":"tests/javascript/javascript/comments.js","sb":144,"text":"{\n  return x; // A comment after code.\n}"}

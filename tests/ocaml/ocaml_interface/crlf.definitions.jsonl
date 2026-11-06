@@ -1,0 +1,2 @@
+{"cap":"definition","col":1,"eb":32,"ecol":15,"eline":2,"line":2,"node":"value_specification","pat":0,"path":"tests/ocaml/ocaml_interface/crlf.mli","sb":18,"text":"val crlf : int"}
+{"cap":"name","col":5,"eb":26,"ecol":9,"eline":2,"line":2,"node":"value_name","pat":0,"path":"tests/ocaml/ocaml_interface/crlf.mli","sb":22,"text":"crlf"}

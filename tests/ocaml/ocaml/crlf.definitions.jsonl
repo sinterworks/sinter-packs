@@ -1,0 +1,10 @@
+{"cap":"definition","col":5,"eb":58,"ecol":4,"eline":4,"line":3,"node":"let_binding","pat":0,"path":"tests/ocaml/ocaml/crlf.ml","sb":45,"text":"crlf x =\r\n  x"}
+{"cap":"name","col":5,"eb":49,"ecol":9,"eline":3,"line":3,"node":"value_name","pat":0,"path":"tests/ocaml/ocaml/crlf.ml","sb":45,"text":"crlf"}
+{"cap":"body","col":3,"eb":58,"ecol":4,"eline":4,"line":4,"node":"value_path","pat":0,"path":"tests/ocaml/ocaml/crlf.ml","sb":57,"text":"x"}
+{"cap":"definition","col":5,"eb":58,"ecol":4,"eline":4,"line":3,"node":"let_binding","pat":2,"path":"tests/ocaml/ocaml/crlf.ml","sb":45,"text":"crlf x =\r\n  x"}
+{"cap":"body","col":3,"eb":58,"ecol":4,"eline":4,"line":4,"node":"value_path","pat":2,"path":"tests/ocaml/ocaml/crlf.ml","sb":57,"text":"x"}
+{"cap":"definition","col":5,"eb":125,"ecol":64,"eline":6,"line":6,"node":"let_binding","pat":0,"path":"tests/ocaml/ocaml/crlf.ml","sb":66,"text":"tests = [ Alcotest.test_case \"crlf\" `Quick (fun () -> ()) ]"}
+{"cap":"name","col":5,"eb":71,"ecol":10,"eline":6,"line":6,"node":"value_name","pat":0,"path":"tests/ocaml/ocaml/crlf.ml","sb":66,"text":"tests"}
+{"cap":"body","col":13,"eb":125,"ecol":64,"eline":6,"line":6,"node":"list_expression","pat":0,"path":"tests/ocaml/ocaml/crlf.ml","sb":74,"text":"[ Alcotest.test_case \"crlf\" `Quick (fun () -> ()) ]"}
+{"cap":"definition","col":5,"eb":125,"ecol":64,"eline":6,"line":6,"node":"let_binding","pat":2,"path":"tests/ocaml/ocaml/crlf.ml","sb":66,"text":"tests = [ Alcotest.test_case \"crlf\" `Quick (fun () -> ()) ]"}
+{"cap":"body","col":13,"eb":125,"ecol":64,"eline":6,"line":6,"node":"list_expression","pat":2,"path":"tests/ocaml/ocaml/crlf.ml","sb":74,"text":"[ Alcotest.test_case \"crlf\" `Quick (fun () -> ()) ]"}

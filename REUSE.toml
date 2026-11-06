@@ -7,3 +7,27 @@ path = ["**"]
 precedence = "closest"
 SPDX-FileCopyrightText = "The Sinter Authors"
 SPDX-License-Identifier = "Apache-2.0"
+
+[[annotations]]
+path = ["packs/javascript/grammars/javascript.wasm", "packs/javascript/licenses/tree-sitter-javascript.LICENSE"]
+precedence = "override"
+SPDX-FileCopyrightText = "Copyright (c) 2014 Max Brunsfeld"
+SPDX-License-Identifier = "MIT"
+
+[[annotations]]
+path = ["packs/typescript/grammars/typescript.wasm", "packs/typescript/grammars/tsx.wasm", "packs/typescript/licenses/tree-sitter-typescript.LICENSE"]
+precedence = "override"
+SPDX-FileCopyrightText = "Copyright (c) 2017 Max Brunsfeld"
+SPDX-License-Identifier = "MIT"
+
+[[annotations]]
+path = ["packs/rust/grammars/rust.wasm", "packs/rust/licenses/tree-sitter-rust.LICENSE"]
+precedence = "override"
+SPDX-FileCopyrightText = "Copyright (c) 2017 Maxim Sokolov"
+SPDX-License-Identifier = "MIT"
+
+[[annotations]]
+path = ["packs/ocaml/grammars/ocaml.wasm", "packs/ocaml/grammars/ocaml_interface.wasm", "packs/ocaml/licenses/tree-sitter-ocaml.LICENSE"]
+precedence = "override"
+SPDX-FileCopyrightText = "Copyright (c) 2020 Max Brunsfeld and Pieter Goetschalckx"
+SPDX-License-Identifier = "MIT"

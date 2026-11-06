@@ -1,0 +1,3 @@
+{"cap":"definition","col":1,"eb":77,"ecol":2,"eline":7,"line":5,"node":"function_declaration","pat":0,"path":"tests/javascript/javascript/crlf.js","sb":44,"text":"function crlf() {\r\n  return 1;\r\n}"}
+{"cap":"name","col":10,"eb":57,"ecol":14,"eline":5,"line":5,"node":"identifier","pat":0,"path":"tests/javascript/javascript/crlf.js","sb":53,"text":"crlf"}
+{"cap":"body","col":17,"eb":77,"ecol":2,"eline":7,"line":5,"node":"statement_block","pat":0,"path":"tests/javascript/javascript/crlf.js","sb":60,"text":"{\r\n  return 1;\r\n}"}

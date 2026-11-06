@@ -1,0 +1,13 @@
+{"cap":"definition","col":16,"eb":29,"ecol":30,"eline":1,"line":1,"node":"function_expression","pat":15,"path":"tests/typescript/typescript/default-exports.ts","sb":15,"text":"function () {}"}
+{"cap":"body","col":28,"eb":29,"ecol":30,"eline":1,"line":1,"node":"statement_block","pat":15,"path":"tests/typescript/typescript/default-exports.ts","sb":27,"text":"{}"}
+{"cap":"definition","col":16,"eb":61,"ecol":31,"eline":3,"line":3,"node":"generator_function","pat":15,"path":"tests/typescript/typescript/default-exports.ts","sb":46,"text":"function* () {}"}
+{"cap":"body","col":29,"eb":61,"ecol":31,"eline":3,"line":3,"node":"statement_block","pat":15,"path":"tests/typescript/typescript/default-exports.ts","sb":59,"text":"{}"}
+{"cap":"definition","col":16,"eb":101,"ecol":2,"eline":7,"line":5,"node":"class","pat":15,"path":"tests/typescript/typescript/default-exports.ts","sb":78,"text":"class {\n  method() {}\n}"}
+{"cap":"body","col":22,"eb":101,"ecol":2,"eline":7,"line":5,"node":"class_body","pat":15,"path":"tests/typescript/typescript/default-exports.ts","sb":84,"text":"{\n  method() {}\n}"}
+{"cap":"definition","col":3,"eb":99,"ecol":14,"eline":6,"line":6,"node":"method_definition","pat":5,"path":"tests/typescript/typescript/default-exports.ts","sb":88,"text":"method() {}"}
+{"cap":"name","col":3,"eb":94,"ecol":9,"eline":6,"line":6,"node":"property_identifier","pat":5,"path":"tests/typescript/typescript/default-exports.ts","sb":88,"text":"method"}
+{"cap":"body","col":12,"eb":99,"ecol":14,"eline":6,"line":6,"node":"statement_block","pat":5,"path":"tests/typescript/typescript/default-exports.ts","sb":97,"text":"{}"}
+{"cap":"definition","col":16,"eb":126,"ecol":24,"eline":9,"line":9,"node":"arrow_function","pat":15,"path":"tests/typescript/typescript/default-exports.ts","sb":118,"text":"() => {}"}
+{"cap":"body","col":22,"eb":126,"ecol":24,"eline":9,"line":9,"node":"statement_block","pat":15,"path":"tests/typescript/typescript/default-exports.ts","sb":124,"text":"{}"}
+{"cap":"definition","col":16,"eb":157,"ecol":29,"eline":11,"line":11,"node":"arrow_function","pat":15,"path":"tests/typescript/typescript/default-exports.ts","sb":144,"text":"async () => 1"}
+{"cap":"body","col":28,"eb":157,"ecol":29,"eline":11,"line":11,"node":"number","pat":15,"path":"tests/typescript/typescript/default-exports.ts","sb":156,"text":"1"}

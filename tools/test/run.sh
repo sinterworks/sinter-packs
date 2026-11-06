@@ -752,6 +752,225 @@ t_queries_find_a_missing_grammar() {
   has "my pack: the grammar rust has no file grammars/rust.wasm"
 }
 
+query_test_case() {
+  requires sinter grammars
+  mkdir -p "my repo/packs" "my repo/tests/rust/rust"
+  make_pack "my repo/packs/rust" rust rust
+  cp "$rust_wasm" "my repo/packs/rust/grammars/rust.wasm"
+  printf '(line_comment) @comment\n' >"my repo/packs/rust/queries/rust/tags.scm"
+  printf '// a\nfn f() {}\n' >"my repo/tests/rust/rust/a b.rs"
+  (
+    cd "my repo"
+    "$sinter" parse --grammar packs/rust/grammars/rust.wasm --query packs/rust/queries/rust/tags.scm \
+      "tests/rust/rust/a b.rs" >"tests/rust/rust/a b.tags.jsonl"
+  )
+}
+
+t_query_tests_pass() {
+  query_test_case
+  run 0 "$tools_dir/check-query-tests.sh" -s "$sinter" "my repo"
+  has "The query tests pass. Expected files that match: 1."
+  same "$(jq -r .path "my repo/tests/rust/rust/a b.tags.jsonl")" "tests/rust/rust/a b.rs"
+}
+
+t_query_tests_pass_with_no_packs() {
+  requires sinter
+  mkdir "my repo"
+  run 0 "$tools_dir/check-query-tests.sh" -s "$sinter" "my repo"
+  has "The query tests pass. Expected files that match: 0."
+}
+
+t_query_tests_find_other_captures() {
+  query_test_case
+  printf '// b\nfn f() {}\n' >"my repo/tests/rust/rust/a b.rs"
+  run 1 "$tools_dir/check-query-tests.sh" -s "$sinter" "my repo"
+  has "tests/rust/rust/a b.rs, query tags: the captures differ from tests/rust/rust/a b.tags.jsonl:"
+  has '  < {"cap":"comment"'
+  has '"text":"// a"}'
+  has '  > {"cap":"comment"'
+  has '"text":"// b"}'
+}
+
+t_query_tests_find_a_change_of_one_byte_at_the_end() {
+  query_test_case
+  printf '\n' >>"my repo/tests/rust/rust/a b.tags.jsonl"
+  run 1 "$tools_dir/check-query-tests.sh" -s "$sinter" "my repo"
+  has "the captures differ from tests/rust/rust/a b.tags.jsonl"
+}
+
+t_query_tests_find_a_command_that_fails() {
+  query_test_case
+  printf '\377' >"my repo/tests/rust/rust/a b.rs"
+  run 1 "$tools_dir/check-query-tests.sh" -s "$sinter" "my repo"
+  has "tests/rust/rust/a b.rs, query tags: sinter parse fails: "
+}
+
+t_query_tests_find_a_case_with_no_expected_file() {
+  query_test_case
+  printf '(function_item) @definition\n' >"my repo/packs/rust/queries/rust/definitions.scm"
+  run 1 "$tools_dir/check-query-tests.sh" -s "$sinter" "my repo"
+  has "tests/rust/rust/a b.rs, query definitions: the case has no expected file tests/rust/rust/a b.definitions.jsonl"
+}
+
+t_query_tests_find_an_expected_file_with_no_case() {
+  query_test_case
+  : >"my repo/tests/rust/rust/c.tags.jsonl"
+  run 1 "$tools_dir/check-query-tests.sh" -s "$sinter" "my repo"
+  has "tests/rust/rust/c.tags.jsonl: no case has the name c"
+}
+
+t_query_tests_find_an_expected_file_of_no_query() {
+  query_test_case
+  : >"my repo/tests/rust/rust/a b.tests.jsonl"
+  run 1 "$tools_dir/check-query-tests.sh" -s "$sinter" "my repo"
+  has "tests/rust/rust/a b.tests.jsonl: the grammar rust has no query file tests.scm"
+}
+
+t_query_tests_find_an_expected_file_with_a_wrong_name() {
+  query_test_case
+  : >"my repo/tests/rust/rust/tags.jsonl"
+  run 1 "$tools_dir/check-query-tests.sh" -s "$sinter" "my repo"
+  has "tests/rust/rust/tags.jsonl: the name is not CASE.QUERY.jsonl"
+}
+
+t_query_tests_find_a_query_file_with_no_case() {
+  query_test_case
+  rm "my repo/tests/rust/rust/a b.rs" "my repo/tests/rust/rust/a b.tags.jsonl"
+  run 1 "$tools_dir/check-query-tests.sh" -s "$sinter" "my repo"
+  has "packs/rust/queries/rust/tags.scm has no case under tests/rust/rust/"
+}
+
+t_query_tests_find_a_query_file_with_no_folder_of_cases() {
+  query_test_case
+  rm -r "my repo/tests"
+  run 1 "$tools_dir/check-query-tests.sh" -s "$sinter" "my repo"
+  has "packs/rust/queries/rust/tags.scm has no case under tests/rust/rust/"
+}
+
+t_query_tests_find_a_query_file_with_only_a_hidden_case() {
+  query_test_case
+  rm "my repo/tests/rust/rust/a b.rs" "my repo/tests/rust/rust/a b.tags.jsonl"
+  : >"my repo/tests/rust/rust/.hidden.rs"
+  run 1 "$tools_dir/check-query-tests.sh" -s "$sinter" "my repo"
+  has "packs/rust/queries/rust/tags.scm has no case under tests/rust/rust/"
+}
+
+t_query_tests_find_two_cases_of_one_name() {
+  query_test_case
+  cp "my repo/tests/rust/rust/a b.rs" "my repo/tests/rust/rust/a b.txt"
+  run 1 "$tools_dir/check-query-tests.sh" -s "$sinter" "my repo"
+  has "tests/rust/rust: two cases have the name a b"
+}
+
+t_query_tests_find_a_folder_of_no_pack() {
+  query_test_case
+  mkdir -p "my repo/tests/other/rust"
+  run 1 "$tools_dir/check-query-tests.sh" -s "$sinter" "my repo"
+  has "tests/other belongs to no pack"
+}
+
+t_query_tests_find_a_folder_of_no_grammar() {
+  query_test_case
+  mkdir -p "my repo/tests/rust/other"
+  run 1 "$tools_dir/check-query-tests.sh" -s "$sinter" "my repo"
+  has "tests/rust/other belongs to no grammar of the pack rust"
+}
+
+t_query_tests_find_a_file_in_place_of_the_folder_of_a_pack() {
+  query_test_case
+  : >"my repo/tests/other"
+  run 1 "$tools_dir/check-query-tests.sh" -s "$sinter" "my repo"
+  has "tests/other is not a folder"
+}
+
+t_query_tests_find_a_file_in_place_of_a_folder() {
+  query_test_case
+  : >"my repo/tests/rust/notes"
+  run 1 "$tools_dir/check-query-tests.sh" -s "$sinter" "my repo"
+  has "tests/rust/notes is not a folder"
+}
+
+t_query_tests_find_a_folder_in_place_of_a_case() {
+  query_test_case
+  mkdir "my repo/tests/rust/rust/sub"
+  run 1 "$tools_dir/check-query-tests.sh" -s "$sinter" "my repo"
+  has "tests/rust/rust/sub is not a file"
+}
+
+t_query_tests_update_writes_the_expected_files() {
+  query_test_case
+  printf '(function_item) @definition\n' >"my repo/packs/rust/queries/rust/definitions.scm"
+  printf '// b\nfn f() {}\n' >"my repo/tests/rust/rust/a b.rs"
+  run 0 "$tools_dir/check-query-tests.sh" -u -s "$sinter" "my repo"
+  has "Wrote tests/rust/rust/a b.tags.jsonl. Read it line by line."
+  has "Wrote tests/rust/rust/a b.definitions.jsonl. Read it line by line."
+  same "$(jq -r .text "my repo/tests/rust/rust/a b.tags.jsonl")" "// b"
+  run 0 "$tools_dir/check-query-tests.sh" -s "$sinter" "my repo"
+  has "The query tests pass. Expected files that match: 2."
+}
+
+t_query_tests_update_writes_no_unchanged_file() {
+  query_test_case
+  run 0 "$tools_dir/check-query-tests.sh" -u -s "$sinter" "my repo"
+  has "The query tests pass. Expected files that match: 1."
+  if grep -q Wrote "$case_dir/out"; then
+    note "the tool wrote a file that did not change"
+    return 1
+  fi
+}
+
+t_query_tests_update_still_finds_an_expected_file_with_no_case() {
+  query_test_case
+  : >"my repo/tests/rust/rust/c.tags.jsonl"
+  run 1 "$tools_dir/check-query-tests.sh" -u -s "$sinter" "my repo"
+  has "tests/rust/rust/c.tags.jsonl: no case has the name c"
+}
+
+t_query_tests_take_a_relative_sinter() {
+  query_test_case
+  mkdir bin
+  cp "$sinter" bin/sinter
+  run 0 "$tools_dir/check-query-tests.sh" -s bin/sinter "my repo"
+  has "The query tests pass. Expected files that match: 1."
+}
+
+t_query_tests_skip_names_that_start_with_a_dot() {
+  query_test_case
+  : >"my repo/tests/.hidden"
+  : >"my repo/tests/rust/rust/.hidden"
+  : >"my repo/tests/rust/rust/.tags.jsonl"
+  mkdir "my repo/tests/rust/.hidden"
+  run 0 "$tools_dir/check-query-tests.sh" -s "$sinter" "my repo"
+  has "The query tests pass. Expected files that match: 1."
+}
+
+t_query_tests_find_a_command_that_is_not_on_the_path() {
+  run 3 "$tools_dir/check-query-tests.sh" -s no-such-sinter
+  has "no-such-sinter is not a command"
+}
+
+t_query_tests_need_one_repository() {
+  mkdir a b
+  run 2 "$tools_dir/check-query-tests.sh" -s sinter a b
+  has "give at most one repository"
+}
+
+t_query_tests_need_a_folder() {
+  : >file
+  run 2 "$tools_dir/check-query-tests.sh" -s sinter file
+  has "file is not a folder"
+}
+
+t_query_tests_need_a_sinter_command() {
+  run 3 "$tools_dir/check-query-tests.sh" -s no/such/sinter
+  has "no/such/sinter is not a command"
+}
+
+t_query_tests_need_the_sinter_option() {
+  run 2 "$tools_dir/check-query-tests.sh"
+  has "give the sinter command with -s"
+}
+
 license_case() {
   make_pack "my pack" demo demo
 }

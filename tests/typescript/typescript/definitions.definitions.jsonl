@@ -1,0 +1,126 @@
+{"cap":"definition","col":1,"eb":77,"ecol":2,"eline":4,"line":1,"node":"function_declaration","pat":0,"path":"tests/typescript/typescript/definitions.ts","sb":0,"text":"function plain(a: number): number {\n  function inner(): void {}\n  return a;\n}"}
+{"cap":"name","col":10,"eb":14,"ecol":15,"eline":1,"line":1,"node":"identifier","pat":0,"path":"tests/typescript/typescript/definitions.ts","sb":9,"text":"plain"}
+{"cap":"body","col":35,"eb":77,"ecol":2,"eline":4,"line":1,"node":"statement_block","pat":0,"path":"tests/typescript/typescript/definitions.ts","sb":34,"text":"{\n  function inner(): void {}\n  return a;\n}"}
+{"cap":"definition","col":3,"eb":63,"ecol":28,"eline":2,"line":2,"node":"function_declaration","pat":0,"path":"tests/typescript/typescript/definitions.ts","sb":38,"text":"function inner(): void {}"}
+{"cap":"name","col":12,"eb":52,"ecol":17,"eline":2,"line":2,"node":"identifier","pat":0,"path":"tests/typescript/typescript/definitions.ts","sb":47,"text":"inner"}
+{"cap":"body","col":26,"eb":63,"ecol":28,"eline":2,"line":2,"node":"statement_block","pat":0,"path":"tests/typescript/typescript/definitions.ts","sb":61,"text":"{}"}
+{"cap":"definition","col":1,"eb":133,"ecol":2,"eline":8,"line":6,"node":"generator_function_declaration","pat":1,"path":"tests/typescript/typescript/definitions.ts","sb":79,"text":"function* generate(): Generator<number> {\n  yield 1;\n}"}
+{"cap":"name","col":11,"eb":97,"ecol":19,"eline":6,"line":6,"node":"identifier","pat":1,"path":"tests/typescript/typescript/definitions.ts","sb":89,"text":"generate"}
+{"cap":"body","col":41,"eb":133,"ecol":2,"eline":8,"line":6,"node":"statement_block","pat":1,"path":"tests/typescript/typescript/definitions.ts","sb":119,"text":"{\n  yield 1;\n}"}
+{"cap":"definition","col":1,"eb":170,"ecol":36,"eline":10,"line":10,"node":"function_signature","pat":2,"path":"tests/typescript/typescript/definitions.ts","sb":135,"text":"function overload(a: string): void;"}
+{"cap":"name","col":10,"eb":152,"ecol":18,"eline":10,"line":10,"node":"identifier","pat":2,"path":"tests/typescript/typescript/definitions.ts","sb":144,"text":"overload"}
+{"cap":"definition","col":1,"eb":206,"ecol":36,"eline":11,"line":11,"node":"function_signature","pat":2,"path":"tests/typescript/typescript/definitions.ts","sb":171,"text":"function overload(a: number): void;"}
+{"cap":"name","col":10,"eb":188,"ecol":18,"eline":11,"line":11,"node":"identifier","pat":2,"path":"tests/typescript/typescript/definitions.ts","sb":180,"text":"overload"}
+{"cap":"definition","col":1,"eb":245,"ecol":39,"eline":12,"line":12,"node":"function_declaration","pat":0,"path":"tests/typescript/typescript/definitions.ts","sb":207,"text":"function overload(a: unknown): void {}"}
+{"cap":"name","col":10,"eb":224,"ecol":18,"eline":12,"line":12,"node":"identifier","pat":0,"path":"tests/typescript/typescript/definitions.ts","sb":216,"text":"overload"}
+{"cap":"body","col":37,"eb":245,"ecol":39,"eline":12,"line":12,"node":"statement_block","pat":0,"path":"tests/typescript/typescript/definitions.ts","sb":243,"text":"{}"}
+{"cap":"definition","col":9,"eb":280,"ecol":34,"eline":14,"line":14,"node":"function_signature","pat":2,"path":"tests/typescript/typescript/definitions.ts","sb":255,"text":"function ambient(): void;"}
+{"cap":"name","col":18,"eb":271,"ecol":25,"eline":14,"line":14,"node":"identifier","pat":2,"path":"tests/typescript/typescript/definitions.ts","sb":264,"text":"ambient"}
+{"cap":"definition","col":1,"eb":493,"ecol":2,"eline":24,"line":16,"node":"class_declaration","pat":3,"path":"tests/typescript/typescript/definitions.ts","sb":282,"text":"class Shape<T> {\n  constructor(private readonly t: T) {}\n  static create(): void {}\n  get size(): number { return 1; }\n  method(a: string): void;\n  method(a: unknown): void {}\n  #hidden(): void {}\n  field = 1;\n}"}
+{"cap":"name","col":7,"eb":293,"ecol":12,"eline":16,"line":16,"node":"type_identifier","pat":3,"path":"tests/typescript/typescript/definitions.ts","sb":288,"text":"Shape"}
+{"cap":"body","col":16,"eb":493,"ecol":2,"eline":24,"line":16,"node":"class_body","pat":3,"path":"tests/typescript/typescript/definitions.ts","sb":297,"text":"{\n  constructor(private readonly t: T) {}\n  static create(): void {}\n  get size(): number { return 1; }\n  method(a: string): void;\n  method(a: unknown): void {}\n  #hidden(): void {}\n  field = 1;\n}"}
+{"cap":"definition","col":3,"eb":338,"ecol":40,"eline":17,"line":17,"node":"method_definition","pat":5,"path":"tests/typescript/typescript/definitions.ts","sb":301,"text":"constructor(private readonly t: T) {}"}
+{"cap":"name","col":3,"eb":312,"ecol":14,"eline":17,"line":17,"node":"property_identifier","pat":5,"path":"tests/typescript/typescript/definitions.ts","sb":301,"text":"constructor"}
+{"cap":"body","col":38,"eb":338,"ecol":40,"eline":17,"line":17,"node":"statement_block","pat":5,"path":"tests/typescript/typescript/definitions.ts","sb":336,"text":"{}"}
+{"cap":"definition","col":3,"eb":365,"ecol":27,"eline":18,"line":18,"node":"method_definition","pat":5,"path":"tests/typescript/typescript/definitions.ts","sb":341,"text":"static create(): void {}"}
+{"cap":"name","col":10,"eb":354,"ecol":16,"eline":18,"line":18,"node":"property_identifier","pat":5,"path":"tests/typescript/typescript/definitions.ts","sb":348,"text":"create"}
+{"cap":"body","col":25,"eb":365,"ecol":27,"eline":18,"line":18,"node":"statement_block","pat":5,"path":"tests/typescript/typescript/definitions.ts","sb":363,"text":"{}"}
+{"cap":"definition","col":3,"eb":400,"ecol":35,"eline":19,"line":19,"node":"method_definition","pat":5,"path":"tests/typescript/typescript/definitions.ts","sb":368,"text":"get size(): number { return 1; }"}
+{"cap":"name","col":7,"eb":376,"ecol":11,"eline":19,"line":19,"node":"property_identifier","pat":5,"path":"tests/typescript/typescript/definitions.ts","sb":372,"text":"size"}
+{"cap":"body","col":22,"eb":400,"ecol":35,"eline":19,"line":19,"node":"statement_block","pat":5,"path":"tests/typescript/typescript/definitions.ts","sb":387,"text":"{ return 1; }"}
+{"cap":"definition","col":3,"eb":426,"ecol":26,"eline":20,"line":20,"node":"method_signature","pat":6,"path":"tests/typescript/typescript/definitions.ts","sb":403,"text":"method(a: string): void"}
+{"cap":"name","col":3,"eb":409,"ecol":9,"eline":20,"line":20,"node":"property_identifier","pat":6,"path":"tests/typescript/typescript/definitions.ts","sb":403,"text":"method"}
+{"cap":"definition","col":3,"eb":457,"ecol":30,"eline":21,"line":21,"node":"method_definition","pat":5,"path":"tests/typescript/typescript/definitions.ts","sb":430,"text":"method(a: unknown): void {}"}
+{"cap":"name","col":3,"eb":436,"ecol":9,"eline":21,"line":21,"node":"property_identifier","pat":5,"path":"tests/typescript/typescript/definitions.ts","sb":430,"text":"method"}
+{"cap":"body","col":28,"eb":457,"ecol":30,"eline":21,"line":21,"node":"statement_block","pat":5,"path":"tests/typescript/typescript/definitions.ts","sb":455,"text":"{}"}
+{"cap":"definition","col":3,"eb":478,"ecol":21,"eline":22,"line":22,"node":"method_definition","pat":5,"path":"tests/typescript/typescript/definitions.ts","sb":460,"text":"#hidden(): void {}"}
+{"cap":"name","col":3,"eb":467,"ecol":10,"eline":22,"line":22,"node":"private_property_identifier","pat":5,"path":"tests/typescript/typescript/definitions.ts","sb":460,"text":"#hidden"}
+{"cap":"body","col":19,"eb":478,"ecol":21,"eline":22,"line":22,"node":"statement_block","pat":5,"path":"tests/typescript/typescript/definitions.ts","sb":476,"text":"{}"}
+{"cap":"definition","col":1,"eb":581,"ecol":2,"eline":29,"line":26,"node":"abstract_class_declaration","pat":4,"path":"tests/typescript/typescript/definitions.ts","sb":495,"text":"abstract class Base {\n  abstract area(): number;\n  describe(): string { return \"\"; }\n}"}
+{"cap":"name","col":16,"eb":514,"ecol":20,"eline":26,"line":26,"node":"type_identifier","pat":4,"path":"tests/typescript/typescript/definitions.ts","sb":510,"text":"Base"}
+{"cap":"body","col":21,"eb":581,"ecol":2,"eline":29,"line":26,"node":"class_body","pat":4,"path":"tests/typescript/typescript/definitions.ts","sb":515,"text":"{\n  abstract area(): number;\n  describe(): string { return \"\"; }\n}"}
+{"cap":"definition","col":3,"eb":542,"ecol":26,"eline":27,"line":27,"node":"abstract_method_signature","pat":7,"path":"tests/typescript/typescript/definitions.ts","sb":519,"text":"abstract area(): number"}
+{"cap":"name","col":12,"eb":532,"ecol":16,"eline":27,"line":27,"node":"property_identifier","pat":7,"path":"tests/typescript/typescript/definitions.ts","sb":528,"text":"area"}
+{"cap":"definition","col":3,"eb":579,"ecol":36,"eline":28,"line":28,"node":"method_definition","pat":5,"path":"tests/typescript/typescript/definitions.ts","sb":546,"text":"describe(): string { return \"\"; }"}
+{"cap":"name","col":3,"eb":554,"ecol":11,"eline":28,"line":28,"node":"property_identifier","pat":5,"path":"tests/typescript/typescript/definitions.ts","sb":546,"text":"describe"}
+{"cap":"body","col":22,"eb":579,"ecol":36,"eline":28,"line":28,"node":"statement_block","pat":5,"path":"tests/typescript/typescript/definitions.ts","sb":565,"text":"{ return \"\"; }"}
+{"cap":"decoration","col":1,"eb":590,"ecol":8,"eline":31,"line":31,"node":"decorator","pat":16,"path":"tests/typescript/typescript/definitions.ts","sb":583,"text":"@sealed"}
+{"cap":"definition","col":1,"eb":640,"ecol":2,"eline":35,"line":31,"node":"class_declaration","pat":3,"path":"tests/typescript/typescript/definitions.ts","sb":583,"text":"@sealed\nclass Decorated {\n  @logged\n  method(): void {}\n}"}
+{"cap":"name","col":7,"eb":606,"ecol":16,"eline":32,"line":32,"node":"type_identifier","pat":3,"path":"tests/typescript/typescript/definitions.ts","sb":597,"text":"Decorated"}
+{"cap":"body","col":17,"eb":640,"ecol":2,"eline":35,"line":32,"node":"class_body","pat":3,"path":"tests/typescript/typescript/definitions.ts","sb":607,"text":"{\n  @logged\n  method(): void {}\n}"}
+{"cap":"decoration","col":3,"eb":618,"ecol":10,"eline":33,"line":33,"node":"decorator","pat":16,"path":"tests/typescript/typescript/definitions.ts","sb":611,"text":"@logged"}
+{"cap":"definition","col":3,"eb":638,"ecol":20,"eline":34,"line":34,"node":"method_definition","pat":5,"path":"tests/typescript/typescript/definitions.ts","sb":621,"text":"method(): void {}"}
+{"cap":"name","col":3,"eb":627,"ecol":9,"eline":34,"line":34,"node":"property_identifier","pat":5,"path":"tests/typescript/typescript/definitions.ts","sb":621,"text":"method"}
+{"cap":"body","col":18,"eb":638,"ecol":20,"eline":34,"line":34,"node":"statement_block","pat":5,"path":"tests/typescript/typescript/definitions.ts","sb":636,"text":"{}"}
+{"cap":"definition","col":1,"eb":700,"ecol":2,"eline":40,"line":37,"node":"interface_declaration","pat":8,"path":"tests/typescript/typescript/definitions.ts","sb":642,"text":"interface Point {\n  x: number;\n  move(dx: number): void;\n}"}
+{"cap":"name","col":11,"eb":657,"ecol":16,"eline":37,"line":37,"node":"type_identifier","pat":8,"path":"tests/typescript/typescript/definitions.ts","sb":652,"text":"Point"}
+{"cap":"body","col":17,"eb":700,"ecol":2,"eline":40,"line":37,"node":"interface_body","pat":8,"path":"tests/typescript/typescript/definitions.ts","sb":658,"text":"{\n  x: number;\n  move(dx: number): void;\n}"}
+{"cap":"definition","col":3,"eb":697,"ecol":25,"eline":39,"line":39,"node":"method_signature","pat":6,"path":"tests/typescript/typescript/definitions.ts","sb":675,"text":"move(dx: number): void"}
+{"cap":"name","col":3,"eb":679,"ecol":7,"eline":39,"line":39,"node":"property_identifier","pat":6,"path":"tests/typescript/typescript/definitions.ts","sb":675,"text":"move"}
+{"cap":"definition","col":1,"eb":724,"ecol":23,"eline":42,"line":42,"node":"type_alias_declaration","pat":9,"path":"tests/typescript/typescript/definitions.ts","sb":702,"text":"type Pair<T> = [T, T];"}
+{"cap":"name","col":6,"eb":711,"ecol":10,"eline":42,"line":42,"node":"type_identifier","pat":9,"path":"tests/typescript/typescript/definitions.ts","sb":707,"text":"Pair"}
+{"cap":"body","col":16,"eb":723,"ecol":22,"eline":42,"line":42,"node":"tuple_type","pat":9,"path":"tests/typescript/typescript/definitions.ts","sb":717,"text":"[T, T]"}
+{"cap":"definition","col":1,"eb":751,"ecol":26,"eline":44,"line":44,"node":"enum_declaration","pat":10,"path":"tests/typescript/typescript/definitions.ts","sb":726,"text":"enum Color { Red, Green }"}
+{"cap":"name","col":6,"eb":736,"ecol":11,"eline":44,"line":44,"node":"identifier","pat":10,"path":"tests/typescript/typescript/definitions.ts","sb":731,"text":"Color"}
+{"cap":"body","col":12,"eb":751,"ecol":26,"eline":44,"line":44,"node":"enum_body","pat":10,"path":"tests/typescript/typescript/definitions.ts","sb":737,"text":"{ Red, Green }"}
+{"cap":"definition","col":1,"eb":775,"ecol":23,"eline":46,"line":46,"node":"enum_declaration","pat":10,"path":"tests/typescript/typescript/definitions.ts","sb":753,"text":"const enum Flag { On }"}
+{"cap":"name","col":12,"eb":768,"ecol":16,"eline":46,"line":46,"node":"identifier","pat":10,"path":"tests/typescript/typescript/definitions.ts","sb":764,"text":"Flag"}
+{"cap":"body","col":17,"eb":775,"ecol":23,"eline":46,"line":46,"node":"enum_body","pat":10,"path":"tests/typescript/typescript/definitions.ts","sb":769,"text":"{ On }"}
+{"cap":"definition","col":1,"eb":838,"ecol":2,"eline":50,"line":48,"node":"internal_module","pat":11,"path":"tests/typescript/typescript/definitions.ts","sb":777,"text":"namespace Outer.Inner {\n  export function nested(): void {}\n}"}
+{"cap":"name","col":11,"eb":798,"ecol":22,"eline":48,"line":48,"node":"nested_identifier","pat":11,"path":"tests/typescript/typescript/definitions.ts","sb":787,"text":"Outer.Inner"}
+{"cap":"body","col":23,"eb":838,"ecol":2,"eline":50,"line":48,"node":"statement_block","pat":11,"path":"tests/typescript/typescript/definitions.ts","sb":799,"text":"{\n  export function nested(): void {}\n}"}
+{"cap":"definition","col":10,"eb":836,"ecol":36,"eline":49,"line":49,"node":"function_declaration","pat":0,"path":"tests/typescript/typescript/definitions.ts","sb":810,"text":"function nested(): void {}"}
+{"cap":"name","col":19,"eb":825,"ecol":25,"eline":49,"line":49,"node":"identifier","pat":0,"path":"tests/typescript/typescript/definitions.ts","sb":819,"text":"nested"}
+{"cap":"body","col":34,"eb":836,"ecol":36,"eline":49,"line":49,"node":"statement_block","pat":0,"path":"tests/typescript/typescript/definitions.ts","sb":834,"text":"{}"}
+{"cap":"definition","col":1,"eb":856,"ecol":17,"eline":52,"line":52,"node":"module","pat":12,"path":"tests/typescript/typescript/definitions.ts","sb":840,"text":"module Legacy {}"}
+{"cap":"name","col":8,"eb":853,"ecol":14,"eline":52,"line":52,"node":"identifier","pat":12,"path":"tests/typescript/typescript/definitions.ts","sb":847,"text":"Legacy"}
+{"cap":"body","col":15,"eb":856,"ecol":17,"eline":52,"line":52,"node":"statement_block","pat":12,"path":"tests/typescript/typescript/definitions.ts","sb":854,"text":"{}"}
+{"cap":"definition","col":9,"eb":892,"ecol":35,"eline":54,"line":54,"node":"module","pat":12,"path":"tests/typescript/typescript/definitions.ts","sb":866,"text":"module \"ambient-module\" {}"}
+{"cap":"name","col":17,"eb":888,"ecol":31,"eline":54,"line":54,"node":"string_fragment","pat":12,"path":"tests/typescript/typescript/definitions.ts","sb":874,"text":"ambient-module"}
+{"cap":"body","col":33,"eb":892,"ecol":35,"eline":54,"line":54,"node":"statement_block","pat":12,"path":"tests/typescript/typescript/definitions.ts","sb":890,"text":"{}"}
+{"cap":"definition","col":7,"eb":926,"ecol":33,"eline":56,"line":56,"node":"variable_declarator","pat":13,"path":"tests/typescript/typescript/definitions.ts","sb":900,"text":"arrow = <T,>(x: T): T => x"}
+{"cap":"name","col":7,"eb":905,"ecol":12,"eline":56,"line":56,"node":"identifier","pat":13,"path":"tests/typescript/typescript/definitions.ts","sb":900,"text":"arrow"}
+{"cap":"body","col":32,"eb":926,"ecol":33,"eline":56,"line":56,"node":"identifier","pat":13,"path":"tests/typescript/typescript/definitions.ts","sb":925,"text":"x"}
+{"cap":"definition","col":5,"eb":969,"ecol":2,"eline":59,"line":57,"node":"variable_declarator","pat":13,"path":"tests/typescript/typescript/definitions.ts","sb":932,"text":"block = (): number => {\n  return 2;\n}"}
+{"cap":"name","col":5,"eb":937,"ecol":10,"eline":57,"line":57,"node":"identifier","pat":13,"path":"tests/typescript/typescript/definitions.ts","sb":932,"text":"block"}
+{"cap":"body","col":27,"eb":969,"ecol":2,"eline":59,"line":57,"node":"statement_block","pat":13,"path":"tests/typescript/typescript/definitions.ts","sb":954,"text":"{\n  return 2;\n}"}
+{"cap":"definition","col":5,"eb":1013,"ecol":43,"eline":60,"line":60,"node":"variable_declarator","pat":13,"path":"tests/typescript/typescript/definitions.ts","sb":975,"text":"expression = function named(): void {}"}
+{"cap":"name","col":5,"eb":985,"ecol":15,"eline":60,"line":60,"node":"identifier","pat":13,"path":"tests/typescript/typescript/definitions.ts","sb":975,"text":"expression"}
+{"cap":"body","col":41,"eb":1013,"ecol":43,"eline":60,"line":60,"node":"statement_block","pat":13,"path":"tests/typescript/typescript/definitions.ts","sb":1011,"text":"{}"}
+{"cap":"definition","col":8,"eb":1076,"ecol":36,"eline":63,"line":63,"node":"function_declaration","pat":0,"path":"tests/typescript/typescript/definitions.ts","sb":1048,"text":"function exported(): void {}"}
+{"cap":"name","col":17,"eb":1065,"ecol":25,"eline":63,"line":63,"node":"identifier","pat":0,"path":"tests/typescript/typescript/definitions.ts","sb":1057,"text":"exported"}
+{"cap":"body","col":34,"eb":1076,"ecol":36,"eline":63,"line":63,"node":"statement_block","pat":0,"path":"tests/typescript/typescript/definitions.ts","sb":1074,"text":"{}"}
+{"cap":"definition","col":16,"eb":1121,"ecol":44,"eline":65,"line":65,"node":"function_declaration","pat":0,"path":"tests/typescript/typescript/definitions.ts","sb":1093,"text":"function fallback(): void {}"}
+{"cap":"name","col":25,"eb":1110,"ecol":33,"eline":65,"line":65,"node":"identifier","pat":0,"path":"tests/typescript/typescript/definitions.ts","sb":1102,"text":"fallback"}
+{"cap":"body","col":42,"eb":1121,"ecol":44,"eline":65,"line":65,"node":"statement_block","pat":0,"path":"tests/typescript/typescript/definitions.ts","sb":1119,"text":"{}"}
+{"cap":"decoration","col":1,"eb":1134,"ecol":12,"eline":67,"line":67,"node":"decorator","pat":16,"path":"tests/typescript/typescript/definitions.ts","sb":1123,"text":"@registered"}
+{"cap":"definition","col":8,"eb":1159,"ecol":25,"eline":68,"line":68,"node":"class_declaration","pat":3,"path":"tests/typescript/typescript/definitions.ts","sb":1142,"text":"class Exported {}"}
+{"cap":"name","col":14,"eb":1156,"ecol":22,"eline":68,"line":68,"node":"type_identifier","pat":3,"path":"tests/typescript/typescript/definitions.ts","sb":1148,"text":"Exported"}
+{"cap":"body","col":23,"eb":1159,"ecol":25,"eline":68,"line":68,"node":"class_body","pat":3,"path":"tests/typescript/typescript/definitions.ts","sb":1157,"text":"{}"}
+{"cap":"definition","col":8,"eb":1198,"ecol":38,"eline":70,"line":70,"node":"abstract_class_declaration","pat":4,"path":"tests/typescript/typescript/definitions.ts","sb":1168,"text":"abstract class ExportedBase {}"}
+{"cap":"name","col":23,"eb":1195,"ecol":35,"eline":70,"line":70,"node":"type_identifier","pat":4,"path":"tests/typescript/typescript/definitions.ts","sb":1183,"text":"ExportedBase"}
+{"cap":"body","col":36,"eb":1198,"ecol":38,"eline":70,"line":70,"node":"class_body","pat":4,"path":"tests/typescript/typescript/definitions.ts","sb":1196,"text":"{}"}
+{"cap":"definition","col":8,"eb":1233,"ecol":34,"eline":72,"line":72,"node":"interface_declaration","pat":8,"path":"tests/typescript/typescript/definitions.ts","sb":1207,"text":"interface ExportedShape {}"}
+{"cap":"name","col":18,"eb":1230,"ecol":31,"eline":72,"line":72,"node":"type_identifier","pat":8,"path":"tests/typescript/typescript/definitions.ts","sb":1217,"text":"ExportedShape"}
+{"cap":"body","col":32,"eb":1233,"ecol":34,"eline":72,"line":72,"node":"interface_body","pat":8,"path":"tests/typescript/typescript/definitions.ts","sb":1231,"text":"{}"}
+{"cap":"definition","col":8,"eb":1262,"ecol":28,"eline":74,"line":74,"node":"type_alias_declaration","pat":9,"path":"tests/typescript/typescript/definitions.ts","sb":1242,"text":"type Alias = string;"}
+{"cap":"name","col":13,"eb":1252,"ecol":18,"eline":74,"line":74,"node":"type_identifier","pat":9,"path":"tests/typescript/typescript/definitions.ts","sb":1247,"text":"Alias"}
+{"cap":"body","col":21,"eb":1261,"ecol":27,"eline":74,"line":74,"node":"predefined_type","pat":9,"path":"tests/typescript/typescript/definitions.ts","sb":1255,"text":"string"}
+{"cap":"definition","col":14,"eb":1322,"ecol":59,"eline":76,"line":76,"node":"variable_declarator","pat":13,"path":"tests/typescript/typescript/definitions.ts","sb":1277,"text":"exportedArrow = async (): Promise<void> => {}"}
+{"cap":"name","col":14,"eb":1290,"ecol":27,"eline":76,"line":76,"node":"identifier","pat":13,"path":"tests/typescript/typescript/definitions.ts","sb":1277,"text":"exportedArrow"}
+{"cap":"body","col":57,"eb":1322,"ecol":59,"eline":76,"line":76,"node":"statement_block","pat":13,"path":"tests/typescript/typescript/definitions.ts","sb":1320,"text":"{}"}
+{"cap":"definition","col":1,"eb":1529,"ecol":2,"eline":84,"line":78,"node":"class_declaration","pat":3,"path":"tests/typescript/typescript/definitions.ts","sb":1325,"text":"class Handlers {\n  onClick = (): void => {};\n  private onKey = function (): void {};\n  static items = function* (): Generator<number> {};\n  #secret = async (): Promise<number> => 1;\n  count: number = 0;\n}"}
+{"cap":"name","col":7,"eb":1339,"ecol":15,"eline":78,"line":78,"node":"type_identifier","pat":3,"path":"tests/typescript/typescript/definitions.ts","sb":1331,"text":"Handlers"}
+{"cap":"body","col":16,"eb":1529,"ecol":2,"eline":84,"line":78,"node":"class_body","pat":3,"path":"tests/typescript/typescript/definitions.ts","sb":1340,"text":"{\n  onClick = (): void => {};\n  private onKey = function (): void {};\n  static items = function* (): Generator<number> {};\n  #secret = async (): Promise<number> => 1;\n  count: number = 0;\n}"}
+{"cap":"definition","col":3,"eb":1368,"ecol":27,"eline":79,"line":79,"node":"public_field_definition","pat":14,"path":"tests/typescript/typescript/definitions.ts","sb":1344,"text":"onClick = (): void => {}"}
+{"cap":"name","col":3,"eb":1351,"ecol":10,"eline":79,"line":79,"node":"property_identifier","pat":14,"path":"tests/typescript/typescript/definitions.ts","sb":1344,"text":"onClick"}
+{"cap":"body","col":25,"eb":1368,"ecol":27,"eline":79,"line":79,"node":"statement_block","pat":14,"path":"tests/typescript/typescript/definitions.ts","sb":1366,"text":"{}"}
+{"cap":"definition","col":3,"eb":1408,"ecol":39,"eline":80,"line":80,"node":"public_field_definition","pat":14,"path":"tests/typescript/typescript/definitions.ts","sb":1372,"text":"private onKey = function (): void {}"}
+{"cap":"name","col":11,"eb":1385,"ecol":16,"eline":80,"line":80,"node":"property_identifier","pat":14,"path":"tests/typescript/typescript/definitions.ts","sb":1380,"text":"onKey"}
+{"cap":"body","col":37,"eb":1408,"ecol":39,"eline":80,"line":80,"node":"statement_block","pat":14,"path":"tests/typescript/typescript/definitions.ts","sb":1406,"text":"{}"}
+{"cap":"definition","col":3,"eb":1461,"ecol":52,"eline":81,"line":81,"node":"public_field_definition","pat":14,"path":"tests/typescript/typescript/definitions.ts","sb":1412,"text":"static items = function* (): Generator<number> {}"}
+{"cap":"name","col":10,"eb":1424,"ecol":15,"eline":81,"line":81,"node":"property_identifier","pat":14,"path":"tests/typescript/typescript/definitions.ts","sb":1419,"text":"items"}
+{"cap":"body","col":50,"eb":1461,"ecol":52,"eline":81,"line":81,"node":"statement_block","pat":14,"path":"tests/typescript/typescript/definitions.ts","sb":1459,"text":"{}"}
+{"cap":"definition","col":3,"eb":1505,"ecol":43,"eline":82,"line":82,"node":"public_field_definition","pat":14,"path":"tests/typescript/typescript/definitions.ts","sb":1465,"text":"#secret = async (): Promise<number> => 1"}
+{"cap":"name","col":3,"eb":1472,"ecol":10,"eline":82,"line":82,"node":"private_property_identifier","pat":14,"path":"tests/typescript/typescript/definitions.ts","sb":1465,"text":"#secret"}
+{"cap":"body","col":42,"eb":1505,"ecol":43,"eline":82,"line":82,"node":"number","pat":14,"path":"tests/typescript/typescript/definitions.ts","sb":1504,"text":"1"}

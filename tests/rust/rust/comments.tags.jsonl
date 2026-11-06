@@ -1,0 +1,10 @@
+{"cap":"comment","col":1,"eb":26,"ecol":27,"eline":1,"line":1,"node":"line_comment","pat":0,"path":"tests/rust/rust/comments.rs","sb":0,"text":"//! An inner doc comment.\n"}
+{"cap":"comment","col":1,"eb":58,"ecol":33,"eline":2,"line":2,"node":"line_comment","pat":0,"path":"tests/rust/rust/comments.rs","sb":26,"text":"//! @satisfies some-requirement\n"}
+{"cap":"comment","col":1,"eb":77,"ecol":19,"eline":4,"line":4,"node":"line_comment","pat":0,"path":"tests/rust/rust/comments.rs","sb":59,"text":"// A line comment."}
+{"cap":"comment","col":1,"eb":104,"ecol":27,"eline":5,"line":5,"node":"line_comment","pat":0,"path":"tests/rust/rust/comments.rs","sb":78,"text":"/// An outer doc comment.\n"}
+{"cap":"comment","col":1,"eb":126,"ecol":23,"eline":6,"line":6,"node":"block_comment","pat":1,"path":"tests/rust/rust/comments.rs","sb":104,"text":"/* A block comment. */"}
+{"cap":"comment","col":1,"eb":161,"ecol":35,"eline":7,"line":7,"node":"block_comment","pat":1,"path":"tests/rust/rust/comments.rs","sb":127,"text":"/** An outer block doc comment. */"}
+{"cap":"comment","col":1,"eb":196,"ecol":35,"eline":8,"line":8,"node":"block_comment","pat":1,"path":"tests/rust/rust/comments.rs","sb":162,"text":"/*! An inner block doc comment. */"}
+{"cap":"comment","col":1,"eb":243,"ecol":4,"eline":12,"line":9,"node":"block_comment","pat":1,"path":"tests/rust/rust/comments.rs","sb":197,"text":"/*\n * A block comment\n * with inner lines.\n */"}
+{"cap":"comment","col":1,"eb":274,"ecol":31,"eline":13,"line":13,"node":"block_comment","pat":1,"path":"tests/rust/rust/comments.rs","sb":244,"text":"/* outer /* nested */ outer */"}
+{"cap":"comment","col":24,"eb":347,"ecol":48,"eline":15,"line":15,"node":"line_comment","pat":0,"path":"tests/rust/rust/comments.rs","sb":323,"text":"// A comment after code."}

@@ -1,0 +1,16 @@
+ocaml pack of Sinter
+Copyright 2026 The Sinter Authors
+
+grammar: ocaml
+repository: tree-sitter/tree-sitter-ocaml
+tag: v0.26.0
+commit: e3c9cf368f68bffd2f81188229aefa7b434eda65
+asset: tree-sitter-ocaml.wasm
+sha256: bfa3eef92b9d3cc1117aa486d46ecb06c98a3a28c1747660aaa5851df5e4530c
+
+grammar: ocaml_interface
+repository: tree-sitter/tree-sitter-ocaml
+tag: v0.26.0
+commit: e3c9cf368f68bffd2f81188229aefa7b434eda65
+asset: tree-sitter-ocaml_interface.wasm
+sha256: 3ce03850c36618e3530292372aae9156a45b5a923210a87c285539d7f13b0354

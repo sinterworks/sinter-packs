@@ -1,0 +1,4 @@
+{"cap":"comment","col":1,"eb":18,"ecol":19,"eline":1,"line":1,"node":"comment","pat":0,"path":"tests/typescript/tsx/jsx.tsx","sb":0,"text":"// A line comment."}
+{"cap":"comment","col":1,"eb":40,"ecol":22,"eline":2,"line":2,"node":"comment","pat":0,"path":"tests/typescript/tsx/jsx.tsx","sb":19,"text":"/** A doc comment. */"}
+{"cap":"comment","col":8,"eb":151,"ecol":28,"eline":6,"line":6,"node":"comment","pat":0,"path":"tests/typescript/tsx/jsx.tsx","sb":131,"text":"/* A JSX comment. */"}
+{"cap":"comment","col":26,"eb":194,"ecol":42,"eline":7,"line":7,"node":"comment","pat":0,"path":"tests/typescript/tsx/jsx.tsx","sb":178,"text":"/* after code */"}

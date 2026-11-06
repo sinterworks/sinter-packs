@@ -1,0 +1,1 @@
+{"cap":"comment","col":1,"eb":30,"ecol":31,"eline":1,"line":1,"node":"line_comment","pat":0,"path":"tests/rust/rust/parse-error.rs","sb":0,"text":"// A comment before the error."}

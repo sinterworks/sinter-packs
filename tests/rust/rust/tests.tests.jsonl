@@ -1,0 +1,39 @@
+{"cap":"_cfg","col":3,"eb":21,"ecol":6,"eline":3,"line":3,"node":"identifier","pat":3,"path":"tests/rust/rust/tests.rs","sb":18,"text":"cfg"}
+{"cap":"_arg","col":7,"eb":26,"ecol":11,"eline":3,"line":3,"node":"identifier","pat":3,"path":"tests/rust/rust/tests.rs","sb":22,"text":"test"}
+{"cap":"group","col":1,"eb":598,"ecol":2,"eline":41,"line":4,"node":"mod_item","pat":3,"path":"tests/rust/rust/tests.rs","sb":29,"text":"mod tests {\n    use super::*;\n\n    #[test]\n    fn adds() {}\n\n    #[test]\n    #[ignore]\n    fn ignored_after() {}\n\n    #[ignore = \"slow\"]\n    #[test]\n    fn ignored_before() {}\n\n    #[test]\n    // A comment between the attributes.\n    #[should_panic]\n    fn panics() {}\n\n    #[tokio::test(flavor = \"multi_thread\")]\n    async fn runs_async() {}\n\n    #[rstest]\n    #[case(1)]\n    #[case(2)]\n    fn cases(#[case] x: u8) {}\n\n    #[rstest::rstest]\n    fn with_path() {}\n\n    #[inline]\n    fn not_a_test() {}\n\n    mod nested {\n        #[test]\n        fn in_nested() {}\n    }\n}"}
+{"cap":"name","col":5,"eb":38,"ecol":10,"eline":4,"line":4,"node":"identifier","pat":3,"path":"tests/rust/rust/tests.rs","sb":33,"text":"tests"}
+{"cap":"_test","col":7,"eb":70,"ecol":11,"eline":7,"line":7,"node":"identifier","pat":2,"path":"tests/rust/rust/tests.rs","sb":66,"text":"test"}
+{"cap":"test","col":5,"eb":88,"ecol":17,"eline":8,"line":8,"node":"function_item","pat":2,"path":"tests/rust/rust/tests.rs","sb":76,"text":"fn adds() {}"}
+{"cap":"name","col":8,"eb":83,"ecol":12,"eline":8,"line":8,"node":"identifier","pat":2,"path":"tests/rust/rust/tests.rs","sb":79,"text":"adds"}
+{"cap":"_test","col":7,"eb":100,"ecol":11,"eline":10,"line":10,"node":"identifier","pat":1,"path":"tests/rust/rust/tests.rs","sb":96,"text":"test"}
+{"cap":"label.ignore","col":7,"eb":114,"ecol":13,"eline":11,"line":11,"node":"identifier","pat":1,"path":"tests/rust/rust/tests.rs","sb":108,"text":"ignore"}
+{"cap":"test","col":5,"eb":141,"ecol":26,"eline":12,"line":12,"node":"function_item","pat":1,"path":"tests/rust/rust/tests.rs","sb":120,"text":"fn ignored_after() {}"}
+{"cap":"name","col":8,"eb":136,"ecol":21,"eline":12,"line":12,"node":"identifier","pat":1,"path":"tests/rust/rust/tests.rs","sb":123,"text":"ignored_after"}
+{"cap":"_test","col":7,"eb":100,"ecol":11,"eline":10,"line":10,"node":"identifier","pat":2,"path":"tests/rust/rust/tests.rs","sb":96,"text":"test"}
+{"cap":"test","col":5,"eb":141,"ecol":26,"eline":12,"line":12,"node":"function_item","pat":2,"path":"tests/rust/rust/tests.rs","sb":120,"text":"fn ignored_after() {}"}
+{"cap":"name","col":8,"eb":136,"ecol":21,"eline":12,"line":12,"node":"identifier","pat":2,"path":"tests/rust/rust/tests.rs","sb":123,"text":"ignored_after"}
+{"cap":"label.ignore","col":7,"eb":155,"ecol":13,"eline":14,"line":14,"node":"identifier","pat":0,"path":"tests/rust/rust/tests.rs","sb":149,"text":"ignore"}
+{"cap":"_test","col":7,"eb":176,"ecol":11,"eline":15,"line":15,"node":"identifier","pat":0,"path":"tests/rust/rust/tests.rs","sb":172,"text":"test"}
+{"cap":"test","col":5,"eb":204,"ecol":27,"eline":16,"line":16,"node":"function_item","pat":0,"path":"tests/rust/rust/tests.rs","sb":182,"text":"fn ignored_before() {}"}
+{"cap":"name","col":8,"eb":199,"ecol":22,"eline":16,"line":16,"node":"identifier","pat":0,"path":"tests/rust/rust/tests.rs","sb":185,"text":"ignored_before"}
+{"cap":"_test","col":7,"eb":176,"ecol":11,"eline":15,"line":15,"node":"identifier","pat":2,"path":"tests/rust/rust/tests.rs","sb":172,"text":"test"}
+{"cap":"test","col":5,"eb":204,"ecol":27,"eline":16,"line":16,"node":"function_item","pat":2,"path":"tests/rust/rust/tests.rs","sb":182,"text":"fn ignored_before() {}"}
+{"cap":"name","col":8,"eb":199,"ecol":22,"eline":16,"line":16,"node":"identifier","pat":2,"path":"tests/rust/rust/tests.rs","sb":185,"text":"ignored_before"}
+{"cap":"_test","col":7,"eb":216,"ecol":11,"eline":18,"line":18,"node":"identifier","pat":2,"path":"tests/rust/rust/tests.rs","sb":212,"text":"test"}
+{"cap":"test","col":5,"eb":297,"ecol":19,"eline":21,"line":21,"node":"function_item","pat":2,"path":"tests/rust/rust/tests.rs","sb":283,"text":"fn panics() {}"}
+{"cap":"name","col":8,"eb":292,"ecol":14,"eline":21,"line":21,"node":"identifier","pat":2,"path":"tests/rust/rust/tests.rs","sb":286,"text":"panics"}
+{"cap":"_test","col":7,"eb":316,"ecol":18,"eline":23,"line":23,"node":"scoped_identifier","pat":2,"path":"tests/rust/rust/tests.rs","sb":305,"text":"tokio::test"}
+{"cap":"test","col":5,"eb":371,"ecol":29,"eline":24,"line":24,"node":"function_item","pat":2,"path":"tests/rust/rust/tests.rs","sb":347,"text":"async fn runs_async() {}"}
+{"cap":"name","col":14,"eb":366,"ecol":24,"eline":24,"line":24,"node":"identifier","pat":2,"path":"tests/rust/rust/tests.rs","sb":356,"text":"runs_async"}
+{"cap":"_test","col":7,"eb":385,"ecol":13,"eline":26,"line":26,"node":"identifier","pat":2,"path":"tests/rust/rust/tests.rs","sb":379,"text":"rstest"}
+{"cap":"test","col":5,"eb":447,"ecol":31,"eline":29,"line":29,"node":"function_item","pat":2,"path":"tests/rust/rust/tests.rs","sb":421,"text":"fn cases(#[case] x: u8) {}"}
+{"cap":"name","col":8,"eb":429,"ecol":13,"eline":29,"line":29,"node":"identifier","pat":2,"path":"tests/rust/rust/tests.rs","sb":424,"text":"cases"}
+{"cap":"_test","col":7,"eb":469,"ecol":21,"eline":31,"line":31,"node":"scoped_identifier","pat":2,"path":"tests/rust/rust/tests.rs","sb":455,"text":"rstest::rstest"}
+{"cap":"test","col":5,"eb":492,"ecol":22,"eline":32,"line":32,"node":"function_item","pat":2,"path":"tests/rust/rust/tests.rs","sb":475,"text":"fn with_path() {}"}
+{"cap":"name","col":8,"eb":487,"ecol":17,"eline":32,"line":32,"node":"identifier","pat":2,"path":"tests/rust/rust/tests.rs","sb":478,"text":"with_path"}
+{"cap":"_test","col":11,"eb":563,"ecol":15,"eline":38,"line":38,"node":"identifier","pat":2,"path":"tests/rust/rust/tests.rs","sb":559,"text":"test"}
+{"cap":"test","col":9,"eb":590,"ecol":26,"eline":39,"line":39,"node":"function_item","pat":2,"path":"tests/rust/rust/tests.rs","sb":573,"text":"fn in_nested() {}"}
+{"cap":"name","col":12,"eb":585,"ecol":21,"eline":39,"line":39,"node":"identifier","pat":2,"path":"tests/rust/rust/tests.rs","sb":576,"text":"in_nested"}
+{"cap":"_test","col":7,"eb":628,"ecol":11,"eline":44,"line":44,"node":"identifier","pat":2,"path":"tests/rust/rust/tests.rs","sb":624,"text":"test"}
+{"cap":"test","col":5,"eb":658,"ecol":29,"eline":45,"line":45,"node":"function_item","pat":2,"path":"tests/rust/rust/tests.rs","sb":634,"text":"fn outside_cfg_test() {}"}
+{"cap":"name","col":8,"eb":653,"ecol":24,"eline":45,"line":45,"node":"identifier","pat":2,"path":"tests/rust/rust/tests.rs","sb":637,"text":"outside_cfg_test"}

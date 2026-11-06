@@ -1,0 +1,95 @@
+{"cap":"group","col":1,"eb":304,"ecol":3,"eline":12,"line":1,"node":"call_expression","pat":3,"path":"tests/javascript/javascript/tests.js","sb":0,"text":"describe(\"math\", () => {\n  it(\"adds\", () => {});\n  test(\"subtracts\", () => {});\n  it.skip(\"skips\", () => {});\n  it.only(\"runs alone\", () => {});\n  it.todo(\"waits\");\n  test.each([[1, 2]])(\"doubles %i to %i\", (a, b) => {});\n  it.each`\n    a    | b\n    ${1} | ${2}\n  `(\"adds $a to $b\", ({ a, b }) => {});\n})"}
+{"cap":"_fn","col":1,"eb":8,"ecol":9,"eline":1,"line":1,"node":"identifier","pat":3,"path":"tests/javascript/javascript/tests.js","sb":0,"text":"describe"}
+{"cap":"name","col":11,"eb":14,"ecol":15,"eline":1,"line":1,"node":"string_fragment","pat":3,"path":"tests/javascript/javascript/tests.js","sb":10,"text":"math"}
+{"cap":"test","col":3,"eb":47,"ecol":23,"eline":2,"line":2,"node":"call_expression","pat":0,"path":"tests/javascript/javascript/tests.js","sb":27,"text":"it(\"adds\", () => {})"}
+{"cap":"_fn","col":3,"eb":29,"ecol":5,"eline":2,"line":2,"node":"identifier","pat":0,"path":"tests/javascript/javascript/tests.js","sb":27,"text":"it"}
+{"cap":"name","col":7,"eb":35,"ecol":11,"eline":2,"line":2,"node":"string_fragment","pat":0,"path":"tests/javascript/javascript/tests.js","sb":31,"text":"adds"}
+{"cap":"test","col":3,"eb":78,"ecol":30,"eline":3,"line":3,"node":"call_expression","pat":0,"path":"tests/javascript/javascript/tests.js","sb":51,"text":"test(\"subtracts\", () => {})"}
+{"cap":"_fn","col":3,"eb":55,"ecol":7,"eline":3,"line":3,"node":"identifier","pat":0,"path":"tests/javascript/javascript/tests.js","sb":51,"text":"test"}
+{"cap":"name","col":9,"eb":66,"ecol":18,"eline":3,"line":3,"node":"string_fragment","pat":0,"path":"tests/javascript/javascript/tests.js","sb":57,"text":"subtracts"}
+{"cap":"test","col":3,"eb":108,"ecol":29,"eline":4,"line":4,"node":"call_expression","pat":0,"path":"tests/javascript/javascript/tests.js","sb":82,"text":"it.skip(\"skips\", () => {})"}
+{"cap":"_fn","col":3,"eb":84,"ecol":5,"eline":4,"line":4,"node":"identifier","pat":0,"path":"tests/javascript/javascript/tests.js","sb":82,"text":"it"}
+{"cap":"label.skip","col":6,"eb":89,"ecol":10,"eline":4,"line":4,"node":"property_identifier","pat":0,"path":"tests/javascript/javascript/tests.js","sb":85,"text":"skip"}
+{"cap":"name","col":12,"eb":96,"ecol":17,"eline":4,"line":4,"node":"string_fragment","pat":0,"path":"tests/javascript/javascript/tests.js","sb":91,"text":"skips"}
+{"cap":"test","col":3,"eb":143,"ecol":34,"eline":5,"line":5,"node":"call_expression","pat":0,"path":"tests/javascript/javascript/tests.js","sb":112,"text":"it.only(\"runs alone\", () => {})"}
+{"cap":"_fn","col":3,"eb":114,"ecol":5,"eline":5,"line":5,"node":"identifier","pat":0,"path":"tests/javascript/javascript/tests.js","sb":112,"text":"it"}
+{"cap":"label.only","col":6,"eb":119,"ecol":10,"eline":5,"line":5,"node":"property_identifier","pat":0,"path":"tests/javascript/javascript/tests.js","sb":115,"text":"only"}
+{"cap":"name","col":12,"eb":131,"ecol":22,"eline":5,"line":5,"node":"string_fragment","pat":0,"path":"tests/javascript/javascript/tests.js","sb":121,"text":"runs alone"}
+{"cap":"test","col":3,"eb":163,"ecol":19,"eline":6,"line":6,"node":"call_expression","pat":0,"path":"tests/javascript/javascript/tests.js","sb":147,"text":"it.todo(\"waits\")"}
+{"cap":"_fn","col":3,"eb":149,"ecol":5,"eline":6,"line":6,"node":"identifier","pat":0,"path":"tests/javascript/javascript/tests.js","sb":147,"text":"it"}
+{"cap":"label.todo","col":6,"eb":154,"ecol":10,"eline":6,"line":6,"node":"property_identifier","pat":0,"path":"tests/javascript/javascript/tests.js","sb":150,"text":"todo"}
+{"cap":"name","col":12,"eb":161,"ecol":17,"eline":6,"line":6,"node":"string_fragment","pat":0,"path":"tests/javascript/javascript/tests.js","sb":156,"text":"waits"}
+{"cap":"test","col":3,"eb":220,"ecol":56,"eline":7,"line":7,"node":"call_expression","pat":0,"path":"tests/javascript/javascript/tests.js","sb":167,"text":"test.each([[1, 2]])(\"doubles %i to %i\", (a, b) => {})"}
+{"cap":"_fn","col":3,"eb":171,"ecol":7,"eline":7,"line":7,"node":"identifier","pat":0,"path":"tests/javascript/javascript/tests.js","sb":167,"text":"test"}
+{"cap":"label.each","col":8,"eb":176,"ecol":12,"eline":7,"line":7,"node":"property_identifier","pat":0,"path":"tests/javascript/javascript/tests.js","sb":172,"text":"each"}
+{"cap":"name","col":24,"eb":204,"ecol":40,"eline":7,"line":7,"node":"string_fragment","pat":0,"path":"tests/javascript/javascript/tests.js","sb":188,"text":"doubles %i to %i"}
+{"cap":"test","col":3,"eb":300,"ecol":39,"eline":11,"line":8,"node":"call_expression","pat":0,"path":"tests/javascript/javascript/tests.js","sb":224,"text":"it.each`\n    a    | b\n    ${1} | ${2}\n  `(\"adds $a to $b\", ({ a, b }) => {})"}
+{"cap":"_fn","col":3,"eb":226,"ecol":5,"eline":8,"line":8,"node":"identifier","pat":0,"path":"tests/javascript/javascript/tests.js","sb":224,"text":"it"}
+{"cap":"label.each","col":6,"eb":231,"ecol":10,"eline":8,"line":8,"node":"property_identifier","pat":0,"path":"tests/javascript/javascript/tests.js","sb":227,"text":"each"}
+{"cap":"name","col":6,"eb":280,"ecol":19,"eline":11,"line":11,"node":"string_fragment","pat":0,"path":"tests/javascript/javascript/tests.js","sb":267,"text":"adds $a to $b"}
+{"cap":"group","col":1,"eb":347,"ecol":41,"eline":14,"line":14,"node":"call_expression","pat":3,"path":"tests/javascript/javascript/tests.js","sb":307,"text":"describe.skip(\"skipped group\", () => {})"}
+{"cap":"_fn","col":1,"eb":315,"ecol":9,"eline":14,"line":14,"node":"identifier","pat":3,"path":"tests/javascript/javascript/tests.js","sb":307,"text":"describe"}
+{"cap":"label.skip","col":10,"eb":320,"ecol":14,"eline":14,"line":14,"node":"property_identifier","pat":3,"path":"tests/javascript/javascript/tests.js","sb":316,"text":"skip"}
+{"cap":"name","col":16,"eb":335,"ecol":29,"eline":14,"line":14,"node":"string_fragment","pat":3,"path":"tests/javascript/javascript/tests.js","sb":322,"text":"skipped group"}
+{"cap":"group","col":1,"eb":386,"ecol":38,"eline":15,"line":15,"node":"call_expression","pat":4,"path":"tests/javascript/javascript/tests.js","sb":349,"text":"describe.only(`only group`, () => {})"}
+{"cap":"_fn","col":1,"eb":357,"ecol":9,"eline":15,"line":15,"node":"identifier","pat":4,"path":"tests/javascript/javascript/tests.js","sb":349,"text":"describe"}
+{"cap":"label.only","col":10,"eb":362,"ecol":14,"eline":15,"line":15,"node":"property_identifier","pat":4,"path":"tests/javascript/javascript/tests.js","sb":358,"text":"only"}
+{"cap":"name","col":16,"eb":374,"ecol":26,"eline":15,"line":15,"node":"string_fragment","pat":4,"path":"tests/javascript/javascript/tests.js","sb":364,"text":"only group"}
+{"cap":"group","col":1,"eb":416,"ecol":29,"eline":16,"line":16,"node":"call_expression","pat":3,"path":"tests/javascript/javascript/tests.js","sb":388,"text":"describe.todo(\"later group\")"}
+{"cap":"_fn","col":1,"eb":396,"ecol":9,"eline":16,"line":16,"node":"identifier","pat":3,"path":"tests/javascript/javascript/tests.js","sb":388,"text":"describe"}
+{"cap":"label.todo","col":10,"eb":401,"ecol":14,"eline":16,"line":16,"node":"property_identifier","pat":3,"path":"tests/javascript/javascript/tests.js","sb":397,"text":"todo"}
+{"cap":"name","col":16,"eb":414,"ecol":27,"eline":16,"line":16,"node":"string_fragment","pat":3,"path":"tests/javascript/javascript/tests.js","sb":403,"text":"later group"}
+{"cap":"group","col":1,"eb":462,"ecol":45,"eline":17,"line":17,"node":"call_expression","pat":3,"path":"tests/javascript/javascript/tests.js","sb":418,"text":"describe.each([1, 2])(\"group %i\", (n) => {})"}
+{"cap":"_fn","col":1,"eb":426,"ecol":9,"eline":17,"line":17,"node":"identifier","pat":3,"path":"tests/javascript/javascript/tests.js","sb":418,"text":"describe"}
+{"cap":"label.each","col":10,"eb":431,"ecol":14,"eline":17,"line":17,"node":"property_identifier","pat":3,"path":"tests/javascript/javascript/tests.js","sb":427,"text":"each"}
+{"cap":"name","col":24,"eb":449,"ecol":32,"eline":17,"line":17,"node":"string_fragment","pat":3,"path":"tests/javascript/javascript/tests.js","sb":441,"text":"group %i"}
+{"cap":"test","col":1,"eb":506,"ecol":42,"eline":19,"line":19,"node":"call_expression","pat":0,"path":"tests/javascript/javascript/tests.js","sb":465,"text":"it(\"line\\nbreak and \\\"quote\\\"\", () => {})"}
+{"cap":"_fn","col":1,"eb":467,"ecol":3,"eline":19,"line":19,"node":"identifier","pat":0,"path":"tests/javascript/javascript/tests.js","sb":465,"text":"it"}
+{"cap":"name","col":5,"eb":473,"ecol":9,"eline":19,"line":19,"node":"string_fragment","pat":0,"path":"tests/javascript/javascript/tests.js","sb":469,"text":"line"}
+{"cap":"placeholder","col":9,"eb":475,"ecol":11,"eline":19,"line":19,"node":"escape_sequence","pat":0,"path":"tests/javascript/javascript/tests.js","sb":473,"text":"\\n"}
+{"cap":"name","col":11,"eb":485,"ecol":21,"eline":19,"line":19,"node":"string_fragment","pat":0,"path":"tests/javascript/javascript/tests.js","sb":475,"text":"break and "}
+{"cap":"placeholder","col":21,"eb":487,"ecol":23,"eline":19,"line":19,"node":"escape_sequence","pat":0,"path":"tests/javascript/javascript/tests.js","sb":485,"text":"\\\""}
+{"cap":"name","col":23,"eb":492,"ecol":28,"eline":19,"line":19,"node":"string_fragment","pat":0,"path":"tests/javascript/javascript/tests.js","sb":487,"text":"quote"}
+{"cap":"placeholder","col":28,"eb":494,"ecol":30,"eline":19,"line":19,"node":"escape_sequence","pat":0,"path":"tests/javascript/javascript/tests.js","sb":492,"text":"\\\""}
+{"cap":"test","col":1,"eb":548,"ecol":41,"eline":20,"line":20,"node":"call_expression","pat":1,"path":"tests/javascript/javascript/tests.js","sb":508,"text":"test(`count ${n} of ${total}`, () => {})"}
+{"cap":"_fn","col":1,"eb":512,"ecol":5,"eline":20,"line":20,"node":"identifier","pat":1,"path":"tests/javascript/javascript/tests.js","sb":508,"text":"test"}
+{"cap":"name","col":7,"eb":520,"ecol":13,"eline":20,"line":20,"node":"string_fragment","pat":1,"path":"tests/javascript/javascript/tests.js","sb":514,"text":"count "}
+{"cap":"placeholder","col":13,"eb":524,"ecol":17,"eline":20,"line":20,"node":"template_substitution","pat":1,"path":"tests/javascript/javascript/tests.js","sb":520,"text":"${n}"}
+{"cap":"name","col":17,"eb":528,"ecol":21,"eline":20,"line":20,"node":"string_fragment","pat":1,"path":"tests/javascript/javascript/tests.js","sb":524,"text":" of "}
+{"cap":"placeholder","col":21,"eb":536,"ecol":29,"eline":20,"line":20,"node":"template_substitution","pat":1,"path":"tests/javascript/javascript/tests.js","sb":528,"text":"${total}"}
+{"cap":"test","col":1,"eb":575,"ecol":26,"eline":21,"line":21,"node":"call_expression","pat":1,"path":"tests/javascript/javascript/tests.js","sb":550,"text":"it(`tab\\there`, () => {})"}
+{"cap":"_fn","col":1,"eb":552,"ecol":3,"eline":21,"line":21,"node":"identifier","pat":1,"path":"tests/javascript/javascript/tests.js","sb":550,"text":"it"}
+{"cap":"name","col":5,"eb":557,"ecol":8,"eline":21,"line":21,"node":"string_fragment","pat":1,"path":"tests/javascript/javascript/tests.js","sb":554,"text":"tab"}
+{"cap":"placeholder","col":8,"eb":559,"ecol":10,"eline":21,"line":21,"node":"escape_sequence","pat":1,"path":"tests/javascript/javascript/tests.js","sb":557,"text":"\\t"}
+{"cap":"name","col":10,"eb":563,"ecol":14,"eline":21,"line":21,"node":"string_fragment","pat":1,"path":"tests/javascript/javascript/tests.js","sb":559,"text":"here"}
+{"cap":"test","col":1,"eb":593,"ecol":17,"eline":22,"line":22,"node":"call_expression","pat":0,"path":"tests/javascript/javascript/tests.js","sb":577,"text":"it(\"\", () => {})"}
+{"cap":"_fn","col":1,"eb":579,"ecol":3,"eline":22,"line":22,"node":"identifier","pat":0,"path":"tests/javascript/javascript/tests.js","sb":577,"text":"it"}
+{"cap":"test","col":1,"eb":742,"ecol":19,"eline":27,"line":27,"node":"call_expression","pat":2,"path":"tests/javascript/javascript/tests.js","sb":724,"text":"it(name, () => {})"}
+{"cap":"_fn","col":1,"eb":726,"ecol":3,"eline":27,"line":27,"node":"identifier","pat":2,"path":"tests/javascript/javascript/tests.js","sb":724,"text":"it"}
+{"cap":"placeholder","col":4,"eb":731,"ecol":8,"eline":27,"line":27,"node":"identifier","pat":2,"path":"tests/javascript/javascript/tests.js","sb":727,"text":"name"}
+{"cap":"group","col":1,"eb":1031,"ecol":3,"eline":38,"line":30,"node":"call_expression","pat":5,"path":"tests/javascript/javascript/tests.js","sb":765,"text":"describe(suiteName, () => {\n  it.each(rows)(title, () => {});\n  test(prefix + \" suffix\", () => {});\n  it.skip(names[0], () => {});\n  it(makeTitle(), () => {});\n  it(table.title, () => {});\n  it(fast ? \"fast\" : \"slow\", () => {});\n  it((\"parenthesized\"), () => {});\n})"}
+{"cap":"_fn","col":1,"eb":773,"ecol":9,"eline":30,"line":30,"node":"identifier","pat":5,"path":"tests/javascript/javascript/tests.js","sb":765,"text":"describe"}
+{"cap":"placeholder","col":10,"eb":783,"ecol":19,"eline":30,"line":30,"node":"identifier","pat":5,"path":"tests/javascript/javascript/tests.js","sb":774,"text":"suiteName"}
+{"cap":"test","col":3,"eb":825,"ecol":33,"eline":31,"line":31,"node":"call_expression","pat":2,"path":"tests/javascript/javascript/tests.js","sb":795,"text":"it.each(rows)(title, () => {})"}
+{"cap":"_fn","col":3,"eb":797,"ecol":5,"eline":31,"line":31,"node":"identifier","pat":2,"path":"tests/javascript/javascript/tests.js","sb":795,"text":"it"}
+{"cap":"label.each","col":6,"eb":802,"ecol":10,"eline":31,"line":31,"node":"property_identifier","pat":2,"path":"tests/javascript/javascript/tests.js","sb":798,"text":"each"}
+{"cap":"placeholder","col":17,"eb":814,"ecol":22,"eline":31,"line":31,"node":"identifier","pat":2,"path":"tests/javascript/javascript/tests.js","sb":809,"text":"title"}
+{"cap":"test","col":3,"eb":863,"ecol":37,"eline":32,"line":32,"node":"call_expression","pat":2,"path":"tests/javascript/javascript/tests.js","sb":829,"text":"test(prefix + \" suffix\", () => {})"}
+{"cap":"_fn","col":3,"eb":833,"ecol":7,"eline":32,"line":32,"node":"identifier","pat":2,"path":"tests/javascript/javascript/tests.js","sb":829,"text":"test"}
+{"cap":"placeholder","col":8,"eb":852,"ecol":26,"eline":32,"line":32,"node":"binary_expression","pat":2,"path":"tests/javascript/javascript/tests.js","sb":834,"text":"prefix + \" suffix\""}
+{"cap":"test","col":3,"eb":894,"ecol":30,"eline":33,"line":33,"node":"call_expression","pat":2,"path":"tests/javascript/javascript/tests.js","sb":867,"text":"it.skip(names[0], () => {})"}
+{"cap":"_fn","col":3,"eb":869,"ecol":5,"eline":33,"line":33,"node":"identifier","pat":2,"path":"tests/javascript/javascript/tests.js","sb":867,"text":"it"}
+{"cap":"label.skip","col":6,"eb":874,"ecol":10,"eline":33,"line":33,"node":"property_identifier","pat":2,"path":"tests/javascript/javascript/tests.js","sb":870,"text":"skip"}
+{"cap":"placeholder","col":11,"eb":883,"ecol":19,"eline":33,"line":33,"node":"subscript_expression","pat":2,"path":"tests/javascript/javascript/tests.js","sb":875,"text":"names[0]"}
+{"cap":"test","col":3,"eb":923,"ecol":28,"eline":34,"line":34,"node":"call_expression","pat":2,"path":"tests/javascript/javascript/tests.js","sb":898,"text":"it(makeTitle(), () => {})"}
+{"cap":"_fn","col":3,"eb":900,"ecol":5,"eline":34,"line":34,"node":"identifier","pat":2,"path":"tests/javascript/javascript/tests.js","sb":898,"text":"it"}
+{"cap":"placeholder","col":6,"eb":912,"ecol":17,"eline":34,"line":34,"node":"call_expression","pat":2,"path":"tests/javascript/javascript/tests.js","sb":901,"text":"makeTitle()"}
+{"cap":"test","col":3,"eb":952,"ecol":28,"eline":35,"line":35,"node":"call_expression","pat":2,"path":"tests/javascript/javascript/tests.js","sb":927,"text":"it(table.title, () => {})"}
+{"cap":"_fn","col":3,"eb":929,"ecol":5,"eline":35,"line":35,"node":"identifier","pat":2,"path":"tests/javascript/javascript/tests.js","sb":927,"text":"it"}
+{"cap":"placeholder","col":6,"eb":941,"ecol":17,"eline":35,"line":35,"node":"member_expression","pat":2,"path":"tests/javascript/javascript/tests.js","sb":930,"text":"table.title"}
+{"cap":"test","col":3,"eb":992,"ecol":39,"eline":36,"line":36,"node":"call_expression","pat":2,"path":"tests/javascript/javascript/tests.js","sb":956,"text":"it(fast ? \"fast\" : \"slow\", () => {})"}
+{"cap":"_fn","col":3,"eb":958,"ecol":5,"eline":36,"line":36,"node":"identifier","pat":2,"path":"tests/javascript/javascript/tests.js","sb":956,"text":"it"}
+{"cap":"placeholder","col":6,"eb":981,"ecol":28,"eline":36,"line":36,"node":"ternary_expression","pat":2,"path":"tests/javascript/javascript/tests.js","sb":959,"text":"fast ? \"fast\" : \"slow\""}
+{"cap":"test","col":3,"eb":1027,"ecol":34,"eline":37,"line":37,"node":"call_expression","pat":2,"path":"tests/javascript/javascript/tests.js","sb":996,"text":"it((\"parenthesized\"), () => {})"}
+{"cap":"_fn","col":3,"eb":998,"ecol":5,"eline":37,"line":37,"node":"identifier","pat":2,"path":"tests/javascript/javascript/tests.js","sb":996,"text":"it"}
+{"cap":"placeholder","col":6,"eb":1016,"ecol":23,"eline":37,"line":37,"node":"parenthesized_expression","pat":2,"path":"tests/javascript/javascript/tests.js","sb":999,"text":"(\"parenthesized\")"}

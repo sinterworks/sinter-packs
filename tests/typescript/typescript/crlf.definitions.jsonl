@@ -1,0 +1,3 @@
+{"cap":"definition","col":1,"eb":85,"ecol":2,"eline":7,"line":5,"node":"function_declaration","pat":0,"path":"tests/typescript/typescript/crlf.ts","sb":44,"text":"function crlf(): number {\r\n  return 1;\r\n}"}
+{"cap":"name","col":10,"eb":57,"ecol":14,"eline":5,"line":5,"node":"identifier","pat":0,"path":"tests/typescript/typescript/crlf.ts","sb":53,"text":"crlf"}
+{"cap":"body","col":25,"eb":85,"ecol":2,"eline":7,"line":5,"node":"statement_block","pat":0,"path":"tests/typescript/typescript/crlf.ts","sb":68,"text":"{\r\n  return 1;\r\n}"}

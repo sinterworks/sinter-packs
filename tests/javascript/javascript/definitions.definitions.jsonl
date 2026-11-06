@@ -1,0 +1,96 @@
+{"cap":"definition","col":1,"eb":59,"ecol":2,"eline":4,"line":1,"node":"function_declaration","pat":0,"path":"tests/javascript/javascript/definitions.js","sb":0,"text":"function plain(a) {\n  function inner() {}\n  return inner;\n}"}
+{"cap":"name","col":10,"eb":14,"ecol":15,"eline":1,"line":1,"node":"identifier","pat":0,"path":"tests/javascript/javascript/definitions.js","sb":9,"text":"plain"}
+{"cap":"body","col":19,"eb":59,"ecol":2,"eline":4,"line":1,"node":"statement_block","pat":0,"path":"tests/javascript/javascript/definitions.js","sb":18,"text":"{\n  function inner() {}\n  return inner;\n}"}
+{"cap":"definition","col":3,"eb":41,"ecol":22,"eline":2,"line":2,"node":"function_declaration","pat":0,"path":"tests/javascript/javascript/definitions.js","sb":22,"text":"function inner() {}"}
+{"cap":"name","col":12,"eb":36,"ecol":17,"eline":2,"line":2,"node":"identifier","pat":0,"path":"tests/javascript/javascript/definitions.js","sb":31,"text":"inner"}
+{"cap":"body","col":20,"eb":41,"ecol":22,"eline":2,"line":2,"node":"statement_block","pat":0,"path":"tests/javascript/javascript/definitions.js","sb":39,"text":"{}"}
+{"cap":"definition","col":1,"eb":96,"ecol":2,"eline":8,"line":6,"node":"generator_function_declaration","pat":1,"path":"tests/javascript/javascript/definitions.js","sb":61,"text":"function* generate() {\n  yield 1;\n}"}
+{"cap":"name","col":11,"eb":79,"ecol":19,"eline":6,"line":6,"node":"identifier","pat":1,"path":"tests/javascript/javascript/definitions.js","sb":71,"text":"generate"}
+{"cap":"body","col":22,"eb":96,"ecol":2,"eline":8,"line":6,"node":"statement_block","pat":1,"path":"tests/javascript/javascript/definitions.js","sb":82,"text":"{\n  yield 1;\n}"}
+{"cap":"definition","col":1,"eb":123,"ecol":26,"eline":10,"line":10,"node":"function_declaration","pat":0,"path":"tests/javascript/javascript/definitions.js","sb":98,"text":"async function later() {}"}
+{"cap":"name","col":16,"eb":118,"ecol":21,"eline":10,"line":10,"node":"identifier","pat":0,"path":"tests/javascript/javascript/definitions.js","sb":113,"text":"later"}
+{"cap":"body","col":24,"eb":123,"ecol":26,"eline":10,"line":10,"node":"statement_block","pat":0,"path":"tests/javascript/javascript/definitions.js","sb":121,"text":"{}"}
+{"cap":"definition","col":1,"eb":304,"ecol":2,"eline":22,"line":12,"node":"class_declaration","pat":2,"path":"tests/javascript/javascript/definitions.js","sb":125,"text":"class Shape {\n  constructor() {}\n  static create() {}\n  get size() { return 1; }\n  set size(v) {}\n  *items() {}\n  async load() {}\n  #hidden() {}\n  [\"computed\"]() {}\n  field = 1;\n}"}
+{"cap":"name","col":7,"eb":136,"ecol":12,"eline":12,"line":12,"node":"identifier","pat":2,"path":"tests/javascript/javascript/definitions.js","sb":131,"text":"Shape"}
+{"cap":"body","col":13,"eb":304,"ecol":2,"eline":22,"line":12,"node":"class_body","pat":2,"path":"tests/javascript/javascript/definitions.js","sb":137,"text":"{\n  constructor() {}\n  static create() {}\n  get size() { return 1; }\n  set size(v) {}\n  *items() {}\n  async load() {}\n  #hidden() {}\n  [\"computed\"]() {}\n  field = 1;\n}"}
+{"cap":"definition","col":3,"eb":157,"ecol":19,"eline":13,"line":13,"node":"method_definition","pat":3,"path":"tests/javascript/javascript/definitions.js","sb":141,"text":"constructor() {}"}
+{"cap":"name","col":3,"eb":152,"ecol":14,"eline":13,"line":13,"node":"property_identifier","pat":3,"path":"tests/javascript/javascript/definitions.js","sb":141,"text":"constructor"}
+{"cap":"body","col":17,"eb":157,"ecol":19,"eline":13,"line":13,"node":"statement_block","pat":3,"path":"tests/javascript/javascript/definitions.js","sb":155,"text":"{}"}
+{"cap":"definition","col":3,"eb":178,"ecol":21,"eline":14,"line":14,"node":"method_definition","pat":3,"path":"tests/javascript/javascript/definitions.js","sb":160,"text":"static create() {}"}
+{"cap":"name","col":10,"eb":173,"ecol":16,"eline":14,"line":14,"node":"property_identifier","pat":3,"path":"tests/javascript/javascript/definitions.js","sb":167,"text":"create"}
+{"cap":"body","col":19,"eb":178,"ecol":21,"eline":14,"line":14,"node":"statement_block","pat":3,"path":"tests/javascript/javascript/definitions.js","sb":176,"text":"{}"}
+{"cap":"definition","col":3,"eb":205,"ecol":27,"eline":15,"line":15,"node":"method_definition","pat":3,"path":"tests/javascript/javascript/definitions.js","sb":181,"text":"get size() { return 1; }"}
+{"cap":"name","col":7,"eb":189,"ecol":11,"eline":15,"line":15,"node":"property_identifier","pat":3,"path":"tests/javascript/javascript/definitions.js","sb":185,"text":"size"}
+{"cap":"body","col":14,"eb":205,"ecol":27,"eline":15,"line":15,"node":"statement_block","pat":3,"path":"tests/javascript/javascript/definitions.js","sb":192,"text":"{ return 1; }"}
+{"cap":"definition","col":3,"eb":222,"ecol":17,"eline":16,"line":16,"node":"method_definition","pat":3,"path":"tests/javascript/javascript/definitions.js","sb":208,"text":"set size(v) {}"}
+{"cap":"name","col":7,"eb":216,"ecol":11,"eline":16,"line":16,"node":"property_identifier","pat":3,"path":"tests/javascript/javascript/definitions.js","sb":212,"text":"size"}
+{"cap":"body","col":15,"eb":222,"ecol":17,"eline":16,"line":16,"node":"statement_block","pat":3,"path":"tests/javascript/javascript/definitions.js","sb":220,"text":"{}"}
+{"cap":"definition","col":3,"eb":236,"ecol":14,"eline":17,"line":17,"node":"method_definition","pat":3,"path":"tests/javascript/javascript/definitions.js","sb":225,"text":"*items() {}"}
+{"cap":"name","col":4,"eb":231,"ecol":9,"eline":17,"line":17,"node":"property_identifier","pat":3,"path":"tests/javascript/javascript/definitions.js","sb":226,"text":"items"}
+{"cap":"body","col":12,"eb":236,"ecol":14,"eline":17,"line":17,"node":"statement_block","pat":3,"path":"tests/javascript/javascript/definitions.js","sb":234,"text":"{}"}
+{"cap":"definition","col":3,"eb":254,"ecol":18,"eline":18,"line":18,"node":"method_definition","pat":3,"path":"tests/javascript/javascript/definitions.js","sb":239,"text":"async load() {}"}
+{"cap":"name","col":9,"eb":249,"ecol":13,"eline":18,"line":18,"node":"property_identifier","pat":3,"path":"tests/javascript/javascript/definitions.js","sb":245,"text":"load"}
+{"cap":"body","col":16,"eb":254,"ecol":18,"eline":18,"line":18,"node":"statement_block","pat":3,"path":"tests/javascript/javascript/definitions.js","sb":252,"text":"{}"}
+{"cap":"definition","col":3,"eb":269,"ecol":15,"eline":19,"line":19,"node":"method_definition","pat":3,"path":"tests/javascript/javascript/definitions.js","sb":257,"text":"#hidden() {}"}
+{"cap":"name","col":3,"eb":264,"ecol":10,"eline":19,"line":19,"node":"private_property_identifier","pat":3,"path":"tests/javascript/javascript/definitions.js","sb":257,"text":"#hidden"}
+{"cap":"body","col":13,"eb":269,"ecol":15,"eline":19,"line":19,"node":"statement_block","pat":3,"path":"tests/javascript/javascript/definitions.js","sb":267,"text":"{}"}
+{"cap":"definition","col":3,"eb":289,"ecol":20,"eline":20,"line":20,"node":"method_definition","pat":3,"path":"tests/javascript/javascript/definitions.js","sb":272,"text":"[\"computed\"]() {}"}
+{"cap":"name","col":3,"eb":284,"ecol":15,"eline":20,"line":20,"node":"computed_property_name","pat":3,"path":"tests/javascript/javascript/definitions.js","sb":272,"text":"[\"computed\"]"}
+{"cap":"body","col":18,"eb":289,"ecol":20,"eline":20,"line":20,"node":"statement_block","pat":3,"path":"tests/javascript/javascript/definitions.js","sb":287,"text":"{}"}
+{"cap":"decoration","col":1,"eb":313,"ecol":8,"eline":24,"line":24,"node":"decorator","pat":7,"path":"tests/javascript/javascript/definitions.js","sb":306,"text":"@sealed"}
+{"cap":"definition","col":1,"eb":357,"ecol":2,"eline":28,"line":24,"node":"class_declaration","pat":2,"path":"tests/javascript/javascript/definitions.js","sb":306,"text":"@sealed\nclass Decorated {\n  @logged\n  method() {}\n}"}
+{"cap":"name","col":7,"eb":329,"ecol":16,"eline":25,"line":25,"node":"identifier","pat":2,"path":"tests/javascript/javascript/definitions.js","sb":320,"text":"Decorated"}
+{"cap":"body","col":17,"eb":357,"ecol":2,"eline":28,"line":25,"node":"class_body","pat":2,"path":"tests/javascript/javascript/definitions.js","sb":330,"text":"{\n  @logged\n  method() {}\n}"}
+{"cap":"decoration","col":3,"eb":341,"ecol":10,"eline":26,"line":26,"node":"decorator","pat":7,"path":"tests/javascript/javascript/definitions.js","sb":334,"text":"@logged"}
+{"cap":"definition","col":3,"eb":355,"ecol":14,"eline":27,"line":26,"node":"method_definition","pat":3,"path":"tests/javascript/javascript/definitions.js","sb":334,"text":"@logged\n  method() {}"}
+{"cap":"name","col":3,"eb":350,"ecol":9,"eline":27,"line":27,"node":"property_identifier","pat":3,"path":"tests/javascript/javascript/definitions.js","sb":344,"text":"method"}
+{"cap":"body","col":12,"eb":355,"ecol":14,"eline":27,"line":27,"node":"statement_block","pat":3,"path":"tests/javascript/javascript/definitions.js","sb":353,"text":"{}"}
+{"cap":"definition","col":7,"eb":385,"ecol":27,"eline":30,"line":30,"node":"variable_declarator","pat":4,"path":"tests/javascript/javascript/definitions.js","sb":365,"text":"arrow = (x) => x + 1"}
+{"cap":"name","col":7,"eb":370,"ecol":12,"eline":30,"line":30,"node":"identifier","pat":4,"path":"tests/javascript/javascript/definitions.js","sb":365,"text":"arrow"}
+{"cap":"body","col":22,"eb":385,"ecol":27,"eline":30,"line":30,"node":"binary_expression","pat":4,"path":"tests/javascript/javascript/definitions.js","sb":380,"text":"x + 1"}
+{"cap":"definition","col":5,"eb":420,"ecol":2,"eline":33,"line":31,"node":"variable_declarator","pat":4,"path":"tests/javascript/javascript/definitions.js","sb":391,"text":"block = () => {\n  return 2;\n}"}
+{"cap":"name","col":5,"eb":396,"ecol":10,"eline":31,"line":31,"node":"identifier","pat":4,"path":"tests/javascript/javascript/definitions.js","sb":391,"text":"block"}
+{"cap":"body","col":19,"eb":420,"ecol":2,"eline":33,"line":31,"node":"statement_block","pat":4,"path":"tests/javascript/javascript/definitions.js","sb":405,"text":"{\n  return 2;\n}"}
+{"cap":"definition","col":5,"eb":458,"ecol":37,"eline":34,"line":34,"node":"variable_declarator","pat":4,"path":"tests/javascript/javascript/definitions.js","sb":426,"text":"expression = function named() {}"}
+{"cap":"name","col":5,"eb":436,"ecol":15,"eline":34,"line":34,"node":"identifier","pat":4,"path":"tests/javascript/javascript/definitions.js","sb":426,"text":"expression"}
+{"cap":"body","col":35,"eb":458,"ecol":37,"eline":34,"line":34,"node":"statement_block","pat":4,"path":"tests/javascript/javascript/definitions.js","sb":456,"text":"{}"}
+{"cap":"definition","col":7,"eb":493,"ecol":34,"eline":35,"line":35,"node":"variable_declarator","pat":4,"path":"tests/javascript/javascript/definitions.js","sb":466,"text":"generator = function* () {}"}
+{"cap":"name","col":7,"eb":475,"ecol":16,"eline":35,"line":35,"node":"identifier","pat":4,"path":"tests/javascript/javascript/definitions.js","sb":466,"text":"generator"}
+{"cap":"body","col":32,"eb":493,"ecol":34,"eline":35,"line":35,"node":"statement_block","pat":4,"path":"tests/javascript/javascript/definitions.js","sb":491,"text":"{}"}
+{"cap":"definition","col":7,"eb":517,"ecol":23,"eline":36,"line":36,"node":"variable_declarator","pat":4,"path":"tests/javascript/javascript/definitions.js","sb":501,"text":"first = () => {}"}
+{"cap":"name","col":7,"eb":506,"ecol":12,"eline":36,"line":36,"node":"identifier","pat":4,"path":"tests/javascript/javascript/definitions.js","sb":501,"text":"first"}
+{"cap":"body","col":21,"eb":517,"ecol":23,"eline":36,"line":36,"node":"statement_block","pat":4,"path":"tests/javascript/javascript/definitions.js","sb":515,"text":"{}"}
+{"cap":"definition","col":25,"eb":542,"ecol":48,"eline":36,"line":36,"node":"variable_declarator","pat":4,"path":"tests/javascript/javascript/definitions.js","sb":519,"text":"second = function () {}"}
+{"cap":"name","col":25,"eb":525,"ecol":31,"eline":36,"line":36,"node":"identifier","pat":4,"path":"tests/javascript/javascript/definitions.js","sb":519,"text":"second"}
+{"cap":"body","col":46,"eb":542,"ecol":48,"eline":36,"line":36,"node":"statement_block","pat":4,"path":"tests/javascript/javascript/definitions.js","sb":540,"text":"{}"}
+{"cap":"definition","col":18,"eb":614,"ecol":29,"eline":40,"line":40,"node":"method_definition","pat":3,"path":"tests/javascript/javascript/definitions.js","sb":603,"text":"method() {}"}
+{"cap":"name","col":18,"eb":609,"ecol":24,"eline":40,"line":40,"node":"property_identifier","pat":3,"path":"tests/javascript/javascript/definitions.js","sb":603,"text":"method"}
+{"cap":"body","col":27,"eb":614,"ecol":29,"eline":40,"line":40,"node":"statement_block","pat":3,"path":"tests/javascript/javascript/definitions.js","sb":612,"text":"{}"}
+{"cap":"definition","col":8,"eb":648,"ecol":30,"eline":42,"line":42,"node":"function_declaration","pat":0,"path":"tests/javascript/javascript/definitions.js","sb":626,"text":"function exported() {}"}
+{"cap":"name","col":17,"eb":643,"ecol":25,"eline":42,"line":42,"node":"identifier","pat":0,"path":"tests/javascript/javascript/definitions.js","sb":635,"text":"exported"}
+{"cap":"body","col":28,"eb":648,"ecol":30,"eline":42,"line":42,"node":"statement_block","pat":0,"path":"tests/javascript/javascript/definitions.js","sb":646,"text":"{}"}
+{"cap":"definition","col":16,"eb":687,"ecol":38,"eline":44,"line":44,"node":"function_declaration","pat":0,"path":"tests/javascript/javascript/definitions.js","sb":665,"text":"function fallback() {}"}
+{"cap":"name","col":25,"eb":682,"ecol":33,"eline":44,"line":44,"node":"identifier","pat":0,"path":"tests/javascript/javascript/definitions.js","sb":674,"text":"fallback"}
+{"cap":"body","col":36,"eb":687,"ecol":38,"eline":44,"line":44,"node":"statement_block","pat":0,"path":"tests/javascript/javascript/definitions.js","sb":685,"text":"{}"}
+{"cap":"decoration","col":1,"eb":700,"ecol":12,"eline":46,"line":46,"node":"decorator","pat":7,"path":"tests/javascript/javascript/definitions.js","sb":689,"text":"@registered"}
+{"cap":"definition","col":8,"eb":725,"ecol":25,"eline":47,"line":47,"node":"class_declaration","pat":2,"path":"tests/javascript/javascript/definitions.js","sb":708,"text":"class Exported {}"}
+{"cap":"name","col":14,"eb":722,"ecol":22,"eline":47,"line":47,"node":"identifier","pat":2,"path":"tests/javascript/javascript/definitions.js","sb":714,"text":"Exported"}
+{"cap":"body","col":23,"eb":725,"ecol":25,"eline":47,"line":47,"node":"class_body","pat":2,"path":"tests/javascript/javascript/definitions.js","sb":723,"text":"{}"}
+{"cap":"definition","col":14,"eb":770,"ecol":44,"eline":49,"line":49,"node":"variable_declarator","pat":4,"path":"tests/javascript/javascript/definitions.js","sb":740,"text":"exportedArrow = async () => {}"}
+{"cap":"name","col":14,"eb":753,"ecol":27,"eline":49,"line":49,"node":"identifier","pat":4,"path":"tests/javascript/javascript/definitions.js","sb":740,"text":"exportedArrow"}
+{"cap":"body","col":42,"eb":770,"ecol":44,"eline":49,"line":49,"node":"statement_block","pat":4,"path":"tests/javascript/javascript/definitions.js","sb":768,"text":"{}"}
+{"cap":"definition","col":1,"eb":913,"ecol":2,"eline":57,"line":51,"node":"class_declaration","pat":2,"path":"tests/javascript/javascript/definitions.js","sb":773,"text":"class Handlers {\n  onClick = () => {};\n  onKey = function () {};\n  static items = function* () {};\n  #secret = async () => 1;\n  count = 0;\n}"}
+{"cap":"name","col":7,"eb":787,"ecol":15,"eline":51,"line":51,"node":"identifier","pat":2,"path":"tests/javascript/javascript/definitions.js","sb":779,"text":"Handlers"}
+{"cap":"body","col":16,"eb":913,"ecol":2,"eline":57,"line":51,"node":"class_body","pat":2,"path":"tests/javascript/javascript/definitions.js","sb":788,"text":"{\n  onClick = () => {};\n  onKey = function () {};\n  static items = function* () {};\n  #secret = async () => 1;\n  count = 0;\n}"}
+{"cap":"definition","col":3,"eb":810,"ecol":21,"eline":52,"line":52,"node":"field_definition","pat":5,"path":"tests/javascript/javascript/definitions.js","sb":792,"text":"onClick = () => {}"}
+{"cap":"name","col":3,"eb":799,"ecol":10,"eline":52,"line":52,"node":"property_identifier","pat":5,"path":"tests/javascript/javascript/definitions.js","sb":792,"text":"onClick"}
+{"cap":"body","col":19,"eb":810,"ecol":21,"eline":52,"line":52,"node":"statement_block","pat":5,"path":"tests/javascript/javascript/definitions.js","sb":808,"text":"{}"}
+{"cap":"definition","col":3,"eb":836,"ecol":25,"eline":53,"line":53,"node":"field_definition","pat":5,"path":"tests/javascript/javascript/definitions.js","sb":814,"text":"onKey = function () {}"}
+{"cap":"name","col":3,"eb":819,"ecol":8,"eline":53,"line":53,"node":"property_identifier","pat":5,"path":"tests/javascript/javascript/definitions.js","sb":814,"text":"onKey"}
+{"cap":"body","col":23,"eb":836,"ecol":25,"eline":53,"line":53,"node":"statement_block","pat":5,"path":"tests/javascript/javascript/definitions.js","sb":834,"text":"{}"}
+{"cap":"definition","col":3,"eb":870,"ecol":33,"eline":54,"line":54,"node":"field_definition","pat":5,"path":"tests/javascript/javascript/definitions.js","sb":840,"text":"static items = function* () {}"}
+{"cap":"name","col":10,"eb":852,"ecol":15,"eline":54,"line":54,"node":"property_identifier","pat":5,"path":"tests/javascript/javascript/definitions.js","sb":847,"text":"items"}
+{"cap":"body","col":31,"eb":870,"ecol":33,"eline":54,"line":54,"node":"statement_block","pat":5,"path":"tests/javascript/javascript/definitions.js","sb":868,"text":"{}"}
+{"cap":"definition","col":3,"eb":897,"ecol":26,"eline":55,"line":55,"node":"field_definition","pat":5,"path":"tests/javascript/javascript/definitions.js","sb":874,"text":"#secret = async () => 1"}
+{"cap":"name","col":3,"eb":881,"ecol":10,"eline":55,"line":55,"node":"private_property_identifier","pat":5,"path":"tests/javascript/javascript/definitions.js","sb":874,"text":"#secret"}
+{"cap":"body","col":25,"eb":897,"ecol":26,"eline":55,"line":55,"node":"number","pat":5,"path":"tests/javascript/javascript/definitions.js","sb":896,"text":"1"}

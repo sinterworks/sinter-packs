@@ -188,6 +188,9 @@ jobs:
       - name: Check the queries
         if: ${{ !cancelled() && steps.packs.outputs.count != '0' }}
         run: tools/check-queries.sh -s sinter packs/*/
+      - name: Run the query tests
+        if: ${{ !cancelled() }}
+        run: tools/check-query-tests.sh -s sinter
       - name: Check the licenses
         if: ${{ !cancelled() && steps.packs.outputs.count != '0' }}
         run: tools/check-licenses.sh packs/*/
