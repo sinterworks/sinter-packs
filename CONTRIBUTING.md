@@ -3,7 +3,7 @@
 ## Writing
 
 The rules of the section "Writing" of
-[Sinter's CONTRIBUTING.md](https://github.com/lathrys-at/sinter/blob/main/CONTRIBUTING.md#writing)
+[Sinter's CONTRIBUTING.md](https://github.com/sinterworks/sinter/blob/main/CONTRIBUTING.md#writing)
 apply to every text of this repository: the documents, the comments,
 the commit messages, the pull requests, and the messages that the
 tools print. The text uses Simplified Technical English (ASD-STE100)
@@ -16,7 +16,7 @@ source.
 ### Code comments
 
 A comment is permitted only in these cases (record
-[`code-comments`](https://github.com/lathrys-at/sinter/blob/main/docs/decisions/code-comments.md)
+[`code-comments`](https://github.com/sinterworks/sinter/blob/main/docs/decisions/code-comments.md)
 of Sinter):
 
 - Sinter reads it: a tag block, with the prose that follows the tags
@@ -67,7 +67,7 @@ license tags for this file.
 
 The file `tools/sinter.pin` holds the commit of Sinter that CI builds.
 Build Sinter at that commit from
-[its repository](https://github.com/lathrys-at/sinter), as its
+[its repository](https://github.com/sinterworks/sinter), as its
 CONTRIBUTING.md says. The checks below name two of its parts:
 
 - `SINTER`: the built `sinter`, `_build/default/bin/main.exe`.
@@ -114,7 +114,7 @@ them in the workflow `ci`, and the license checks in the workflow
 - Use an imperative subject line and a short body that says what
   changed and why.
 - End the message with the trailers of the record
-  [`commit-messages`](https://github.com/lathrys-at/sinter/blob/main/docs/decisions/commit-messages.md)
+  [`commit-messages`](https://github.com/sinterworks/sinter/blob/main/docs/decisions/commit-messages.md)
   of Sinter, before the sign-off:
   1. One line that names what allows the change: `Step: <plan>/<step>`
      for a step of a plan in `.plans/`, for example
@@ -145,7 +145,7 @@ with its plan file, or the issue that the change carries out.
 ## Adding a pack
 
 A pack lives in the folder `packs/<name>/`, its pack root. The
-[pack specification](https://github.com/lathrys-at/sinter/blob/main/spec/packs.md)
+[pack specification](https://github.com/sinterworks/sinter/blob/main/spec/packs.md)
 gives the files of a pack. Each grammar comes from a release asset of
 its upstream project (record `upstream-grammars`).
 
