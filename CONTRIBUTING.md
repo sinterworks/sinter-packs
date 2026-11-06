@@ -94,7 +94,8 @@ Before you commit, check that these pass at the repository root:
   a folder that holds the files of `tools/test/grammars.txt`. Each
   line of that file gives a file, its SHA-256, and its address.
   Download each file and check its SHA-256. With `-u`, the tests also
-  call GitHub with `gh`.
+  call GitHub with `gh`. With `-a`, the tool also runs the tests that
+  need GNU tar. CI gives both options.
 - The checks of the packs, on each folder under `packs/`:
   1. `tools/check-grammars.sh -t CRATE packs/*/`
   2. `tools/check-queries.sh -s SINTER packs/*/`

@@ -164,3 +164,16 @@
   an interface declares no tests.
 - In the grammar ocaml v0.26.0, a comment that does not end runs to
   the end of the file, with no `ERROR` node.
+
+## Release packs
+
+- `check-archive.sh` checks the first three bytes before it runs gzip:
+  `gzip -t` also accepts the data of the command `compress`, with exit
+  code 0.
+- The tool stops the decompression at 128 MiB and one byte, with
+  `head -c`, so that a small archive cannot fill the disk of the runner.
+- The tests of `build-archive.sh` use a stub of `tar` that writes real
+  ustar entries with `tools/test/ustar.awk`, so that they run on macOS
+  too. Only the tests with the prefix `t_gnu_` run the real tar.
+- `run.sh` prints one line `skip` for each test that an option leaves
+  out, so that no test skips silently. This also applies to `-u`.

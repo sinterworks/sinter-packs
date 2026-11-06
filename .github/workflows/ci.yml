@@ -251,7 +251,7 @@ jobs:
           set -eu
           build="$RUNNER_TEMP/sinter-build"
           chmod +x "$build/bin/sinter"
-          sh tools/test/run.sh -u \
+          sh tools/test/run.sh -u -a \
             -s "$build/bin/sinter" \
             -t "$build/tree-sitter" \
             -g "$RUNNER_TEMP/grammars"

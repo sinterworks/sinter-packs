@@ -11,11 +11,12 @@ tool=run.sh
 
 usage() {
   cat <<'USAGE'
-Usage: tools/test/run.sh [-s SINTER] [-t CRATE] [-g GRAMMARS] [-u] [NAME...]
+Usage: tools/test/run.sh [-s SINTER] [-t CRATE] [-g GRAMMARS] [-u] [-a] [NAME...]
 
 Run the tests of the pack checks. Each test builds packs, indexes, and
-repositories in a temporary folder. A test that needs an option fails
-when the option is not given.
+repositories in a temporary folder. A test that needs -s, -t, or -g fails
+when the option is not given. A test that needs -u or -a does not run
+when the option is not given, and the tool prints a line skip for it.
 
   -s SINTER    the sinter command
   -t CRATE     the folder of the source of the tree-sitter crate that
@@ -23,6 +24,7 @@ when the option is not given.
   -g GRAMMARS  a folder that holds the upstream grammars
                tree-sitter-rust.wasm and tree-sitter-typescript.wasm
   -u           also run the tests that call GitHub with gh
+  -a           also run the tests that need GNU tar
   NAME         run only the tests whose names, without their prefix
                t_, start with NAME
 
@@ -35,13 +37,15 @@ sinter=
 crate=
 grammars=
 online=0
-while getopts hs:t:g:u option; do
+gnu=0
+while getopts hs:t:g:ua option; do
   case $option in
     h) usage; exit 0 ;;
     s) sinter=$OPTARG ;;
     t) crate=$OPTARG ;;
     g) grammars=$OPTARG ;;
     u) online=1 ;;
+    a) gnu=1 ;;
     *) usage_error "the option is not known" ;;
   esac
 done
@@ -51,6 +55,7 @@ typescript_wasm=$grammars/tree-sitter-typescript.wasm
 make_temp_dir
 passed=0
 failed=0
+not_run=0
 number=0
 
 note() {
@@ -99,14 +104,22 @@ same() {
   fi
 }
 
+is_selected() {
+  [ -n "$selection" ] || return 0
+  for prefix in $selection; do
+    case ${1#t_} in "$prefix"*) return 0 ;; esac
+  done
+  return 1
+}
+
+test_not_run() {
+  is_selected "$1" || return 0
+  not_run=$((not_run + 1))
+  printf 'skip %s: the test needs the option %s\n' "$1" "$2"
+}
+
 test_case() {
-  if [ -n "$selection" ]; then
-    selected=0
-    for prefix in $selection; do
-      case ${1#t_} in "$prefix"*) selected=1 ;; esac
-    done
-    [ "$selected" -eq 1 ] || return 0
-  fi
+  is_selected "$1" || return 0
   number=$((number + 1))
   case_dir="$temp_dir/case $number"
   mkdir -p "$case_dir"
@@ -2462,6 +2475,284 @@ t_archive_needs_gzip() {
   has "this check needs the command gzip, and it is not installed"
 }
 
+stub_tar() {
+  mkdir -p stub
+  cat >stub/tar <<'STUB'
+#!/bin/sh
+if [ "$1" = --version ]; then
+  echo "${STUB_TAR_VERSION:-tar (GNU tar) 1.35}"
+  exit 0
+fi
+printf '%s\n' "$*" >>"$STUB_TAR_DIR/tar-log"
+printf '%s\n' "${TAR_OPTIONS-unset}" >>"$STUB_TAR_DIR/tar-options"
+while [ "$#" -gt 0 ]; do
+  [ "$1" != -T ] || list=$2
+  shift
+done
+cp "$list" "$STUB_TAR_DIR/tar-list"
+zeros() {
+  dd if=/dev/zero bs=1 count="$1" 2>/dev/null
+}
+while IFS= read -r path; do
+  size=$(wc -c <"$path" | tr -d ' ')
+  printf 'name=%s\tlength=%s\n' "$path" "$size" |
+    awk -f "$STUB_TAR_TOOLS/test/ustar.awk" | tr '\001' '\000'
+  cat "$path"
+  zeros "$(((512 - size % 512) % 512))"
+done <"$list"
+if [ -f "$STUB_TAR_DIR/tar-fails" ]; then
+  echo "tar: a path is too long" >&2
+  exit 2
+fi
+zeros 1024
+STUB
+  chmod +x stub/tar
+  STUB_TAR_DIR=$case_dir/stub
+  STUB_TAR_TOOLS=$tools_dir
+  PATH=$case_dir/stub:$PATH
+  export STUB_TAR_DIR STUB_TAR_TOOLS PATH
+}
+
+small_pack() {
+  mkdir -p "my pack/queries/a b" "my pack/empty"
+  printf 'one' >"my pack/pack.toml"
+  printf 'two' >"my pack/queries/a b/tags.scm"
+  printf 'three' >"my pack/.hidden"
+  printf 'four' >"my pack/Upper"
+}
+
+t_build_calls_tar_in_the_fixed_form() {
+  stub_tar
+  small_pack
+  run 0 "$tools_dir/build-archive.sh" "my pack" a.tar.gz
+  same "$(sed 's|-T .*/list|-T list|' stub/tar-log)" \
+    "--format=ustar --owner=0 --group=0 --numeric-owner --mtime=@0 --mode=u+rw,go-w,a+rX --no-recursion --verbatim-files-from -T list -cf -"
+}
+
+t_build_lists_each_file_in_byte_order_and_no_folder() {
+  stub_tar
+  small_pack
+  run 0 "$tools_dir/build-archive.sh" "my pack" a.tar.gz
+  same "$(cat stub/tar-list)" "$(printf '%s\n' .hidden Upper pack.toml "queries/a b/tags.scm")"
+}
+
+t_build_writes_an_archive_with_the_pack_hash() {
+  stub_tar
+  small_pack
+  run 0 "$tools_dir/build-archive.sh" "my pack" a.tar.gz
+  passes
+  same "$(cat "$case_dir/out")" "$("$tools_dir/pack-hash.sh" "my pack")"
+}
+
+t_build_writes_gzip_data_with_no_name_and_no_time_at_the_best_level() {
+  stub_tar
+  small_pack
+  run 0 "$tools_dir/build-archive.sh" "my pack" a.tar.gz
+  same "$(od -An -v -tu1 -N 9 a.tar.gz | awk 'NF { print $4, $5, $6, $7, $8, $9 }')" "0 0 0 0 0 2"
+}
+
+t_build_gives_the_same_bytes_on_each_run() {
+  stub_tar
+  small_pack
+  run 0 "$tools_dir/build-archive.sh" "my pack" first.tar.gz
+  touch -t 200001010000 "my pack/pack.toml"
+  run 0 "$tools_dir/build-archive.sh" "my pack" second.tar.gz
+  same "$(sha256_of first.tar.gz)" "$(sha256_of second.tar.gz)"
+}
+
+t_build_takes_a_path_of_an_archive_with_a_space() {
+  stub_tar
+  small_pack
+  mkdir "out dir"
+  run 0 "$tools_dir/build-archive.sh" "my pack" "out dir/a b.tar.gz"
+  [ -f "out dir/a b.tar.gz" ]
+}
+
+t_build_needs_gnu_tar() {
+  stub_tar
+  small_pack
+  STUB_TAR_VERSION="bsdtar 3.5.3 - libarchive 3.5.3"
+  export STUB_TAR_VERSION
+  run 3 "$tools_dir/build-archive.sh" "my pack" a.tar.gz
+  has "this tool needs GNU tar, and the command tar is another program"
+  [ ! -e a.tar.gz ]
+  [ ! -e stub/tar-log ]
+}
+
+t_build_refuses_a_link_and_writes_nothing() {
+  stub_tar
+  small_pack
+  ln -s pack.toml "my pack/link"
+  run 1 "$tools_dir/build-archive.sh" "my pack" a.tar.gz
+  has "the pack holds an entry that is not a file or a folder: link"
+  [ ! -e a.tar.gz ]
+  [ ! -e stub/tar-log ]
+}
+
+t_build_refuses_a_named_pipe_and_writes_nothing() {
+  stub_tar
+  small_pack
+  mkfifo "my pack/pipe"
+  run 1 "$tools_dir/build-archive.sh" "my pack" a.tar.gz
+  has "the pack holds an entry that is not a file or a folder: pipe"
+  [ ! -e a.tar.gz ]
+  [ ! -e stub/tar-log ]
+}
+
+t_build_refuses_a_backslash_and_writes_nothing() {
+  stub_tar
+  small_pack
+  printf 'x' >'my pack/a\b'
+  run 1 "$tools_dir/build-archive.sh" "my pack" a.tar.gz
+  has "with a backslash"
+  [ ! -e a.tar.gz ]
+  [ ! -e stub/tar-log ]
+}
+
+t_build_refuses_a_line_feed_and_writes_nothing() {
+  stub_tar
+  small_pack
+  printf 'x' >"my pack/a
+b"
+  run 1 "$tools_dir/build-archive.sh" "my pack" a.tar.gz
+  has "a character outside printable ASCII"
+  [ ! -e a.tar.gz ]
+  [ ! -e stub/tar-log ]
+}
+
+t_build_stops_when_tar_fails_and_keeps_no_archive() {
+  stub_tar
+  small_pack
+  : >stub/tar-fails
+  run 1 "$tools_dir/build-archive.sh" "my pack" a.tar.gz
+  has "tar cannot write the archive: tar: a path is too long"
+  [ ! -e a.tar.gz ]
+}
+
+t_build_leaves_an_old_archive_when_tar_fails() {
+  stub_tar
+  small_pack
+  printf 'old' >a.tar.gz
+  : >stub/tar-fails
+  run 1 "$tools_dir/build-archive.sh" "my pack" a.tar.gz
+  same "$(cat a.tar.gz)" old
+}
+
+t_build_gives_tar_no_options_of_the_environment() {
+  stub_tar
+  small_pack
+  TAR_OPTIONS=--format=gnu
+  export TAR_OPTIONS
+  run 0 "$tools_dir/build-archive.sh" "my pack" a.tar.gz
+  same "$(cat stub/tar-options)" unset
+}
+
+t_build_gives_gzip_no_options_of_the_environment() {
+  stub_tar
+  small_pack
+  run 0 "$tools_dir/build-archive.sh" "my pack" first.tar.gz
+  GZIP=-1
+  export GZIP
+  run 0 "$tools_dir/build-archive.sh" "my pack" second.tar.gz
+  same "$(sha256_of first.tar.gz)" "$(sha256_of second.tar.gz)"
+}
+
+t_build_needs_two_arguments() {
+  run 2 "$tools_dir/build-archive.sh" pack
+  has "give one pack folder and one archive"
+  run 2 "$tools_dir/build-archive.sh" pack a b
+  has "give one pack folder and one archive"
+}
+
+t_build_needs_a_folder() {
+  run 2 "$tools_dir/build-archive.sh" no-such-folder a.tar.gz
+  has "no-such-folder is not a folder"
+}
+
+t_build_needs_the_folder_of_the_archive() {
+  mkdir pack
+  run 2 "$tools_dir/build-archive.sh" pack no-such-folder/a.tar.gz
+  has "the folder of no-such-folder/a.tar.gz does not exist"
+}
+
+t_build_needs_gzip() {
+  stub_tar
+  small_pack
+  mkdir bin
+  ln -s "$(command -v dirname)" bin/dirname
+  ln -s "$(command -v tar)" bin/tar
+  run 3 env PATH="$case_dir/bin" /bin/sh "$tools_dir/build-archive.sh" "my pack" a.tar.gz
+  has "this check needs the command gzip, and it is not installed"
+}
+
+t_gnu_gives_the_same_bytes_on_each_run() {
+  small_pack
+  run 0 "$tools_dir/build-archive.sh" "my pack" first.tar.gz
+  touch -t 200001010000 "my pack/pack.toml"
+  chmod g+w "my pack/.hidden"
+  run 0 "$tools_dir/build-archive.sh" "my pack" second.tar.gz
+  same "$(sha256_of first.tar.gz)" "$(sha256_of second.tar.gz)"
+}
+
+t_gnu_gives_the_pack_hash_with_a_space_in_a_path() {
+  small_pack
+  printf 'five' >"my pack/-dash"
+  printf 'six' >"my pack/queries/a b/ c "
+  run 0 "$tools_dir/build-archive.sh" "my pack" a.tar.gz
+  passes
+  same "$(cat "$case_dir/out")" "$("$tools_dir/pack-hash.sh" "my pack")"
+}
+
+t_gnu_writes_no_owner_and_no_time() {
+  small_pack
+  chmod 755 "my pack/pack.toml"
+  chmod 640 "my pack/Upper"
+  run 0 "$tools_dir/build-archive.sh" "my pack" a.tar.gz
+  TZ=UTC tar -tzvf a.tar.gz >list
+  same "$(awk '{ print $1, $2, $4, $5 }' list)" "$(printf '%s\n' \
+    "-rw-r--r-- 0/0 1970-01-01 00:00" \
+    "-rw-r--r-- 0/0 1970-01-01 00:00" \
+    "-rwxr-xr-x 0/0 1970-01-01 00:00" \
+    "-rw-r--r-- 0/0 1970-01-01 00:00")"
+}
+
+t_gnu_splits_a_long_path_into_the_prefix_and_the_name() {
+  small_pack
+  folder=$(repeated p 60)/$(repeated q 60)
+  mkdir -p "my pack/$folder"
+  printf 'seven' >"my pack/$folder/file"
+  run 0 "$tools_dir/build-archive.sh" "my pack" a.tar.gz
+  passes
+  same "$(cat "$case_dir/out")" "$("$tools_dir/pack-hash.sh" "my pack")"
+}
+
+t_gnu_refuses_a_name_that_does_not_fit_in_the_ustar_form() {
+  small_pack
+  printf 'eight' >"my pack/$(repeated n 101)"
+  run 1 "$tools_dir/build-archive.sh" "my pack" a.tar.gz
+  has "tar cannot write the archive"
+  [ ! -e a.tar.gz ]
+}
+
+t_gnu_builds_each_pack_of_the_repository() {
+  count=0
+  for folder in "$(repository_root)"/packs/*/; do
+    [ -d "$folder" ] || continue
+    count=$((count + 1))
+    rm -rf copy
+    cp -R "$folder" copy
+    run 0 "$tools_dir/build-archive.sh" copy first.tar.gz
+    run 0 "$tools_dir/build-archive.sh" copy second.tar.gz
+    same "$(sha256_of first.tar.gz)" "$(sha256_of second.tar.gz)"
+    run 0 "$tools_dir/check-archive.sh" first.tar.gz
+    same "$(cat "$case_dir/out")" "$("$tools_dir/pack-hash.sh" "$folder")"
+  done
+  [ "$count" -gt 0 ] || {
+    note "the repository has no pack"
+    return 1
+  }
+}
+
 online_pack() {
   requires grammars
   mkdir -p "rust pack/grammars" "rust pack/licenses"
@@ -2509,9 +2800,20 @@ selection="$*"
 tests=$(grep -E '^t_[a-z0-9_]+\(\) \{$' "$0" | sed 's/().*//')
 for name in $tests; do
   case $name in
-    t_online_*) [ "$online" -eq 1 ] || continue ;;
+    t_online_*)
+      if [ "$online" -ne 1 ]; then
+        test_not_run "$name" -u
+        continue
+      fi
+      ;;
+    t_gnu_*)
+      if [ "$gnu" -ne 1 ]; then
+        test_not_run "$name" -a
+        continue
+      fi
+      ;;
   esac
   test_case "$name"
 done
-printf '%s passed, %s failed.\n' "$passed" "$failed"
+printf '%s passed, %s failed, %s not run.\n' "$passed" "$failed" "$not_run"
 [ "$failed" -eq 0 ]
