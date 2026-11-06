@@ -1,13 +1,13 @@
 # Sinter packs
 
-Language packs for [Sinter](https://github.com/lathrys-at/sinter), a
+Language packs for [Sinter](https://github.com/sinterworks/sinter), a
 linter that keeps specs, plans, and code in sync.
 
 A **pack** is the support for one language in Sinter. It holds the
 grammar that parses the language, and the queries that find the
 comments, definitions, and tests where Sinter reads tags. It also
 holds a descriptor and the license texts. The
-[pack specification](https://github.com/lathrys-at/sinter/blob/main/spec/packs.md)
+[pack specification](https://github.com/sinterworks/sinter/blob/main/spec/packs.md)
 gives the format of a pack.
 
 ## Packs

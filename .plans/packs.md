@@ -29,6 +29,11 @@ and the query files for comments, definitions, and tests. Test the
 queries of each grammar on small files against the captures that
 `sinter parse --query` prints, in CI.
 
+## Name the sinterworks organization
+@scope README.md, CONTRIBUTING.md, .github/workflows/ci.yml
+Change the address of Sinter from lathrys-at to sinterworks after the
+move of the repository.
+
 ## Release packs
 @scope tools/**, .github/workflows/release.yml
 Release each pack that `index.jsonl` names and that has no release:
