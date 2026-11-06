@@ -1711,6 +1711,757 @@ t_index_needs_a_revision() {
   has "no-such-revision is not a revision of the repository"
 }
 
+ustar_header() {
+  (
+    IFS=$(printf '\t')
+    printf '%s\n' "$*"
+  ) | ustar_headers
+}
+
+ustar_headers() {
+  awk -f "$tools_dir/test/ustar.awk" | tr '\001' '\000'
+}
+
+zero_bytes() {
+  dd if=/dev/zero bs=1 count="$1" 2>/dev/null
+}
+
+ustar_file() {
+  file_path=$1
+  file_content=$2
+  shift 2
+  ustar_header "name=$file_path" "length=${#file_content}" "$@"
+  printf '%s' "$file_content"
+  zero_bytes "$(((512 - ${#file_content} % 512) % 512))"
+}
+
+ustar_end() {
+  zero_bytes 1024
+}
+
+repeated() {
+  awk -v count="$2" -v text="$1" 'BEGIN { for (i = 0; i < count; i++) printf "%s", text }'
+}
+
+one_header() {
+  {
+    ustar_header "$@"
+    ustar_end
+  } | gzip -n >a.tar.gz
+}
+
+refused_with() {
+  run 1 "$tools_dir/check-archive.sh" a.tar.gz
+  has "$1"
+}
+
+passes() {
+  run 0 "$tools_dir/check-archive.sh" a.tar.gz
+}
+
+chain_lines() {
+  awk -v chains="$1" 'BEGIN {
+    for (c = 1; c <= chains; c++) {
+      path = sprintf("c%04d/", c)
+      printf "name=%s\ttype=5\n", path
+      for (d = 2; d <= 15; d++) {
+        path = path "d/"
+        printf "name=%s\ttype=5\n", path
+      }
+      printf "name=%sf\n", path
+    }
+  }'
+}
+
+t_archive_gives_the_pack_hash_of_the_same_files() {
+  mkdir -p "pack/a" pack/.dot
+  printf 'one' >"pack/a/b"
+  printf 'two' >"pack/a b"
+  printf 'three' >"pack/a-b"
+  printf '' >"pack/B"
+  repeated x 512 >"pack/c"
+  repeated y 20000 >"pack/.dot/d"
+  {
+    ustar_file .dot/d "$(cat pack/.dot/d)"
+    ustar_file c "$(cat pack/c)"
+    ustar_file B ''
+    ustar_file a-b three
+    ustar_file "a b" two
+    ustar_file a/b one
+    ustar_end
+  } | gzip -n >a.tar.gz
+  passes
+  same "$(cat "$case_dir/out")" "$("$tools_dir/pack-hash.sh" pack)"
+}
+
+t_archive_prints_only_the_hash_on_one_line() {
+  {
+    ustar_file a one
+    ustar_end
+  } | gzip -n >a.tar.gz
+  "$tools_dir/check-archive.sh" a.tar.gz >printed
+  same "$(awk 'END { print NR }' printed)" 1
+  is_hex "$(cat printed)" 64
+}
+
+check_with_the_pipe_signal_ignored() {
+  (
+    trap '' PIPE
+    "$tools_dir/check-archive.sh" a.tar.gz
+  )
+}
+
+t_archive_prints_only_the_hash_when_the_pipe_signal_is_ignored() {
+  {
+    ustar_file a one
+    ustar_file b "$(repeated x 300000)"
+    ustar_end
+  } | gzip -n >a.tar.gz
+  run 0 check_with_the_pipe_signal_ignored
+  same "$(awk 'END { print NR }' "$case_dir/out")" 1
+}
+
+t_archive_gives_the_hash_of_no_files_for_only_an_end_marker() {
+  ustar_end | gzip -n >a.tar.gz
+  mkdir pack
+  passes
+  same "$(cat "$case_dir/out")" "$("$tools_dir/pack-hash.sh" pack)"
+}
+
+t_archive_joins_the_prefix_and_the_name() {
+  mkdir -p pack/a/b
+  printf 'one' >pack/a/b/c
+  {
+    ustar_file c one prefix=a/b
+    ustar_end
+  } | gzip -n >a.tar.gz
+  passes
+  same "$(cat "$case_dir/out")" "$("$tools_dir/pack-hash.sh" pack)"
+}
+
+t_archive_leaves_a_folder_entry_out_of_the_hash() {
+  mkdir -p pack/a
+  printf 'one' >pack/a/b
+  {
+    ustar_header name=a/ type=5
+    ustar_file a/b one
+    ustar_end
+  } | gzip -n >a.tar.gz
+  passes
+  same "$(cat "$case_dir/out")" "$("$tools_dir/pack-hash.sh" pack)"
+}
+
+t_archive_takes_a_nul_byte_as_the_type_of_a_regular_file() {
+  mkdir pack
+  printf 'one' >pack/a
+  {
+    ustar_file a one 'type=\000'
+    ustar_end
+  } | gzip -n >a.tar.gz
+  passes
+  same "$(cat "$case_dir/out")" "$("$tools_dir/pack-hash.sh" pack)"
+}
+
+t_archive_takes_a_field_name_with_no_nul_byte() {
+  name=$(repeated n 100)
+  one_header "name=$name"
+  passes
+}
+
+t_archive_takes_a_field_prefix_with_no_nul_byte() {
+  prefix=$(repeated p 155)
+  one_header name=a "prefix=$prefix"
+  passes
+}
+
+t_archive_takes_zero_bytes_after_the_end_marker() {
+  {
+    ustar_file a one
+    ustar_end
+    zero_bytes 700
+  } | gzip -n >a.tar.gz
+  passes
+}
+
+t_archive_takes_numeric_fields_with_no_digit() {
+  one_header name=a mode= uid= gid= mtime= devmajor= devminor=
+  passes
+}
+
+t_archive_takes_numeric_fields_with_spaces_after_the_digits() {
+  one_header name=a 'mode=644 ' 'uid=0   ' 'gid=0 \000 ' 'size=0        ' 'mtime=0           ' 'devmajor=0      ' 'devminor=0      '
+  passes
+}
+
+t_archive_takes_numeric_fields_with_only_digits() {
+  one_header name=a mode=00000644 uid=00000000 gid=00000000 size=000000000000 mtime=000000000000 devmajor=00000000 devminor=00000000
+  passes
+}
+
+t_archive_takes_a_checksum_with_a_nul_byte_and_no_space() {
+  one_header name=a 'chksum-form=%07o\000'
+  passes
+}
+
+t_archive_reads_each_byte_of_the_header_as_unsigned() {
+  one_header name=a 'uname=\377\377' 'linkname=\200'
+  passes
+}
+
+t_archive_takes_a_space_in_a_path() {
+  one_header "name= a b "
+  passes
+}
+
+t_archive_takes_a_path_of_255_bytes() {
+  prefix=$(repeated p 154)
+  name=$(repeated n 100)
+  one_header "name=$name" "prefix=$prefix"
+  passes
+}
+
+t_archive_refuses_a_path_of_256_bytes() {
+  prefix=$(repeated p 155)
+  name=$(repeated n 100)
+  one_header "name=$name" "prefix=$prefix"
+  refused_with "the path has more than 255 bytes"
+}
+
+t_archive_takes_a_path_of_16_names() {
+  one_header name=1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16
+  passes
+}
+
+t_archive_refuses_a_path_of_17_names() {
+  one_header name=1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17
+  refused_with "the entry 1 (1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17): the path has more than 16 names"
+}
+
+t_archive_takes_4096_entries() {
+  {
+    chain_lines 256 | ustar_headers
+    ustar_end
+  } | gzip -n >a.tar.gz
+  passes
+}
+
+t_archive_refuses_4097_entries() {
+  {
+    chain_lines 256 | ustar_headers
+    ustar_header name=z
+    ustar_end
+  } | gzip -n >a.tar.gz
+  refused_with "the archive has more than 4096 entries"
+}
+
+t_archive_passes_the_size_check_at_64_mib() {
+  dd if=/dev/zero of=a.tar.gz bs=1048576 count=64 2>/dev/null
+  refused_with "the archive is not gzip data"
+}
+
+t_archive_refuses_more_than_64_mib() {
+  {
+    dd if=/dev/zero bs=1048576 count=64 2>/dev/null
+    printf 'x'
+  } >a.tar.gz
+  refused_with "the archive has 67108865 bytes, which is more than 64 MiB"
+}
+
+t_archive_takes_128_mib_of_tar_data() {
+  dd if=/dev/zero bs=1048576 count=128 2>/dev/null | gzip -n -1 >a.tar.gz
+  passes
+}
+
+t_archive_refuses_more_than_128_mib_of_tar_data() {
+  {
+    dd if=/dev/zero bs=1048576 count=128 2>/dev/null
+    printf '\000'
+  } | gzip -n -1 >a.tar.gz
+  refused_with "the tar data has more than 128 MiB"
+}
+
+t_archive_refuses_a_file_that_is_not_gzip_data() {
+  {
+    ustar_file a one
+    ustar_end
+  } >a.tar.gz
+  refused_with "the archive is not gzip data"
+}
+
+t_archive_refuses_an_empty_file() {
+  : >a.tar.gz
+  refused_with "the archive is not gzip data"
+}
+
+t_archive_refuses_data_of_the_command_compress() {
+  printf '\037\235\220x\000' >a.tar.gz
+  refused_with "the archive is not gzip data"
+}
+
+t_archive_refuses_a_wrong_crc() {
+  {
+    ustar_file a one
+    ustar_end
+  } | gzip -n >good.gz
+  size=$(wc -c <good.gz | tr -d ' ')
+  {
+    head -c "$((size - 8))" good.gz
+    printf '\000\000\000\000'
+    tail -c 4 good.gz
+  } >a.tar.gz
+  refused_with "the gzip data is not correct"
+}
+
+t_archive_refuses_a_wrong_size_in_the_trailer() {
+  {
+    ustar_file a one
+    ustar_end
+  } | gzip -n >good.gz
+  size=$(wc -c <good.gz | tr -d ' ')
+  {
+    head -c "$((size - 4))" good.gz
+    printf '\000\000\000\000'
+  } >a.tar.gz
+  refused_with "the gzip data is not correct"
+}
+
+t_archive_refuses_bytes_after_the_trailer() {
+  {
+    ustar_file a one
+    ustar_end
+  } | gzip -n >a.tar.gz
+  printf 'x' >>a.tar.gz
+  refused_with "the gzip data is not correct"
+}
+
+t_archive_refuses_zero_bytes_after_the_trailer() {
+  {
+    ustar_file a one
+    ustar_end
+  } | gzip -n >a.tar.gz
+  printf '\000\000\000\000' >>a.tar.gz
+  run 1 "$tools_dir/check-archive.sh" a.tar.gz
+}
+
+t_archive_refuses_two_gzip_members() {
+  ustar_file a one | gzip -n >a.tar.gz
+  ustar_end | gzip -n >>a.tar.gz
+  refused_with "so the archive is more than one gzip member"
+}
+
+t_archive_refuses_data_with_no_end_marker() {
+  ustar_file a one | gzip -n >a.tar.gz
+  refused_with "the tar data has no end marker"
+}
+
+t_archive_refuses_empty_tar_data() {
+  printf '' | gzip -n >a.tar.gz
+  refused_with "the tar data has no end marker"
+}
+
+t_archive_refuses_one_block_of_zero_bytes_at_the_end() {
+  {
+    ustar_file a one
+    zero_bytes 512
+  } | gzip -n >a.tar.gz
+  refused_with "the tar data has no end marker"
+}
+
+t_archive_refuses_an_end_marker_cut_short() {
+  {
+    ustar_file a one
+    zero_bytes 1023
+  } | gzip -n >a.tar.gz
+  refused_with "the tar data has no end marker"
+}
+
+t_archive_refuses_a_header_after_one_block_of_zero_bytes() {
+  {
+    zero_bytes 512
+    ustar_file a one
+    ustar_end
+  } | gzip -n >a.tar.gz
+  refused_with "a block of zero bytes comes before a block that is not zero"
+}
+
+t_archive_refuses_a_byte_after_the_end_marker() {
+  {
+    ustar_file a one
+    ustar_end
+    zero_bytes 3000
+    printf 'x'
+  } | gzip -n >a.tar.gz
+  refused_with "the tar data holds a byte that is not zero after the end marker"
+}
+
+t_archive_refuses_a_header_cut_short() {
+  {
+    ustar_file a one
+    ustar_header name=b | head -c 511
+  } | gzip -n >a.tar.gz
+  refused_with "the tar data has no end marker"
+}
+
+t_archive_refuses_content_cut_short() {
+  {
+    ustar_header name=a length=513
+    repeated x 512
+  } | gzip -n >a.tar.gz
+  refused_with "the entry 1 (a): the content is cut short"
+}
+
+t_archive_refuses_a_size_past_the_end_of_the_data() {
+  one_header name=a size=77777777777
+  refused_with "the entry 1 (a): the content is cut short"
+}
+
+t_archive_refuses_a_byte_after_the_content_in_its_last_block() {
+  {
+    ustar_header name=a length=3
+    printf 'onex'
+    zero_bytes 508
+    ustar_end
+  } | gzip -n >a.tar.gz
+  refused_with "the entry 1 (a): a byte after the content in its last block is not zero"
+}
+
+t_archive_refuses_a_byte_at_the_end_of_the_last_block() {
+  {
+    ustar_header name=a length=3
+    printf 'one'
+    zero_bytes 508
+    printf 'x'
+    ustar_end
+  } | gzip -n >a.tar.gz
+  refused_with "the entry 1 (a): a byte after the content in its last block is not zero"
+}
+
+t_archive_refuses_the_magic_of_gnu_tar() {
+  one_header name=a 'magic=ustar ' 'version= \000'
+  refused_with "the entry 1 (a): the field magic does not hold ustar and a NUL byte"
+}
+
+t_archive_refuses_a_magic_with_no_nul_byte() {
+  one_header name=a magic=ustarx
+  refused_with "the entry 1 (a): the field magic does not hold ustar and a NUL byte"
+}
+
+t_archive_refuses_a_wrong_version() {
+  one_header name=a version=01
+  refused_with "the entry 1 (a): the field version does not hold 00"
+}
+
+t_archive_refuses_a_wrong_checksum() {
+  one_header name=a chksum=0000000
+  refused_with "the entry 1 (a): the field chksum does not hold the sum of the bytes of the header"
+}
+
+t_archive_refuses_a_numeric_field_with_another_byte() {
+  for field in mode uid gid size mtime chksum devmajor devminor; do
+    one_header name=a "$field=08"
+    refused_with "the entry 1 (a): the field $field holds a byte that is not an octal digit, a NUL byte, or a space"
+  done
+}
+
+t_archive_refuses_a_numeric_field_in_base_256() {
+  one_header name=a 'size=\200\000\000\000\000\000\000\000\000\000\000\000'
+  refused_with "the entry 1 (a): the field size holds a byte that is not an octal digit, a NUL byte, or a space"
+}
+
+t_archive_refuses_a_digit_after_a_space() {
+  for field in mode uid gid size mtime chksum devmajor devminor; do
+    one_header name=a "$field= 0"
+    refused_with "the entry 1 (a): the field $field holds an octal digit after a NUL byte or a space"
+  done
+}
+
+t_archive_refuses_a_digit_after_a_nul_byte() {
+  for field in mode uid gid size mtime chksum devmajor devminor; do
+    one_header name=a "$field="'\0000'
+    refused_with "the entry 1 (a): the field $field holds an octal digit after a NUL byte or a space"
+  done
+}
+
+t_archive_refuses_a_size_with_no_digit() {
+  one_header name=a size=
+  refused_with "the entry 1 (a): the field size holds no octal digit"
+}
+
+t_archive_refuses_a_checksum_with_no_digit() {
+  one_header name=a 'chksum=        '
+  refused_with "the entry 1 (a): the field chksum holds no octal digit"
+}
+
+t_archive_refuses_each_other_type() {
+  for type in 1 2 3 4 6 7 x g L K S; do
+    one_header name=a "type=$type"
+    refused_with "the entry 1 (a): the type $type is not a regular file or a folder"
+  done
+}
+
+t_archive_refuses_a_type_outside_printable_ascii() {
+  one_header name=a 'type=\177'
+  refused_with "the entry 1 (a): the type with the byte value 127 is not a regular file or a folder"
+}
+
+t_archive_refuses_a_folder_with_a_size() {
+  {
+    ustar_header name=a/ type=5 length=1
+    printf 'x'
+    zero_bytes 511
+    ustar_file a/b one
+    ustar_end
+  } | gzip -n >a.tar.gz
+  refused_with "the entry 1 (a/): the entry of a folder has a size that is not 0"
+}
+
+t_archive_refuses_a_byte_after_the_first_nul_byte_of_the_name() {
+  one_header 'name=a\000b'
+  refused_with "the entry 1 (a): the field name holds another byte after its first NUL byte"
+}
+
+t_archive_refuses_a_byte_after_the_first_nul_byte_of_the_prefix() {
+  one_header name=a 'prefix=b\000c'
+  refused_with "the field prefix holds another byte after its first NUL byte"
+}
+
+t_archive_refuses_an_empty_name() {
+  one_header name= prefix=a
+  refused_with "the field name is empty"
+}
+
+t_archive_refuses_a_folder_path_that_does_not_end_with_a_slash() {
+  one_header name=a type=5
+  refused_with "the entry 1 (a): the path of the folder does not end with /"
+}
+
+t_archive_refuses_a_file_path_that_ends_with_a_slash() {
+  one_header name=a/
+  refused_with "the entry 1 (a/): the path of the regular file ends with /"
+}
+
+t_archive_refuses_a_folder_path_that_ends_with_two_slashes() {
+  one_header name=a// type=5
+  refused_with "the entry 1 (a//): the path holds an empty name"
+}
+
+t_archive_refuses_the_path_of_a_folder_that_is_only_a_slash() {
+  one_header name=/ type=5
+  refused_with "the entry 1 (/): the path of the folder is empty"
+}
+
+t_archive_refuses_a_byte_outside_printable_ascii_in_the_name() {
+  for byte in 002 037 177 200 377; do
+    one_header "name=a\\$byte"
+    refused_with "the entry 1 (a?): the field name holds a byte outside printable ASCII"
+  done
+}
+
+t_archive_refuses_a_byte_outside_printable_ascii_in_the_prefix() {
+  for byte in 002 037 177 200 377; do
+    one_header name=a "prefix=b\\$byte"
+    refused_with "the entry 1 (b?/a): the field prefix holds a byte outside printable ASCII"
+  done
+}
+
+t_archive_refuses_a_line_feed_in_the_name() {
+  one_header 'name=a\012b'
+  refused_with "the entry 1 (a?b): the field name holds a byte outside printable ASCII"
+}
+
+t_archive_refuses_a_backslash_in_the_name() {
+  one_header 'name=a\134b'
+  refused_with "the field name holds a backslash"
+}
+
+t_archive_refuses_a_backslash_in_the_prefix() {
+  one_header name=a 'prefix=b\134c'
+  refused_with "the field prefix holds a backslash"
+}
+
+t_archive_refuses_a_path_that_starts_with_a_slash() {
+  one_header name=/a
+  refused_with "the entry 1 (/a): the path starts with /"
+}
+
+t_archive_refuses_a_prefix_that_starts_with_a_slash() {
+  one_header name=a prefix=/b
+  refused_with "the path starts with /"
+}
+
+t_archive_refuses_an_empty_name_in_a_path() {
+  one_header name=a//b
+  refused_with "the path holds an empty name"
+}
+
+t_archive_refuses_a_prefix_that_ends_with_a_slash() {
+  one_header name=b prefix=a/
+  refused_with "the path holds an empty name"
+}
+
+t_archive_refuses_the_name_dot() {
+  for path in . ./a a/. a/./b; do
+    one_header "name=$path"
+    refused_with "the path holds the name ."
+  done
+}
+
+t_archive_refuses_the_name_dot_dot() {
+  for path in .. ../a a/.. a/../b; do
+    one_header "name=$path"
+    refused_with "the path holds the name .."
+  done
+}
+
+t_archive_refuses_a_folder_of_255_bytes_with_no_file_that_fits_below_it() {
+  prefix=$(repeated p 155)
+  name=$(repeated n 99)
+  one_header "name=$name/" "prefix=$prefix" type=5
+  refused_with "has no regular file below it"
+}
+
+t_archive_refuses_a_path_that_is_a_file_and_a_folder() {
+  {
+    ustar_file a one
+    ustar_file a/b two
+    ustar_end
+  } | gzip -n >a.tar.gz
+  refused_with "the entry 2 (a/b): the path a is the path of a file and also of a folder"
+}
+
+t_archive_refuses_a_path_that_is_a_folder_and_a_file() {
+  {
+    ustar_file a/b two
+    ustar_file a one
+    ustar_end
+  } | gzip -n >a.tar.gz
+  refused_with "the entry 2 (a): the path a is the path of a file and also of a folder"
+}
+
+t_archive_refuses_a_file_and_a_folder_entry_of_one_path() {
+  {
+    ustar_file a one
+    ustar_header name=a/ type=5
+    ustar_file a/b two
+    ustar_end
+  } | gzip -n >a.tar.gz
+  refused_with "the entry 2 (a/): the path a occurs in two entries"
+}
+
+t_archive_refuses_two_files_of_one_path() {
+  {
+    ustar_file a one
+    ustar_file a two
+    ustar_end
+  } | gzip -n >a.tar.gz
+  refused_with "the entry 2 (a): the path a occurs in two entries"
+}
+
+t_archive_refuses_two_entries_of_one_folder() {
+  {
+    ustar_header name=a/ type=5
+    ustar_header name=a/ type=5
+    ustar_file a/b one
+    ustar_end
+  } | gzip -n >a.tar.gz
+  refused_with "the entry 2 (a/): the path a occurs in two entries"
+}
+
+t_archive_refuses_files_equal_after_case_folding() {
+  {
+    ustar_file readme one
+    ustar_file README two
+    ustar_end
+  } | gzip -n >a.tar.gz
+  refused_with "the entry 2 (README): the paths readme and README are equal after ASCII case folding"
+}
+
+t_archive_refuses_folders_equal_after_case_folding() {
+  {
+    ustar_file queries/rust/tags.scm one
+    ustar_file queries/Rust/tests.scm two
+    ustar_end
+  } | gzip -n >a.tar.gz
+  refused_with "the paths queries/rust and queries/Rust are equal after ASCII case folding"
+}
+
+t_archive_refuses_a_file_and_a_folder_equal_after_case_folding() {
+  {
+    ustar_file a one
+    ustar_header name=A/ type=5
+    ustar_file A/b two
+    ustar_end
+  } | gzip -n >a.tar.gz
+  refused_with "the paths a and A are equal after ASCII case folding"
+}
+
+t_archive_refuses_a_folder_entry_with_nothing_below_it() {
+  {
+    ustar_file b one
+    ustar_header name=a/ type=5
+    ustar_end
+  } | gzip -n >a.tar.gz
+  refused_with "the entry of the folder a has no regular file below it"
+}
+
+t_archive_refuses_a_folder_entry_with_only_a_folder_below_it() {
+  {
+    ustar_header name=a/ type=5
+    ustar_header name=a/b/ type=5
+    ustar_file a/b/c one
+    ustar_header name=d/ type=5
+    ustar_header name=d/e/ type=5
+    ustar_end
+  } | gzip -n >a.tar.gz
+  refused_with "the entry of the folder d has no regular file below it"
+}
+
+check_in_deep_folder() {
+  (
+    cd deep/below
+    "$tools_dir/check-archive.sh" a.tar.gz
+  )
+}
+
+t_archive_writes_no_file_for_a_path_that_climbs() {
+  mkdir -p deep/below
+  {
+    ustar_file ../escaped one
+    ustar_end
+  } | gzip -n >deep/below/a.tar.gz
+  run 1 check_in_deep_folder
+  has "the path holds the name .."
+  same "$(find deep -type f)" "deep/below/a.tar.gz"
+}
+
+t_archive_refuses_a_link_entry() {
+  one_header name=a type=2 linkname=/etc/passwd
+  refused_with "the type 2 is not a regular file or a folder"
+}
+
+t_archive_needs_one_archive() {
+  run 2 "$tools_dir/check-archive.sh"
+  has "give one archive"
+  run 2 "$tools_dir/check-archive.sh" a b
+  has "give one archive"
+}
+
+t_archive_needs_a_file() {
+  mkdir folder
+  run 2 "$tools_dir/check-archive.sh" folder
+  has "folder is not a file"
+  run 2 "$tools_dir/check-archive.sh" no-such-file
+  has "no-such-file is not a file"
+}
+
+t_archive_needs_gzip() {
+  mkdir bin
+  ln -s "$(command -v dirname)" bin/dirname
+  : >a.tar.gz
+  run 3 env PATH="$case_dir/bin" /bin/sh "$tools_dir/check-archive.sh" a.tar.gz
+  has "this check needs the command gzip, and it is not installed"
+}
+
 online_pack() {
   requires grammars
   mkdir -p "rust pack/grammars" "rust pack/licenses"
