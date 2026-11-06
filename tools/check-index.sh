@@ -98,8 +98,8 @@ if [ -f "$index" ]; then
     problem "index.jsonl does not end with a line feed"
   fi
   jq -R -n -r \
-    --arg names "^($name_pattern)\$" \
-    --arg releases "^($release_pattern)\$" \
+    --arg names "\\A($name_pattern)\\z" \
+    --arg releases "\\A($release_pattern)\\z" \
     '[inputs] | to_entries[] | (.key + 1) as $line | .value as $text |
       ($text | try fromjson catch null) as $object |
       if ($object | type) != "object" then "bad\t\($line)\tthe line is not a JSON object"
@@ -112,7 +112,7 @@ if [ -f "$index" ]; then
         "bad\t\($line)\tthe field name is not a name of a pack"
       elif ($object.version | type) != "string" or ($object.version | test($releases) | not) then
         "bad\t\($line)\tthe field version is not a release number"
-      elif ($object.hash | type) != "string" or ($object.hash | test("^[0-9a-f]{64}$") | not) then
+      elif ($object.hash | type) != "string" or ($object.hash | test("\\A[0-9a-f]{64}\\z") | not) then
         "bad\t\($line)\tthe field hash is not 64 lowercase hex digits"
       elif $object.url != "https://github.com/sinterworks/sinter-packs/releases/download/\($object.name)-v\($object.version)/\($object.name)-\($object.version).tar.gz" then
         "bad\t\($line)\tthe field url is not the address of the archive of the release"

@@ -1434,6 +1434,27 @@ t_index_finds_a_hash_in_upper_case() {
   has "index.jsonl: line 1: the field hash is not 64 lowercase hex digits"
 }
 
+t_index_finds_a_name_with_a_line_feed_at_the_end() {
+  make_repository
+  index_line 'demo\n' 0.1.0 "$(pack_hash repo/packs/demo)" >repo/index.jsonl
+  run 1 "$tools_dir/check-index.sh" repo
+  has "index.jsonl: line 1: the field name is not a name of a pack"
+}
+
+t_index_finds_a_version_with_a_line_feed_at_the_end() {
+  make_repository
+  index_line demo '0.1.0\n' "$(pack_hash repo/packs/demo)" >repo/index.jsonl
+  run 1 "$tools_dir/check-index.sh" repo
+  has "index.jsonl: line 1: the field version is not a release number"
+}
+
+t_index_finds_a_hash_with_a_line_feed_at_the_end() {
+  make_repository
+  index_line demo 0.1.0 "$(pack_hash repo/packs/demo)\n" >repo/index.jsonl
+  run 1 "$tools_dir/check-index.sh" repo
+  has "index.jsonl: line 1: the field hash is not 64 lowercase hex digits"
+}
+
 t_index_finds_a_url_of_another_repository() {
   make_repository
   good_line | sed 's|sinterworks/sinter-packs|lathrys-at/sinter-packs|' >repo/index.jsonl
