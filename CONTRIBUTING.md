@@ -249,7 +249,30 @@ specification, and add the line of the new release to `index.jsonl`
 in the same pull request. The line holds the pack hash of the folder,
 which `tools/pack-hash.sh packs/<name>` prints. A pull request can add
 only the newest line of a pack.
-After the merge, CI publishes the archive of the release.
+
+The merge starts the workflow `release`. For each line of the index
+with no published release, the job builds the archive, checks its pack
+hash, attests it, and publishes it. The job makes the tag
+`<name>-v<version>` at the publication. Do not push a tag.
+
+A published release and its tag cannot change, and a deleted release
+does not free its tag. The fix for a wrong release is a new release.
+A new run skips a published release and does not check it again. So
+when a run fails after a publication, check the release with
+`gh release verify`.
+
+A later run or a manual start releases every line with no release,
+each from the commit that added the line. To repeat a failed run, start
+the workflow `release` by hand on `main`, with an empty input. The run
+deletes each old draft and makes it again. A run stops and changes
+nothing when a tag exists with no release, when no commit added a line,
+or when the commit that added a line holds other content.
+
+To rehearse the release of a pack, start the workflow by hand on `main`,
+with the name of the pack as the input `rehearse`. The job builds and
+checks the archive, makes a draft, attests the archive, compares the
+asset of the draft with the archive, and deletes the draft. It
+publishes nothing.
 
 ### A grammar built from source
 
