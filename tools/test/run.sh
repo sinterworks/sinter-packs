@@ -2477,11 +2477,16 @@ t_archive_needs_gzip() {
 
 stub_tar() {
   mkdir -p stub
+  STUB_TAR_REAL=$(command -v tar)
+  export STUB_TAR_REAL
   cat >stub/tar <<'STUB'
 #!/bin/sh
 if [ "$1" = --version ]; then
   echo "${STUB_TAR_VERSION:-tar (GNU tar) 1.35}"
   exit 0
+fi
+if [ "$1" = -x ]; then
+  exec "$STUB_TAR_REAL" "$@"
 fi
 printf '%s\n' "$*" >>"$STUB_TAR_DIR/tar-log"
 printf '%s\n' "${TAR_OPTIONS-unset}" >>"$STUB_TAR_DIR/tar-options"
@@ -2494,6 +2499,10 @@ zeros() {
   dd if=/dev/zero bs=1 count="$1" 2>/dev/null
 }
 while IFS= read -r path; do
+  if [ -f "$STUB_TAR_DIR/tar-skips-first" ] && [ -z "${skipped:-}" ]; then
+    skipped=1
+    continue
+  fi
   size=$(wc -c <"$path" | tr -d ' ')
   printf 'name=%s\tlength=%s\n' "$path" "$size" |
     awk -f "$STUB_TAR_TOOLS/test/ustar.awk" | tr '\001' '\000'
@@ -2504,7 +2513,7 @@ if [ -f "$STUB_TAR_DIR/tar-fails" ]; then
   echo "tar: a path is too long" >&2
   exit 2
 fi
-zeros 1024
+[ -f "$STUB_TAR_DIR/tar-cuts-end" ] || zeros 1024
 STUB
   chmod +x stub/tar
   STUB_TAR_DIR=$case_dir/stub
@@ -2751,6 +2760,1298 @@ t_gnu_builds_each_pack_of_the_repository() {
     note "the repository has no pack"
     return 1
   }
+}
+
+stub_gh_state() {
+  mkdir -p stub/assets
+  : >stub/releases
+  : >stub/tags
+  : >stub/gh-log
+  cat >stub/gh <<'STUB'
+#!/bin/sh
+printf '%s\n' "$*" >>"$STUB_DIR/gh-log"
+printf '%s\n' "${GH_REPO:-}" >"$STUB_DIR/gh-repo"
+if [ -f "$STUB_DIR/gh-fails" ] && printf '%s\n' "$*" | grep -Fq -f "$STUB_DIR/gh-fails"; then
+  echo "gh: Server Error (HTTP 500)" >&2
+  exit 1
+fi
+base=repos/sinterworks/sinter-packs
+store() {
+  jq -c "$1" "$STUB_DIR/releases" >"$STUB_DIR/releases.new"
+  mv "$STUB_DIR/releases.new" "$STUB_DIR/releases"
+}
+not_found() {
+  echo "gh: Not Found (HTTP 404)" >&2
+  exit 1
+}
+case $1 in
+  api)
+    case $2 in
+      --paginate)
+        [ "$3" = "$base/releases" ] || not_found
+        echo '[]'
+        jq -c '[.]' "$STUB_DIR/releases"
+        ;;
+      -X)
+        case $4 in
+          "$base"/releases/*)
+            id=${4##*/}
+            [ -n "$(jq --argjson id "$id" 'select(.id == $id)' "$STUB_DIR/releases")" ] || not_found
+            store "select(.id != $id)"
+            ;;
+          "$base"/git/refs/tags/*)
+            tag=${4##*/tags/}
+            grep -Fxq -- "$tag" "$STUB_DIR/tags" || not_found
+            grep -Fvx -- "$tag" "$STUB_DIR/tags" >"$STUB_DIR/tags.new" || true
+            mv "$STUB_DIR/tags.new" "$STUB_DIR/tags"
+            ;;
+          *) not_found ;;
+        esac
+        ;;
+      -H)
+        [ "$3" = "Accept: application/octet-stream" ] || not_found
+        id=${4##*/}
+        [ -f "$STUB_DIR/assets/$id" ] || not_found
+        cat "$STUB_DIR/assets/$id"
+        ;;
+      "$base"/git/ref/tags/*)
+        tag=${2##*/tags/}
+        grep -Fxq -- "$tag" "$STUB_DIR/tags" || not_found
+        if [ -f "$STUB_DIR/ref-fails" ]; then
+          echo "gh: Server Error (HTTP 500)" >&2
+          exit 1
+        fi
+        if [ -f "$STUB_DIR/ref-fails-once" ]; then
+          rm "$STUB_DIR/ref-fails-once"
+          echo "gh: Server Error (HTTP 500)" >&2
+          exit 1
+        fi
+        sha=$(cat "$STUB_DIR/tag-commit-$tag" 2>/dev/null) || sha=0000000000000000000000000000000000000000
+        printf '{"ref":"refs/tags/%s","object":{"sha":"%s"}}\n' "$tag" "$sha"
+        ;;
+      *) not_found ;;
+    esac
+    ;;
+  release)
+    case $2 in
+      create)
+        tag=$3
+        archive=$4
+        shift 4
+        draft=false
+        target=
+        while [ "$#" -gt 0 ]; do
+          case $1 in
+            --draft) draft=true ;;
+            --target) target=$2; shift ;;
+          esac
+          shift
+        done
+        [ "$draft" = true ] || exit 9
+        id=$(($(awk 'END { print NR }' "$STUB_DIR/releases") + 101))
+        while grep -q "\"id\":$id," "$STUB_DIR/releases"; do id=$((id + 1)); done
+        asset=$((id * 10))
+        cp "$archive" "$STUB_DIR/assets/$asset"
+        [ ! -f "$STUB_DIR/upload-corrupts" ] || printf 'x' >>"$STUB_DIR/assets/$asset"
+        jq -nc --argjson id "$id" --arg tag "$tag" --arg target "$target" --argjson asset "$asset" --arg name "${archive##*/}" \
+          '{id: $id, tag_name: $tag, target_commitish: $target, draft: true, assets: [{id: $asset, name: $name}]}' >>"$STUB_DIR/releases"
+        [ ! -f "$STUB_DIR/draft-makes-tag" ] || printf '%s\n' "$tag" >>"$STUB_DIR/tags"
+        ;;
+      edit)
+        [ "$4" = --draft=false ] && [ "$5" = --latest=false ] || exit 9
+        [ -n "$(jq --arg tag "$3" 'select(.tag_name == $tag and .draft)' "$STUB_DIR/releases")" ] || not_found
+        if [ ! -f "$STUB_DIR/tag-at-wrong-commit" ]; then
+          jq -r --arg tag "$3" 'select(.tag_name == $tag) | .target_commitish' "$STUB_DIR/releases" >"$STUB_DIR/tag-commit-$3"
+        fi
+        store "if .tag_name == \"$3\" then .draft = false else . end"
+        printf '%s\n' "$3" >>"$STUB_DIR/tags"
+        ;;
+      verify)
+        if [ -f "$STUB_DIR/verify-fails-once" ]; then
+          rm "$STUB_DIR/verify-fails-once"
+          echo "no attestation yet" >&2
+          exit 1
+        fi
+        [ -n "$(jq --arg tag "$3" 'select(.tag_name == $tag and (.draft | not))' "$STUB_DIR/releases")" ] || exit 1
+        ;;
+      verify-asset)
+        [ -n "$(jq --arg tag "$3" 'select(.tag_name == $tag and (.draft | not))' "$STUB_DIR/releases")" ] && [ -f "$4" ] || exit 1
+        ;;
+      *) exit 9 ;;
+    esac
+    ;;
+  *) exit 9 ;;
+esac
+STUB
+  cat >stub/curl <<'STUB'
+#!/bin/sh
+printf '%s\n' "$*" >>"$STUB_DIR/curl-log"
+[ ! -f "$STUB_DIR/curl-fails" ] || exit 22
+while [ "$#" -gt 1 ]; do
+  [ "$1" != -o ] || out=$2
+  shift
+done
+tag=${1%/*}
+tag=${tag##*/}
+asset=$(jq -r --arg tag "$tag" 'select(.tag_name == $tag and (.draft | not)) | .assets[0].id' "$STUB_DIR/releases")
+[ -n "$asset" ] || exit 22
+cp "$STUB_DIR/assets/$asset" "$out"
+[ ! -f "$STUB_DIR/download-corrupts" ] || printf 'x' >>"$out"
+STUB
+  chmod +x stub/gh stub/curl
+  STUB_DIR=$case_dir/stub
+  GH=$case_dir/stub/gh
+  CURL=$case_dir/stub/curl
+  GITHUB_REPOSITORY=sinterworks/sinter-packs
+  GITHUB_SHA=0123456789abcdef0123456789abcdef01234567
+  RELEASE_RETRY_WAIT=0
+  export STUB_DIR GH CURL GITHUB_REPOSITORY GITHUB_SHA RELEASE_RETRY_WAIT
+  unset GITHUB_STEP_SUMMARY
+}
+
+stub_release() {
+  stub_tar
+  stub_gh_state
+}
+
+release_tool() {
+  "$tools_dir/release.sh" -r repo "$@"
+}
+
+seed_release() {
+  jq -nc --argjson id "$1" --arg tag "$2" --argjson draft "$3" \
+    '{id: $id, tag_name: $tag, draft: $draft, assets: []}' >>stub/releases
+}
+
+seed_tag() {
+  printf '%s\n' "$1" >>stub/tags
+}
+
+gh_called() {
+  grep -q -- "$1" stub/gh-log
+}
+
+changes_nothing_on_github() {
+  if grep -Eq '^(release |api -X)' stub/gh-log; then
+    note "the tool changed something on GitHub:"
+    sed 's/^/      /' stub/gh-log >>"$case_dir/notes"
+    return 1
+  fi
+}
+
+commit_release() {
+  [ -d repo/.git ] || git init -q repo
+  commit_all repo "$1"
+  GITHUB_SHA=$(git -C repo rev-parse HEAD)
+  export GITHUB_SHA
+}
+
+release_repository() {
+  make_repository
+  commit_release base
+}
+
+two_packs_repository() {
+  make_repository
+  second_pack
+  {
+    index_line alpha 0.1.0 "$(pack_hash repo/packs/alpha)"
+    index_line demo 0.1.0 "$(pack_hash repo/packs/demo)"
+  } >repo/index.jsonl
+  commit_release base
+}
+
+two_lines_repository() {
+  make_repository
+  first_hash=$(pack_hash repo/packs/demo)
+  commit_release first
+  first_commit=$GITHUB_SHA
+  set_version repo/packs/demo 0.2.0
+  second_hash=$(pack_hash repo/packs/demo)
+  index_line demo 0.2.0 "$second_hash" >>repo/index.jsonl
+  commit_release second
+  second_commit=$GITHUB_SHA
+}
+
+draft_target() {
+  jq -r --arg tag "$1" 'select(.tag_name == $tag) | .target_commitish' stub/releases
+}
+
+t_release_prepare_with_no_index_has_nothing_to_release() {
+  stub_release
+  release_repository
+  rm repo/index.jsonl
+  run 0 release_tool prepare dist
+  has "there is nothing to release"
+  has "Number of drafts: 0"
+  same "$(cut -f 1 dist/tags)" ""
+  same "$(cat stub/gh-log)" ""
+}
+
+t_release_prepare_stops_on_a_broken_index() {
+  stub_release
+  release_repository
+  printf 'not json\n' >repo/index.jsonl
+  run 1 release_tool prepare dist
+  has "index.jsonl: line 1: the line is not a JSON object"
+  same "$(cat stub/gh-log)" ""
+}
+
+t_release_prepare_makes_a_draft_at_the_commit() {
+  stub_release
+  release_repository
+  hash=$(pack_hash repo/packs/demo)
+  run 0 release_tool prepare dist
+  has "Number of drafts: 1"
+  grep -Fxq "release create demo-v0.1.0 dist/demo-0.1.0.tar.gz --draft --target $GITHUB_SHA --latest=false --title demo 0.1.0 --notes The pack hash of this release is $hash." stub/gh-log
+  same "$(cat stub/gh-repo)" sinterworks/sinter-packs
+  same "$(cut -f 1 dist/tags)" demo-v0.1.0
+  run 0 "$tools_dir/check-archive.sh" dist/demo-0.1.0.tar.gz
+  same "$(cat "$case_dir/out")" "$hash"
+}
+
+t_release_prepare_keeps_the_order_of_the_index() {
+  stub_release
+  two_packs_repository
+  run 0 release_tool prepare dist
+  has "Number of drafts: 2"
+  same "$(cut -f 1 dist/tags)" "$(printf 'alpha-v0.1.0\ndemo-v0.1.0')"
+}
+
+t_release_prepare_skips_a_published_release() {
+  stub_release
+  release_repository
+  seed_release 1 demo-v0.1.0 false
+  seed_tag demo-v0.1.0
+  run 0 release_tool prepare dist
+  has "demo-v0.1.0 has a published release."
+  has "Number of drafts: 0"
+  same "$(cut -f 1 dist/tags)" ""
+  changes_nothing_on_github
+}
+
+t_release_prepare_reads_each_page_of_the_list() {
+  stub_release
+  two_packs_repository
+  seed_release 1 other-v9.9.9 false
+  seed_release 2 alpha-v0.1.0 false
+  seed_release 3 demo-v0.1.0 false
+  run 0 release_tool prepare dist
+  has "Number of drafts: 0"
+  gh_called "^api --paginate repos/sinterworks/sinter-packs/releases$"
+}
+
+t_release_prepare_deletes_an_old_draft_before_the_new_draft() {
+  stub_release
+  release_repository
+  seed_release 7 demo-v0.1.0 true
+  run 0 release_tool prepare dist
+  has "Deleted the draft 7 of the tag demo-v0.1.0."
+  same "$(jq -c 'select(.id == 7)' stub/releases)" ""
+  same "$(jq -r 'select(.draft) | .tag_name' stub/releases)" demo-v0.1.0
+  same "$(grep -nE '^(api -X|release create)' stub/gh-log | cut -d: -f1 | sort -n | tr '\n' ' ')" "$(grep -n '^api -X' stub/gh-log | cut -d: -f1) $(grep -n '^release create' stub/gh-log | cut -d: -f1) "
+}
+
+t_release_prepare_deletes_each_old_draft_of_a_tag() {
+  stub_release
+  release_repository
+  seed_release 7 demo-v0.1.0 true
+  seed_release 8 demo-v0.1.0 true
+  run 0 release_tool prepare dist
+  same "$(jq -c 'select(.id == 7 or .id == 8)' stub/releases)" ""
+}
+
+t_release_prepare_refuses_a_tag_with_no_release() {
+  stub_release
+  release_repository
+  seed_tag demo-v0.1.0
+  run 1 release_tool prepare dist
+  has "demo-v0.1.0: the tag exists with no published release, and a tag cannot change."
+  gh_called "^api repos/sinterworks/sinter-packs/git/ref/tags/demo-v0.1.0$"
+  changes_nothing_on_github
+}
+
+t_release_prepare_refuses_a_draft_of_a_tag_that_exists() {
+  stub_release
+  release_repository
+  seed_release 7 demo-v0.1.0 true
+  seed_tag demo-v0.1.0
+  run 1 release_tool prepare dist
+  has "demo-v0.1.0: the tag exists with no published release"
+  changes_nothing_on_github
+}
+
+t_release_prepare_stops_when_github_does_not_answer_about_a_tag() {
+  stub_release
+  release_repository
+  printf 'git/ref/tags\n' >stub/gh-fails
+  run 1 release_tool prepare dist
+  has "GitHub does not say whether the tag demo-v0.1.0 exists: gh: Server Error (HTTP 500)"
+  changes_nothing_on_github
+}
+
+t_release_prepare_stops_when_github_gives_no_list() {
+  stub_release
+  release_repository
+  printf -- '--paginate\n' >stub/gh-fails
+  run 1 release_tool prepare dist
+  has "GitHub gives no list of the releases: gh: Server Error (HTTP 500)"
+  changes_nothing_on_github
+}
+
+t_release_prepare_stops_on_a_list_that_is_not_json() {
+  stub_release
+  release_repository
+  printf '#!/bin/sh\nprintf "<html>"\n' >stub/html
+  chmod +x stub/html
+  GH=$case_dir/stub/html
+  run 1 release_tool prepare dist
+  has "the list of the releases cannot be read"
+}
+
+t_release_prepare_builds_each_line_from_its_own_commit() {
+  stub_release
+  two_lines_repository
+  run 0 release_tool prepare dist
+  has "Number of drafts: 2"
+  same "$(cat dist/tags)" "$(printf 'demo-v0.1.0\t%s\ndemo-v0.2.0\t%s' "$first_commit" "$second_commit")"
+  same "$(draft_target demo-v0.1.0)" "$first_commit"
+  same "$(draft_target demo-v0.2.0)" "$second_commit"
+  run 0 "$tools_dir/check-archive.sh" dist/demo-0.1.0.tar.gz
+  same "$(cat "$case_dir/out")" "$first_hash"
+  run 0 "$tools_dir/check-archive.sh" dist/demo-0.2.0.tar.gz
+  same "$(cat "$case_dir/out")" "$second_hash"
+}
+
+t_release_prepare_takes_an_older_line_with_a_release() {
+  stub_release
+  two_lines_repository
+  seed_release 1 demo-v0.1.0 false
+  run 0 release_tool prepare dist
+  same "$(cat dist/tags)" "$(printf 'demo-v0.2.0\t%s' "$second_commit")"
+}
+
+t_release_prepare_finds_the_commit_of_a_line_that_a_later_commit_moves() {
+  stub_release
+  make_repository
+  commit_release first
+  first_commit=$GITHUB_SHA
+  second_pack
+  {
+    index_line alpha 0.1.0 "$(pack_hash repo/packs/alpha)"
+    cat repo/index.jsonl
+  } >repo/index.new
+  mv repo/index.new repo/index.jsonl
+  commit_release second
+  seed_release 1 alpha-v0.1.0 false
+  run 0 release_tool prepare dist
+  same "$(draft_target demo-v0.1.0)" "$first_commit"
+}
+
+t_release_prepare_takes_the_oldest_commit_of_a_line_added_twice() {
+  stub_release
+  make_repository
+  line=$(cat repo/index.jsonl)
+  commit_release add
+  first_commit=$GITHUB_SHA
+  : >repo/index.jsonl
+  commit_release remove
+  printf '%s\n' "$line" >repo/index.jsonl
+  commit_release "add again"
+  run 0 release_tool prepare dist
+  same "$(draft_target demo-v0.1.0)" "$first_commit"
+}
+
+t_release_prepare_takes_the_merge_and_not_the_commit_of_a_side_branch() {
+  stub_release
+  make_repository
+  rm repo/index.jsonl
+  line=$(index_line demo 0.1.0 "$(pack_hash repo/packs/demo)")
+  commit_release base
+  git -C repo checkout -q -b side
+  printf '%s\n' "$line" >repo/index.jsonl
+  commit_release side
+  git -C repo checkout -q -
+  git -C repo -c user.name=test -c user.email=test@example.com -c commit.gpgsign=false \
+    merge -q --no-ff -m merge side
+  GITHUB_SHA=$(git -C repo rev-parse HEAD)
+  run 0 release_tool prepare dist
+  same "$(draft_target demo-v0.1.0)" "$GITHUB_SHA"
+}
+
+t_release_prepare_refuses_a_line_that_no_commit_adds() {
+  stub_release
+  make_repository
+  rm repo/index.jsonl
+  line=$(index_line demo 0.1.0 "$(pack_hash repo/packs/demo)")
+  commit_release base
+  printf '%s\n' "$line" >repo/index.jsonl
+  run 1 release_tool prepare dist
+  has "demo-v0.1.0: no commit in the history of $GITHUB_SHA adds this line of the index: $line"
+  changes_nothing_on_github
+}
+
+t_release_prepare_does_not_read_another_branch() {
+  stub_release
+  make_repository
+  rm repo/index.jsonl
+  line=$(index_line demo 0.1.0 "$(pack_hash repo/packs/demo)")
+  commit_release base
+  base_commit=$GITHUB_SHA
+  git -C repo checkout -q -b side
+  printf '%s\n' "$line" >repo/index.jsonl
+  commit_release side
+  GITHUB_SHA=$base_commit
+  run 1 release_tool prepare dist
+  has "demo-v0.1.0: no commit in the history of $base_commit adds this line"
+  changes_nothing_on_github
+}
+
+t_release_prepare_refuses_a_commit_that_holds_the_text_inside_another_line() {
+  stub_release
+  make_repository
+  line=$(cat repo/index.jsonl)
+  printf 'x%s\n' "$line" >repo/index.jsonl
+  commit_release first
+  first_commit=$GITHUB_SHA
+  printf '%s\n' "$line" >repo/index.jsonl
+  commit_release second
+  run 1 release_tool prepare dist
+  has "demo-v0.1.0: the commit $first_commit changes this line of the index but does not hold it as a line"
+  changes_nothing_on_github
+}
+
+t_release_prepare_refuses_a_commit_that_holds_other_content() {
+  stub_release
+  make_repository
+  index_line demo 0.1.0 "$(printf '%064d' 1)" >repo/index.jsonl
+  commit_release first
+  first_commit=$GITHUB_SHA
+  set_version repo/packs/demo 0.2.0
+  index_line demo 0.2.0 "$(pack_hash repo/packs/demo)" >>repo/index.jsonl
+  commit_release second
+  run 1 release_tool prepare dist
+  has "demo-v0.1.0: the line of the index has the hash $(printf '%064d' 1), and packs/demo in the commit $first_commit that adds the line holds other content"
+  changes_nothing_on_github
+}
+
+t_release_prepare_refuses_a_file_that_git_archive_leaves_out() {
+  stub_release
+  make_repository
+  printf 'x' >repo/packs/demo/left-out
+  printf 'packs/demo/left-out export-ignore\n' >repo/.gitattributes
+  index_line demo 0.1.0 "$(pack_hash repo/packs/demo)" >repo/index.jsonl
+  commit_release base
+  run 1 release_tool prepare dist
+  has "holds other content"
+  changes_nothing_on_github
+}
+
+t_release_prepare_refuses_a_commit_with_no_folder_of_the_pack() {
+  stub_release
+  mkdir -p repo/packs
+  make_pack other demo demo
+  index_line demo 0.1.0 "$(pack_hash other)" >repo/index.jsonl
+  : >repo/packs/.keep
+  commit_release first
+  first_commit=$GITHUB_SHA
+  rm repo/packs/.keep
+  mv other repo/packs/demo
+  set_version repo/packs/demo 0.2.0
+  index_line demo 0.2.0 "$(pack_hash repo/packs/demo)" >>repo/index.jsonl
+  commit_release second
+  run 1 release_tool prepare dist
+  has "demo-v0.1.0: the commit $first_commit has no folder packs/demo"
+  changes_nothing_on_github
+}
+
+t_release_prepare_refuses_a_link_in_place_of_the_folder_at_the_commit() {
+  stub_release
+  mkdir -p repo/packs
+  make_pack copy demo demo
+  ln -s "$case_dir/copy" repo/packs/demo
+  index_line demo 0.1.0 "$(pack_hash copy)" >repo/index.jsonl
+  commit_release first
+  first_commit=$GITHUB_SHA
+  rm repo/packs/demo
+  make_pack repo/packs/demo demo demo
+  set_version repo/packs/demo 0.2.0
+  index_line demo 0.2.0 "$(pack_hash repo/packs/demo)" >>repo/index.jsonl
+  commit_release second
+  run 1 release_tool prepare dist
+  has "demo-v0.1.0: packs/demo is not a folder in the commit $first_commit"
+  changes_nothing_on_github
+}
+
+t_release_prepare_refuses_a_descriptor_with_another_name_at_the_commit() {
+  stub_release
+  mkdir -p repo/packs
+  make_pack repo/packs/demo other demo
+  index_line demo 0.1.0 "$(pack_hash repo/packs/demo)" >repo/index.jsonl
+  commit_release first
+  first_commit=$GITHUB_SHA
+  rm -rf repo/packs/demo
+  make_pack repo/packs/demo demo demo
+  set_version repo/packs/demo 0.2.0
+  index_line demo 0.2.0 "$(pack_hash repo/packs/demo)" >>repo/index.jsonl
+  commit_release second
+  run 1 release_tool prepare dist
+  has "demo-v0.1.0: the descriptor of packs/demo in the commit $first_commit gives the name \"other\" and the version \"0.1.0\", which are not those of the line"
+  changes_nothing_on_github
+}
+
+t_release_prepare_refuses_a_link_in_the_pack_at_the_commit() {
+  stub_release
+  make_repository
+  ln -s pack.toml repo/packs/demo/link
+  index_line demo 0.1.0 "$(printf '%064d' 1)" >repo/index.jsonl
+  commit_release first
+  rm repo/packs/demo/link
+  set_version repo/packs/demo 0.2.0
+  index_line demo 0.2.0 "$(pack_hash repo/packs/demo)" >>repo/index.jsonl
+  commit_release second
+  run 1 release_tool prepare dist
+  has "demo-v0.1.0: packs/demo has no pack hash in the commit"
+  has "the pack holds an entry that is not a file or a folder: link"
+  changes_nothing_on_github
+}
+
+t_release_prepare_refuses_a_shallow_checkout() {
+  stub_release
+  release_repository
+  git clone -q --depth 1 "file://$case_dir/repo" shallow
+  run 1 "$tools_dir/release.sh" -r shallow prepare dist
+  has "the checkout is shallow"
+  same "$(cat stub/gh-log)" ""
+}
+
+t_release_prepare_needs_a_git_repository() {
+  stub_release
+  make_repository
+  run 1 release_tool prepare dist
+  has "repo is not a git repository"
+  same "$(cat stub/gh-log)" ""
+}
+
+t_release_prepare_needs_a_commit_of_the_repository() {
+  stub_release
+  release_repository
+  GITHUB_SHA=$(printf '%040d' 1)
+  run 1 release_tool prepare dist
+  has "the repository has no commit $GITHUB_SHA"
+  same "$(cat stub/gh-log)" ""
+}
+
+t_release_prepare_reads_the_repository_that_it_names() {
+  stub_release
+  release_repository
+  mkdir other
+  git init -q other
+  GIT_DIR=$case_dir/other/.git
+  export GIT_DIR
+  run 0 release_tool prepare dist
+  has "Number of drafts: 1"
+}
+
+t_release_prepare_with_a_problem_keeps_the_draft_of_another_line() {
+  stub_release
+  two_packs_repository
+  seed_release 7 alpha-v0.1.0 true
+  seed_tag demo-v0.1.0
+  run 1 release_tool prepare dist
+  has "The tool changed nothing on GitHub."
+  changes_nothing_on_github
+  same "$(jq -r 'select(.id == 7) | .tag_name' stub/releases)" alpha-v0.1.0
+}
+
+t_release_prepare_refuses_a_line_with_the_version_of_another_folder() {
+  stub_release
+  make_repository
+  set_version repo/packs/demo 0.2.0
+  hash=$(pack_hash repo/packs/demo)
+  {
+    index_line demo 0.1.0 "$hash"
+    index_line demo 0.2.0 "$hash"
+  } >repo/index.jsonl
+  commit_release base
+  run 1 release_tool prepare dist
+  has "demo-v0.1.0: the descriptor of packs/demo in the commit $GITHUB_SHA gives the name \"demo\" and the version \"0.2.0\", which are not those of the line"
+  changes_nothing_on_github
+}
+
+t_release_prepare_makes_no_draft_of_a_broken_archive() {
+  stub_release
+  release_repository
+  : >stub/tar-cuts-end
+  run 1 release_tool prepare dist
+  has "the tar data has no end marker"
+  [ "$(grep -c '^release create' stub/gh-log)" -eq 0 ]
+  [ ! -e dist/tags ]
+}
+
+t_release_prepare_makes_no_draft_of_an_archive_with_another_hash() {
+  stub_release
+  release_repository
+  : >stub/tar-skips-first
+  run 1 release_tool prepare dist
+  has "demo-v0.1.0: the archive has the pack hash"
+  has "and the line of the index has the hash $(pack_hash repo/packs/demo)"
+  [ "$(grep -c '^release create' stub/gh-log)" -eq 0 ]
+  [ ! -e dist/tags ]
+}
+
+t_release_prepare_writes_no_tags_when_a_draft_fails() {
+  stub_release
+  two_packs_repository
+  printf 'release create demo\n' >stub/gh-fails
+  run 1 release_tool prepare dist
+  has "demo-v0.1.0: gh cannot make the draft: gh: Server Error (HTTP 500)"
+  [ ! -e dist/tags ]
+}
+
+t_release_prepare_stops_when_a_draft_cannot_be_deleted() {
+  stub_release
+  release_repository
+  seed_release 7 demo-v0.1.0 true
+  printf 'api -X DELETE\n' >stub/gh-fails
+  run 1 release_tool prepare dist
+  has "demo-v0.1.0: gh cannot delete the draft 7"
+  [ "$(grep -c '^release create' stub/gh-log)" -eq 0 ]
+}
+
+t_release_prepare_repairs_a_failed_run() {
+  stub_release
+  two_packs_repository
+  printf 'release create demo\n' >stub/gh-fails
+  run 1 release_tool prepare dist
+  rm stub/gh-fails
+  run 0 release_tool prepare dist2
+  has "Number of drafts: 2"
+  same "$(jq -r 'select(.draft) | .tag_name' stub/releases | LC_ALL=C sort | tr '\n' ' ')" "alpha-v0.1.0 demo-v0.1.0 "
+}
+
+t_release_prepare_refuses_an_outdir_with_files() {
+  stub_release
+  release_repository
+  mkdir dist
+  : >dist/.old
+  run 2 release_tool prepare dist
+  has "dist holds files, and it must be empty"
+}
+
+t_release_prepare_refuses_an_outdir_that_is_a_file() {
+  stub_release
+  release_repository
+  : >dist
+  run 2 release_tool prepare dist
+  has "dist is not a folder"
+}
+
+t_release_prepare_needs_the_commit() {
+  stub_release
+  release_repository
+  GITHUB_SHA=main
+  run 2 release_tool prepare dist
+  has "the variable GITHUB_SHA must give a commit"
+}
+
+t_release_needs_the_repository() {
+  stub_release
+  release_repository
+  GITHUB_REPOSITORY='owner/name; id'
+  run 2 release_tool prepare dist
+  has "the variable GITHUB_REPOSITORY must give the repository"
+}
+
+published_case() {
+  stub_release
+  "${1:-release_repository}"
+  run 0 release_tool prepare dist
+}
+
+t_release_publish_publishes_and_verifies() {
+  published_case
+  run 0 release_tool publish dist
+  has "Published demo-v0.1.0."
+  same "$(sed -n '/^release edit/,$p' stub/gh-log)" "$(printf '%s\n' \
+    "release edit demo-v0.1.0 --draft=false --latest=false" \
+    "api repos/sinterworks/sinter-packs/git/ref/tags/demo-v0.1.0" \
+    "release verify demo-v0.1.0" \
+    "release verify-asset demo-v0.1.0 dist/demo-0.1.0.tar.gz")"
+  same "$(jq -r '.draft' stub/releases)" false
+}
+
+t_release_publish_downloads_from_the_address_of_the_index() {
+  published_case
+  run 0 release_tool publish dist
+  has "Published demo-v0.1.0."
+  grep -Fq -- "https://github.com/sinterworks/sinter-packs/releases/download/demo-v0.1.0/demo-0.1.0.tar.gz" stub/curl-log
+  grep -Fq -- "-fsSL" stub/curl-log
+  grep -Fq -- "--proto =https" stub/curl-log
+}
+
+t_release_publish_writes_the_summary() {
+  published_case
+  GITHUB_STEP_SUMMARY=$case_dir/summary
+  export GITHUB_STEP_SUMMARY
+  run 0 release_tool publish dist
+  same "$(cat summary)" "- demo 0.1.0: pack hash $(pack_hash repo/packs/demo), SHA-256 of the archive $(sha256_of dist/demo-0.1.0.tar.gz)"
+}
+
+no_publication() {
+  has "The release is not published, and a new run makes the draft again."
+  [ "$(grep -c '^release edit' stub/gh-log)" -eq 0 ]
+}
+
+after_publication() {
+  has "The release is published, and a published release cannot change."
+  has "A new run skips it and does not check it again, so check it with gh release verify."
+  has "The fix for a wrong release is a new release."
+}
+
+t_release_publish_refuses_a_draft_whose_asset_has_other_bytes() {
+  published_case
+  printf 'x' >>stub/assets/1010
+  run 1 release_tool publish dist
+  has "demo-v0.1.0: the asset of the draft has the SHA-256"
+  no_publication
+}
+
+t_release_publish_refuses_a_second_draft_of_the_tag() {
+  published_case
+  seed_release 7 demo-v0.1.0 true
+  run 1 release_tool publish dist
+  has "demo-v0.1.0: GitHub holds 2 drafts of this tag, and it must hold one"
+  no_publication
+}
+
+t_release_publish_refuses_a_tag_with_no_draft() {
+  published_case
+  printf '' >stub/releases
+  run 1 release_tool publish dist
+  has "demo-v0.1.0: GitHub holds 0 drafts of this tag, and it must hold one"
+  no_publication
+}
+
+edit_stub_releases() {
+  jq -c "$1" stub/releases >stub/releases.new
+  mv stub/releases.new stub/releases
+}
+
+t_release_publish_refuses_a_draft_at_another_commit() {
+  published_case
+  other=$(printf '%040d' 1)
+  edit_stub_releases ".target_commitish = \"$other\""
+  run 1 release_tool publish dist
+  has "demo-v0.1.0: the draft has the commit $other, and it must have the commit $GITHUB_SHA"
+  no_publication
+}
+
+t_release_publish_refuses_a_file_of_tags_with_no_commit() {
+  published_case
+  printf 'demo-v0.1.0\n' >dist/tags
+  run 1 release_tool publish dist
+  has "demo-v0.1.0: the file of the tags gives no commit for this tag"
+  [ "$(grep -c '^release edit' stub/gh-log)" -eq 0 ]
+}
+
+t_release_publish_publishes_each_line_at_its_own_commit() {
+  published_case two_lines_repository
+  run 0 release_tool publish dist
+  has "Published demo-v0.1.0."
+  has "Published demo-v0.2.0."
+  same "$(draft_target demo-v0.1.0)" "$first_commit"
+}
+
+t_release_a_new_run_repairs_a_failed_run_of_two_lines() {
+  published_case two_lines_repository
+  printf 'release verify demo-v0.1.0\n' >stub/gh-fails
+  run 1 release_tool publish dist
+  rm stub/gh-fails
+  run 0 release_tool prepare dist2
+  has "demo-v0.1.0 has a published release."
+  has "Number of drafts: 1"
+  same "$(draft_target demo-v0.2.0)" "$second_commit"
+  run 0 release_tool publish dist2
+  has "Published demo-v0.2.0."
+}
+
+t_release_publish_refuses_a_second_asset() {
+  published_case
+  edit_stub_releases '.assets += [{id: 5, name: "other"}]'
+  run 1 release_tool publish dist
+  has "demo-v0.1.0: the draft does not have exactly one asset, with the name demo-0.1.0.tar.gz"
+  no_publication
+}
+
+t_release_publish_refuses_a_draft_with_no_asset() {
+  published_case
+  edit_stub_releases '.assets = []'
+  run 1 release_tool publish dist
+  has "demo-v0.1.0: the draft does not have exactly one asset, with the name demo-0.1.0.tar.gz"
+  no_publication
+}
+
+t_release_publish_refuses_an_asset_with_another_name() {
+  published_case
+  edit_stub_releases '.assets[0].name = "other.tar.gz"'
+  run 1 release_tool publish dist
+  has "demo-v0.1.0: the draft does not have exactly one asset, with the name demo-0.1.0.tar.gz"
+  no_publication
+}
+
+t_release_publish_stops_when_the_asset_cannot_be_downloaded() {
+  published_case
+  printf 'releases/assets\n' >stub/gh-fails
+  run 1 release_tool publish dist
+  has "demo-v0.1.0: the asset of the draft cannot be downloaded"
+  no_publication
+}
+
+t_release_publish_refuses_a_published_release_of_the_tag() {
+  published_case
+  edit_stub_releases '.draft = false'
+  run 1 release_tool publish dist
+  has "demo-v0.1.0: a published release has this tag"
+  no_publication
+}
+
+t_release_publish_refuses_a_tag_that_appears_after_the_draft() {
+  published_case
+  seed_tag demo-v0.1.0
+  run 1 release_tool publish dist
+  has "demo-v0.1.0: the tag exists, and the release would take it at its commit"
+  no_publication
+}
+
+t_release_publish_stops_when_github_does_not_answer_about_a_tag() {
+  published_case
+  printf 'git/ref/tags\n' >stub/gh-fails
+  run 1 release_tool publish dist
+  has "GitHub does not say whether the tag demo-v0.1.0 exists"
+  [ "$(grep -c '^release edit' stub/gh-log)" -eq 0 ]
+}
+
+t_release_publish_stops_when_github_gives_no_list() {
+  published_case
+  printf -- '--paginate\n' >stub/gh-fails
+  run 1 release_tool publish dist
+  has "GitHub gives no list of the releases"
+  [ "$(grep -c '^release edit' stub/gh-log)" -eq 0 ]
+}
+
+t_release_publish_refuses_a_download_with_other_bytes() {
+  published_case
+  : >stub/download-corrupts
+  run 1 release_tool publish dist
+  has "demo-v0.1.0: the file at https://github.com/sinterworks/sinter-packs/releases/download/demo-v0.1.0/demo-0.1.0.tar.gz has the SHA-256"
+  after_publication
+}
+
+t_release_publish_stops_when_the_download_fails() {
+  published_case
+  : >stub/curl-fails
+  run 1 release_tool publish dist
+  has "demo-v0.1.0: the archive cannot be downloaded"
+  after_publication
+}
+
+t_release_publish_stops_when_the_edit_fails() {
+  published_case
+  printf 'release edit\n' >stub/gh-fails
+  run 1 release_tool publish dist
+  has "demo-v0.1.0: gh cannot publish the draft: gh: Server Error (HTTP 500)"
+  has "When the release is still a draft, a new run makes it again."
+  has "A published release cannot change, and the fix for a wrong release is a new release."
+  [ ! -e stub/curl-log ]
+}
+
+t_release_publish_checks_the_commit_of_the_tag() {
+  published_case two_packs_repository
+  : >stub/tag-at-wrong-commit
+  run 1 release_tool publish dist
+  has "alpha-v0.1.0: the tag has the commit 0000000000000000000000000000000000000000, and it must have the commit $GITHUB_SHA"
+  after_publication
+  same "$(jq -r 'select(.tag_name == "demo-v0.1.0") | .draft' stub/releases)" true
+  [ ! -e stub/curl-log ]
+}
+
+t_release_publish_stops_when_the_commit_of_the_tag_cannot_be_read() {
+  published_case
+  : >stub/ref-fails
+  run 1 release_tool publish dist
+  has "demo-v0.1.0: the commit of the tag cannot be read: gh: Server Error (HTTP 500)"
+  after_publication
+  same "$(grep -c '^api repos/sinterworks/sinter-packs/git/ref/tags/demo-v0.1.0$' stub/gh-log)" 7
+}
+
+t_release_publish_reads_the_commit_of_the_tag_again() {
+  published_case
+  : >stub/ref-fails-once
+  run 0 release_tool publish dist
+  has "Published demo-v0.1.0."
+}
+
+t_release_publish_refuses_an_archive_with_no_sha256() {
+  published_case
+  chmod 000 dist/demo-0.1.0.tar.gz
+  run 1 release_tool publish dist
+  has "demo-v0.1.0: the SHA-256 of the archive cannot be computed"
+  no_publication
+}
+
+t_release_needs_a_command_for_sha256() {
+  stub_release
+  release_repository
+  mkdir bin
+  for command in dirname awk jq; do
+    ln -s "$(command -v "$command")" "bin/$command"
+  done
+  run 3 env PATH="$case_dir/bin" /bin/sh "$tools_dir/release.sh" -r repo publish dist
+  has "this check needs sha256sum or shasum, and neither is installed"
+}
+
+t_release_publish_tries_the_verification_again() {
+  published_case
+  : >stub/verify-fails-once
+  run 0 release_tool publish dist
+  has "Published demo-v0.1.0."
+  same "$(grep -c '^release verify demo-v0.1.0$' stub/gh-log)" 2
+}
+
+t_release_publish_stops_when_the_release_does_not_verify() {
+  published_case
+  printf 'release verify demo\n' >stub/gh-fails
+  run 1 release_tool publish dist
+  has "demo-v0.1.0: gh release verify does not accept the release"
+  same "$(grep -c '^release verify demo-v0.1.0$' stub/gh-log)" 5
+  after_publication
+}
+
+t_release_publish_stops_when_the_asset_does_not_verify() {
+  published_case
+  printf 'release verify-asset\n' >stub/gh-fails
+  run 1 release_tool publish dist
+  has "demo-v0.1.0: gh release verify-asset does not accept the archive"
+  same "$(grep -c '^release verify-asset demo-v0.1.0 ' stub/gh-log)" 5
+  after_publication
+}
+
+t_release_publish_stops_at_the_first_failure() {
+  published_case two_packs_repository
+  printf 'release verify alpha\n' >stub/gh-fails
+  run 1 release_tool publish dist
+  has "alpha-v0.1.0: gh release verify"
+  same "$(jq -r 'select(.tag_name == "demo-v0.1.0") | .draft' stub/releases)" true
+}
+
+t_release_a_new_run_repairs_a_failed_publication() {
+  published_case two_packs_repository
+  printf 'release verify alpha\n' >stub/gh-fails
+  run 1 release_tool publish dist
+  rm stub/gh-fails
+  run 0 release_tool prepare dist2
+  has "alpha-v0.1.0 has a published release."
+  has "Number of drafts: 1"
+  run 0 release_tool publish dist2
+  has "Published demo-v0.1.0."
+  same "$(jq -r '.draft' stub/releases | tr '\n' ' ')" "false false "
+  same "$(jq -c 'select(.tag_name == "demo-v0.1.0")' stub/releases | wc -l | tr -d ' ')" 1
+}
+
+t_release_publish_publishes_nothing_when_an_archive_is_missing() {
+  published_case two_packs_repository
+  rm dist/demo-0.1.0.tar.gz
+  run 1 release_tool publish dist
+  has "demo-v0.1.0: dist holds no archive of this tag"
+  [ "$(grep -c '^release edit' stub/gh-log)" -eq 0 ]
+}
+
+t_release_publish_publishes_nothing_for_a_tag_with_no_line() {
+  published_case
+  printf 'other-v1.0.0\t%s\n' "$GITHUB_SHA" >>dist/tags
+  run 1 release_tool publish dist
+  has "other-v1.0.0: the index has no line of this tag"
+  [ "$(grep -c '^release edit' stub/gh-log)" -eq 0 ]
+}
+
+t_release_publish_needs_the_file_of_the_tags() {
+  stub_release
+  release_repository
+  mkdir dist
+  run 2 release_tool publish dist
+  has "dist holds no file tags"
+}
+
+t_release_rehearse_makes_a_draft_and_checks_it() {
+  stub_release
+  release_repository
+  rm repo/index.jsonl
+  GITHUB_STEP_SUMMARY=$case_dir/summary
+  export GITHUB_STEP_SUMMARY
+  hash=$(pack_hash repo/packs/demo)
+  run 0 release_tool rehearse dist demo rehearsal-1-1
+  has "The rehearsal of demo 0.1.0 passes with the tag rehearsal-1-1."
+  grep -Fxq "release create rehearsal-1-1 dist/demo-0.1.0.tar.gz --draft --target $GITHUB_SHA --latest=false --title demo 0.1.0 --notes The pack hash of this release is $hash." stub/gh-log
+  gh_called "^api repos/sinterworks/sinter-packs/git/ref/tags/rehearsal-1-1$"
+  grep -Fxq "api -H Accept: application/octet-stream repos/sinterworks/sinter-packs/releases/assets/1010" stub/gh-log
+  same "$(cut -f 1 dist/tags)" rehearsal-1-1
+  has_summary=$(cat summary)
+  case $has_summary in
+    "- Rehearsal of demo 0.1.0 with the tag rehearsal-1-1: pack hash $hash, SHA-256 of the archive $(sha256_of dist/demo-0.1.0.tar.gz)."*) ;;
+    *) note "the summary is: $has_summary"; return 1 ;;
+  esac
+}
+
+t_release_rehearse_refuses_a_shallow_checkout() {
+  stub_release
+  release_repository
+  git clone -q --depth 1 "file://$case_dir/repo" shallow
+  run 1 "$tools_dir/release.sh" -r shallow rehearse dist demo rehearsal-1-1
+  has "the checkout is shallow"
+  same "$(cat stub/gh-log)" ""
+}
+
+t_release_rehearse_reads_the_folder_of_the_commit() {
+  stub_release
+  release_repository
+  printf 'x' >>repo/packs/demo/pack.toml
+  run 1 release_tool rehearse dist demo rehearsal-1-1
+  has "rehearsal-1-1: the archive has the pack hash"
+  changes_nothing_on_github
+}
+
+t_release_rehearse_refuses_a_commit_with_no_folder_of_the_pack() {
+  stub_release
+  make_repository
+  rm -rf repo/packs/demo
+  : >repo/packs/.keep
+  commit_release base
+  git -C repo checkout -q HEAD -- .
+  make_pack repo/packs/demo demo demo
+  run 1 release_tool rehearse dist demo rehearsal-1-1
+  has "rehearsal-1-1: the commit $GITHUB_SHA has no folder packs/demo"
+  changes_nothing_on_github
+}
+
+t_release_rehearse_publishes_nothing() {
+  stub_release
+  release_repository
+  run 0 release_tool rehearse dist demo rehearsal-1-1
+  [ "$(grep -c '^release edit' stub/gh-log)" -eq 0 ]
+  same "$(jq -r '.draft' stub/releases)" true
+  [ ! -e stub/curl-log ]
+}
+
+t_release_rehearse_fails_when_the_draft_makes_a_tag() {
+  stub_release
+  release_repository
+  : >stub/draft-makes-tag
+  run 1 release_tool rehearse dist demo rehearsal-1-1
+  has "rehearsal-1-1: the draft made a tag, so the design of the rehearsal does not hold"
+}
+
+t_release_rehearse_fails_when_the_asset_has_other_bytes() {
+  stub_release
+  release_repository
+  : >stub/upload-corrupts
+  run 1 release_tool rehearse dist demo rehearsal-1-1
+  has "rehearsal-1-1: the asset of the draft has the SHA-256"
+  [ ! -e dist/tags ]
+}
+
+t_release_rehearse_fails_when_the_asset_cannot_be_downloaded() {
+  stub_release
+  release_repository
+  printf 'releases/assets\n' >stub/gh-fails
+  run 1 release_tool rehearse dist demo rehearsal-1-1
+  has "rehearsal-1-1: the asset of the draft cannot be downloaded"
+}
+
+t_release_rehearse_makes_no_draft_of_an_archive_with_another_hash() {
+  stub_release
+  release_repository
+  : >stub/tar-skips-first
+  run 1 release_tool rehearse dist demo rehearsal-1-1
+  has "rehearsal-1-1: the archive has the pack hash"
+  changes_nothing_on_github
+}
+
+t_release_rehearse_makes_no_draft_of_a_broken_archive() {
+  stub_release
+  release_repository
+  : >stub/tar-cuts-end
+  run 1 release_tool rehearse dist demo rehearsal-1-1
+  has "the tar data has no end marker"
+  changes_nothing_on_github
+}
+
+t_release_rehearse_refuses_a_name_that_is_not_the_name_of_a_pack() {
+  stub_release
+  release_repository
+  for name in ../demo demo/ Demo "demo x" ""; do
+    run 2 release_tool rehearse dist "$name" rehearsal-1-1
+    has "is not a name of a pack"
+  done
+  same "$(cat stub/gh-log)" ""
+}
+
+t_release_rehearse_refuses_a_pack_with_no_folder() {
+  stub_release
+  release_repository
+  run 2 release_tool rehearse dist other rehearsal-1-1
+  has "the repository has no folder packs/other"
+  same "$(cat stub/gh-log)" ""
+}
+
+t_release_rehearse_refuses_a_link_in_place_of_a_folder() {
+  stub_release
+  release_repository
+  ln -s demo repo/packs/link
+  run 2 release_tool rehearse dist link rehearsal-1-1
+  has "the repository has no folder packs/link"
+  same "$(cat stub/gh-log)" ""
+}
+
+t_release_rehearse_refuses_a_tag_of_the_form_of_a_release() {
+  stub_release
+  release_repository
+  for tag in demo-v0.1.0 x-v -v1; do
+    run 2 release_tool rehearse dist demo "$tag"
+    has "has the form of the tag of a release"
+  done
+  same "$(cat stub/gh-log)" ""
+}
+
+t_release_rehearse_refuses_a_tag_with_another_character() {
+  stub_release
+  release_repository
+  for tag in "a b" "a;b" a/b ""; do
+    run 2 release_tool rehearse dist demo "$tag"
+    has "holds a character that a rehearsal does not take"
+  done
+  same "$(cat stub/gh-log)" ""
+}
+
+t_release_rehearse_refuses_a_version_that_is_not_a_release_number() {
+  stub_release
+  release_repository
+  set_version repo/packs/demo 1.0
+  commit_release version
+  run 1 release_tool rehearse dist demo rehearsal-1-1
+  has 'packs/demo: the descriptor gives the version "1.0", which is not a release number'
+  changes_nothing_on_github
+}
+
+t_release_clean_deletes_the_draft_and_the_tag() {
+  stub_release
+  release_repository
+  seed_release 7 rehearsal-1-1 true
+  seed_tag rehearsal-1-1
+  run 0 release_tool clean-rehearsal rehearsal-1-1
+  same "$(cat stub/releases)" ""
+  same "$(cat stub/tags)" ""
+}
+
+t_release_clean_leaves_other_releases_and_tags() {
+  stub_release
+  release_repository
+  seed_release 7 rehearsal-1-1 true
+  seed_release 8 rehearsal-2-1 true
+  seed_tag rehearsal-1-1
+  seed_tag demo-v0.1.0
+  run 0 release_tool clean-rehearsal rehearsal-1-1
+  same "$(jq -r .id stub/releases)" 8
+  same "$(cat stub/tags)" demo-v0.1.0
+}
+
+t_release_clean_succeeds_with_nothing_to_delete() {
+  stub_release
+  release_repository
+  run 0 release_tool clean-rehearsal rehearsal-1-1
+  changes_nothing_on_github
+}
+
+t_release_clean_refuses_a_tag_of_the_form_of_a_release() {
+  stub_release
+  release_repository
+  seed_release 7 demo-v0.1.0 true
+  run 2 release_tool clean-rehearsal demo-v0.1.0
+  has "has the form of the tag of a release"
+  same "$(cat stub/gh-log)" ""
+}
+
+t_release_clean_refuses_a_published_release() {
+  stub_release
+  release_repository
+  seed_release 7 rehearsal-1-1 false
+  seed_tag rehearsal-1-1
+  run 1 release_tool clean-rehearsal rehearsal-1-1
+  has "rehearsal-1-1: a published release has this tag"
+  changes_nothing_on_github
+}
+
+t_release_clean_stops_when_the_tag_cannot_be_deleted() {
+  stub_release
+  release_repository
+  seed_tag rehearsal-1-1
+  printf 'git/refs/tags\n' >stub/gh-fails
+  run 1 release_tool clean-rehearsal rehearsal-1-1
+  has "rehearsal-1-1: gh cannot delete the tag"
+}
+
+t_release_needs_a_command() {
+  run 2 "$tools_dir/release.sh"
+  has "give a command"
+  run 2 "$tools_dir/release.sh" other
+  has "the command other is not known"
+}
+
+t_release_needs_its_arguments() {
+  run 2 "$tools_dir/release.sh" prepare
+  has "prepare needs one OUTDIR"
+  run 2 "$tools_dir/release.sh" publish a b
+  has "publish needs one OUTDIR"
+  run 2 "$tools_dir/release.sh" rehearse a b
+  has "rehearse needs OUTDIR, NAME, and TAG"
+  run 2 "$tools_dir/release.sh" clean-rehearsal
+  has "clean-rehearsal needs one TAG"
+}
+
+t_release_needs_gh() {
+  stub_release
+  release_repository
+  GH=no-such-gh
+  run 3 release_tool prepare dist
+  has "this check needs the command no-such-gh, and it is not installed"
+}
+
+t_release_publish_needs_curl() {
+  stub_release
+  release_repository
+  CURL=no-such-curl
+  run 3 release_tool publish dist
+  has "this check needs the command no-such-curl, and it is not installed"
+}
+
+t_release_names_the_repository_folder() {
+  run 2 "$tools_dir/release.sh" -r no-such-folder prepare dist
+  has "no-such-folder is not a folder"
+}
+
+t_gnu_release_builds_the_bytes_of_the_folder_from_the_commit() {
+  stub_gh_state
+  release_repository
+  chmod g+w repo/packs/demo/pack.toml
+  hash=$(pack_hash repo/packs/demo)
+  run 0 "$tools_dir/build-archive.sh" repo/packs/demo direct.tar.gz
+  run 0 release_tool prepare dist
+  has "Number of drafts: 1"
+  same "$(sha256_of dist/demo-0.1.0.tar.gz)" "$(sha256_of direct.tar.gz)"
+  run 0 "$tools_dir/check-archive.sh" dist/demo-0.1.0.tar.gz
+  same "$(cat "$case_dir/out")" "$hash"
+  run 0 release_tool publish dist
+  has "Published demo-v0.1.0."
 }
 
 online_pack() {
