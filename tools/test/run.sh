@@ -1647,6 +1647,37 @@ t_index_passes_a_new_pack_with_no_release() {
   run 0 "$tools_dir/check-index.sh" -b HEAD repo
 }
 
+t_index_finds_a_new_line_that_is_not_the_newest_of_its_pack() {
+  base_repository
+  first=$(cat repo/index.jsonl)
+  set_version repo/packs/demo 0.3.0
+  {
+    printf '%s\n' "$first"
+    index_line demo 0.2.0 "$(printf '%064d' 1)"
+    index_line demo 0.3.0 "$(pack_hash repo/packs/demo)"
+  } >repo/index.jsonl
+  run 1 "$tools_dir/check-index.sh" -b HEAD repo
+  has "index.jsonl: line 2: the release 0.2.0 of demo is new, and only the newest line of a pack can be new"
+}
+
+t_index_passes_a_new_line_that_is_the_newest_of_its_pack() {
+  base_repository
+  set_version repo/packs/demo 0.2.0
+  index_line demo 0.2.0 "$(pack_hash repo/packs/demo)" >>repo/index.jsonl
+  run 0 "$tools_dir/check-index.sh" -b HEAD repo
+}
+
+t_index_passes_one_new_line_for_each_pack() {
+  base_repository
+  second_pack
+  {
+    index_line alpha 0.1.0 "$(pack_hash repo/packs/alpha)"
+    cat repo/index.jsonl
+  } >repo/index.new
+  mv repo/index.new repo/index.jsonl
+  run 0 "$tools_dir/check-index.sh" -b HEAD repo
+}
+
 t_index_passes_a_pack_with_no_release_at_the_base() {
   make_repository
   rm repo/index.jsonl

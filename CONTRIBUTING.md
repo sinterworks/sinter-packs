@@ -246,7 +246,8 @@ pack that has a release needs a new release: raise `version` in
 `pack.toml` by the rules of release numbers of the pack
 specification, and add the line of the new release to `index.jsonl`
 in the same pull request. The line holds the pack hash of the folder,
-which `tools/pack-hash.sh packs/<name>` prints.
+which `tools/pack-hash.sh packs/<name>` prints. A pull request can add
+only the newest line of a pack.
 After the merge, CI publishes the archive of the release.
 
 ### A grammar built from source

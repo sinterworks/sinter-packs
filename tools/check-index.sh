@@ -29,6 +29,8 @@ by default the repository that holds this tool.
 With -b, the tool also compares the tree with the git revision BASE:
 
   - Each line of the index of BASE is still in the index.
+  - Each line that the index of BASE does not have is the newest line of
+    its pack.
   - When the files of a pack that has a line in the index of BASE
     changed, the index has a new line for the pack.
 
@@ -188,6 +190,18 @@ if [ -n "$base" ]; then
   while IFS= read -r line; do
     problem "index.jsonl: line $line of the index of $base is no longer in the index"
   done <"$temp_dir/gone"
+  awk 'NR == FNR { base[$0] = 1; next } !($0 in base) { print FNR }' \
+    "$temp_dir/base-index" "$temp_dir/head-index" >"$temp_dir/added"
+  awk -F '\t' '
+    FILENAME == ARGV[1] { added[$1] = 1; next }
+    FILENAME == ARGV[2] { newest[$1] = $2; next }
+    ($1 in added) && newest[$2] != $1 {
+      print "index.jsonl: line " $1 ": the release " $3 " of " $2 " is new, and only the newest line of a pack can be new"
+    }
+  ' "$temp_dir/added" "$temp_dir/newest" "$temp_dir/lines" >"$temp_dir/not-newest"
+  while IFS= read -r message; do
+    problem "$message"
+  done <"$temp_dir/not-newest"
   while IFS="$(printf '\t')" read -r name version; do
     released=$(jq -R -r --arg name "$name" 'fromjson? | select(.name == $name) | .version' "$temp_dir/base-index" | tail -n 1)
     [ -n "$released" ] || continue
