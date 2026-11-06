@@ -35,10 +35,11 @@ Change the address of Sinter from lathrys-at to sinterworks after the
 move of the repository.
 
 ## Release packs
-@scope tools/**, .github/workflows/release.yml
+@scope tools/**, .github/workflows/release.yml, .github/workflows/ci.yml, CONTRIBUTING.md, docs/decisions/**
 Release each pack that `index.jsonl` names and that has no release:
 build the archive, check its pack hash, attest it, and publish it as
-`<name>-v<version>`.
+`<name>-v<version>`. A manual start rehearses the release of one pack
+up to a draft, and it publishes nothing.
 
 ## Add the scan fixtures
 @scope fixtures/**, tools/**, .github/workflows/ci.yml

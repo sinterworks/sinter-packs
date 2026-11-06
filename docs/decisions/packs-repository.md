@@ -2,7 +2,7 @@
 <!-- Copyright 2026 The Sinter Authors -->
 
 # Lay out the packs, their checks, and their releases
-@decision packs-repository
+@decision packs-repository v2
 @cites upstream-grammars
 This repository holds the packs javascript, ocaml, rust, and typescript, writes their queries, checks them with a Sinter built from a pinned commit, and releases each pack from a line of `index.jsonl` that its pull request adds.
 
@@ -26,8 +26,12 @@ Rust, and TypeScript, and binds the results of their tests.
   of Sinter that the packs need.
 - The pull request that changes the version of a pack adds the line
   of the new release to `index.jsonl`. CI checks the line against the
-  pack. The release job publishes the archive after the merge, and it
+  pack. The merge starts the release job. The job publishes the
+  archive, it makes the tag of the release at publication, and it
   never pushes to `main`.
+- A manual start of the release job rehearses the release of one pack.
+  The job builds and checks the archive, makes a draft release, attests
+  the archive, and deletes the draft. It publishes nothing.
 - The queries of each pack are written here. Sinter's tests copy a
   pack folder from this repository as a fixture, pinned by its
   SHA-256.
@@ -52,6 +56,19 @@ Rust, and TypeScript, and binds the results of their tests.
   and a new line in the lock file of every user.
 - **Let the release job add the line to `index.jsonl`.** Not chosen:
   a bot would push to `main`, past the rules that protect it.
+- **Start a release with a pushed tag.** Not chosen: the rules of this
+  repository forbid a change of a release tag, so a tag at a wrong
+  commit stays. A tag on a branch runs the workflow of that branch with
+  the right to write, before a review. The index names a missing
+  archive until a person pushes the tag. The gain, an attestation of
+  the job that names the tag, is small: the attestation that GitHub
+  makes for each release names the tag, the commit, and the assets.
+- **Rehearse in a separate test repository, up to publication.** Not
+  chosen: the rehearsal in this repository tests everything except the
+  call that publishes, and a test repository must be created and
+  deleted.
+- **No rehearsal.** Not chosen: a published release cannot change, so
+  the first test would be a release that stays.
 - **An adapter module for the OCaml runner.** Not chosen: a JUnit
   writer whose names the default adapter matches needs no module.
 - **Write the queries in Sinter's test fixtures first, and move them
@@ -72,4 +89,7 @@ Rust, and TypeScript, and binds the results of their tests.
 The checks of a pack run before Sinter has a release, at the cost of a
 build of Sinter in CI. A change of a query here needs a new fixture
 copy in Sinter's tests. For a minute or two after a merge, the index
-can name an archive that is still in publication.
+can name an archive that is still in publication. A published release
+and its tag cannot change, because this repository has immutable
+releases on. The fix for a wrong release is a new release, and the
+wrong one stays in the index.
