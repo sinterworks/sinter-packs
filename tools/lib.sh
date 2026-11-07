@@ -78,19 +78,23 @@ read_descriptor() {
   awk -f "$tools_dir/descriptor.awk" <"$1" >"$2"
 }
 
+check_pack_entries() {
+  odd=$(find . ! -type f ! -type d | sed 's|^\./||' | head -n 1)
+  if [ -n "$odd" ]; then
+    printf 'the pack holds an entry that is not a file or a folder: %s\n' "$odd" >&2
+    exit 1
+  fi
+  odd=$(find . \( -name '*[! -~]*' -o -name '*\\*' \) | sed 's|^\./||' | head -n 1)
+  if [ -n "$odd" ]; then
+    printf 'the pack holds a path with a character outside printable ASCII or with a backslash: %s\n' "$odd" >&2
+    exit 1
+  fi
+}
+
 pack_hash() {
   (
     cd -- "$1" || exit 3
-    odd=$(find . ! -type f ! -type d | sed 's|^\./||' | head -n 1)
-    if [ -n "$odd" ]; then
-      printf 'the pack holds an entry that is not a file or a folder: %s\n' "$odd" >&2
-      exit 1
-    fi
-    odd=$(find . \( -name '*[! -~]*' -o -name '*\\*' \) | sed 's|^\./||' | head -n 1)
-    if [ -n "$odd" ]; then
-      printf 'the pack holds a path with a character outside printable ASCII or with a backslash: %s\n' "$odd" >&2
-      exit 1
-    fi
+    check_pack_entries
     find . -type f | sed 's|^\./||' | sort >"$temp_dir/paths"
     : >"$temp_dir/listing"
     while IFS= read -r path; do

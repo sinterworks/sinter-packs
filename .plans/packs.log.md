@@ -164,3 +164,61 @@
   an interface declares no tests.
 - In the grammar ocaml v0.26.0, a comment that does not end runs to
   the end of the file, with no `ERROR` node.
+
+## Release packs
+
+- `check-archive.sh` checks the first three bytes before it runs gzip:
+  `gzip -t` also accepts the data of the command `compress`, with exit
+  code 0.
+- The tool stops the decompression at 128 MiB and one byte, with
+  `head -c`, so that a small archive cannot fill the disk of the runner.
+- The tests of `build-archive.sh` and `release.sh` use a stub of `tar`
+  that writes real ustar entries with `tools/test/ustar.awk`, so that
+  they run on macOS too. Only the tests with the prefix `t_gnu_` run the
+  real tar. The stub of `gh` keeps the releases and the tags in files,
+  so that a test can run a failed run and then a new run.
+- `run.sh` prints one line `skip` for each test that an option leaves
+  out, so that no test skips silently. This also applies to `-u`.
+- `prepare` also refuses a draft whose tag exists. A publication with
+  that draft would use a tag at another commit.
+- `prepare` and `clean-rehearsal` delete a draft by its id, with
+  `gh api -X DELETE`. GitHub can hold two drafts of one tag, and
+  `gh release delete` finds only one.
+- `release.sh` exports `GH_REPO`, so that `gh release` does not read the
+  remote of the checkout.
+- `publish` gives `curl` the options `--retry 5 --retry-all-errors`. A
+  new run skips a published release, so a short delay of the download
+  must not stop the run for good.
+- `publish` checks each draft again just before it publishes the draft:
+  the tag does not exist, the draft is the only one of its tag and has
+  the commit of its line, and its one asset has the bytes of the archive.
+  After the publication, nothing can change. `rehearse` runs the same
+  function, so that the rehearsal tests it.
+- `prepare` builds each line from the commit that added it, and the
+  draft has that commit as its target (ruling of the lead). With a build
+  from the folder only, an older line with no release stopped every pack.
+  The tag now holds the content of its own release, which the step "Add
+  the scan fixtures" reads.
+- The commit of a line is the oldest hit of `git log --first-parent
+  --reverse -S`, from the commit of the run. The oldest hit always adds
+  the line. `--first-parent` gives the merge and not a commit of a side
+  branch, and `-1` with `--reverse` would give the newest hit. A shallow
+  history gives a wrong commit with no error, so the tool refuses it.
+- `prepare` also compares the name and the version of a line with the
+  descriptor at its commit. Without this, a line with the hash of a newer
+  folder could publish that folder under an older version.
+- `gh release verify` and `verify-asset` get five tries, as `curl` gets
+  retries. The documents of GitHub do not say how soon the attestation
+  of a release exists, and a rehearsal does not publish.
+- `publish` reads the commit of each tag just after the publication, and
+  it stops when the commit is not the commit of the line. A rehearsal
+  cannot test what a publication does with a target, and the first real
+  release publishes four packs.
+- `rehearse` reads the folder with `git archive` and refuses a shallow
+  checkout, as `prepare` does, so that it finds a missing `fetch-depth`
+  or a failure of the extraction first. Only the search for the commit of
+  a line stays outside the rehearsal.
+- With `-b`, `check-index.sh` refuses a new line that is not the newest
+  of its pack. Otherwise a merge could add a line that stops every later
+  run of the release job, with no repair: no line of the index can go
+  away.

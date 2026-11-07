@@ -1,0 +1,71 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright 2026 The Sinter Authors
+
+name: release
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      rehearse:
+        description: The pack to rehearse. Empty means a normal release run.
+        type: string
+        default: ""
+
+concurrency:
+  group: ${{ inputs.rehearse != '' && 'rehearsal' || 'release' }}
+  cancel-in-progress: false
+
+permissions: {}
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  release:
+    name: Release the packs
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-26.04
+    timeout-minutes: 15
+    permissions:
+      contents: write
+      id-token: write
+      attestations: write
+      artifact-metadata: write
+    env:
+      REHEARSE: ${{ inputs.rehearse }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Make the drafts or the draft of the rehearsal
+        id: drafts
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -eu
+          outdir="$RUNNER_TEMP/release"
+          if [ -n "$REHEARSE" ]; then
+            tools/release.sh rehearse "$outdir" "$REHEARSE" "rehearsal-$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT"
+          else
+            tools/release.sh prepare "$outdir"
+          fi
+          echo "count=$(wc -l <"$outdir/tags")" >>"$GITHUB_OUTPUT"
+      - name: Attest the archives
+        if: steps.drafts.outputs.count != '0'
+        uses: actions/attest@v4
+        with:
+          subject-path: ${{ runner.temp }}/release/*.tar.gz
+      - name: Publish the drafts
+        if: inputs.rehearse == '' && steps.drafts.outputs.count != '0'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: tools/release.sh publish "$RUNNER_TEMP/release"
+      - name: Delete the draft of the rehearsal
+        if: always() && inputs.rehearse != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: tools/release.sh clean-rehearsal "rehearsal-$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT"
