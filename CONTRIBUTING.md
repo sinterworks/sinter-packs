@@ -270,9 +270,9 @@ or when the commit that added a line holds other content.
 
 To rehearse the release of a pack, start the workflow by hand on `main`,
 with the name of the pack as the input `rehearse`. The job builds and
-checks the archive, makes a draft, attests the archive, compares the
-asset of the draft with the archive, and deletes the draft. It
-publishes nothing.
+checks the archive, makes a draft, compares the asset of the draft with
+the archive, attests the archive, and deletes the draft. It publishes
+nothing. The attestation stays after the draft is deleted.
 
 ### A grammar built from source
 
