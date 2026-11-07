@@ -493,7 +493,7 @@ clean_rehearsal() {
       stop "$rehearsal_tag: gh cannot delete the tag: $(error_line)"
     printf 'Deleted the tag %s.\n' "$rehearsal_tag"
   fi
-  printf 'The rehearsal of the tag %s has left nothing on GitHub.\n' "$rehearsal_tag"
+  printf 'The rehearsal of the tag %s has left no draft and no tag on GitHub.\n' "$rehearsal_tag"
 }
 
 case $subcommand in
