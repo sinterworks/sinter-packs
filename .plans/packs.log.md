@@ -179,9 +179,8 @@
   so that a test can run a failed run and then a new run.
 - `run.sh` prints one line `skip` for each test that an option leaves
   out, so that no test skips silently. This also applies to `-u`.
-- `prepare` also refuses a draft whose tag exists. The brief lists this
-  case only for a line with no release. A publication with that draft
-  would use a tag at another commit.
+- `prepare` also refuses a draft whose tag exists. A publication with
+  that draft would use a tag at another commit.
 - `prepare` and `clean-rehearsal` delete a draft by its id, with
   `gh api -X DELETE`. GitHub can hold two drafts of one tag, and
   `gh release delete` finds only one.
@@ -193,14 +192,13 @@
 - `publish` checks each draft again just before it publishes the draft:
   the tag does not exist, the draft is the only one of its tag and has
   the commit of its line, and its one asset has the bytes of the archive.
-  The brief has these checks after the publication only, when nothing
-  can change. `rehearse` runs the same function, so that the rehearsal
-  tests it.
+  After the publication, nothing can change. `rehearse` runs the same
+  function, so that the rehearsal tests it.
 - `prepare` builds each line from the commit that added it, and the
-  draft has that commit as its target (ruling of the lead, against the
-  first brief). With a build from the folder only, an older line with no
-  release stopped every pack. The tag now holds the content of its own
-  release, which the step "Add the scan fixtures" reads.
+  draft has that commit as its target (ruling of the lead). With a build
+  from the folder only, an older line with no release stopped every pack.
+  The tag now holds the content of its own release, which the step "Add
+  the scan fixtures" reads.
 - The commit of a line is the oldest hit of `git log --first-parent
   --reverse -S`, from the commit of the run. The oldest hit always adds
   the line. `--first-parent` gives the merge and not a commit of a side
