@@ -1,0 +1,10 @@
+{"cap":"definition","col":1,"eb":177,"ecol":11,"eline":11,"line":11,"node":"assignment","pat":3,"path":"tests/python/python/comments.py","sb":167,"text":"LIMIT = 10"}
+{"cap":"name","col":1,"eb":172,"ecol":6,"eline":11,"line":11,"node":"identifier","pat":3,"path":"tests/python/python/comments.py","sb":167,"text":"LIMIT"}
+{"cap":"definition","col":1,"eb":227,"ecol":25,"eline":12,"line":12,"node":"assignment","pat":3,"path":"tests/python/python/comments.py","sb":203,"text":"TEXT = \"# not a comment\""}
+{"cap":"name","col":1,"eb":207,"ecol":5,"eline":12,"line":12,"node":"identifier","pat":3,"path":"tests/python/python/comments.py","sb":203,"text":"TEXT"}
+{"cap":"definition","col":1,"eb":263,"ecol":10,"eline":14,"line":13,"node":"assignment","pat":3,"path":"tests/python/python/comments.py","sb":228,"text":"RAW = r'''# not a comment\neither'''"}
+{"cap":"name","col":1,"eb":231,"ecol":4,"eline":13,"line":13,"node":"identifier","pat":3,"path":"tests/python/python/comments.py","sb":228,"text":"RAW"}
+{"cap":"decoration","col":1,"eb":329,"ecol":11,"eline":19,"line":19,"node":"decorator","pat":4,"path":"tests/python/python/comments.py","sb":319,"text":"@decorator"}
+{"cap":"definition","col":1,"eb":551,"ecol":66,"eline":26,"line":21,"node":"function_definition","pat":0,"path":"tests/python/python/comments.py","sb":380,"text":"def read(path):\n    \"\"\"A docstring with @cites some-record in it.\n\n    @verifies some-requirement\n    \"\"\"\n    return f\"{path} # not a comment\"  # A comment after a string."}
+{"cap":"name","col":5,"eb":388,"ecol":9,"eline":21,"line":21,"node":"identifier","pat":0,"path":"tests/python/python/comments.py","sb":384,"text":"read"}
+{"cap":"body","col":5,"eb":551,"ecol":66,"eline":26,"line":22,"node":"block","pat":0,"path":"tests/python/python/comments.py","sb":400,"text":"\"\"\"A docstring with @cites some-record in it.\n\n    @verifies some-requirement\n    \"\"\"\n    return f\"{path} # not a comment\"  # A comment after a string."}

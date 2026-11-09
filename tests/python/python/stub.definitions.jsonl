@@ -1,0 +1,24 @@
+{"cap":"definition","col":1,"eb":56,"ecol":13,"eline":4,"line":4,"node":"assignment","pat":3,"path":"tests/python/python/stub.pyi","sb":44,"text":"VERSION: str"}
+{"cap":"name","col":1,"eb":51,"ecol":8,"eline":4,"line":4,"node":"identifier","pat":3,"path":"tests/python/python/stub.pyi","sb":44,"text":"VERSION"}
+{"cap":"definition","col":1,"eb":80,"ecol":24,"eline":5,"line":5,"node":"assignment","pat":3,"path":"tests/python/python/stub.pyi","sb":57,"text":"DEFAULT_SIZE: int = ..."}
+{"cap":"name","col":1,"eb":69,"ecol":13,"eline":5,"line":5,"node":"identifier","pat":3,"path":"tests/python/python/stub.pyi","sb":57,"text":"DEFAULT_SIZE"}
+{"cap":"definition","col":1,"eb":266,"ecol":42,"eline":13,"line":7,"node":"class_definition","pat":1,"path":"tests/python/python/stub.pyi","sb":82,"text":"class Reader:\n    size: int\n    def read(self, n: int = ...) -> bytes: ...\n    @overload\n    def get(self, key: str) -> str: ...\n    @overload\n    def get(self, key: int) -> bytes: ..."}
+{"cap":"name","col":7,"eb":94,"ecol":13,"eline":7,"line":7,"node":"identifier","pat":1,"path":"tests/python/python/stub.pyi","sb":88,"text":"Reader"}
+{"cap":"body","col":5,"eb":266,"ecol":42,"eline":13,"line":8,"node":"block","pat":1,"path":"tests/python/python/stub.pyi","sb":100,"text":"size: int\n    def read(self, n: int = ...) -> bytes: ...\n    @overload\n    def get(self, key: str) -> str: ...\n    @overload\n    def get(self, key: int) -> bytes: ..."}
+{"cap":"definition","col":5,"eb":156,"ecol":47,"eline":9,"line":9,"node":"function_definition","pat":0,"path":"tests/python/python/stub.pyi","sb":114,"text":"def read(self, n: int = ...) -> bytes: ..."}
+{"cap":"name","col":9,"eb":122,"ecol":13,"eline":9,"line":9,"node":"identifier","pat":0,"path":"tests/python/python/stub.pyi","sb":118,"text":"read"}
+{"cap":"body","col":44,"eb":156,"ecol":47,"eline":9,"line":9,"node":"block","pat":0,"path":"tests/python/python/stub.pyi","sb":153,"text":"..."}
+{"cap":"decoration","col":5,"eb":170,"ecol":14,"eline":10,"line":10,"node":"decorator","pat":4,"path":"tests/python/python/stub.pyi","sb":161,"text":"@overload"}
+{"cap":"definition","col":5,"eb":210,"ecol":40,"eline":11,"line":11,"node":"function_definition","pat":0,"path":"tests/python/python/stub.pyi","sb":175,"text":"def get(self, key: str) -> str: ..."}
+{"cap":"name","col":9,"eb":182,"ecol":12,"eline":11,"line":11,"node":"identifier","pat":0,"path":"tests/python/python/stub.pyi","sb":179,"text":"get"}
+{"cap":"body","col":37,"eb":210,"ecol":40,"eline":11,"line":11,"node":"block","pat":0,"path":"tests/python/python/stub.pyi","sb":207,"text":"..."}
+{"cap":"decoration","col":5,"eb":224,"ecol":14,"eline":12,"line":12,"node":"decorator","pat":4,"path":"tests/python/python/stub.pyi","sb":215,"text":"@overload"}
+{"cap":"definition","col":5,"eb":266,"ecol":42,"eline":13,"line":13,"node":"function_definition","pat":0,"path":"tests/python/python/stub.pyi","sb":229,"text":"def get(self, key: int) -> bytes: ..."}
+{"cap":"name","col":9,"eb":236,"ecol":12,"eline":13,"line":13,"node":"identifier","pat":0,"path":"tests/python/python/stub.pyi","sb":233,"text":"get"}
+{"cap":"body","col":39,"eb":266,"ecol":42,"eline":13,"line":13,"node":"block","pat":0,"path":"tests/python/python/stub.pyi","sb":263,"text":"..."}
+{"cap":"definition","col":1,"eb":309,"ecol":42,"eline":15,"line":15,"node":"function_definition","pat":0,"path":"tests/python/python/stub.pyi","sb":268,"text":"def open_reader(path: str) -> Reader: ..."}
+{"cap":"name","col":5,"eb":283,"ecol":16,"eline":15,"line":15,"node":"identifier","pat":0,"path":"tests/python/python/stub.pyi","sb":272,"text":"open_reader"}
+{"cap":"body","col":39,"eb":309,"ecol":42,"eline":15,"line":15,"node":"block","pat":0,"path":"tests/python/python/stub.pyi","sb":306,"text":"..."}
+{"cap":"definition","col":1,"eb":338,"ecol":29,"eline":16,"line":16,"node":"function_definition","pat":0,"path":"tests/python/python/stub.pyi","sb":310,"text":"def test_stub() -> None: ..."}
+{"cap":"name","col":5,"eb":323,"ecol":14,"eline":16,"line":16,"node":"identifier","pat":0,"path":"tests/python/python/stub.pyi","sb":314,"text":"test_stub"}
+{"cap":"body","col":26,"eb":338,"ecol":29,"eline":16,"line":16,"node":"block","pat":0,"path":"tests/python/python/stub.pyi","sb":335,"text":"..."}

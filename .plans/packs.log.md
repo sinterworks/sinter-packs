@@ -231,3 +231,18 @@
   maintainer).
 - In the python grammar, a comment in a file with CRLF line ends holds
   the CR, as a plain line comment of the rust grammar does.
+- A top-level assignment is a definition when its target is one
+  identifier, also with an annotation and no value, as in a stub file
+  (`VERSION: str`). `a = b = 1` gives the definition `a` only, and
+  `a, b = 1, 2` gives none. An assignment inside an `if` or a `try` at
+  the top level is no definition.
+- The pattern of a top-level assignment has two branches: the
+  assignment inside an `expression_statement`, and the assignment as a
+  child of `module`. tree-sitter 0.26 compiles the second branch, which
+  matches nothing at v0.25.0. It is for the grammar at upstream master
+  (26855eab), where `expression_statement` is a supertype and the
+  assignment is a child of `module`. No test covers that branch.
+- In the python grammar, a comment after the last statement of a block,
+  at the indentation of the block, is part of the block. So the body
+  and the code hash of a function hold such a comment. A comment at a
+  lower indentation is outside the block.

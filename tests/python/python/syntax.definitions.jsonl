@@ -1,0 +1,18 @@
+{"cap":"definition","col":1,"eb":89,"ecol":20,"eline":3,"line":2,"node":"function_definition","pat":0,"path":"tests/python/python/syntax.py","sb":35,"text":"def first[T](items: list[T]) -> T:\n    return items[0]"}
+{"cap":"name","col":5,"eb":44,"ecol":10,"eline":2,"line":2,"node":"identifier","pat":0,"path":"tests/python/python/syntax.py","sb":39,"text":"first"}
+{"cap":"body","col":5,"eb":89,"ecol":20,"eline":3,"line":3,"node":"block","pat":0,"path":"tests/python/python/syntax.py","sb":74,"text":"return items[0]"}
+{"cap":"definition","col":1,"eb":133,"ecol":28,"eline":7,"line":6,"node":"class_definition","pat":1,"path":"tests/python/python/syntax.py","sb":92,"text":"class Box[T]:\n    def get(self) -> T: ..."}
+{"cap":"name","col":7,"eb":101,"ecol":10,"eline":6,"line":6,"node":"identifier","pat":1,"path":"tests/python/python/syntax.py","sb":98,"text":"Box"}
+{"cap":"body","col":5,"eb":133,"ecol":28,"eline":7,"line":7,"node":"block","pat":1,"path":"tests/python/python/syntax.py","sb":110,"text":"def get(self) -> T: ..."}
+{"cap":"definition","col":5,"eb":133,"ecol":28,"eline":7,"line":7,"node":"function_definition","pat":0,"path":"tests/python/python/syntax.py","sb":110,"text":"def get(self) -> T: ..."}
+{"cap":"name","col":9,"eb":117,"ecol":12,"eline":7,"line":7,"node":"identifier","pat":0,"path":"tests/python/python/syntax.py","sb":114,"text":"get"}
+{"cap":"body","col":25,"eb":133,"ecol":28,"eline":7,"line":7,"node":"block","pat":0,"path":"tests/python/python/syntax.py","sb":130,"text":"..."}
+{"cap":"definition","col":1,"eb":161,"ecol":26,"eline":10,"line":10,"node":"type_alias_statement","pat":2,"path":"tests/python/python/syntax.py","sb":136,"text":"type Vector = list[float]"}
+{"cap":"name","col":6,"eb":147,"ecol":12,"eline":10,"line":10,"node":"identifier","pat":2,"path":"tests/python/python/syntax.py","sb":141,"text":"Vector"}
+{"cap":"definition","col":1,"eb":188,"ecol":27,"eline":11,"line":11,"node":"type_alias_statement","pat":2,"path":"tests/python/python/syntax.py","sb":162,"text":"type Pair[T] = tuple[T, T]"}
+{"cap":"name","col":6,"eb":171,"ecol":10,"eline":11,"line":11,"node":"identifier","pat":2,"path":"tests/python/python/syntax.py","sb":167,"text":"Pair"}
+{"cap":"definition","col":1,"eb":331,"ecol":24,"eline":19,"line":14,"node":"function_definition","pat":0,"path":"tests/python/python/syntax.py","sb":191,"text":"def handle(command):\n    match command:\n        case [\"go\", direction]:\n            return direction\n        case _:\n            return None"}
+{"cap":"name","col":5,"eb":201,"ecol":11,"eline":14,"line":14,"node":"identifier","pat":0,"path":"tests/python/python/syntax.py","sb":195,"text":"handle"}
+{"cap":"body","col":5,"eb":331,"ecol":24,"eline":19,"line":15,"node":"block","pat":0,"path":"tests/python/python/syntax.py","sb":216,"text":"match command:\n        case [\"go\", direction]:\n            return direction\n        case _:\n            return None"}
+{"cap":"definition","col":1,"eb":457,"ecol":27,"eline":32,"line":32,"node":"assignment","pat":3,"path":"tests/python/python/syntax.py","sb":431,"text":"GREETING = t\"Hello {name}\""}
+{"cap":"name","col":1,"eb":439,"ecol":9,"eline":32,"line":32,"node":"identifier","pat":3,"path":"tests/python/python/syntax.py","sb":431,"text":"GREETING"}
