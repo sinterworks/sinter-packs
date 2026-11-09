@@ -1,0 +1,9 @@
+python pack of Sinter
+Copyright 2026 The Sinter Authors
+
+grammar: python
+repository: tree-sitter/tree-sitter-python
+tag: v0.25.0
+commit: 293fdc02038ee2bf0e2e206711b69c90ac0d413f
+asset: tree-sitter-python.wasm
+sha256: 16108b50df4ee9a30168794252ab55e7c93bfc5765d7fa0aa3e335752c515f47
