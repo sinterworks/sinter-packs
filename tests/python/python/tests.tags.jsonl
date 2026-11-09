@@ -1,0 +1,5 @@
+{"cap":"comment","col":18,"eb":800,"ecol":50,"eline":65,"line":65,"node":"comment","pat":0,"path":"tests/python/python/tests.py","sb":768,"text":"# A comment after the decorator."}
+{"cap":"comment","col":18,"eb":914,"ecol":50,"eline":71,"line":71,"node":"comment","pat":0,"path":"tests/python/python/tests.py","sb":882,"text":"# A comment after the decorator."}
+{"cap":"comment","col":1,"eb":1774,"ecol":36,"eline":132,"line":132,"node":"comment","pat":0,"path":"tests/python/python/tests.py","sb":1739,"text":"# A comment between the decorators."}
+{"cap":"comment","col":22,"eb":2252,"ecol":54,"eline":164,"line":164,"node":"comment","pat":0,"path":"tests/python/python/tests.py","sb":2220,"text":"# A comment after the decorator."}
+{"cap":"comment","col":5,"eb":4313,"ecol":37,"eline":269,"line":269,"node":"comment","pat":0,"path":"tests/python/python/tests.py","sb":4281,"text":"# A comment in the superclasses."}

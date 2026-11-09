@@ -246,3 +246,51 @@
   at the indentation of the block, is part of the block. So the body
   and the code hash of a function hold such a comment. A comment at a
   lower indentation is outside the block.
+- In `tree-sitter` 0.26.13, `#any-match?` and `#any-eq?` pass when no
+  node of the capture matches: the loop over the nodes ends and returns
+  true. So no pattern of `tests.scm` uses them. A group class is either
+  of two branches of one pattern: a name that starts with `Test`, or a
+  superclass whose last name ends in `TestCase`. A match of either
+  branch gives the group, and Sinter joins the two matches.
+- A capture on an alternation of node types inside an alternation, as
+  in `[[(identifier) (attribute)] @label.skip ...]`, lost the
+  `attribute` branch in tree-sitter 0.26.13. The label branches name
+  one node type each.
+- A function or a method with a decorator whose last name is `fixture`,
+  with or without a call, is no test (ruling of the lead). So
+  `pytest.fixture`, `fixture`, and `pytest_asyncio.fixture` are
+  fixtures. The patterns capture every other decorator as
+  `@_decorator`, with `#not-match?`, so the check holds for every
+  decorator of the function. In the python grammar, a decorator holds
+  a comment after it on its line, so the check accepts `#` after the
+  name `fixture`.
+- A superclass whose last name ends in `TestCase` makes the class a
+  group (ruling of the lead): `TestCase`, `unittest.TestCase`,
+  `unittest.IsolatedAsyncioTestCase`, `django.test.SimpleTestCase`,
+  and `TransactionTestCase`.
+- The labels of decorators also apply to a group class (ruling of the
+  lead). A labeled pattern stands before the pattern with no label, as
+  in the rust pack. A test with two label decorators gives two matches
+  of the labeled pattern, and Sinter joins them.
+- A group is a class at the top level of a module, or a class right
+  inside a class whose name starts with `Test`. The query does not
+  check the class around that outer class, so in `class Helper`,
+  `class TestA`, `class TestB`, the class `TestB` is a group and
+  `TestA` is not. A test method is a method right inside a group.
+- Known limits. pytest skips a `Test` class with `__init__`, and a
+  project can change the prefixes `test` and `Test` in its
+  configuration; a query sees neither. A base class from another file
+  (`class ReaderTests(BaseTest)`) is not seen as a `TestCase`. A query
+  does not see the file name, so `test_x` in `utils.py` is a test. A
+  test function inside an `if` or a `try` at the top level, which
+  pytest collects, is no test. A class whose name starts with `Test`
+  inside a `TestCase` class whose name starts with `Test` is a group,
+  but pytest does not collect it. A decorator line that ends in a
+  backslash gives a `line_continuation` node before the function, and
+  the function is no test. A `line_continuation` in the sequence of
+  decorators stopped the match when the `decorated_definition` stood
+  in an alternation, as in the patterns with no label.
+- The time of `tests.scm` grows fast with the number of decorators of
+  one function: 0.03 s for 10, 0.28 s for 30, 3.4 s for 60, and 47 s
+  for 120 decorators. The rust pack shows the same growth with
+  attributes: 0.9 s for 30 and 25 s for 60.

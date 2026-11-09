@@ -1,0 +1,6 @@
+{"cap":"group","col":1,"eb":142,"ecol":13,"eline":9,"line":7,"node":"class_definition","pat":1,"path":"tests/python/python/crlf.py","sb":88,"text":"class TestCrlf:\r\n    def test_one(self):\r\n        pass"}
+{"cap":"name","col":7,"eb":102,"ecol":15,"eline":7,"line":7,"node":"identifier","pat":1,"path":"tests/python/python/crlf.py","sb":94,"text":"TestCrlf"}
+{"cap":"_test_name","col":7,"eb":102,"ecol":15,"eline":7,"line":7,"node":"identifier","pat":1,"path":"tests/python/python/crlf.py","sb":94,"text":"TestCrlf"}
+{"cap":"_test_name","col":7,"eb":102,"ecol":15,"eline":7,"line":7,"node":"identifier","pat":7,"path":"tests/python/python/crlf.py","sb":94,"text":"TestCrlf"}
+{"cap":"test","col":5,"eb":142,"ecol":13,"eline":9,"line":8,"node":"function_definition","pat":7,"path":"tests/python/python/crlf.py","sb":109,"text":"def test_one(self):\r\n        pass"}
+{"cap":"name","col":9,"eb":121,"ecol":17,"eline":8,"line":8,"node":"identifier","pat":7,"path":"tests/python/python/crlf.py","sb":113,"text":"test_one"}

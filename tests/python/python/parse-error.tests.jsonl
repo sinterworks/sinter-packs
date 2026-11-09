@@ -1,0 +1,2 @@
+{"cap":"test","col":1,"eb":129,"ecol":9,"eline":7,"line":6,"node":"function_definition","pat":5,"path":"tests/python/python/parse-error.py","sb":93,"text":"def test_after_the_error():\n    pass"}
+{"cap":"name","col":5,"eb":117,"ecol":25,"eline":6,"line":6,"node":"identifier","pat":5,"path":"tests/python/python/parse-error.py","sb":97,"text":"test_after_the_error"}
