@@ -222,3 +222,5 @@
   of its pack. Otherwise a merge could add a line that stops every later
   run of the release job, with no repair: no line of the index can go
   away.
+
+## Add the python pack

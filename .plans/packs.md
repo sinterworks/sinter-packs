@@ -1,8 +1,8 @@
 # The first packs
 @plan packs@939532
 @scope README.md, CONTRIBUTING.md, NOTICE, REUSE.toml, LICENSES/**, THIRD_PARTY.md, sinter.toml, docs/**, packs/**, adapters/**, fixtures/**, tools/**, tests/**, index.jsonl, .github/workflows/**
-Release the packs javascript, ocaml, rust, and typescript at 0.1.0,
-with their queries, their conformance fixtures, and their test
+Release the packs javascript, ocaml, python, rust, and typescript at
+0.1.0, with their queries, their conformance fixtures, and their test
 runners, and the CI that checks and releases each pack.
 
 ## Set up the repository
@@ -41,6 +41,13 @@ build the archive, check its pack hash, attest it, and publish it as
 `<name>-v<version>`. A manual start rehearses the release of one pack
 up to a draft, and it publishes nothing.
 
+## Add the python pack
+@scope packs/**, README.md, REUSE.toml, LICENSES/**, THIRD_PARTY.md, CONTRIBUTING.md, tests/**, tools/**, .github/workflows/ci.yml
+Add the pack python: the upstream grammar by SHA-256, its license text
+and notice, the descriptor, and the query files for comments,
+definitions, and tests, with their query tests. Tags stand in `#`
+comments only.
+
 ## Add the scan fixtures
 @scope fixtures/**, tools/**, .github/workflows/ci.yml
 Add the conformance fixtures of each pack, with the project, the
@@ -50,11 +57,11 @@ fixtures of the release before it. This step needs the Sinter step
 
 ## Release the first packs
 @scope index.jsonl, packs/*/pack.toml
-Release javascript, ocaml, rust, and typescript at 0.1.0.
+Release javascript, ocaml, python, rust, and typescript at 0.1.0.
 
 ## Add the test runners
 @scope packs/**, adapters/**, fixtures/**, tools/**, THIRD_PARTY.md, .github/workflows/**
-Add the runner data of vitest and of alcotest's JUnit report, and the
-adapter of cargo-nextest, with fixtures that hold real reports, and
-release each pack again as a minor release. This step needs the
-Sinter step "Import test evidence".
+Add the runner data of vitest, of alcotest's JUnit report, and of
+pytest's JUnit report, and the adapter of cargo-nextest, with
+fixtures that hold real reports, and release each pack again as a
+minor release. This step needs the Sinter step "Import test evidence".
