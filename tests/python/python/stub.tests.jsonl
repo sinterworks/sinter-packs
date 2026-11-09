@@ -1,0 +1,2 @@
+{"cap":"test","col":1,"eb":338,"ecol":29,"eline":16,"line":16,"node":"function_definition","pat":5,"path":"tests/python/python/stub.pyi","sb":310,"text":"def test_stub() -> None: ..."}
+{"cap":"name","col":5,"eb":323,"ecol":14,"eline":16,"line":16,"node":"identifier","pat":5,"path":"tests/python/python/stub.pyi","sb":314,"text":"test_stub"}

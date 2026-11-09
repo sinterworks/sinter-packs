@@ -1,0 +1,17 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright 2026 The Sinter Authors
+
+sinter-spec = "1.0"
+name = "python"
+version = "0.1.0"
+license = "Apache-2.0"
+name-separator = "."
+
+[comments]
+line = ["#"]
+
+[[grammar]]
+name = "python"
+sha256 = "16108b50df4ee9a30168794252ab55e7c93bfc5765d7fa0aa3e335752c515f47"
+license = "MIT"
+names = ["*.py", "*.pyi"]

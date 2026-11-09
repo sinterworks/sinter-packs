@@ -1,0 +1,295 @@
+{"cap":"definition","col":1,"eb":183,"ecol":9,"eline":10,"line":9,"node":"function_definition","pat":0,"path":"tests/python/python/tests.py","sb":161,"text":"def helper():\n    pass"}
+{"cap":"name","col":5,"eb":171,"ecol":11,"eline":9,"line":9,"node":"identifier","pat":0,"path":"tests/python/python/tests.py","sb":165,"text":"helper"}
+{"cap":"body","col":5,"eb":183,"ecol":9,"eline":10,"line":10,"node":"block","pat":0,"path":"tests/python/python/tests.py","sb":179,"text":"pass"}
+{"cap":"definition","col":1,"eb":212,"ecol":9,"eline":14,"line":13,"node":"function_definition","pat":0,"path":"tests/python/python/tests.py","sb":186,"text":"def test_plain():\n    pass"}
+{"cap":"name","col":5,"eb":200,"ecol":15,"eline":13,"line":13,"node":"identifier","pat":0,"path":"tests/python/python/tests.py","sb":190,"text":"test_plain"}
+{"cap":"body","col":5,"eb":212,"ecol":9,"eline":14,"line":14,"node":"block","pat":0,"path":"tests/python/python/tests.py","sb":208,"text":"pass"}
+{"cap":"definition","col":1,"eb":247,"ecol":9,"eline":18,"line":17,"node":"function_definition","pat":0,"path":"tests/python/python/tests.py","sb":215,"text":"async def test_async():\n    pass"}
+{"cap":"name","col":11,"eb":235,"ecol":21,"eline":17,"line":17,"node":"identifier","pat":0,"path":"tests/python/python/tests.py","sb":225,"text":"test_async"}
+{"cap":"body","col":5,"eb":247,"ecol":9,"eline":18,"line":18,"node":"block","pat":0,"path":"tests/python/python/tests.py","sb":243,"text":"pass"}
+{"cap":"definition","col":1,"eb":280,"ecol":9,"eline":22,"line":21,"node":"function_definition","pat":0,"path":"tests/python/python/tests.py","sb":250,"text":"def testing_prefix():\n    pass"}
+{"cap":"name","col":5,"eb":268,"ecol":19,"eline":21,"line":21,"node":"identifier","pat":0,"path":"tests/python/python/tests.py","sb":254,"text":"testing_prefix"}
+{"cap":"body","col":5,"eb":280,"ecol":9,"eline":22,"line":22,"node":"block","pat":0,"path":"tests/python/python/tests.py","sb":276,"text":"pass"}
+{"cap":"definition","col":1,"eb":318,"ecol":9,"eline":26,"line":25,"node":"function_definition","pat":0,"path":"tests/python/python/tests.py","sb":283,"text":"def tests_prefix_plural():\n    pass"}
+{"cap":"name","col":5,"eb":306,"ecol":24,"eline":25,"line":25,"node":"identifier","pat":0,"path":"tests/python/python/tests.py","sb":287,"text":"tests_prefix_plural"}
+{"cap":"body","col":5,"eb":318,"ecol":9,"eline":26,"line":26,"node":"block","pat":0,"path":"tests/python/python/tests.py","sb":314,"text":"pass"}
+{"cap":"definition","col":1,"eb":352,"ecol":9,"eline":30,"line":29,"node":"function_definition","pat":0,"path":"tests/python/python/tests.py","sb":321,"text":"def not_a_test_name():\n    pass"}
+{"cap":"name","col":5,"eb":340,"ecol":20,"eline":29,"line":29,"node":"identifier","pat":0,"path":"tests/python/python/tests.py","sb":325,"text":"not_a_test_name"}
+{"cap":"body","col":5,"eb":352,"ecol":9,"eline":30,"line":30,"node":"block","pat":0,"path":"tests/python/python/tests.py","sb":348,"text":"pass"}
+{"cap":"definition","col":1,"eb":402,"ecol":13,"eline":35,"line":33,"node":"function_definition","pat":0,"path":"tests/python/python/tests.py","sb":355,"text":"def outer():\n    def test_inner():\n        pass"}
+{"cap":"name","col":5,"eb":364,"ecol":10,"eline":33,"line":33,"node":"identifier","pat":0,"path":"tests/python/python/tests.py","sb":359,"text":"outer"}
+{"cap":"body","col":5,"eb":402,"ecol":13,"eline":35,"line":34,"node":"block","pat":0,"path":"tests/python/python/tests.py","sb":372,"text":"def test_inner():\n        pass"}
+{"cap":"definition","col":5,"eb":402,"ecol":13,"eline":35,"line":34,"node":"function_definition","pat":0,"path":"tests/python/python/tests.py","sb":372,"text":"def test_inner():\n        pass"}
+{"cap":"name","col":9,"eb":386,"ecol":19,"eline":34,"line":34,"node":"identifier","pat":0,"path":"tests/python/python/tests.py","sb":376,"text":"test_inner"}
+{"cap":"body","col":9,"eb":402,"ecol":13,"eline":35,"line":35,"node":"block","pat":0,"path":"tests/python/python/tests.py","sb":398,"text":"pass"}
+{"cap":"decoration","col":1,"eb":420,"ecol":16,"eline":38,"line":38,"node":"decorator","pat":4,"path":"tests/python/python/tests.py","sb":405,"text":"@pytest.fixture"}
+{"cap":"definition","col":1,"eb":449,"ecol":9,"eline":40,"line":39,"node":"function_definition","pat":0,"path":"tests/python/python/tests.py","sb":421,"text":"def test_fixture():\n    pass"}
+{"cap":"name","col":5,"eb":437,"ecol":17,"eline":39,"line":39,"node":"identifier","pat":0,"path":"tests/python/python/tests.py","sb":425,"text":"test_fixture"}
+{"cap":"body","col":5,"eb":449,"ecol":9,"eline":40,"line":40,"node":"block","pat":0,"path":"tests/python/python/tests.py","sb":445,"text":"pass"}
+{"cap":"decoration","col":1,"eb":483,"ecol":32,"eline":43,"line":43,"node":"decorator","pat":4,"path":"tests/python/python/tests.py","sb":452,"text":"@pytest.fixture(scope=\"module\")"}
+{"cap":"definition","col":1,"eb":527,"ecol":9,"eline":45,"line":44,"node":"function_definition","pat":0,"path":"tests/python/python/tests.py","sb":484,"text":"def test_fixture_with_arguments():\n    pass"}
+{"cap":"name","col":5,"eb":515,"ecol":32,"eline":44,"line":44,"node":"identifier","pat":0,"path":"tests/python/python/tests.py","sb":488,"text":"test_fixture_with_arguments"}
+{"cap":"body","col":5,"eb":527,"ecol":9,"eline":45,"line":45,"node":"block","pat":0,"path":"tests/python/python/tests.py","sb":523,"text":"pass"}
+{"cap":"decoration","col":1,"eb":538,"ecol":9,"eline":48,"line":48,"node":"decorator","pat":4,"path":"tests/python/python/tests.py","sb":530,"text":"@fixture"}
+{"cap":"definition","col":1,"eb":573,"ecol":9,"eline":50,"line":49,"node":"function_definition","pat":0,"path":"tests/python/python/tests.py","sb":539,"text":"def test_short_fixture():\n    pass"}
+{"cap":"name","col":5,"eb":561,"ecol":23,"eline":49,"line":49,"node":"identifier","pat":0,"path":"tests/python/python/tests.py","sb":543,"text":"test_short_fixture"}
+{"cap":"body","col":5,"eb":573,"ecol":9,"eline":50,"line":50,"node":"block","pat":0,"path":"tests/python/python/tests.py","sb":569,"text":"pass"}
+{"cap":"decoration","col":1,"eb":606,"ecol":31,"eline":53,"line":53,"node":"decorator","pat":4,"path":"tests/python/python/tests.py","sb":576,"text":"@pytest.mark.usefixtures(\"db\")"}
+{"cap":"decoration","col":1,"eb":622,"ecol":16,"eline":54,"line":54,"node":"decorator","pat":4,"path":"tests/python/python/tests.py","sb":607,"text":"@pytest.fixture"}
+{"cap":"definition","col":1,"eb":675,"ecol":9,"eline":56,"line":55,"node":"function_definition","pat":0,"path":"tests/python/python/tests.py","sb":623,"text":"def test_fixture_after_another_decorator():\n    pass"}
+{"cap":"name","col":5,"eb":663,"ecol":41,"eline":55,"line":55,"node":"identifier","pat":0,"path":"tests/python/python/tests.py","sb":627,"text":"test_fixture_after_another_decorator"}
+{"cap":"body","col":5,"eb":675,"ecol":9,"eline":56,"line":56,"node":"block","pat":0,"path":"tests/python/python/tests.py","sb":671,"text":"pass"}
+{"cap":"decoration","col":1,"eb":695,"ecol":18,"eline":59,"line":59,"node":"decorator","pat":4,"path":"tests/python/python/tests.py","sb":678,"text":"@pytest.mark.skip"}
+{"cap":"decoration","col":1,"eb":706,"ecol":11,"eline":60,"line":60,"node":"decorator","pat":4,"path":"tests/python/python/tests.py","sb":696,"text":"@fixture()"}
+{"cap":"definition","col":1,"eb":748,"ecol":9,"eline":62,"line":61,"node":"function_definition","pat":0,"path":"tests/python/python/tests.py","sb":707,"text":"def test_fixture_with_a_label():\n    pass"}
+{"cap":"name","col":5,"eb":736,"ecol":30,"eline":61,"line":61,"node":"identifier","pat":0,"path":"tests/python/python/tests.py","sb":711,"text":"test_fixture_with_a_label"}
+{"cap":"body","col":5,"eb":748,"ecol":9,"eline":62,"line":62,"node":"block","pat":0,"path":"tests/python/python/tests.py","sb":744,"text":"pass"}
+{"cap":"decoration","col":1,"eb":800,"ecol":50,"eline":65,"line":65,"node":"decorator","pat":4,"path":"tests/python/python/tests.py","sb":751,"text":"@pytest.fixture  # A comment after the decorator."}
+{"cap":"definition","col":1,"eb":844,"ecol":9,"eline":67,"line":66,"node":"function_definition","pat":0,"path":"tests/python/python/tests.py","sb":801,"text":"def test_fixture_with_a_comment():\n    pass"}
+{"cap":"name","col":5,"eb":832,"ecol":32,"eline":66,"line":66,"node":"identifier","pat":0,"path":"tests/python/python/tests.py","sb":805,"text":"test_fixture_with_a_comment"}
+{"cap":"body","col":5,"eb":844,"ecol":9,"eline":67,"line":67,"node":"block","pat":0,"path":"tests/python/python/tests.py","sb":840,"text":"pass"}
+{"cap":"decoration","col":1,"eb":864,"ecol":18,"eline":70,"line":70,"node":"decorator","pat":4,"path":"tests/python/python/tests.py","sb":847,"text":"@pytest.mark.skip"}
+{"cap":"decoration","col":1,"eb":914,"ecol":50,"eline":71,"line":71,"node":"decorator","pat":4,"path":"tests/python/python/tests.py","sb":865,"text":"@pytest.fixture  # A comment after the decorator."}
+{"cap":"definition","col":1,"eb":970,"ecol":9,"eline":73,"line":72,"node":"function_definition","pat":0,"path":"tests/python/python/tests.py","sb":915,"text":"def test_fixture_with_a_label_and_a_comment():\n    pass"}
+{"cap":"name","col":5,"eb":958,"ecol":44,"eline":72,"line":72,"node":"identifier","pat":0,"path":"tests/python/python/tests.py","sb":919,"text":"test_fixture_with_a_label_and_a_comment"}
+{"cap":"body","col":5,"eb":970,"ecol":9,"eline":73,"line":73,"node":"block","pat":0,"path":"tests/python/python/tests.py","sb":966,"text":"pass"}
+{"cap":"decoration","col":1,"eb":996,"ecol":24,"eline":76,"line":76,"node":"decorator","pat":4,"path":"tests/python/python/tests.py","sb":973,"text":"@pytest_asyncio.fixture"}
+{"cap":"definition","col":1,"eb":1039,"ecol":9,"eline":78,"line":77,"node":"function_definition","pat":0,"path":"tests/python/python/tests.py","sb":997,"text":"async def test_asyncio_fixture():\n    pass"}
+{"cap":"name","col":11,"eb":1027,"ecol":31,"eline":77,"line":77,"node":"identifier","pat":0,"path":"tests/python/python/tests.py","sb":1007,"text":"test_asyncio_fixture"}
+{"cap":"body","col":5,"eb":1039,"ecol":9,"eline":78,"line":78,"node":"block","pat":0,"path":"tests/python/python/tests.py","sb":1035,"text":"pass"}
+{"cap":"decoration","col":1,"eb":1057,"ecol":16,"eline":81,"line":81,"node":"decorator","pat":4,"path":"tests/python/python/tests.py","sb":1042,"text":"@fixture.helper"}
+{"cap":"definition","col":1,"eb":1110,"ecol":9,"eline":83,"line":82,"node":"function_definition","pat":0,"path":"tests/python/python/tests.py","sb":1058,"text":"def test_decorator_that_is_not_a_fixture():\n    pass"}
+{"cap":"name","col":5,"eb":1098,"ecol":41,"eline":82,"line":82,"node":"identifier","pat":0,"path":"tests/python/python/tests.py","sb":1062,"text":"test_decorator_that_is_not_a_fixture"}
+{"cap":"body","col":5,"eb":1110,"ecol":9,"eline":83,"line":83,"node":"block","pat":0,"path":"tests/python/python/tests.py","sb":1106,"text":"pass"}
+{"cap":"decoration","col":1,"eb":1143,"ecol":31,"eline":86,"line":86,"node":"decorator","pat":4,"path":"tests/python/python/tests.py","sb":1113,"text":"@pytest.mark.usefixtures(\"db\")"}
+{"cap":"definition","col":1,"eb":1187,"ecol":9,"eline":88,"line":87,"node":"function_definition","pat":0,"path":"tests/python/python/tests.py","sb":1144,"text":"def test_with_another_decorator():\n    pass"}
+{"cap":"name","col":5,"eb":1175,"ecol":32,"eline":87,"line":87,"node":"identifier","pat":0,"path":"tests/python/python/tests.py","sb":1148,"text":"test_with_another_decorator"}
+{"cap":"body","col":5,"eb":1187,"ecol":9,"eline":88,"line":88,"node":"block","pat":0,"path":"tests/python/python/tests.py","sb":1183,"text":"pass"}
+{"cap":"decoration","col":1,"eb":1231,"ecol":42,"eline":91,"line":91,"node":"decorator","pat":4,"path":"tests/python/python/tests.py","sb":1190,"text":"@pytest.mark.parametrize(\"value\", [1, 2])"}
+{"cap":"definition","col":1,"eb":1269,"ecol":9,"eline":93,"line":92,"node":"function_definition","pat":0,"path":"tests/python/python/tests.py","sb":1232,"text":"def test_parametrize(value):\n    pass"}
+{"cap":"name","col":5,"eb":1252,"ecol":21,"eline":92,"line":92,"node":"identifier","pat":0,"path":"tests/python/python/tests.py","sb":1236,"text":"test_parametrize"}
+{"cap":"body","col":5,"eb":1269,"ecol":9,"eline":93,"line":93,"node":"block","pat":0,"path":"tests/python/python/tests.py","sb":1265,"text":"pass"}
+{"cap":"decoration","col":1,"eb":1306,"ecol":35,"eline":96,"line":96,"node":"decorator","pat":4,"path":"tests/python/python/tests.py","sb":1272,"text":"@mark.parametrize(\"value\", [1, 2])"}
+{"cap":"definition","col":1,"eb":1350,"ecol":9,"eline":98,"line":97,"node":"function_definition","pat":0,"path":"tests/python/python/tests.py","sb":1307,"text":"def test_short_parametrize(value):\n    pass"}
+{"cap":"name","col":5,"eb":1333,"ecol":27,"eline":97,"line":97,"node":"identifier","pat":0,"path":"tests/python/python/tests.py","sb":1311,"text":"test_short_parametrize"}
+{"cap":"body","col":5,"eb":1350,"ecol":9,"eline":98,"line":98,"node":"block","pat":0,"path":"tests/python/python/tests.py","sb":1346,"text":"pass"}
+{"cap":"decoration","col":1,"eb":1370,"ecol":18,"eline":101,"line":101,"node":"decorator","pat":4,"path":"tests/python/python/tests.py","sb":1353,"text":"@pytest.mark.skip"}
+{"cap":"definition","col":1,"eb":1396,"ecol":9,"eline":103,"line":102,"node":"function_definition","pat":0,"path":"tests/python/python/tests.py","sb":1371,"text":"def test_skip():\n    pass"}
+{"cap":"name","col":5,"eb":1384,"ecol":14,"eline":102,"line":102,"node":"identifier","pat":0,"path":"tests/python/python/tests.py","sb":1375,"text":"test_skip"}
+{"cap":"body","col":5,"eb":1396,"ecol":9,"eline":103,"line":103,"node":"block","pat":0,"path":"tests/python/python/tests.py","sb":1392,"text":"pass"}
+{"cap":"decoration","col":1,"eb":1431,"ecol":33,"eline":106,"line":106,"node":"decorator","pat":4,"path":"tests/python/python/tests.py","sb":1399,"text":"@pytest.mark.skip(reason=\"slow\")"}
+{"cap":"definition","col":1,"eb":1469,"ecol":9,"eline":108,"line":107,"node":"function_definition","pat":0,"path":"tests/python/python/tests.py","sb":1432,"text":"def test_skip_with_reason():\n    pass"}
+{"cap":"name","col":5,"eb":1457,"ecol":26,"eline":107,"line":107,"node":"identifier","pat":0,"path":"tests/python/python/tests.py","sb":1436,"text":"test_skip_with_reason"}
+{"cap":"body","col":5,"eb":1469,"ecol":9,"eline":108,"line":108,"node":"block","pat":0,"path":"tests/python/python/tests.py","sb":1465,"text":"pass"}
+{"cap":"decoration","col":1,"eb":1513,"ecol":42,"eline":111,"line":111,"node":"decorator","pat":4,"path":"tests/python/python/tests.py","sb":1472,"text":"@pytest.mark.skipif(True, reason=\"never\")"}
+{"cap":"definition","col":1,"eb":1541,"ecol":9,"eline":113,"line":112,"node":"function_definition","pat":0,"path":"tests/python/python/tests.py","sb":1514,"text":"def test_skipif():\n    pass"}
+{"cap":"name","col":5,"eb":1529,"ecol":16,"eline":112,"line":112,"node":"identifier","pat":0,"path":"tests/python/python/tests.py","sb":1518,"text":"test_skipif"}
+{"cap":"body","col":5,"eb":1541,"ecol":9,"eline":113,"line":113,"node":"block","pat":0,"path":"tests/python/python/tests.py","sb":1537,"text":"pass"}
+{"cap":"decoration","col":1,"eb":1554,"ecol":11,"eline":116,"line":116,"node":"decorator","pat":4,"path":"tests/python/python/tests.py","sb":1544,"text":"@mark.skip"}
+{"cap":"definition","col":1,"eb":1586,"ecol":9,"eline":118,"line":117,"node":"function_definition","pat":0,"path":"tests/python/python/tests.py","sb":1555,"text":"def test_short_skip():\n    pass"}
+{"cap":"name","col":5,"eb":1574,"ecol":20,"eline":117,"line":117,"node":"identifier","pat":0,"path":"tests/python/python/tests.py","sb":1559,"text":"test_short_skip"}
+{"cap":"body","col":5,"eb":1586,"ecol":9,"eline":118,"line":118,"node":"block","pat":0,"path":"tests/python/python/tests.py","sb":1582,"text":"pass"}
+{"cap":"decoration","col":1,"eb":1607,"ecol":19,"eline":121,"line":121,"node":"decorator","pat":4,"path":"tests/python/python/tests.py","sb":1589,"text":"@pytest.mark.xfail"}
+{"cap":"definition","col":1,"eb":1634,"ecol":9,"eline":123,"line":122,"node":"function_definition","pat":0,"path":"tests/python/python/tests.py","sb":1608,"text":"def test_xfail():\n    pass"}
+{"cap":"name","col":5,"eb":1622,"ecol":15,"eline":122,"line":122,"node":"identifier","pat":0,"path":"tests/python/python/tests.py","sb":1612,"text":"test_xfail"}
+{"cap":"body","col":5,"eb":1634,"ecol":9,"eline":123,"line":123,"node":"block","pat":0,"path":"tests/python/python/tests.py","sb":1630,"text":"pass"}
+{"cap":"decoration","col":1,"eb":1661,"ecol":25,"eline":126,"line":126,"node":"decorator","pat":4,"path":"tests/python/python/tests.py","sb":1637,"text":"@mark.xfail(strict=True)"}
+{"cap":"definition","col":1,"eb":1694,"ecol":9,"eline":128,"line":127,"node":"function_definition","pat":0,"path":"tests/python/python/tests.py","sb":1662,"text":"def test_short_xfail():\n    pass"}
+{"cap":"name","col":5,"eb":1682,"ecol":21,"eline":127,"line":127,"node":"identifier","pat":0,"path":"tests/python/python/tests.py","sb":1666,"text":"test_short_xfail"}
+{"cap":"body","col":5,"eb":1694,"ecol":9,"eline":128,"line":128,"node":"block","pat":0,"path":"tests/python/python/tests.py","sb":1690,"text":"pass"}
+{"cap":"decoration","col":1,"eb":1738,"ecol":42,"eline":131,"line":131,"node":"decorator","pat":4,"path":"tests/python/python/tests.py","sb":1697,"text":"@pytest.mark.parametrize(\"value\", [1, 2])"}
+{"cap":"decoration","col":1,"eb":1805,"ecol":31,"eline":133,"line":133,"node":"decorator","pat":4,"path":"tests/python/python/tests.py","sb":1775,"text":"@pytest.mark.usefixtures(\"db\")"}
+{"cap":"decoration","col":1,"eb":1823,"ecol":18,"eline":134,"line":134,"node":"decorator","pat":4,"path":"tests/python/python/tests.py","sb":1806,"text":"@pytest.mark.skip"}
+{"cap":"definition","col":1,"eb":1860,"ecol":9,"eline":136,"line":135,"node":"function_definition","pat":0,"path":"tests/python/python/tests.py","sb":1824,"text":"def test_two_labels(value):\n    pass"}
+{"cap":"name","col":5,"eb":1843,"ecol":20,"eline":135,"line":135,"node":"identifier","pat":0,"path":"tests/python/python/tests.py","sb":1828,"text":"test_two_labels"}
+{"cap":"body","col":5,"eb":1860,"ecol":9,"eline":136,"line":136,"node":"block","pat":0,"path":"tests/python/python/tests.py","sb":1856,"text":"pass"}
+{"cap":"decoration","col":1,"eb":1880,"ecol":18,"eline":139,"line":139,"node":"decorator","pat":4,"path":"tests/python/python/tests.py","sb":1863,"text":"@pytest.mark.skip"}
+{"cap":"definition","col":1,"eb":1918,"ecol":9,"eline":141,"line":140,"node":"function_definition","pat":0,"path":"tests/python/python/tests.py","sb":1881,"text":"async def test_async_skip():\n    pass"}
+{"cap":"name","col":11,"eb":1906,"ecol":26,"eline":140,"line":140,"node":"identifier","pat":0,"path":"tests/python/python/tests.py","sb":1891,"text":"test_async_skip"}
+{"cap":"body","col":5,"eb":1918,"ecol":9,"eline":141,"line":141,"node":"block","pat":0,"path":"tests/python/python/tests.py","sb":1914,"text":"pass"}
+{"cap":"decoration","col":1,"eb":1938,"ecol":18,"eline":144,"line":144,"node":"decorator","pat":4,"path":"tests/python/python/tests.py","sb":1921,"text":"@pytest.mark.skip"}
+{"cap":"definition","col":1,"eb":1980,"ecol":9,"eline":147,"line":146,"node":"function_definition","pat":0,"path":"tests/python/python/tests.py","sb":1942,"text":"def test_line_continuation():\n    pass"}
+{"cap":"name","col":5,"eb":1968,"ecol":27,"eline":146,"line":146,"node":"identifier","pat":0,"path":"tests/python/python/tests.py","sb":1946,"text":"test_line_continuation"}
+{"cap":"body","col":5,"eb":1980,"ecol":9,"eline":147,"line":147,"node":"block","pat":0,"path":"tests/python/python/tests.py","sb":1976,"text":"pass"}
+{"cap":"definition","col":1,"eb":2670,"ecol":17,"eline":186,"line":150,"node":"class_definition","pat":1,"path":"tests/python/python/tests.py","sb":1983,"text":"class TestPlain:\n    def test_method(self):\n        pass\n\n    async def test_async_method(self):\n        pass\n\n    def helper(self):\n        pass\n\n    @pytest.fixture\n    def test_fixture_method(self):\n        pass\n\n    @pytest.fixture  # A comment after the decorator.\n    def test_fixture_method_with_a_comment(self):\n        pass\n\n    @pytest.mark.xfail\n    def test_xfail_method(self):\n        pass\n\n    @staticmethod\n    def test_static():\n        pass\n\n    class TestNested:\n        def test_in_nested(self):\n            pass\n\n        class TestDeeper:\n            def test_in_deeper(self):\n                pass\n\n    class Helper:\n        def test_in_helper(self):\n            pass"}
+{"cap":"name","col":7,"eb":1998,"ecol":16,"eline":150,"line":150,"node":"identifier","pat":1,"path":"tests/python/python/tests.py","sb":1989,"text":"TestPlain"}
+{"cap":"body","col":5,"eb":2670,"ecol":17,"eline":186,"line":151,"node":"block","pat":1,"path":"tests/python/python/tests.py","sb":2004,"text":"def test_method(self):\n        pass\n\n    async def test_async_method(self):\n        pass\n\n    def helper(self):\n        pass\n\n    @pytest.fixture\n    def test_fixture_method(self):\n        pass\n\n    @pytest.fixture  # A comment after the decorator.\n    def test_fixture_method_with_a_comment(self):\n        pass\n\n    @pytest.mark.xfail\n    def test_xfail_method(self):\n        pass\n\n    @staticmethod\n    def test_static():\n        pass\n\n    class TestNested:\n        def test_in_nested(self):\n            pass\n\n        class TestDeeper:\n            def test_in_deeper(self):\n                pass\n\n    class Helper:\n        def test_in_helper(self):\n            pass"}
+{"cap":"definition","col":5,"eb":2039,"ecol":13,"eline":152,"line":151,"node":"function_definition","pat":0,"path":"tests/python/python/tests.py","sb":2004,"text":"def test_method(self):\n        pass"}
+{"cap":"name","col":9,"eb":2019,"ecol":20,"eline":151,"line":151,"node":"identifier","pat":0,"path":"tests/python/python/tests.py","sb":2008,"text":"test_method"}
+{"cap":"body","col":9,"eb":2039,"ecol":13,"eline":152,"line":152,"node":"block","pat":0,"path":"tests/python/python/tests.py","sb":2035,"text":"pass"}
+{"cap":"definition","col":5,"eb":2092,"ecol":13,"eline":155,"line":154,"node":"function_definition","pat":0,"path":"tests/python/python/tests.py","sb":2045,"text":"async def test_async_method(self):\n        pass"}
+{"cap":"name","col":15,"eb":2072,"ecol":32,"eline":154,"line":154,"node":"identifier","pat":0,"path":"tests/python/python/tests.py","sb":2055,"text":"test_async_method"}
+{"cap":"body","col":9,"eb":2092,"ecol":13,"eline":155,"line":155,"node":"block","pat":0,"path":"tests/python/python/tests.py","sb":2088,"text":"pass"}
+{"cap":"definition","col":5,"eb":2128,"ecol":13,"eline":158,"line":157,"node":"function_definition","pat":0,"path":"tests/python/python/tests.py","sb":2098,"text":"def helper(self):\n        pass"}
+{"cap":"name","col":9,"eb":2108,"ecol":15,"eline":157,"line":157,"node":"identifier","pat":0,"path":"tests/python/python/tests.py","sb":2102,"text":"helper"}
+{"cap":"body","col":9,"eb":2128,"ecol":13,"eline":158,"line":158,"node":"block","pat":0,"path":"tests/python/python/tests.py","sb":2124,"text":"pass"}
+{"cap":"decoration","col":5,"eb":2149,"ecol":20,"eline":160,"line":160,"node":"decorator","pat":4,"path":"tests/python/python/tests.py","sb":2134,"text":"@pytest.fixture"}
+{"cap":"definition","col":5,"eb":2197,"ecol":13,"eline":162,"line":161,"node":"function_definition","pat":0,"path":"tests/python/python/tests.py","sb":2154,"text":"def test_fixture_method(self):\n        pass"}
+{"cap":"name","col":9,"eb":2177,"ecol":28,"eline":161,"line":161,"node":"identifier","pat":0,"path":"tests/python/python/tests.py","sb":2158,"text":"test_fixture_method"}
+{"cap":"body","col":9,"eb":2197,"ecol":13,"eline":162,"line":162,"node":"block","pat":0,"path":"tests/python/python/tests.py","sb":2193,"text":"pass"}
+{"cap":"decoration","col":5,"eb":2252,"ecol":54,"eline":164,"line":164,"node":"decorator","pat":4,"path":"tests/python/python/tests.py","sb":2203,"text":"@pytest.fixture  # A comment after the decorator."}
+{"cap":"definition","col":5,"eb":2315,"ecol":13,"eline":166,"line":165,"node":"function_definition","pat":0,"path":"tests/python/python/tests.py","sb":2257,"text":"def test_fixture_method_with_a_comment(self):\n        pass"}
+{"cap":"name","col":9,"eb":2295,"ecol":43,"eline":165,"line":165,"node":"identifier","pat":0,"path":"tests/python/python/tests.py","sb":2261,"text":"test_fixture_method_with_a_comment"}
+{"cap":"body","col":9,"eb":2315,"ecol":13,"eline":166,"line":166,"node":"block","pat":0,"path":"tests/python/python/tests.py","sb":2311,"text":"pass"}
+{"cap":"decoration","col":5,"eb":2339,"ecol":23,"eline":168,"line":168,"node":"decorator","pat":4,"path":"tests/python/python/tests.py","sb":2321,"text":"@pytest.mark.xfail"}
+{"cap":"definition","col":5,"eb":2385,"ecol":13,"eline":170,"line":169,"node":"function_definition","pat":0,"path":"tests/python/python/tests.py","sb":2344,"text":"def test_xfail_method(self):\n        pass"}
+{"cap":"name","col":9,"eb":2365,"ecol":26,"eline":169,"line":169,"node":"identifier","pat":0,"path":"tests/python/python/tests.py","sb":2348,"text":"test_xfail_method"}
+{"cap":"body","col":9,"eb":2385,"ecol":13,"eline":170,"line":170,"node":"block","pat":0,"path":"tests/python/python/tests.py","sb":2381,"text":"pass"}
+{"cap":"decoration","col":5,"eb":2404,"ecol":18,"eline":172,"line":172,"node":"decorator","pat":4,"path":"tests/python/python/tests.py","sb":2391,"text":"@staticmethod"}
+{"cap":"definition","col":5,"eb":2440,"ecol":13,"eline":174,"line":173,"node":"function_definition","pat":0,"path":"tests/python/python/tests.py","sb":2409,"text":"def test_static():\n        pass"}
+{"cap":"name","col":9,"eb":2424,"ecol":20,"eline":173,"line":173,"node":"identifier","pat":0,"path":"tests/python/python/tests.py","sb":2413,"text":"test_static"}
+{"cap":"body","col":9,"eb":2440,"ecol":13,"eline":174,"line":174,"node":"block","pat":0,"path":"tests/python/python/tests.py","sb":2436,"text":"pass"}
+{"cap":"definition","col":5,"eb":2600,"ecol":21,"eline":182,"line":176,"node":"class_definition","pat":1,"path":"tests/python/python/tests.py","sb":2446,"text":"class TestNested:\n        def test_in_nested(self):\n            pass\n\n        class TestDeeper:\n            def test_in_deeper(self):\n                pass"}
+{"cap":"name","col":11,"eb":2462,"ecol":21,"eline":176,"line":176,"node":"identifier","pat":1,"path":"tests/python/python/tests.py","sb":2452,"text":"TestNested"}
+{"cap":"body","col":9,"eb":2600,"ecol":21,"eline":182,"line":177,"node":"block","pat":1,"path":"tests/python/python/tests.py","sb":2472,"text":"def test_in_nested(self):\n            pass\n\n        class TestDeeper:\n            def test_in_deeper(self):\n                pass"}
+{"cap":"definition","col":9,"eb":2514,"ecol":17,"eline":178,"line":177,"node":"function_definition","pat":0,"path":"tests/python/python/tests.py","sb":2472,"text":"def test_in_nested(self):\n            pass"}
+{"cap":"name","col":13,"eb":2490,"ecol":27,"eline":177,"line":177,"node":"identifier","pat":0,"path":"tests/python/python/tests.py","sb":2476,"text":"test_in_nested"}
+{"cap":"body","col":13,"eb":2514,"ecol":17,"eline":178,"line":178,"node":"block","pat":0,"path":"tests/python/python/tests.py","sb":2510,"text":"pass"}
+{"cap":"definition","col":9,"eb":2600,"ecol":21,"eline":182,"line":180,"node":"class_definition","pat":1,"path":"tests/python/python/tests.py","sb":2524,"text":"class TestDeeper:\n            def test_in_deeper(self):\n                pass"}
+{"cap":"name","col":15,"eb":2540,"ecol":25,"eline":180,"line":180,"node":"identifier","pat":1,"path":"tests/python/python/tests.py","sb":2530,"text":"TestDeeper"}
+{"cap":"body","col":13,"eb":2600,"ecol":21,"eline":182,"line":181,"node":"block","pat":1,"path":"tests/python/python/tests.py","sb":2554,"text":"def test_in_deeper(self):\n                pass"}
+{"cap":"definition","col":13,"eb":2600,"ecol":21,"eline":182,"line":181,"node":"function_definition","pat":0,"path":"tests/python/python/tests.py","sb":2554,"text":"def test_in_deeper(self):\n                pass"}
+{"cap":"name","col":17,"eb":2572,"ecol":31,"eline":181,"line":181,"node":"identifier","pat":0,"path":"tests/python/python/tests.py","sb":2558,"text":"test_in_deeper"}
+{"cap":"body","col":17,"eb":2600,"ecol":21,"eline":182,"line":182,"node":"block","pat":0,"path":"tests/python/python/tests.py","sb":2596,"text":"pass"}
+{"cap":"definition","col":5,"eb":2670,"ecol":17,"eline":186,"line":184,"node":"class_definition","pat":1,"path":"tests/python/python/tests.py","sb":2606,"text":"class Helper:\n        def test_in_helper(self):\n            pass"}
+{"cap":"name","col":11,"eb":2618,"ecol":17,"eline":184,"line":184,"node":"identifier","pat":1,"path":"tests/python/python/tests.py","sb":2612,"text":"Helper"}
+{"cap":"body","col":9,"eb":2670,"ecol":17,"eline":186,"line":185,"node":"block","pat":1,"path":"tests/python/python/tests.py","sb":2628,"text":"def test_in_helper(self):\n            pass"}
+{"cap":"definition","col":9,"eb":2670,"ecol":17,"eline":186,"line":185,"node":"function_definition","pat":0,"path":"tests/python/python/tests.py","sb":2628,"text":"def test_in_helper(self):\n            pass"}
+{"cap":"name","col":13,"eb":2646,"ecol":27,"eline":185,"line":185,"node":"identifier","pat":0,"path":"tests/python/python/tests.py","sb":2632,"text":"test_in_helper"}
+{"cap":"body","col":13,"eb":2670,"ecol":17,"eline":186,"line":186,"node":"block","pat":0,"path":"tests/python/python/tests.py","sb":2666,"text":"pass"}
+{"cap":"decoration","col":1,"eb":2690,"ecol":18,"eline":189,"line":189,"node":"decorator","pat":4,"path":"tests/python/python/tests.py","sb":2673,"text":"@pytest.mark.skip"}
+{"cap":"definition","col":1,"eb":2764,"ecol":13,"eline":192,"line":190,"node":"class_definition","pat":1,"path":"tests/python/python/tests.py","sb":2691,"text":"class TestSkippedClass:\n    def test_in_skipped_class(self):\n        pass"}
+{"cap":"name","col":7,"eb":2713,"ecol":23,"eline":190,"line":190,"node":"identifier","pat":1,"path":"tests/python/python/tests.py","sb":2697,"text":"TestSkippedClass"}
+{"cap":"body","col":5,"eb":2764,"ecol":13,"eline":192,"line":191,"node":"block","pat":1,"path":"tests/python/python/tests.py","sb":2719,"text":"def test_in_skipped_class(self):\n        pass"}
+{"cap":"definition","col":5,"eb":2764,"ecol":13,"eline":192,"line":191,"node":"function_definition","pat":0,"path":"tests/python/python/tests.py","sb":2719,"text":"def test_in_skipped_class(self):\n        pass"}
+{"cap":"name","col":9,"eb":2744,"ecol":30,"eline":191,"line":191,"node":"identifier","pat":0,"path":"tests/python/python/tests.py","sb":2723,"text":"test_in_skipped_class"}
+{"cap":"body","col":9,"eb":2764,"ecol":13,"eline":192,"line":192,"node":"block","pat":0,"path":"tests/python/python/tests.py","sb":2760,"text":"pass"}
+{"cap":"definition","col":1,"eb":3210,"ecol":13,"eline":216,"line":195,"node":"class_definition","pat":1,"path":"tests/python/python/tests.py","sb":2767,"text":"class ReaderTests(unittest.TestCase):\n    def test_reads(self):\n        pass\n\n    @unittest.skip(\"broken\")\n    def test_skip_long(self):\n        pass\n\n    @unittest.skipIf(True, \"never\")\n    def test_skipif_long(self):\n        pass\n\n    @unittest.skipUnless(False, \"never\")\n    def test_skipunless_long(self):\n        pass\n\n    @unittest.expectedFailure\n    def test_expected_failure_long(self):\n        pass\n\n    def setUp(self):\n        pass"}
+{"cap":"name","col":7,"eb":2784,"ecol":18,"eline":195,"line":195,"node":"identifier","pat":1,"path":"tests/python/python/tests.py","sb":2773,"text":"ReaderTests"}
+{"cap":"body","col":5,"eb":3210,"ecol":13,"eline":216,"line":196,"node":"block","pat":1,"path":"tests/python/python/tests.py","sb":2809,"text":"def test_reads(self):\n        pass\n\n    @unittest.skip(\"broken\")\n    def test_skip_long(self):\n        pass\n\n    @unittest.skipIf(True, \"never\")\n    def test_skipif_long(self):\n        pass\n\n    @unittest.skipUnless(False, \"never\")\n    def test_skipunless_long(self):\n        pass\n\n    @unittest.expectedFailure\n    def test_expected_failure_long(self):\n        pass\n\n    def setUp(self):\n        pass"}
+{"cap":"definition","col":5,"eb":2843,"ecol":13,"eline":197,"line":196,"node":"function_definition","pat":0,"path":"tests/python/python/tests.py","sb":2809,"text":"def test_reads(self):\n        pass"}
+{"cap":"name","col":9,"eb":2823,"ecol":19,"eline":196,"line":196,"node":"identifier","pat":0,"path":"tests/python/python/tests.py","sb":2813,"text":"test_reads"}
+{"cap":"body","col":9,"eb":2843,"ecol":13,"eline":197,"line":197,"node":"block","pat":0,"path":"tests/python/python/tests.py","sb":2839,"text":"pass"}
+{"cap":"decoration","col":5,"eb":2873,"ecol":29,"eline":199,"line":199,"node":"decorator","pat":4,"path":"tests/python/python/tests.py","sb":2849,"text":"@unittest.skip(\"broken\")"}
+{"cap":"definition","col":5,"eb":2916,"ecol":13,"eline":201,"line":200,"node":"function_definition","pat":0,"path":"tests/python/python/tests.py","sb":2878,"text":"def test_skip_long(self):\n        pass"}
+{"cap":"name","col":9,"eb":2896,"ecol":23,"eline":200,"line":200,"node":"identifier","pat":0,"path":"tests/python/python/tests.py","sb":2882,"text":"test_skip_long"}
+{"cap":"body","col":9,"eb":2916,"ecol":13,"eline":201,"line":201,"node":"block","pat":0,"path":"tests/python/python/tests.py","sb":2912,"text":"pass"}
+{"cap":"decoration","col":5,"eb":2953,"ecol":36,"eline":203,"line":203,"node":"decorator","pat":4,"path":"tests/python/python/tests.py","sb":2922,"text":"@unittest.skipIf(True, \"never\")"}
+{"cap":"definition","col":5,"eb":2998,"ecol":13,"eline":205,"line":204,"node":"function_definition","pat":0,"path":"tests/python/python/tests.py","sb":2958,"text":"def test_skipif_long(self):\n        pass"}
+{"cap":"name","col":9,"eb":2978,"ecol":25,"eline":204,"line":204,"node":"identifier","pat":0,"path":"tests/python/python/tests.py","sb":2962,"text":"test_skipif_long"}
+{"cap":"body","col":9,"eb":2998,"ecol":13,"eline":205,"line":205,"node":"block","pat":0,"path":"tests/python/python/tests.py","sb":2994,"text":"pass"}
+{"cap":"decoration","col":5,"eb":3040,"ecol":41,"eline":207,"line":207,"node":"decorator","pat":4,"path":"tests/python/python/tests.py","sb":3004,"text":"@unittest.skipUnless(False, \"never\")"}
+{"cap":"definition","col":5,"eb":3089,"ecol":13,"eline":209,"line":208,"node":"function_definition","pat":0,"path":"tests/python/python/tests.py","sb":3045,"text":"def test_skipunless_long(self):\n        pass"}
+{"cap":"name","col":9,"eb":3069,"ecol":29,"eline":208,"line":208,"node":"identifier","pat":0,"path":"tests/python/python/tests.py","sb":3049,"text":"test_skipunless_long"}
+{"cap":"body","col":9,"eb":3089,"ecol":13,"eline":209,"line":209,"node":"block","pat":0,"path":"tests/python/python/tests.py","sb":3085,"text":"pass"}
+{"cap":"decoration","col":5,"eb":3120,"ecol":30,"eline":211,"line":211,"node":"decorator","pat":4,"path":"tests/python/python/tests.py","sb":3095,"text":"@unittest.expectedFailure"}
+{"cap":"definition","col":5,"eb":3175,"ecol":13,"eline":213,"line":212,"node":"function_definition","pat":0,"path":"tests/python/python/tests.py","sb":3125,"text":"def test_expected_failure_long(self):\n        pass"}
+{"cap":"name","col":9,"eb":3155,"ecol":35,"eline":212,"line":212,"node":"identifier","pat":0,"path":"tests/python/python/tests.py","sb":3129,"text":"test_expected_failure_long"}
+{"cap":"body","col":9,"eb":3175,"ecol":13,"eline":213,"line":213,"node":"block","pat":0,"path":"tests/python/python/tests.py","sb":3171,"text":"pass"}
+{"cap":"definition","col":5,"eb":3210,"ecol":13,"eline":216,"line":215,"node":"function_definition","pat":0,"path":"tests/python/python/tests.py","sb":3181,"text":"def setUp(self):\n        pass"}
+{"cap":"name","col":9,"eb":3190,"ecol":14,"eline":215,"line":215,"node":"identifier","pat":0,"path":"tests/python/python/tests.py","sb":3185,"text":"setUp"}
+{"cap":"body","col":9,"eb":3210,"ecol":13,"eline":216,"line":216,"node":"block","pat":0,"path":"tests/python/python/tests.py","sb":3206,"text":"pass"}
+{"cap":"definition","col":1,"eb":3546,"ecol":13,"eline":234,"line":219,"node":"class_definition","pat":1,"path":"tests/python/python/tests.py","sb":3213,"text":"class WriterTests(Base, TestCase):\n    @skip(\"broken\")\n    def test_skip_short(self):\n        pass\n\n    @skipIf(True, \"never\")\n    def test_skipif_short(self):\n        pass\n\n    @skipUnless(False, \"never\")\n    def test_skipunless_short(self):\n        pass\n\n    @expectedFailure\n    def test_expected_failure_short(self):\n        pass"}
+{"cap":"name","col":7,"eb":3230,"ecol":18,"eline":219,"line":219,"node":"identifier","pat":1,"path":"tests/python/python/tests.py","sb":3219,"text":"WriterTests"}
+{"cap":"body","col":5,"eb":3546,"ecol":13,"eline":234,"line":220,"node":"block","pat":1,"path":"tests/python/python/tests.py","sb":3252,"text":"@skip(\"broken\")\n    def test_skip_short(self):\n        pass\n\n    @skipIf(True, \"never\")\n    def test_skipif_short(self):\n        pass\n\n    @skipUnless(False, \"never\")\n    def test_skipunless_short(self):\n        pass\n\n    @expectedFailure\n    def test_expected_failure_short(self):\n        pass"}
+{"cap":"decoration","col":5,"eb":3267,"ecol":20,"eline":220,"line":220,"node":"decorator","pat":4,"path":"tests/python/python/tests.py","sb":3252,"text":"@skip(\"broken\")"}
+{"cap":"definition","col":5,"eb":3311,"ecol":13,"eline":222,"line":221,"node":"function_definition","pat":0,"path":"tests/python/python/tests.py","sb":3272,"text":"def test_skip_short(self):\n        pass"}
+{"cap":"name","col":9,"eb":3291,"ecol":24,"eline":221,"line":221,"node":"identifier","pat":0,"path":"tests/python/python/tests.py","sb":3276,"text":"test_skip_short"}
+{"cap":"body","col":9,"eb":3311,"ecol":13,"eline":222,"line":222,"node":"block","pat":0,"path":"tests/python/python/tests.py","sb":3307,"text":"pass"}
+{"cap":"decoration","col":5,"eb":3339,"ecol":27,"eline":224,"line":224,"node":"decorator","pat":4,"path":"tests/python/python/tests.py","sb":3317,"text":"@skipIf(True, \"never\")"}
+{"cap":"definition","col":5,"eb":3385,"ecol":13,"eline":226,"line":225,"node":"function_definition","pat":0,"path":"tests/python/python/tests.py","sb":3344,"text":"def test_skipif_short(self):\n        pass"}
+{"cap":"name","col":9,"eb":3365,"ecol":26,"eline":225,"line":225,"node":"identifier","pat":0,"path":"tests/python/python/tests.py","sb":3348,"text":"test_skipif_short"}
+{"cap":"body","col":9,"eb":3385,"ecol":13,"eline":226,"line":226,"node":"block","pat":0,"path":"tests/python/python/tests.py","sb":3381,"text":"pass"}
+{"cap":"decoration","col":5,"eb":3418,"ecol":32,"eline":228,"line":228,"node":"decorator","pat":4,"path":"tests/python/python/tests.py","sb":3391,"text":"@skipUnless(False, \"never\")"}
+{"cap":"definition","col":5,"eb":3468,"ecol":13,"eline":230,"line":229,"node":"function_definition","pat":0,"path":"tests/python/python/tests.py","sb":3423,"text":"def test_skipunless_short(self):\n        pass"}
+{"cap":"name","col":9,"eb":3448,"ecol":30,"eline":229,"line":229,"node":"identifier","pat":0,"path":"tests/python/python/tests.py","sb":3427,"text":"test_skipunless_short"}
+{"cap":"body","col":9,"eb":3468,"ecol":13,"eline":230,"line":230,"node":"block","pat":0,"path":"tests/python/python/tests.py","sb":3464,"text":"pass"}
+{"cap":"decoration","col":5,"eb":3490,"ecol":21,"eline":232,"line":232,"node":"decorator","pat":4,"path":"tests/python/python/tests.py","sb":3474,"text":"@expectedFailure"}
+{"cap":"definition","col":5,"eb":3546,"ecol":13,"eline":234,"line":233,"node":"function_definition","pat":0,"path":"tests/python/python/tests.py","sb":3495,"text":"def test_expected_failure_short(self):\n        pass"}
+{"cap":"name","col":9,"eb":3526,"ecol":36,"eline":233,"line":233,"node":"identifier","pat":0,"path":"tests/python/python/tests.py","sb":3499,"text":"test_expected_failure_short"}
+{"cap":"body","col":9,"eb":3546,"ecol":13,"eline":234,"line":234,"node":"block","pat":0,"path":"tests/python/python/tests.py","sb":3542,"text":"pass"}
+{"cap":"decoration","col":1,"eb":3583,"ecol":35,"eline":237,"line":237,"node":"decorator","pat":4,"path":"tests/python/python/tests.py","sb":3549,"text":"@mark.parametrize(\"value\", [1, 2])"}
+{"cap":"definition","col":1,"eb":3701,"ecol":13,"eline":241,"line":238,"node":"class_definition","pat":1,"path":"tests/python/python/tests.py","sb":3584,"text":"class TestParametrizedClass:\n    @pytest.mark.skip\n    def test_skip_in_parametrized_class(self, value):\n        pass"}
+{"cap":"name","col":7,"eb":3611,"ecol":28,"eline":238,"line":238,"node":"identifier","pat":1,"path":"tests/python/python/tests.py","sb":3590,"text":"TestParametrizedClass"}
+{"cap":"body","col":5,"eb":3701,"ecol":13,"eline":241,"line":239,"node":"block","pat":1,"path":"tests/python/python/tests.py","sb":3617,"text":"@pytest.mark.skip\n    def test_skip_in_parametrized_class(self, value):\n        pass"}
+{"cap":"decoration","col":5,"eb":3634,"ecol":22,"eline":239,"line":239,"node":"decorator","pat":4,"path":"tests/python/python/tests.py","sb":3617,"text":"@pytest.mark.skip"}
+{"cap":"definition","col":5,"eb":3701,"ecol":13,"eline":241,"line":240,"node":"function_definition","pat":0,"path":"tests/python/python/tests.py","sb":3639,"text":"def test_skip_in_parametrized_class(self, value):\n        pass"}
+{"cap":"name","col":9,"eb":3674,"ecol":40,"eline":240,"line":240,"node":"identifier","pat":0,"path":"tests/python/python/tests.py","sb":3643,"text":"test_skip_in_parametrized_class"}
+{"cap":"body","col":9,"eb":3701,"ecol":13,"eline":241,"line":241,"node":"block","pat":0,"path":"tests/python/python/tests.py","sb":3697,"text":"pass"}
+{"cap":"decoration","col":1,"eb":3734,"ecol":31,"eline":244,"line":244,"node":"decorator","pat":4,"path":"tests/python/python/tests.py","sb":3704,"text":"@pytest.mark.usefixtures(\"db\")"}
+{"cap":"definition","col":1,"eb":3812,"ecol":13,"eline":247,"line":245,"node":"class_definition","pat":1,"path":"tests/python/python/tests.py","sb":3735,"text":"class TestDecoratedClass:\n    def test_in_decorated_class(self):\n        pass"}
+{"cap":"name","col":7,"eb":3759,"ecol":25,"eline":245,"line":245,"node":"identifier","pat":1,"path":"tests/python/python/tests.py","sb":3741,"text":"TestDecoratedClass"}
+{"cap":"body","col":5,"eb":3812,"ecol":13,"eline":247,"line":246,"node":"block","pat":1,"path":"tests/python/python/tests.py","sb":3765,"text":"def test_in_decorated_class(self):\n        pass"}
+{"cap":"definition","col":5,"eb":3812,"ecol":13,"eline":247,"line":246,"node":"function_definition","pat":0,"path":"tests/python/python/tests.py","sb":3765,"text":"def test_in_decorated_class(self):\n        pass"}
+{"cap":"name","col":9,"eb":3792,"ecol":32,"eline":246,"line":246,"node":"identifier","pat":0,"path":"tests/python/python/tests.py","sb":3769,"text":"test_in_decorated_class"}
+{"cap":"body","col":9,"eb":3812,"ecol":13,"eline":247,"line":247,"node":"block","pat":0,"path":"tests/python/python/tests.py","sb":3808,"text":"pass"}
+{"cap":"definition","col":1,"eb":4229,"ecol":17,"eline":264,"line":250,"node":"class_definition","pat":1,"path":"tests/python/python/tests.py","sb":3815,"text":"class TestOuter:\n    @pytest.mark.skip\n    class TestSkippedNested:\n        @pytest.mark.parametrize(\"value\", [1, 2])\n        def test_parametrize_in_nested(self, value):\n            pass\n\n    @pytest.mark.usefixtures(\"db\")\n    class TestDecoratedNested:\n        def test_in_decorated_nested(self):\n            pass\n\n    class NestedTests(unittest.TestCase):\n        def test_in_nested_case(self):\n            pass"}
+{"cap":"name","col":7,"eb":3830,"ecol":16,"eline":250,"line":250,"node":"identifier","pat":1,"path":"tests/python/python/tests.py","sb":3821,"text":"TestOuter"}
+{"cap":"body","col":5,"eb":4229,"ecol":17,"eline":264,"line":251,"node":"block","pat":1,"path":"tests/python/python/tests.py","sb":3836,"text":"@pytest.mark.skip\n    class TestSkippedNested:\n        @pytest.mark.parametrize(\"value\", [1, 2])\n        def test_parametrize_in_nested(self, value):\n            pass\n\n    @pytest.mark.usefixtures(\"db\")\n    class TestDecoratedNested:\n        def test_in_decorated_nested(self):\n            pass\n\n    class NestedTests(unittest.TestCase):\n        def test_in_nested_case(self):\n            pass"}
+{"cap":"decoration","col":5,"eb":3853,"ecol":22,"eline":251,"line":251,"node":"decorator","pat":4,"path":"tests/python/python/tests.py","sb":3836,"text":"@pytest.mark.skip"}
+{"cap":"definition","col":5,"eb":4002,"ecol":17,"eline":255,"line":252,"node":"class_definition","pat":1,"path":"tests/python/python/tests.py","sb":3858,"text":"class TestSkippedNested:\n        @pytest.mark.parametrize(\"value\", [1, 2])\n        def test_parametrize_in_nested(self, value):\n            pass"}
+{"cap":"name","col":11,"eb":3881,"ecol":28,"eline":252,"line":252,"node":"identifier","pat":1,"path":"tests/python/python/tests.py","sb":3864,"text":"TestSkippedNested"}
+{"cap":"body","col":9,"eb":4002,"ecol":17,"eline":255,"line":253,"node":"block","pat":1,"path":"tests/python/python/tests.py","sb":3891,"text":"@pytest.mark.parametrize(\"value\", [1, 2])\n        def test_parametrize_in_nested(self, value):\n            pass"}
+{"cap":"decoration","col":9,"eb":3932,"ecol":50,"eline":253,"line":253,"node":"decorator","pat":4,"path":"tests/python/python/tests.py","sb":3891,"text":"@pytest.mark.parametrize(\"value\", [1, 2])"}
+{"cap":"definition","col":9,"eb":4002,"ecol":17,"eline":255,"line":254,"node":"function_definition","pat":0,"path":"tests/python/python/tests.py","sb":3941,"text":"def test_parametrize_in_nested(self, value):\n            pass"}
+{"cap":"name","col":13,"eb":3971,"ecol":39,"eline":254,"line":254,"node":"identifier","pat":0,"path":"tests/python/python/tests.py","sb":3945,"text":"test_parametrize_in_nested"}
+{"cap":"body","col":13,"eb":4002,"ecol":17,"eline":255,"line":255,"node":"block","pat":0,"path":"tests/python/python/tests.py","sb":3998,"text":"pass"}
+{"cap":"decoration","col":5,"eb":4038,"ecol":35,"eline":257,"line":257,"node":"decorator","pat":4,"path":"tests/python/python/tests.py","sb":4008,"text":"@pytest.mark.usefixtures(\"db\")"}
+{"cap":"definition","col":5,"eb":4130,"ecol":17,"eline":260,"line":258,"node":"class_definition","pat":1,"path":"tests/python/python/tests.py","sb":4043,"text":"class TestDecoratedNested:\n        def test_in_decorated_nested(self):\n            pass"}
+{"cap":"name","col":11,"eb":4068,"ecol":30,"eline":258,"line":258,"node":"identifier","pat":1,"path":"tests/python/python/tests.py","sb":4049,"text":"TestDecoratedNested"}
+{"cap":"body","col":9,"eb":4130,"ecol":17,"eline":260,"line":259,"node":"block","pat":1,"path":"tests/python/python/tests.py","sb":4078,"text":"def test_in_decorated_nested(self):\n            pass"}
+{"cap":"definition","col":9,"eb":4130,"ecol":17,"eline":260,"line":259,"node":"function_definition","pat":0,"path":"tests/python/python/tests.py","sb":4078,"text":"def test_in_decorated_nested(self):\n            pass"}
+{"cap":"name","col":13,"eb":4106,"ecol":37,"eline":259,"line":259,"node":"identifier","pat":0,"path":"tests/python/python/tests.py","sb":4082,"text":"test_in_decorated_nested"}
+{"cap":"body","col":13,"eb":4130,"ecol":17,"eline":260,"line":260,"node":"block","pat":0,"path":"tests/python/python/tests.py","sb":4126,"text":"pass"}
+{"cap":"definition","col":5,"eb":4229,"ecol":17,"eline":264,"line":262,"node":"class_definition","pat":1,"path":"tests/python/python/tests.py","sb":4136,"text":"class NestedTests(unittest.TestCase):\n        def test_in_nested_case(self):\n            pass"}
+{"cap":"name","col":11,"eb":4153,"ecol":22,"eline":262,"line":262,"node":"identifier","pat":1,"path":"tests/python/python/tests.py","sb":4142,"text":"NestedTests"}
+{"cap":"body","col":9,"eb":4229,"ecol":17,"eline":264,"line":263,"node":"block","pat":1,"path":"tests/python/python/tests.py","sb":4182,"text":"def test_in_nested_case(self):\n            pass"}
+{"cap":"definition","col":9,"eb":4229,"ecol":17,"eline":264,"line":263,"node":"function_definition","pat":0,"path":"tests/python/python/tests.py","sb":4182,"text":"def test_in_nested_case(self):\n            pass"}
+{"cap":"name","col":13,"eb":4205,"ecol":32,"eline":263,"line":263,"node":"identifier","pat":0,"path":"tests/python/python/tests.py","sb":4186,"text":"test_in_nested_case"}
+{"cap":"body","col":13,"eb":4229,"ecol":17,"eline":264,"line":264,"node":"block","pat":0,"path":"tests/python/python/tests.py","sb":4225,"text":"pass"}
+{"cap":"decoration","col":1,"eb":4256,"ecol":25,"eline":267,"line":267,"node":"decorator","pat":4,"path":"tests/python/python/tests.py","sb":4232,"text":"@unittest.skip(\"broken\")"}
+{"cap":"definition","col":1,"eb":4388,"ecol":13,"eline":273,"line":268,"node":"class_definition","pat":1,"path":"tests/python/python/tests.py","sb":4257,"text":"class SkippedTests(\n    # A comment in the superclasses.\n    unittest.TestCase,\n):\n    def test_in_skipped_case(self):\n        pass"}
+{"cap":"name","col":7,"eb":4275,"ecol":19,"eline":268,"line":268,"node":"identifier","pat":1,"path":"tests/python/python/tests.py","sb":4263,"text":"SkippedTests"}
+{"cap":"body","col":5,"eb":4388,"ecol":13,"eline":273,"line":272,"node":"block","pat":1,"path":"tests/python/python/tests.py","sb":4344,"text":"def test_in_skipped_case(self):\n        pass"}
+{"cap":"definition","col":5,"eb":4388,"ecol":13,"eline":273,"line":272,"node":"function_definition","pat":0,"path":"tests/python/python/tests.py","sb":4344,"text":"def test_in_skipped_case(self):\n        pass"}
+{"cap":"name","col":9,"eb":4368,"ecol":29,"eline":272,"line":272,"node":"identifier","pat":0,"path":"tests/python/python/tests.py","sb":4348,"text":"test_in_skipped_case"}
+{"cap":"body","col":9,"eb":4388,"ecol":13,"eline":273,"line":273,"node":"block","pat":0,"path":"tests/python/python/tests.py","sb":4384,"text":"pass"}
+{"cap":"definition","col":1,"eb":4499,"ecol":13,"eline":278,"line":276,"node":"class_definition","pat":1,"path":"tests/python/python/tests.py","sb":4391,"text":"class AsyncReaderTests(unittest.IsolatedAsyncioTestCase):\n    async def test_reads_async(self):\n        pass"}
+{"cap":"name","col":7,"eb":4413,"ecol":23,"eline":276,"line":276,"node":"identifier","pat":1,"path":"tests/python/python/tests.py","sb":4397,"text":"AsyncReaderTests"}
+{"cap":"body","col":5,"eb":4499,"ecol":13,"eline":278,"line":277,"node":"block","pat":1,"path":"tests/python/python/tests.py","sb":4453,"text":"async def test_reads_async(self):\n        pass"}
+{"cap":"definition","col":5,"eb":4499,"ecol":13,"eline":278,"line":277,"node":"function_definition","pat":0,"path":"tests/python/python/tests.py","sb":4453,"text":"async def test_reads_async(self):\n        pass"}
+{"cap":"name","col":15,"eb":4479,"ecol":31,"eline":277,"line":277,"node":"identifier","pat":0,"path":"tests/python/python/tests.py","sb":4463,"text":"test_reads_async"}
+{"cap":"body","col":9,"eb":4499,"ecol":13,"eline":278,"line":278,"node":"block","pat":0,"path":"tests/python/python/tests.py","sb":4495,"text":"pass"}
+{"cap":"definition","col":1,"eb":4584,"ecol":13,"eline":283,"line":281,"node":"class_definition","pat":1,"path":"tests/python/python/tests.py","sb":4502,"text":"class ViewTests(django.test.SimpleTestCase):\n    def test_view(self):\n        pass"}
+{"cap":"name","col":7,"eb":4517,"ecol":16,"eline":281,"line":281,"node":"identifier","pat":1,"path":"tests/python/python/tests.py","sb":4508,"text":"ViewTests"}
+{"cap":"body","col":5,"eb":4584,"ecol":13,"eline":283,"line":282,"node":"block","pat":1,"path":"tests/python/python/tests.py","sb":4551,"text":"def test_view(self):\n        pass"}
+{"cap":"definition","col":5,"eb":4584,"ecol":13,"eline":283,"line":282,"node":"function_definition","pat":0,"path":"tests/python/python/tests.py","sb":4551,"text":"def test_view(self):\n        pass"}
+{"cap":"name","col":9,"eb":4564,"ecol":18,"eline":282,"line":282,"node":"identifier","pat":0,"path":"tests/python/python/tests.py","sb":4555,"text":"test_view"}
+{"cap":"body","col":9,"eb":4584,"ecol":13,"eline":283,"line":283,"node":"block","pat":0,"path":"tests/python/python/tests.py","sb":4580,"text":"pass"}
+{"cap":"definition","col":1,"eb":4664,"ecol":13,"eline":288,"line":286,"node":"class_definition","pat":1,"path":"tests/python/python/tests.py","sb":4587,"text":"class ModelTests(TransactionTestCase):\n    def test_model(self):\n        pass"}
+{"cap":"name","col":7,"eb":4603,"ecol":17,"eline":286,"line":286,"node":"identifier","pat":1,"path":"tests/python/python/tests.py","sb":4593,"text":"ModelTests"}
+{"cap":"body","col":5,"eb":4664,"ecol":13,"eline":288,"line":287,"node":"block","pat":1,"path":"tests/python/python/tests.py","sb":4630,"text":"def test_model(self):\n        pass"}
+{"cap":"definition","col":5,"eb":4664,"ecol":13,"eline":288,"line":287,"node":"function_definition","pat":0,"path":"tests/python/python/tests.py","sb":4630,"text":"def test_model(self):\n        pass"}
+{"cap":"name","col":9,"eb":4644,"ecol":19,"eline":287,"line":287,"node":"identifier","pat":0,"path":"tests/python/python/tests.py","sb":4634,"text":"test_model"}
+{"cap":"body","col":9,"eb":4664,"ecol":13,"eline":288,"line":288,"node":"block","pat":0,"path":"tests/python/python/tests.py","sb":4660,"text":"pass"}
+{"cap":"definition","col":1,"eb":4728,"ecol":13,"eline":293,"line":291,"node":"class_definition","pat":1,"path":"tests/python/python/tests.py","sb":4667,"text":"class Helper:\n    def test_not_in_a_group(self):\n        pass"}
+{"cap":"name","col":7,"eb":4679,"ecol":13,"eline":291,"line":291,"node":"identifier","pat":1,"path":"tests/python/python/tests.py","sb":4673,"text":"Helper"}
+{"cap":"body","col":5,"eb":4728,"ecol":13,"eline":293,"line":292,"node":"block","pat":1,"path":"tests/python/python/tests.py","sb":4685,"text":"def test_not_in_a_group(self):\n        pass"}
+{"cap":"definition","col":5,"eb":4728,"ecol":13,"eline":293,"line":292,"node":"function_definition","pat":0,"path":"tests/python/python/tests.py","sb":4685,"text":"def test_not_in_a_group(self):\n        pass"}
+{"cap":"name","col":9,"eb":4708,"ecol":28,"eline":292,"line":292,"node":"identifier","pat":0,"path":"tests/python/python/tests.py","sb":4689,"text":"test_not_in_a_group"}
+{"cap":"body","col":9,"eb":4728,"ecol":13,"eline":293,"line":293,"node":"block","pat":0,"path":"tests/python/python/tests.py","sb":4724,"text":"pass"}
+{"cap":"definition","col":1,"eb":4832,"ecol":13,"eline":298,"line":296,"node":"class_definition","pat":1,"path":"tests/python/python/tests.py","sb":4731,"text":"class NotTestCase(TestCaseMixin, metaclass=TestCase):\n    def test_not_in_a_group(self):\n        pass"}
+{"cap":"name","col":7,"eb":4748,"ecol":18,"eline":296,"line":296,"node":"identifier","pat":1,"path":"tests/python/python/tests.py","sb":4737,"text":"NotTestCase"}
+{"cap":"body","col":5,"eb":4832,"ecol":13,"eline":298,"line":297,"node":"block","pat":1,"path":"tests/python/python/tests.py","sb":4789,"text":"def test_not_in_a_group(self):\n        pass"}
+{"cap":"definition","col":5,"eb":4832,"ecol":13,"eline":298,"line":297,"node":"function_definition","pat":0,"path":"tests/python/python/tests.py","sb":4789,"text":"def test_not_in_a_group(self):\n        pass"}
+{"cap":"name","col":9,"eb":4812,"ecol":28,"eline":297,"line":297,"node":"identifier","pat":0,"path":"tests/python/python/tests.py","sb":4793,"text":"test_not_in_a_group"}
+{"cap":"body","col":9,"eb":4832,"ecol":13,"eline":298,"line":298,"node":"block","pat":0,"path":"tests/python/python/tests.py","sb":4828,"text":"pass"}
+{"cap":"definition","col":1,"eb":4931,"ecol":17,"eline":304,"line":301,"node":"function_definition","pat":0,"path":"tests/python/python/tests.py","sb":4835,"text":"def make_class():\n    class TestInFunction:\n        def test_in_function(self):\n            pass"}
+{"cap":"name","col":5,"eb":4849,"ecol":15,"eline":301,"line":301,"node":"identifier","pat":0,"path":"tests/python/python/tests.py","sb":4839,"text":"make_class"}
+{"cap":"body","col":5,"eb":4931,"ecol":17,"eline":304,"line":302,"node":"block","pat":0,"path":"tests/python/python/tests.py","sb":4857,"text":"class TestInFunction:\n        def test_in_function(self):\n            pass"}
+{"cap":"definition","col":5,"eb":4931,"ecol":17,"eline":304,"line":302,"node":"class_definition","pat":1,"path":"tests/python/python/tests.py","sb":4857,"text":"class TestInFunction:\n        def test_in_function(self):\n            pass"}
+{"cap":"name","col":11,"eb":4877,"ecol":25,"eline":302,"line":302,"node":"identifier","pat":1,"path":"tests/python/python/tests.py","sb":4863,"text":"TestInFunction"}
+{"cap":"body","col":9,"eb":4931,"ecol":17,"eline":304,"line":303,"node":"block","pat":1,"path":"tests/python/python/tests.py","sb":4887,"text":"def test_in_function(self):\n            pass"}
+{"cap":"definition","col":9,"eb":4931,"ecol":17,"eline":304,"line":303,"node":"function_definition","pat":0,"path":"tests/python/python/tests.py","sb":4887,"text":"def test_in_function(self):\n            pass"}
+{"cap":"name","col":13,"eb":4907,"ecol":29,"eline":303,"line":303,"node":"identifier","pat":0,"path":"tests/python/python/tests.py","sb":4891,"text":"test_in_function"}
+{"cap":"body","col":13,"eb":4931,"ecol":17,"eline":304,"line":304,"node":"block","pat":0,"path":"tests/python/python/tests.py","sb":4927,"text":"pass"}

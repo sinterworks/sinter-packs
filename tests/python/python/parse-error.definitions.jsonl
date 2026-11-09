@@ -1,0 +1,6 @@
+{"cap":"definition","col":1,"eb":90,"ecol":20,"eline":3,"line":2,"node":"function_definition","pat":0,"path":"tests/python/python/parse-error.py","sb":30,"text":"def first[T = int](items: list[T]) -> T:\n    return items[0]"}
+{"cap":"name","col":5,"eb":39,"ecol":10,"eline":2,"line":2,"node":"identifier","pat":0,"path":"tests/python/python/parse-error.py","sb":34,"text":"first"}
+{"cap":"body","col":5,"eb":90,"ecol":20,"eline":3,"line":3,"node":"block","pat":0,"path":"tests/python/python/parse-error.py","sb":75,"text":"return items[0]"}
+{"cap":"definition","col":1,"eb":129,"ecol":9,"eline":7,"line":6,"node":"function_definition","pat":0,"path":"tests/python/python/parse-error.py","sb":93,"text":"def test_after_the_error():\n    pass"}
+{"cap":"name","col":5,"eb":117,"ecol":25,"eline":6,"line":6,"node":"identifier","pat":0,"path":"tests/python/python/parse-error.py","sb":97,"text":"test_after_the_error"}
+{"cap":"body","col":5,"eb":129,"ecol":9,"eline":7,"line":7,"node":"block","pat":0,"path":"tests/python/python/parse-error.py","sb":125,"text":"pass"}

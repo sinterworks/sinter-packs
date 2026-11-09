@@ -1,0 +1,3 @@
+{"cap":"comment","col":1,"eb":13,"ecol":14,"eline":1,"line":1,"node":"comment","pat":0,"path":"tests/python/python/crlf.py","sb":0,"text":"# A comment.\r"}
+{"cap":"comment","col":1,"eb":44,"ecol":31,"eline":2,"line":2,"node":"comment","pat":0,"path":"tests/python/python/crlf.py","sb":14,"text":"# @satisfies some-requirement\r"}
+{"cap":"comment","col":15,"eb":83,"ecol":29,"eline":4,"line":4,"node":"comment","pat":0,"path":"tests/python/python/crlf.py","sb":69,"text":"# After code.\r"}

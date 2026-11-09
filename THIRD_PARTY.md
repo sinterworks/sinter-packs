@@ -12,3 +12,4 @@ components of a pack are in its folder `packs/<name>/`.
 | tree-sitter-rust v0.24.2, grammar `rust`, in `packs/rust/` | MIT | https://github.com/tree-sitter/tree-sitter-rust/releases/tag/v0.24.2 |
 | tree-sitter-ocaml v0.26.0, grammar `ocaml`, in `packs/ocaml/` | MIT | https://github.com/tree-sitter/tree-sitter-ocaml/releases/tag/v0.26.0 |
 | tree-sitter-ocaml v0.26.0, grammar `ocaml_interface`, in `packs/ocaml/` | MIT | https://github.com/tree-sitter/tree-sitter-ocaml/releases/tag/v0.26.0 |
+| tree-sitter-python v0.25.0, grammar `python`, in `packs/python/` | MIT | https://github.com/tree-sitter/tree-sitter-python/releases/tag/v0.25.0 |

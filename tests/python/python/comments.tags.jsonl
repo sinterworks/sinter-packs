@@ -1,0 +1,13 @@
+{"cap":"comment","col":1,"eb":22,"ecol":23,"eline":1,"line":1,"node":"comment","pat":0,"path":"tests/python/python/comments.py","sb":0,"text":"#!/usr/bin/env python3"}
+{"cap":"comment","col":1,"eb":46,"ecol":24,"eline":2,"line":2,"node":"comment","pat":0,"path":"tests/python/python/comments.py","sb":23,"text":"# -*- coding: utf-8 -*-"}
+{"cap":"comment","col":1,"eb":131,"ecol":19,"eline":5,"line":5,"node":"comment","pat":0,"path":"tests/python/python/comments.py","sb":113,"text":"# A comment alone."}
+{"cap":"comment","col":1,"eb":140,"ecol":8,"eline":7,"line":7,"node":"comment","pat":0,"path":"tests/python/python/comments.py","sb":133,"text":"# A run"}
+{"cap":"comment","col":1,"eb":153,"ecol":13,"eline":8,"line":8,"node":"comment","pat":0,"path":"tests/python/python/comments.py","sb":141,"text":"# of several"}
+{"cap":"comment","col":1,"eb":164,"ecol":11,"eline":9,"line":9,"node":"comment","pat":0,"path":"tests/python/python/comments.py","sb":154,"text":"#   lines."}
+{"cap":"comment","col":1,"eb":166,"ecol":2,"eline":10,"line":10,"node":"comment","pat":0,"path":"tests/python/python/comments.py","sb":165,"text":"#"}
+{"cap":"comment","col":13,"eb":202,"ecol":36,"eline":11,"line":11,"node":"comment","pat":0,"path":"tests/python/python/comments.py","sb":179,"text":"# A comment after code."}
+{"cap":"comment","col":1,"eb":295,"ecol":30,"eline":17,"line":17,"node":"comment","pat":0,"path":"tests/python/python/comments.py","sb":266,"text":"# @satisfies some-requirement"}
+{"cap":"comment","col":1,"eb":318,"ecol":23,"eline":18,"line":18,"node":"comment","pat":0,"path":"tests/python/python/comments.py","sb":296,"text":"# Prose after the tag."}
+{"cap":"comment","col":1,"eb":379,"ecol":50,"eline":20,"line":20,"node":"comment","pat":0,"path":"tests/python/python/comments.py","sb":330,"text":"# A comment between a decorator and a definition."}
+{"cap":"comment","col":39,"eb":551,"ecol":66,"eline":26,"line":26,"node":"comment","pat":0,"path":"tests/python/python/comments.py","sb":524,"text":"# A comment after a string."}
+{"cap":"comment","col":1,"eb":578,"ecol":27,"eline":27,"line":27,"node":"comment","pat":0,"path":"tests/python/python/comments.py","sb":552,"text":"#No space after the sigil."}

@@ -31,3 +31,9 @@ path = ["packs/ocaml/grammars/ocaml.wasm", "packs/ocaml/grammars/ocaml_interface
 precedence = "override"
 SPDX-FileCopyrightText = "Copyright (c) 2020 Max Brunsfeld and Pieter Goetschalckx"
 SPDX-License-Identifier = "MIT"
+
+[[annotations]]
+path = ["packs/python/grammars/python.wasm", "packs/python/licenses/tree-sitter-python.LICENSE"]
+precedence = "override"
+SPDX-FileCopyrightText = "Copyright (c) 2016 Max Brunsfeld"
+SPDX-License-Identifier = "MIT"

@@ -1,0 +1,41 @@
+{"cap":"definition","col":1,"eb":13,"ecol":14,"eline":1,"line":1,"node":"assignment","pat":3,"path":"tests/python/python/definitions.py","sb":0,"text":"MAX_SIZE = 10"}
+{"cap":"name","col":1,"eb":8,"ecol":9,"eline":1,"line":1,"node":"identifier","pat":3,"path":"tests/python/python/definitions.py","sb":0,"text":"MAX_SIZE"}
+{"cap":"definition","col":1,"eb":29,"ecol":16,"eline":2,"line":2,"node":"assignment","pat":3,"path":"tests/python/python/definitions.py","sb":14,"text":"LIMIT: int = 20"}
+{"cap":"name","col":1,"eb":19,"ecol":6,"eline":2,"line":2,"node":"identifier","pat":3,"path":"tests/python/python/definitions.py","sb":14,"text":"LIMIT"}
+{"cap":"definition","col":1,"eb":46,"ecol":17,"eline":3,"line":3,"node":"assignment","pat":3,"path":"tests/python/python/definitions.py","sb":30,"text":"NAMES: list[str]"}
+{"cap":"name","col":1,"eb":35,"ecol":6,"eline":3,"line":3,"node":"identifier","pat":3,"path":"tests/python/python/definitions.py","sb":30,"text":"NAMES"}
+{"cap":"definition","col":1,"eb":81,"ecol":14,"eline":5,"line":5,"node":"assignment","pat":3,"path":"tests/python/python/definitions.py","sb":68,"text":"one = two = 3"}
+{"cap":"name","col":1,"eb":71,"ecol":4,"eline":5,"line":5,"node":"identifier","pat":3,"path":"tests/python/python/definitions.py","sb":68,"text":"one"}
+{"cap":"definition","col":1,"eb":145,"ecol":17,"eline":9,"line":9,"node":"type_alias_statement","pat":2,"path":"tests/python/python/definitions.py","sb":129,"text":"type Alias = int"}
+{"cap":"name","col":6,"eb":139,"ecol":11,"eline":9,"line":9,"node":"identifier","pat":2,"path":"tests/python/python/definitions.py","sb":134,"text":"Alias"}
+{"cap":"definition","col":1,"eb":172,"ecol":27,"eline":10,"line":10,"node":"type_alias_statement","pat":2,"path":"tests/python/python/definitions.py","sb":146,"text":"type Pair[T] = tuple[T, T]"}
+{"cap":"name","col":6,"eb":155,"ecol":10,"eline":10,"line":10,"node":"identifier","pat":2,"path":"tests/python/python/definitions.py","sb":151,"text":"Pair"}
+{"cap":"definition","col":1,"eb":261,"ecol":18,"eline":19,"line":13,"node":"function_definition","pat":0,"path":"tests/python/python/definitions.py","sb":175,"text":"def plain(x):\n    local = 1\n\n    def nested():\n        return local\n\n    return nested"}
+{"cap":"name","col":5,"eb":184,"ecol":10,"eline":13,"line":13,"node":"identifier","pat":0,"path":"tests/python/python/definitions.py","sb":179,"text":"plain"}
+{"cap":"body","col":5,"eb":261,"ecol":18,"eline":19,"line":14,"node":"block","pat":0,"path":"tests/python/python/definitions.py","sb":193,"text":"local = 1\n\n    def nested():\n        return local\n\n    return nested"}
+{"cap":"definition","col":5,"eb":242,"ecol":21,"eline":17,"line":16,"node":"function_definition","pat":0,"path":"tests/python/python/definitions.py","sb":208,"text":"def nested():\n        return local"}
+{"cap":"name","col":9,"eb":218,"ecol":15,"eline":16,"line":16,"node":"identifier","pat":0,"path":"tests/python/python/definitions.py","sb":212,"text":"nested"}
+{"cap":"body","col":9,"eb":242,"ecol":21,"eline":17,"line":17,"node":"block","pat":0,"path":"tests/python/python/definitions.py","sb":230,"text":"return local"}
+{"cap":"definition","col":1,"eb":291,"ecol":9,"eline":23,"line":22,"node":"function_definition","pat":0,"path":"tests/python/python/definitions.py","sb":264,"text":"async def fetch():\n    pass"}
+{"cap":"name","col":11,"eb":279,"ecol":16,"eline":22,"line":22,"node":"identifier","pat":0,"path":"tests/python/python/definitions.py","sb":274,"text":"fetch"}
+{"cap":"body","col":5,"eb":291,"ecol":9,"eline":23,"line":23,"node":"block","pat":0,"path":"tests/python/python/definitions.py","sb":287,"text":"pass"}
+{"cap":"definition","col":1,"eb":409,"ecol":13,"eline":34,"line":26,"node":"class_definition","pat":1,"path":"tests/python/python/definitions.py","sb":294,"text":"class Shape:\n    SIDES = 0\n    type Unit = str\n\n    def area(self):\n        return 0\n\n    class Inner:\n        pass"}
+{"cap":"name","col":7,"eb":305,"ecol":12,"eline":26,"line":26,"node":"identifier","pat":1,"path":"tests/python/python/definitions.py","sb":300,"text":"Shape"}
+{"cap":"body","col":5,"eb":409,"ecol":13,"eline":34,"line":27,"node":"block","pat":1,"path":"tests/python/python/definitions.py","sb":311,"text":"SIDES = 0\n    type Unit = str\n\n    def area(self):\n        return 0\n\n    class Inner:\n        pass"}
+{"cap":"definition","col":5,"eb":340,"ecol":20,"eline":28,"line":28,"node":"type_alias_statement","pat":2,"path":"tests/python/python/definitions.py","sb":325,"text":"type Unit = str"}
+{"cap":"name","col":10,"eb":334,"ecol":14,"eline":28,"line":28,"node":"identifier","pat":2,"path":"tests/python/python/definitions.py","sb":330,"text":"Unit"}
+{"cap":"definition","col":5,"eb":378,"ecol":17,"eline":31,"line":30,"node":"function_definition","pat":0,"path":"tests/python/python/definitions.py","sb":346,"text":"def area(self):\n        return 0"}
+{"cap":"name","col":9,"eb":354,"ecol":13,"eline":30,"line":30,"node":"identifier","pat":0,"path":"tests/python/python/definitions.py","sb":350,"text":"area"}
+{"cap":"body","col":9,"eb":378,"ecol":17,"eline":31,"line":31,"node":"block","pat":0,"path":"tests/python/python/definitions.py","sb":370,"text":"return 0"}
+{"cap":"definition","col":5,"eb":409,"ecol":13,"eline":34,"line":33,"node":"class_definition","pat":1,"path":"tests/python/python/definitions.py","sb":384,"text":"class Inner:\n        pass"}
+{"cap":"name","col":11,"eb":395,"ecol":16,"eline":33,"line":33,"node":"identifier","pat":1,"path":"tests/python/python/definitions.py","sb":390,"text":"Inner"}
+{"cap":"body","col":9,"eb":409,"ecol":13,"eline":34,"line":34,"node":"block","pat":1,"path":"tests/python/python/definitions.py","sb":405,"text":"pass"}
+{"cap":"decoration","col":1,"eb":422,"ecol":11,"eline":37,"line":37,"node":"decorator","pat":4,"path":"tests/python/python/definitions.py","sb":412,"text":"@dataclass"}
+{"cap":"definition","col":1,"eb":446,"ecol":11,"eline":39,"line":38,"node":"class_definition","pat":1,"path":"tests/python/python/definitions.py","sb":423,"text":"class Point:\n    x: int"}
+{"cap":"name","col":7,"eb":434,"ecol":12,"eline":38,"line":38,"node":"identifier","pat":1,"path":"tests/python/python/definitions.py","sb":429,"text":"Point"}
+{"cap":"body","col":5,"eb":446,"ecol":11,"eline":39,"line":39,"node":"block","pat":1,"path":"tests/python/python/definitions.py","sb":440,"text":"x: int"}
+{"cap":"decoration","col":1,"eb":455,"ecol":7,"eline":42,"line":42,"node":"decorator","pat":4,"path":"tests/python/python/definitions.py","sb":449,"text":"@cache"}
+{"cap":"decoration","col":1,"eb":465,"ecol":10,"eline":43,"line":43,"node":"decorator","pat":4,"path":"tests/python/python/definitions.py","sb":456,"text":"@other(1)"}
+{"cap":"definition","col":1,"eb":491,"ecol":9,"eline":45,"line":44,"node":"function_definition","pat":0,"path":"tests/python/python/definitions.py","sb":466,"text":"def decorated():\n    pass"}
+{"cap":"name","col":5,"eb":479,"ecol":14,"eline":44,"line":44,"node":"identifier","pat":0,"path":"tests/python/python/definitions.py","sb":470,"text":"decorated"}
+{"cap":"body","col":5,"eb":491,"ecol":9,"eline":45,"line":45,"node":"block","pat":0,"path":"tests/python/python/definitions.py","sb":487,"text":"pass"}
