@@ -227,7 +227,7 @@
 
 - `tags.scm` captures each `comment` node, the shebang line and the
   encoding line included. A string, a docstring among them, is not a
-  comment, so a tag in a docstring is not read (ruling PY1 of the
+  comment, so a tag in a docstring is not read (ruling of the
   maintainer).
 - In the python grammar, a comment in a file with CRLF line ends holds
   the CR, as a plain line comment of the rust grammar does.
@@ -274,9 +274,10 @@
   of the labeled pattern, and Sinter joins them.
 - A group is a class at the top level of a module, or a class right
   inside a class whose name starts with `Test`. The query does not
-  check the class around that outer class, so in `class Helper`,
-  `class TestA`, `class TestB`, the class `TestB` is a group and
-  `TestA` is not. A test method is a method right inside a group.
+  check the class around that outer class. So when `class TestB`
+  stands in `class TestA`, which stands in `class Helper`, the class
+  `TestB` is a group and `TestA` is not. A test method is a method
+  right inside a group.
 - Known limits. pytest skips a `Test` class with `__init__`, and a
   project can change the prefixes `test` and `Test` in its
   configuration; a query sees neither. A base class from another file
