@@ -224,3 +224,10 @@
   away.
 
 ## Add the python pack
+
+- `tags.scm` captures each `comment` node, the shebang line and the
+  encoding line included. A string, a docstring among them, is not a
+  comment, so a tag in a docstring is not read (ruling PY1 of the
+  maintainer).
+- In the python grammar, a comment in a file with CRLF line ends holds
+  the CR, as a plain line comment of the rust grammar does.
